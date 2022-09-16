@@ -1,7 +1,7 @@
 const DataTypes = require("sequelize");
 const { Model } = DataTypes;
 
-module.exports = class Notice extends Model {
+module.exports = class Announce extends Model {
   static init(sequelize) {
     return super.init(
       {
@@ -41,8 +41,8 @@ module.exports = class Notice extends Model {
         },
       },
       {
-        modelName: "Notice",
-        tableName: "notices",
+        modelName: "Announce",
+        tableName: "Announce",
         charset: "utf8mb4",
         collate: "utf8mb4_general_ci", // 한글 저장
         sequelize,

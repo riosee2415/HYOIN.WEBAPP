@@ -2,8 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
-const { Notice } = require("../models");
-const { Op } = require("sequelize");
+const models = require("../models");
 const isAdminCheck = require("../middlewares/isAdminCheck");
 const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
@@ -59,249 +58,310 @@ const upload = multer({
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get("/list", async (req, res, next) => {
-  const { page, search } = req.query;
+router.post("/list", async (req, res, next) => {
+  const { page, searchTitle } = req.body;
 
   const LIMIT = 10;
 
   const _page = page ? page : 1;
-  const _search = search ? search : "";
+  const _searchTitle = searchTitle ? searchTitle : "";
 
   const __page = _page - 1;
   const OFFSET = __page * 10;
 
-  try {
-    const totalNotices = await Notice.findAll({
-      where: {
-        title: {
-          [Op.like]: `%${_search}%`,
-        },
-        isDelete: false,
-      },
-    });
+  const lengthQuery = `
+  SELECT	ROW_NUMBER() OVER(ORDER BY A.createdAt)     AS num,
+          A.id,
+          A.title,
+          A.content,
+          A.hit,
+          A.file,
+          A.filename,
+          A.imagePath,
+          A.createdAt,
+          A.updatedAt,
+          DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
+          DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
+    FROM	notices		A
+   WHERE	A.title LIKE '%${_searchTitle}%'
+     AND  A.isDelete = 0
+  `;
 
-    const noticeLen = totalNotices.length;
+  const selectQuery = `
+  SELECT	ROW_NUMBER() OVER(ORDER BY A.createdAt)     AS num,
+          A.id,
+          A.title,
+          A.content,
+          A.hit,
+          A.file,
+          A.filename,
+          A.imagePath,
+          A.createdAt,
+          A.updatedAt,
+          DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
+          DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
+    FROM	notices		A
+   WHERE	A.title LIKE '%${_searchTitle}%'
+     AND  A.isDelete = 0
+   ORDER  BY num DESC
+   LIMIT  ${LIMIT}
+  OFFSET  ${OFFSET}
+  `;
+
+  try {
+    const lengths = await models.sequelize.query(lengthQuery);
+    const notice = await models.sequelize.query(selectQuery);
+
+    const noticeLen = lengths[0].length;
 
     const lastPage =
       noticeLen % LIMIT > 0 ? noticeLen / LIMIT + 1 : noticeLen / LIMIT;
 
-    const notices = await Notice.findAll({
-      offset: OFFSET,
-      limit: LIMIT,
-      where: {
-        title: {
-          [Op.like]: `%${_search}%`,
-        },
-        isDelete: false,
-      },
-      order: [["createdAt", "DESC"]],
+    return res.status(200).json({
+      notice: notice[0],
+      lastPage: parseInt(lastPage),
     });
-
-    return res.status(200).json({ notices, lastPage: parseInt(lastPage) });
   } catch (error) {
     console.error(error);
     return res.status(401).send("공지사항 목록을 불러올 수 업습니다.");
   }
 });
 
-router.post(
-  "/create",
-  isAdminCheck,
-  upload.single("file"),
-  async (req, res, next) => {
-    const { title, content, type, isTop } = req.body;
+router.post("/admin/list", async (req, res, next) => {
+  const { searchTitle } = req.body;
 
-    try {
-      const createResult = await Notice.create({
-        title,
-        content,
-        type,
-        isTop: Boolean(isTop),
-        file: req.file ? req.file.location : null,
-      });
+  const _searchTitle = searchTitle ? searchTitle : "";
 
-      if (!createResult) {
-        return res.status(401).send("게시글을 등록할 수 없습니다. [CODE 076]");
-      }
-
-      return res.status(201).json({ result: true });
-    } catch (error) {
-      console.error(error);
-      return res.status(401).send("게시글을 등록할 수 없습니다. [CODE 077]");
-    }
-  }
-);
-
-router.patch(
-  "/update",
-  upload.single("file"),
-  isAdminCheck,
-  async (req, res, next) => {
-    const { id, title, content, type, isTop } = req.body;
-
-    try {
-      const exNotice = await Notice.findOne({ where: { id: parseInt(id) } });
-
-      if (!exNotice) {
-        return res.status(401).send("존재하지 않는 게시글 입니다.");
-      }
-
-      const updateResult = await Notice.update(
-        {
-          title,
-          content,
-          type,
-          isTop: Boolean(isTop),
-          file: req.file ? req.file.path : exNotice.dataValues.file,
-        },
-        {
-          where: { id: parseInt(id) },
-        }
-      );
-
-      if (updateResult[0] > 0) {
-        return res.status(200).json({ result: true });
-      } else {
-        return res.status(200).json({ result: false });
-      }
-    } catch (error) {
-      console.error(error);
-      return res.status(401).send("게시글을 수정할 수 없습니다. [CODE 087]");
-    }
-  }
-);
-
-router.delete("/delete/:noticeId", isAdminCheck, async (req, res, next) => {
-  const { noticeId } = req.params;
+  const selectQuery = `
+  SELECT	ROW_NUMBER() OVER(ORDER BY A.createdAt)     AS num,
+          A.id,
+          A.title,
+          A.content,
+          A.hit,
+          A.file,
+          A.filename,
+          A.imagePath,
+          A.createdAt,
+          A.updatedAt,
+          DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
+          DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
+    FROM	notices		A
+   WHERE	A.title LIKE '%${_searchTitle}%'
+     AND  A.isDelete = 0
+   ORDER  BY num DESC
+  `;
 
   try {
-    const exNotice = await Notice.findOne({
-      where: { id: parseInt(noticeId) },
-    });
+    const notice = await models.sequelize.query(selectQuery);
 
-    if (!exNotice) {
-      return res.status(401).send("존재하지 않는 게시글 입니다.");
-    }
+    return res.status(200).json(notice[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("공지사항 목록을 불러올 수 업습니다.");
+  }
+});
 
-    const updateResult = await Notice.update(
-      {
-        isDelete: true,
-        deletedAt: new Date(),
-      },
-      {
-        where: { id: parseInt(noticeId) },
-      }
-    );
+router.post("/create", isAdminCheck, async (req, res, next) => {
+  const { title, content, file, filename, imagePath } = req.body;
 
-    if (updateResult[0] > 0) {
-      return res.status(200).json({ result: true });
-    } else {
-      return res.status(200).json({ result: false });
-    }
+  const insertQuery = `
+  INSERT  INTO  notices
+  (
+    title,
+    content,
+    file,
+    filename,
+    imagePath,
+    createdAt,
+    updatedAt
+  )
+  VALUES
+  (
+    "${title}",
+    "${content}",
+    ${file ? `"${file}"` : null},
+    ${filename ? `"${filename}"` : null},
+    ${imagePath ? `"${imagePath}"` : null},
+    NOW(),
+    NOW()
+  )
+  `;
+
+  try {
+    const insertResult = await models.sequelize.query(insertQuery);
+
+    return res.status(201).json({ result: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("게시글을 등록할 수 없습니다.");
+  }
+});
+
+router.post("/update", isAdminCheck, async (req, res, next) => {
+  const { id, title, content, file, filename, imagePath } = req.body;
+
+  const updateQuery = `
+  UPDATE  notices
+     SET  title = "${title}",
+          content = "${content}",
+          file = ${file ? `"${file}"` : null},
+          filename = ${filename ? `"${filename}"` : null},
+          imagePath = ${imagePath ? `"${imagePath}"` : null},
+          updatedAt = NOW()
+   WHERE  id = ${id}
+  `;
+
+  try {
+    const updateResult = await models.sequelize.query(updateQuery);
+
+    return res.status(200).json({ result: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("게시글을 수정할 수 없습니다.");
+  }
+});
+
+router.post("/delete", isAdminCheck, async (req, res, next) => {
+  const { id } = req.body;
+
+  const deleteQuery = `
+  UPDATE  notices
+     SET  isDelete = 1,
+          deletedAt = NOW()
+   WHERE  id = ${id}
+  `;
+
+  try {
+    const deleteResult = await models.sequelize.query(deleteQuery);
+
+    return res.status(200).json({ result: true });
   } catch (error) {
     console.error(error);
     return res.status(401).send("게시글을 삭제할 수 없습니다. [CODE 097]");
   }
 });
 
-router.get("/list/:noticeId", async (req, res, next) => {
-  const { noticeId } = req.params;
+router.post("/image", upload.single("image"), async (req, res, next) => {
+  return res.json({ path: req.file.location });
+});
+
+router.post("/file", upload.single("file"), async (req, res, next) => {
+  return res.json({ path: req.file.location });
+});
+
+router.get("/detail/:id", async (req, res, next) => {
+  const { id } = req.params;
 
   try {
-    const exNotice = await Notice.findOne({
-      where: { id: parseInt(noticeId) },
-    });
-
-    const nextHit = exNotice.dataValues.hit + 1;
-
-    const commentQuery = `
+    const detailQuery = `
     SELECT	A.id,
+            A.title,
             A.content,
-            A.isDelete,
-            A.deletedAt,
-            A.parent,
-            A.parentId,
-            DATE_FORMAT(A.createdAt, '%Y-%m-%d')  AS createdAt,
-            DATE_FORMAT(A.updatedAt, '%Y-%m-%d')  AS updatedAt,
-            A.NoticeId,
-            A.UserId,
-            B.email,
-            B.username
-      FROM	noticeComments		A
-     INNER
-      JOIN	users 					  B
-        ON	A.UserId = B.id
-     WHERE	A.isDelete = FALSE
-       AND	A.parentId  IS NULL
-       AND  A.NoticeId = ${noticeId}
+            A.hit,
+            A.file,
+            A.filename,
+            A.imagePath,
+            A.createdAt,
+            A.updatedAt,
+            DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
+            DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
+      FROM	notices		A
+     WHERE	A.id = ${id}
+       AND  A.isDelete = 0
     `;
 
-    const comments = await models.sequelize.query(commentQuery);
+    const detailData = await models.sequelize.query(detailQuery);
 
-    await Notice.update(
-      {
-        hit: nextHit,
-      },
-      {
-        where: { id: parseInt(noticeId) },
-      }
-    );
-
-    if (!exNotice) {
-      return res.status(401).send("존재하지 않는 게시글 입니다.");
+    if (detailData[0].length === 0) {
+      return res.status(401).send("존재하지 않는 게시글 정보입니다.");
     }
 
-    return res.status(200).json({ exNotice, comments: comments[0] });
+    const updateQuery = `
+   UPDATE notices
+      SET hit = ${detailData[0][0].hit + 1},
+          updatedAt = now()
+    WHERE id = ${id} 
+   `;
+
+    const updateResult = await models.sequelize.query(updateQuery);
+
+    const nextDataQuery = `
+    SELECT  title
+      FROM  notices
+     WHERE  id > ${id}
+       AND  isDelete = 0
+     LIMIT  1
+    `;
+
+    const prevDataQuery = `
+    SELECT  title
+      FROM  notices
+     WHERE  id < ${id}
+       AND  isDelete = 0
+    `;
+
+    const nextData = await models.sequelize.query(nextDataQuery);
+    const prevData = await models.sequelize.query(prevDataQuery);
+
+    return res.status(200).json({
+      detailData: detailData[0][0],
+      nextNotice: !nextData[0] ? null : nextData[0][0], // 다음 게시글
+      prevNotice: !prevData[0] ? null : prevData[0][prevData[0].length - 1], // 이전 게시글
+    });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("게시글 정보를 불러올 수 없습니다. [CODE 107]");
+    return res.status(401).send("게시글 정보를 불러올 수 없습니다.");
   }
 });
 
-router.get("/next/:noticeId", async (req, res, next) => {
-  const { noticeId } = req.params;
+router.post("/nextNotice", async (req, res, next) => {
+  const { id } = req.body;
 
   try {
-    const notices = await Notice.findAll({
-      where: {
-        id: {
-          [Op.gt]: parseInt(noticeId),
-        },
-      },
-      limit: 1,
-    });
+    const nextDataQuery = `
+    SELECT  id
+      FROM  notices
+     WHERE  id > ${id}
+       AND  isDelete = 0
+     LIMIT  1
+    `;
 
-    if (!notices[0]) {
+    const nextData = await models.sequelize.query(nextDataQuery);
+
+    if (nextData[0].length === 0) {
       return res.status(401).send("마지막 게시글 입니다.");
     }
 
-    return res.redirect(`/api/notice/list/${notices[0].id}`);
+    return res.redirect(`/api/notice/detail/${nextData[0][0].id}`);
   } catch (error) {
     console.error(error);
-    return res.status(401).send("게시글 정보를 불러올 수 없습니다. [CODE 107]");
+    return res.status(401).send("게시글 정보를 불러올 수 없습니다.");
   }
 });
 
-router.get("/prev/:noticeId", async (req, res, next) => {
-  const { noticeId } = req.params;
+router.post("/prevNotice", async (req, res, next) => {
+  const { id } = req.body;
 
   try {
-    const notices = await Notice.findAll({
-      where: {
-        id: {
-          [Op.lt]: parseInt(noticeId),
-        },
-      },
-    });
+    const prevDataQuery = `
+    SELECT  id
+      FROM  notices
+     WHERE  id < ${id}
+       AND  isDelete = 0
+    `;
 
-    if (!notices[0]) {
+    const prevData = await models.sequelize.query(prevDataQuery);
+
+    if (prevData[0].length === 0) {
       return res.status(401).send("첫번째 게시글 입니다.");
     }
 
-    return res.redirect(`/api/notice/list/${notices[notices.length - 1].id}`);
+    return res.redirect(
+      `/api/notice/detail/${prevData[0][prevData[0].length - 1].id}`
+    );
   } catch (error) {
     console.error(error);
-    return res.status(401).send("게시글 정보를 불러올 수 없습니다. [CODE 107]");
+    return res.status(401).send("게시글 정보를 불러올 수 없습니다.");
   }
 });
 
