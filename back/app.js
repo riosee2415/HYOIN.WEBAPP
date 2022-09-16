@@ -23,6 +23,7 @@ const questionRouter = require("./routers/questionRouter");
 const seoRouter = require("./routers/seoRouter");
 const editRouter = require("./routers/editRouter");
 const faqRouter = require("./routers/faqRouter");
+const newsRouter = require("./routers/newsRouter");
 
 // Config Settings
 db.sequelize
@@ -96,6 +97,7 @@ app.use("/api/popup", popupRouter);
 app.use("/api/company", companyRouter);
 app.use("/api/accept", acceptRouter);
 app.use("/api/notice", noticeRouter);
+app.use("/api/news", newsRouter);
 app.use("/api/gallery", galleryRouter);
 app.use("/api/question", questionRouter);
 app.use("/api/seo", seoRouter);
