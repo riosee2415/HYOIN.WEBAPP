@@ -5,18 +5,21 @@ module.exports = class MainBanner extends Model {
   static init(sequelize) {
     return super.init(
       {
-        // id가 기본적으로 들어있다.
         title: {
-          type: DataTypes.STRING(200), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
-          allowNull: true, // 필수
+          type: DataTypes.STRING(100),
+          allowNull: true,
         },
-        content: {
-          type: DataTypes.STRING(600),
-          allowNull: true, // 필수
+        subTitle: {
+          type: DataTypes.STRING(300),
+          allowNull: true,
         },
         imagePath: {
-          type: DataTypes.STRING(300),
-          allowNull: false, // 필수
+          type: DataTypes.STRING(600),
+          allowNull: false,
+        },
+        mobileImagePath: {
+          type: DataTypes.STRING(600),
+          allowNull: false,
         },
       },
       {

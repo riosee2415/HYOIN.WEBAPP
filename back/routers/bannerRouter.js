@@ -1,6 +1,7 @@
 const express = require("express");
 const isAdminCheck = require("../middlewares/isAdminCheck");
 const { MainBanner } = require("../models");
+const models = require("../models");
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
@@ -60,10 +61,23 @@ const upload = multer({
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 router.get("/list", async (req, res, next) => {
-  try {
-    const banners = await MainBanner.findAll();
+  const selectQuery = `
+  SELECT  ROW_NUMBER() OVER(ORDER BY createdAt) AS num,
+          id,
+          title,
+          subTitle,
+          imagePath,
+          mobileImagePath,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")				AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")				AS viewUpdatedAt
+    FROM  mainBanners
+   ORDER  BY num DESC
+  `;
 
-    return res.status(200).json(banners);
+  try {
+    const list = await models.sequelize.query(selectQuery);
+
+    return res.status(200).json(list[0]);
   } catch (error) {
     console.error(error);
     return res
@@ -82,11 +96,11 @@ router.post(
 );
 
 router.post("/update", isAdminCheck, async (req, res, next) => {
-  const { id, imagePath, title, content } = req.body;
+  const { id, title, subTitle, imagePath, mobileImagePath } = req.body;
 
   try {
     const updateResult = await MainBanner.update(
-      { imagePath, title, content },
+      { title, subTitle, imagePath, mobileImagePath },
       {
         where: { id: parseInt(id) },
       }
@@ -106,13 +120,14 @@ router.post("/update", isAdminCheck, async (req, res, next) => {
 });
 
 router.post("/create", isAdminCheck, async (req, res, next) => {
-  const { title, content, imagePath } = req.body;
+  const { title, subTitle, imagePath, mobileImagePath } = req.body;
 
   try {
     const createResult = await MainBanner.create({
       title,
-      content,
+      subTitle,
       imagePath,
+      mobileImagePath,
     });
 
     return res.status(201).json({ result: true });
