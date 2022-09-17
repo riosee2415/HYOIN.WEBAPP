@@ -10,6 +10,7 @@ import question from "./question";
 import accept from "./accept";
 import seo from "./seo";
 import editor from "./editor";
+import faq from "./faq";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -28,6 +29,7 @@ const rootReducer = (state, action) => {
         accept,
         seo,
         editor,
+        faq,
       });
       return combinedReducer(state, action);
     }
