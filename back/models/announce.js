@@ -42,7 +42,7 @@ module.exports = class Announce extends Model {
       },
       {
         modelName: "Announce",
-        tableName: "Announce",
+        tableName: "announce",
         charset: "utf8mb4",
         collate: "utf8mb4_general_ci", // 한글 저장
         sequelize,
