@@ -173,7 +173,7 @@ const AdminMenu = () => {
             <MenuName>FAQ 유형 관리</MenuName>
           </Menu.Item>
           <Menu.Item key="/admin/faq">
-            <MenuName>FAQ 관리</MenuName>
+            <MenuName>FAQ 리스트 관리</MenuName>
           </Menu.Item>
         </SubMenu>
       </Menu>

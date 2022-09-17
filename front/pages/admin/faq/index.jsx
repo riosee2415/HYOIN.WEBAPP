@@ -235,7 +235,7 @@ const FaqType = () => {
       width: "7%",
     },
     {
-      title: "FAQ 타입",
+      title: "FAQ 유형",
       dataIndex: "typeValue",
       width: "13%",
       ellipsis: true,
@@ -299,8 +299,8 @@ const FaqType = () => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["FAQ 관리", "FAQ 관리"]}
-        title={`FAQ 관리`}
+        breadcrumbs={["FAQ 관리", "FAQ 리스트 관리"]}
+        title={`FAQ 리스트 관리`}
         subTitle={`FAQ를 관리할 수 있습니다.`}
       />
 
@@ -322,7 +322,9 @@ const FaqType = () => {
               <Select.Option value={"all"}>전체</Select.Option>
               {faqTypes &&
                 faqTypes.map((data) => (
-                  <Select.Option value={data.id}>{data.value}</Select.Option>
+                  <Select.Option key={data.id} value={data.id}>
+                    {data.value}
+                  </Select.Option>
                 ))}
             </Select>
             <Input
@@ -363,7 +365,7 @@ const FaqType = () => {
             FAQ를 확인, 수정, 삭제할 수 있습니다.
           </GuideDiv>
           <GuideDiv isImpo={true}>
-            FAQ 타입과 제목으로 데이터를 검색할 수 있습니다.
+            FAQ 유형과 제목으로 데이터를 검색할 수 있습니다.
           </GuideDiv>
           <GuideDiv isImpo={true}>
             데이터 수정을 클릭 시, 보다 자세한 내용을 보실 수 있습니다.
@@ -396,7 +398,7 @@ const FaqType = () => {
           al="flex-start"
         >
           <GuideDiv isImpo={true}>
-            FAQ 타입, 제목, 내용은 필수 사항입니다.
+            FAQ 유형, 제목, 내용은 필수 사항입니다.
           </GuideDiv>
         </Wrapper>
         <Wrapper>
@@ -409,19 +411,21 @@ const FaqType = () => {
             onFinish={createHandler}
           >
             <Form.Item
-              label="FAQ 타입"
+              label="FAQ 유형"
               name="type"
               rules={[
                 {
                   required: true,
-                  message: "FAQ 타입은 필수 선택 사항입니다.",
+                  message: "FAQ 유형은 필수 선택 사항입니다.",
                 },
               ]}
             >
-              <Select placeholder="FAQ 타입을 선택해주세요." size="small">
+              <Select placeholder="FAQ 유형을 선택해주세요." size="small">
                 {faqTypes &&
                   faqTypes.map((data) => (
-                    <Select.Option value={data.id}>{data.value}</Select.Option>
+                    <Select.Option key={data.id} value={data.id}>
+                      {data.value}
+                    </Select.Option>
                   ))}
               </Select>
             </Form.Item>
@@ -485,7 +489,7 @@ const FaqType = () => {
           al="flex-start"
         >
           <GuideDiv isImpo={true}>
-            FAQ 타입, 제목, 내용은 필수 사항입니다.
+            FAQ 유형, 제목, 내용은 필수 사항입니다.
           </GuideDiv>
         </Wrapper>
         <Wrapper>
@@ -498,19 +502,21 @@ const FaqType = () => {
             onFinish={updateHandler}
           >
             <Form.Item
-              label="FAQ 타입"
+              label="FAQ 유형"
               name="type"
               rules={[
                 {
                   required: true,
-                  message: "FAQ 타입은 필수 선택 사항입니다.",
+                  message: "FAQ 유형은 필수 선택 사항입니다.",
                 },
               ]}
             >
-              <Select placeholder="FAQ 타입을 선택해주세요." size="small">
+              <Select placeholder="FAQ 유형을 선택해주세요." size="small">
                 {faqTypes &&
                   faqTypes.map((data) => (
-                    <Select.Option value={data.id}>{data.value}</Select.Option>
+                    <Select.Option key={data.id} value={data.id}>
+                      {data.value}
+                    </Select.Option>
                   ))}
               </Select>
             </Form.Item>
