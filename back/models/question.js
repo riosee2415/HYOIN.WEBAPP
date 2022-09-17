@@ -14,16 +14,24 @@ module.exports = class Question extends Model {
           type: DataTypes.TEXT,
           allowNull: false,
         },
+        name: {
+          type: DataTypes.STRING(30),
+          allowNull: false,
+        },
+        email: {
+          type: DataTypes.STRING(50),
+          allowNull: true,
+        },
+        mobile: {
+          type: DataTypes.STRING(50),
+          allowNull: true,
+        },
         isCompleted: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false,
         },
-        answer: {
-          type: DataTypes.TEXT, // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
-          allowNull: true,
-        },
-        answerdAt: {
+        completedAt: {
           type: DataTypes.DATE,
           allowNull: true,
         },
@@ -37,8 +45,5 @@ module.exports = class Question extends Model {
       }
     );
   }
-  static associate(db) {
-    db.Question.belongsTo(db.QuestionType);
-    db.Question.belongsTo(db.User);
-  }
+  static associate(db) {}
 };
