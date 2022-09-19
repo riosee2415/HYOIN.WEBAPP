@@ -2,54 +2,54 @@ import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import {
   //
-  NOTICE_ADMIN_LIST_REQUEST,
-  NOTICE_ADMIN_LIST_SUCCESS,
-  NOTICE_ADMIN_LIST_FAILURE,
+  NEWS_ADMIN_LIST_REQUEST,
+  NEWS_ADMIN_LIST_SUCCESS,
+  NEWS_ADMIN_LIST_FAILURE,
   //
-  NOTICE_LIST_REQUEST,
-  NOTICE_LIST_SUCCESS,
-  NOTICE_LIST_FAILURE,
+  NEWS_LIST_REQUEST,
+  NEWS_LIST_SUCCESS,
+  NEWS_LIST_FAILURE,
   //
-  NOTICE_CREATE_REQUEST,
-  NOTICE_CREATE_SUCCESS,
-  NOTICE_CREATE_FAILURE,
+  NEWS_CREATE_REQUEST,
+  NEWS_CREATE_SUCCESS,
+  NEWS_CREATE_FAILURE,
   //
-  NOTICE_FILE_UPLOAD_REQUEST,
-  NOTICE_FILE_UPLOAD_SUCCESS,
-  NOTICE_FILE_UPLOAD_FAILURE,
+  NEWS_FILE_UPLOAD_REQUEST,
+  NEWS_FILE_UPLOAD_SUCCESS,
+  NEWS_FILE_UPLOAD_FAILURE,
   //
-  NOTICE_IMAGE_UPLOAD_REQUEST,
-  NOTICE_IMAGE_UPLOAD_SUCCESS,
-  NOTICE_IMAGE_UPLOAD_FAILURE,
+  NEWS_IMAGE_UPLOAD_REQUEST,
+  NEWS_IMAGE_UPLOAD_SUCCESS,
+  NEWS_IMAGE_UPLOAD_FAILURE,
   //
-  NOTICE_UPDATE_REQUEST,
-  NOTICE_UPDATE_SUCCESS,
-  NOTICE_UPDATE_FAILURE,
+  NEWS_UPDATE_REQUEST,
+  NEWS_UPDATE_SUCCESS,
+  NEWS_UPDATE_FAILURE,
   //
-  NOTICE_DELETE_REQUEST,
-  NOTICE_DELETE_SUCCESS,
-  NOTICE_DELETE_FAILURE,
-} from "../reducers/notice";
+  NEWS_DELETE_REQUEST,
+  NEWS_DELETE_SUCCESS,
+  NEWS_DELETE_FAILURE,
+} from "../reducers/news";
 
 // ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-async function noticeListAPI(data) {
-  return await axios.post(`/api/notice/list`, data);
+async function newsListAPI(data) {
+  return await axios.post(`/api/news/list`, data);
 }
 
-function* noticeList(action) {
+function* newsList(action) {
   try {
-    const result = yield call(noticeListAPI, action.data);
+    const result = yield call(newsListAPI, action.data);
 
     yield put({
-      type: NOTICE_LIST_SUCCESS,
+      type: NEWS_LIST_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: NOTICE_LIST_FAILURE,
+      type: NEWS_LIST_FAILURE,
       error: err.response.data,
     });
   }
@@ -61,22 +61,22 @@ function* noticeList(action) {
 // ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-async function noticeAdminListAPI(data) {
-  return await axios.post(`/api/notice/admin/list`, data);
+async function newsAdminListAPI(data) {
+  return await axios.post(`/api/news/admin/list`, data);
 }
 
-function* noticeAdminList(action) {
+function* newsAdminList(action) {
   try {
-    const result = yield call(noticeAdminListAPI, action.data);
+    const result = yield call(newsAdminListAPI, action.data);
 
     yield put({
-      type: NOTICE_ADMIN_LIST_SUCCESS,
+      type: NEWS_ADMIN_LIST_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: NOTICE_ADMIN_LIST_FAILURE,
+      type: NEWS_ADMIN_LIST_FAILURE,
       error: err.response.data,
     });
   }
@@ -88,22 +88,22 @@ function* noticeAdminList(action) {
 // ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-async function noticeCreateAPI(data) {
-  return await axios.post(`/api/notice/create`, data);
+async function newsCreateAPI(data) {
+  return await axios.post(`/api/news/create`, data);
 }
 
-function* noticeCreate(action) {
+function* newsCreate(action) {
   try {
-    const result = yield call(noticeCreateAPI, action.data);
+    const result = yield call(newsCreateAPI, action.data);
 
     yield put({
-      type: NOTICE_CREATE_SUCCESS,
+      type: NEWS_CREATE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: NOTICE_CREATE_FAILURE,
+      type: NEWS_CREATE_FAILURE,
       error: err.response.data,
     });
   }
@@ -115,22 +115,22 @@ function* noticeCreate(action) {
 // ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-async function noticeFileUploadAPI(data) {
-  return await axios.post(`/api/notice/file`, data);
+async function newsFileUploadAPI(data) {
+  return await axios.post(`/api/news/file`, data);
 }
 
-function* noticeFileUpload(action) {
+function* newsFileUpload(action) {
   try {
-    const result = yield call(noticeFileUploadAPI, action.data);
+    const result = yield call(newsFileUploadAPI, action.data);
 
     yield put({
-      type: NOTICE_FILE_UPLOAD_SUCCESS,
+      type: NEWS_FILE_UPLOAD_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: NOTICE_FILE_UPLOAD_FAILURE,
+      type: NEWS_FILE_UPLOAD_FAILURE,
       error: err.response.data,
     });
   }
@@ -142,22 +142,22 @@ function* noticeFileUpload(action) {
 // ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-async function noticeImageUploadAPI(data) {
-  return await axios.post(`/api/notice/image`, data);
+async function newsImageUploadAPI(data) {
+  return await axios.post(`/api/news/image`, data);
 }
 
-function* noticeImageUpload(action) {
+function* newsImageUpload(action) {
   try {
-    const result = yield call(noticeImageUploadAPI, action.data);
+    const result = yield call(newsImageUploadAPI, action.data);
 
     yield put({
-      type: NOTICE_IMAGE_UPLOAD_SUCCESS,
+      type: NEWS_IMAGE_UPLOAD_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: NOTICE_IMAGE_UPLOAD_FAILURE,
+      type: NEWS_IMAGE_UPLOAD_FAILURE,
       error: err.response.data,
     });
   }
@@ -169,22 +169,22 @@ function* noticeImageUpload(action) {
 // ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-async function noticeUpdateAPI(data) {
-  return await axios.post(`/api/notice/update`, data);
+async function newsUpdateAPI(data) {
+  return await axios.post(`/api/news/update`, data);
 }
 
-function* noticeUpdate(action) {
+function* newsUpdate(action) {
   try {
-    const result = yield call(noticeUpdateAPI, action.data);
+    const result = yield call(newsUpdateAPI, action.data);
 
     yield put({
-      type: NOTICE_UPDATE_SUCCESS,
+      type: NEWS_UPDATE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: NOTICE_UPDATE_FAILURE,
+      type: NEWS_UPDATE_FAILURE,
       error: err.response.data,
     });
   }
@@ -196,22 +196,22 @@ function* noticeUpdate(action) {
 // ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-async function noticeDeleteAPI(data) {
-  return await axios.post(`/api/notice/delete`, data);
+async function newsDeleteAPI(data) {
+  return await axios.post(`/api/news/delete`, data);
 }
 
-function* noticeDelete(action) {
+function* newsDelete(action) {
   try {
-    const result = yield call(noticeDeleteAPI, action.data);
+    const result = yield call(newsDeleteAPI, action.data);
 
     yield put({
-      type: NOTICE_DELETE_SUCCESS,
+      type: NEWS_DELETE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: NOTICE_DELETE_FAILURE,
+      type: NEWS_DELETE_FAILURE,
       error: err.response.data,
     });
   }
@@ -222,38 +222,38 @@ function* noticeDelete(action) {
 
 //////////////////////////////////////////////////////////////
 
-function* watchNoticeAdminList() {
-  yield takeLatest(NOTICE_ADMIN_LIST_REQUEST, noticeAdminList);
+function* watchNewsAdminList() {
+  yield takeLatest(NEWS_ADMIN_LIST_REQUEST, newsAdminList);
 }
-function* watchNoticeList() {
-  yield takeLatest(NOTICE_LIST_REQUEST, noticeList);
+function* watchNewsList() {
+  yield takeLatest(NEWS_LIST_REQUEST, newsList);
 }
-function* watchNoticeCreate() {
-  yield takeLatest(NOTICE_CREATE_REQUEST, noticeCreate);
+function* watchNewsCreate() {
+  yield takeLatest(NEWS_CREATE_REQUEST, newsCreate);
 }
-function* watchNoticeFileUpload() {
-  yield takeLatest(NOTICE_FILE_UPLOAD_REQUEST, noticeFileUpload);
+function* watchNewsFileUpload() {
+  yield takeLatest(NEWS_FILE_UPLOAD_REQUEST, newsFileUpload);
 }
-function* watchNoticeImageUpload() {
-  yield takeLatest(NOTICE_IMAGE_UPLOAD_REQUEST, noticeImageUpload);
+function* watchNewsImageUpload() {
+  yield takeLatest(NEWS_IMAGE_UPLOAD_REQUEST, newsImageUpload);
 }
-function* watchNoticeUpdate() {
-  yield takeLatest(NOTICE_UPDATE_REQUEST, noticeUpdate);
+function* watchNewsUpdate() {
+  yield takeLatest(NEWS_UPDATE_REQUEST, newsUpdate);
 }
-function* watchNoticeDelete() {
-  yield takeLatest(NOTICE_DELETE_REQUEST, noticeDelete);
+function* watchNewsDelete() {
+  yield takeLatest(NEWS_DELETE_REQUEST, newsDelete);
 }
 
 //////////////////////////////////////////////////////////////
-export default function* noticeSage() {
+export default function* newsSage() {
   yield all([
-    fork(watchNoticeAdminList),
-    fork(watchNoticeList),
-    fork(watchNoticeCreate),
-    fork(watchNoticeFileUpload),
-    fork(watchNoticeImageUpload),
-    fork(watchNoticeUpdate),
-    fork(watchNoticeDelete),
+    fork(watchNewsAdminList),
+    fork(watchNewsList),
+    fork(watchNewsCreate),
+    fork(watchNewsFileUpload),
+    fork(watchNewsImageUpload),
+    fork(watchNewsUpdate),
+    fork(watchNewsDelete),
 
     //
   ]);
