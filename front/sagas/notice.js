@@ -1,6 +1,11 @@
 import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import {
+  //
+  NOTICE_ADMIN_LIST_REQUEST,
+  NOTICE_ADMIN_LIST_SUCCESS,
+  NOTICE_ADMIN_LIST_FAILURE,
+  //
   NOTICE_LIST_REQUEST,
   NOTICE_LIST_SUCCESS,
   NOTICE_LIST_FAILURE,
@@ -8,6 +13,14 @@ import {
   NOTICE_CREATE_REQUEST,
   NOTICE_CREATE_SUCCESS,
   NOTICE_CREATE_FAILURE,
+  //
+  NOTICE_FILE_UPLOAD_REQUEST,
+  NOTICE_FILE_UPLOAD_SUCCESS,
+  NOTICE_FILE_UPLOAD_FAILURE,
+  //
+  NOTICE_IMAGE_UPLOAD_REQUEST,
+  NOTICE_IMAGE_UPLOAD_SUCCESS,
+  NOTICE_IMAGE_UPLOAD_FAILURE,
   //
   NOTICE_UPDATE_REQUEST,
   NOTICE_UPDATE_SUCCESS,
@@ -18,10 +31,11 @@ import {
   NOTICE_DELETE_FAILURE,
 } from "../reducers/notice";
 
+// ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 async function noticeListAPI(data) {
-  return await axios.get(`/api/notice/list/${data.qs}`, data);
+  return await axios.post(`/api/notice/list`, data);
 }
 
 function* noticeList(action) {
@@ -40,11 +54,38 @@ function* noticeList(action) {
     });
   }
 }
-
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function noticeAdminListAPI(data) {
+  return await axios.post(`/api/notice/admin/list`, data);
+}
+
+function* noticeAdminList(action) {
+  try {
+    const result = yield call(noticeAdminListAPI, action.data);
+
+    yield put({
+      type: NOTICE_ADMIN_LIST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: NOTICE_ADMIN_LIST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 async function noticeCreateAPI(data) {
@@ -67,15 +108,69 @@ function* noticeCreate(action) {
     });
   }
 }
-
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function noticeFileUploadAPI(data) {
+  return await axios.post(`/api/notice/file`, data);
+}
+
+function* noticeFileUpload(action) {
+  try {
+    const result = yield call(noticeFileUploadAPI, action.data);
+
+    yield put({
+      type: NOTICE_FILE_UPLOAD_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: NOTICE_FILE_UPLOAD_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function noticeImageUploadAPI(data) {
+  return await axios.post(`/api/notice/image`, data);
+}
+
+function* noticeImageUpload(action) {
+  try {
+    const result = yield call(noticeImageUploadAPI, action.data);
+
+    yield put({
+      type: NOTICE_IMAGE_UPLOAD_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: NOTICE_IMAGE_UPLOAD_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 async function noticeUpdateAPI(data) {
-  return await axios.patch(`/api/notice/update`, data);
+  return await axios.post(`/api/notice/update`, data);
 }
 
 function* noticeUpdate(action) {
@@ -94,15 +189,15 @@ function* noticeUpdate(action) {
     });
   }
 }
-
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 async function noticeDeleteAPI(data) {
-  return await axios.delete(`/api/notice/delete/${data.noticeId}`);
+  return await axios.post(`/api/notice/delete`, data);
 }
 
 function* noticeDelete(action) {
@@ -121,35 +216,45 @@ function* noticeDelete(action) {
     });
   }
 }
-
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
 //////////////////////////////////////////////////////////////
+
+function* watchNoticeAdminList() {
+  yield takeLatest(NOTICE_ADMIN_LIST_REQUEST, noticeAdminList);
+}
 function* watchNoticeList() {
   yield takeLatest(NOTICE_LIST_REQUEST, noticeList);
 }
-
 function* watchNoticeCreate() {
   yield takeLatest(NOTICE_CREATE_REQUEST, noticeCreate);
 }
-
+function* watchNoticeFileUpload() {
+  yield takeLatest(NOTICE_FILE_UPLOAD_REQUEST, noticeFileUpload);
+}
+function* watchNoticeImageUpload() {
+  yield takeLatest(NOTICE_IMAGE_UPLOAD_REQUEST, noticeImageUpload);
+}
 function* watchNoticeUpdate() {
   yield takeLatest(NOTICE_UPDATE_REQUEST, noticeUpdate);
 }
-
 function* watchNoticeDelete() {
   yield takeLatest(NOTICE_DELETE_REQUEST, noticeDelete);
 }
 
 //////////////////////////////////////////////////////////////
-export default function* noticeSaga() {
+export default function* noticeTypeSaga() {
   yield all([
+    fork(watchNoticeAdminList),
     fork(watchNoticeList),
     fork(watchNoticeCreate),
+    fork(watchNoticeFileUpload),
+    fork(watchNoticeImageUpload),
     fork(watchNoticeUpdate),
     fork(watchNoticeDelete),
+
     //
   ]);
 }
