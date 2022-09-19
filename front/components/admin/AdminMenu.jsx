@@ -111,11 +111,6 @@ const AdminMenu = () => {
           <Menu.Item key="/admin/info/popup">
             <MenuName>팝업 관리</MenuName>
           </Menu.Item>
-
-          {/* <SubMenu key="sub3" title="Submenu">
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu> */}
         </SubMenu>
         <SubMenu
           key="sub3"
@@ -126,12 +121,12 @@ const AdminMenu = () => {
           <Menu.Item key="/admin/board/notice/list">
             <MenuName>공지사항 관리</MenuName>
           </Menu.Item>
-          <Menu.Item key="/admin/board/gallery/list">
-            <MenuName>갤러리 관리</MenuName>
+          <Menu.Item key="/admin/board/news/list">
+            <MenuName>새소식 관리</MenuName>
           </Menu.Item>
         </SubMenu>
         <SubMenu
-          key="su43"
+          key="sub4"
           icon={<SettingOutlined />}
           title="베너 관리"
           onTitleClick={titleClickHandler("sub4")}
