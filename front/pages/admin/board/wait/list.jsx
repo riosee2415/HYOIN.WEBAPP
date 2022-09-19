@@ -15,14 +15,14 @@ import {
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  ANNOUNCE_CREATE_REQUEST,
-  ANNOUNCE_UPDATE_REQUEST,
-  ANNOUNCE_DELETE_REQUEST,
-  ANNOUNCE_ADMIN_LIST_REQUEST,
-  ANNOUNCE_IMAGE_UPLOAD_REQUEST,
-  ANNOUNCE_FILE_UPLOAD_REQUEST,
-  ANNOUNCE_RESET,
-} from "../../../../reducers/announce";
+  WAIT_CREATE_REQUEST,
+  WAIT_UPDATE_REQUEST,
+  WAIT_DELETE_REQUEST,
+  WAIT_ADMIN_LIST_REQUEST,
+  WAIT_IMAGE_UPLOAD_REQUEST,
+  WAIT_FILE_UPLOAD_REQUEST,
+  WAIT_RESET,
+} from "../../../../reducers/wait";
 import { withRouter } from "next/router";
 
 import { END } from "redux-saga";
@@ -77,22 +77,22 @@ const List = () => {
   ////// GLOBAL STATE //////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
   const {
-    adminAnnounceList,
+    adminWaitList,
     fileUpload,
     imgUpload,
     //
-    st_announceImageUploadLoading,
-    st_announceFileUploadLoading,
+    st_waitImageUploadLoading,
+    st_waitFileUploadLoading,
     //
-    st_announceCreateDone,
-    st_announceCreateError,
+    st_waitCreateDone,
+    st_waitCreateError,
 
-    st_announceUpdateDone,
-    st_announceUpdateError,
+    st_waitUpdateDone,
+    st_waitUpdateError,
 
-    st_announceDeleteDone,
-    st_announceDeleteError,
-  } = useSelector((state) => state.announce);
+    st_waitDeleteDone,
+    st_waitDeleteError,
+  } = useSelector((state) => state.wait);
 
   ////// HOOKS //////
   const router = useRouter();
@@ -124,46 +124,46 @@ const List = () => {
 
   useEffect(() => {
     dispatch({
-      type: ANNOUNCE_ADMIN_LIST_REQUEST,
+      type: WAIT_ADMIN_LIST_REQUEST,
       data: {
         searchTitle,
       },
     });
   }, [searchTitle]);
 
-  // 공고(입찰) 생성 후처리
+  // 대기자명단 생성 후처리
   useEffect(() => {
-    if (st_announceCreateDone) {
+    if (st_waitCreateDone) {
       setFileName(null);
       formRef.resetFields();
       cModalToggle();
 
       dispatch({
-        type: ANNOUNCE_ADMIN_LIST_REQUEST,
+        type: WAIT_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
       });
 
       dispatch({
-        type: ANNOUNCE_RESET,
+        type: WAIT_RESET,
       });
 
-      return message.success("공고(입찰)을 생성하였습니다.");
+      return message.success("대기자명단을 생성하였습니다.");
     }
-  }, [st_announceCreateDone]);
+  }, [st_waitCreateDone]);
 
   useEffect(() => {
-    if (st_announceCreateError) {
-      return message.error(st_announceCreateError);
+    if (st_waitCreateError) {
+      return message.error(st_waitCreateError);
     }
-  }, [st_announceCreateError]);
+  }, [st_waitCreateError]);
 
-  // 공고(입찰) 수정 후처리
+  // 대기자명단 수정 후처리
   useEffect(() => {
-    if (st_announceUpdateDone) {
+    if (st_waitUpdateDone) {
       dispatch({
-        type: ANNOUNCE_ADMIN_LIST_REQUEST,
+        type: WAIT_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
@@ -173,39 +173,39 @@ const List = () => {
       setUData(null);
       setFileName(null);
       dispatch({
-        type: ANNOUNCE_RESET,
+        type: WAIT_RESET,
       });
       setUModal(false);
 
-      return message.success("공고(입찰)을 수정하였습니다.");
+      return message.success("대기자명단을 수정하였습니다.");
     }
-  }, [st_announceUpdateDone]);
+  }, [st_waitUpdateDone]);
 
   useEffect(() => {
-    if (st_announceUpdateError) {
-      return message.error(st_announceUpdateError);
+    if (st_waitUpdateError) {
+      return message.error(st_waitUpdateError);
     }
-  }, [st_announceUpdateError]);
+  }, [st_waitUpdateError]);
 
-  // 공고(입찰) 삭제 후처리
+  // 대기자명단 삭제 후처리
   useEffect(() => {
-    if (st_announceDeleteDone) {
+    if (st_waitDeleteDone) {
       dispatch({
-        type: ANNOUNCE_ADMIN_LIST_REQUEST,
+        type: WAIT_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
       });
 
-      return message.success("공고(입찰)을 삭제하였습니다.");
+      return message.success("대기자명단을 삭제하였습니다.");
     }
-  }, [st_announceDeleteDone]);
+  }, [st_waitDeleteDone]);
 
   useEffect(() => {
-    if (st_announceDeleteError) {
-      return message.error(st_announceDeleteError);
+    if (st_waitDeleteError) {
+      return message.error(st_waitDeleteError);
     }
-  }, [st_announceDeleteError]);
+  }, [st_waitDeleteError]);
 
   ////// TOGGLE ///////
   const cModalToggle = useCallback(() => {
@@ -225,7 +225,7 @@ const List = () => {
       if (uModal) {
         setUData(null);
         dispatch({
-          type: ANNOUNCE_RESET,
+          type: WAIT_RESET,
         });
         setFileName(null);
       }
@@ -255,7 +255,7 @@ const List = () => {
   const createHandler = useCallback(
     (data) => {
       dispatch({
-        type: ANNOUNCE_CREATE_REQUEST,
+        type: WAIT_CREATE_REQUEST,
         data: {
           title: data.title,
           content: data.content,
@@ -288,7 +288,7 @@ const List = () => {
       }
 
       dispatch({
-        type: ANNOUNCE_UPDATE_REQUEST,
+        type: WAIT_UPDATE_REQUEST,
         data: {
           title: data.title,
           content: data.content,
@@ -304,7 +304,7 @@ const List = () => {
 
   const deleteHandler = useCallback((data) => {
     dispatch({
-      type: ANNOUNCE_DELETE_REQUEST,
+      type: WAIT_DELETE_REQUEST,
       data: {
         id: data.id,
       },
@@ -329,7 +329,7 @@ const List = () => {
     }
 
     dispatch({
-      type: ANNOUNCE_FILE_UPLOAD_REQUEST,
+      type: WAIT_FILE_UPLOAD_REQUEST,
       data: formData,
     });
   }, []);
@@ -350,7 +350,7 @@ const List = () => {
     }
 
     dispatch({
-      type: ANNOUNCE_IMAGE_UPLOAD_REQUEST,
+      type: WAIT_IMAGE_UPLOAD_REQUEST,
       data: formData,
     });
   }, []);
@@ -414,9 +414,9 @@ const List = () => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["공고(입찰) 관리", "공고(입찰) 리스트"]}
-        title={`공고(입찰) 리스트`}
-        subTitle={`사용자에게 제공하는 공고(입찰)을 관리할 수 있습니다.`}
+        breadcrumbs={["대기자명단 관리", "대기자명단 리스트"]}
+        title={`대기자명단 리스트`}
+        subTitle={`사용자에게 제공하는 대기자명단을 관리할 수 있습니다.`}
       />
 
       <AdminContent>
@@ -430,7 +430,7 @@ const List = () => {
           <Wrapper dr={`row`} ju={`flex-start`} width={`80%`}>
             <SearchForm form={searchForm} onFinish={searchHandler}>
               <Form.Item name="title">
-                <CustomInput size="small" placeholder="공고(입찰)제목" />
+                <CustomInput size="small" placeholder="대기자명단제목" />
               </Form.Item>
 
               <Button icon={<SearchOutlined />} size="small" htmlType="submit">
@@ -450,7 +450,7 @@ const List = () => {
 
           <Wrapper dr={`row`} ju={`flex-end`} width={`20%`}>
             <ModalBtn type="primary" size="small" onClick={cModalToggle}>
-              + 공고(입찰) 생성
+              + 대기자명단 생성
             </ModalBtn>
           </Wrapper>
         </Wrapper>
@@ -465,7 +465,7 @@ const List = () => {
           al="flex-start"
         >
           <GuideDiv isImpo={true}>
-            사용자가 볼 수 있는 공고(입찰)을 관리 할 수 있습니다.
+            사용자가 볼 수 있는 대기자명단을 관리 할 수 있습니다.
           </GuideDiv>
           <GuideDiv isImpo={true}>
             등록된 데이터는 웹사이트 및 어플리케이션에 즉시 적용되기 때문에
@@ -477,7 +477,7 @@ const List = () => {
         <Table
           rowKey="id"
           columns={columns}
-          dataSource={adminAnnounceList}
+          dataSource={adminWaitList}
           size="small"
         />
       </AdminContent>
@@ -486,7 +486,7 @@ const List = () => {
         visible={uModal}
         onCancel={uModalToggle}
         footer={null}
-        title="공고(입찰) 수정"
+        title="대기자명단 수정"
         width="1100px"
       >
         <Wrapper
@@ -531,7 +531,7 @@ const List = () => {
               },
             ]}
           >
-            <Input placeholder="공고(입찰) 제목을 입력해주세요." />
+            <Input placeholder="대기자명단 제목을 입력해주세요." />
           </Form.Item>
           <Form.Item
             label="내용"
@@ -545,7 +545,7 @@ const List = () => {
           >
             <TextArea
               style={{ height: `200px` }}
-              placeholder="공고(입찰) 내용을 입력해주세요."
+              placeholder="대기자명단 내용을 입력해주세요."
             />
           </Form.Item>
 
@@ -577,7 +577,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={imageClickHandler}
-                loading={st_announceImageUploadLoading}
+                loading={st_waitImageUploadLoading}
               >
                 이미지 업로드
               </Button>
@@ -609,7 +609,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={fileClickHandler}
-                loading={st_announceFileUploadLoading}
+                loading={st_waitFileUploadLoading}
               >
                 파일 업로드
               </Button>
@@ -628,7 +628,7 @@ const List = () => {
         visible={cModal}
         onCancel={cModalToggle}
         footer={null}
-        title="공고(입찰) 생성"
+        title="대기자명단 생성"
         width="1100px"
       >
         <Wrapper
@@ -674,7 +674,7 @@ const List = () => {
               },
             ]}
           >
-            <Input placeholder="공고(입찰) 제목을 입력해주세요." />
+            <Input placeholder="대기자명단 제목을 입력해주세요." />
           </Form.Item>
           <Form.Item
             label="내용"
@@ -688,7 +688,7 @@ const List = () => {
           >
             <TextArea
               style={{ height: `200px` }}
-              placeholder="공고(입찰) 내용을 입력해주세요."
+              placeholder="대기자명단 내용을 입력해주세요."
             />
           </Form.Item>
 
@@ -720,7 +720,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={imageClickHandler}
-                loading={st_announceImageUploadLoading}
+                loading={st_waitImageUploadLoading}
               >
                 이미지 업로드
               </Button>
@@ -748,7 +748,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={fileClickHandler}
-                loading={st_announceFileUploadLoading}
+                loading={st_waitFileUploadLoading}
               >
                 파일 업로드
               </Button>
@@ -782,7 +782,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: ANNOUNCE_ADMIN_LIST_REQUEST,
+      type: WAIT_ADMIN_LIST_REQUEST,
     });
 
     // 구현부 종료
