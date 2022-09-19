@@ -1,19 +1,16 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import AdminLayout from "../../../components/AdminLayout";
 import PageHeader from "../../../components/admin/PageHeader";
-import AdminTop from "../../../components/admin/AdminTop";
-import { Table, Button, Modal, Input, notification, Popconfirm } from "antd";
+import { Table, Button, Modal, Input, Popconfirm, message, Switch } from "antd";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BANNER_UPLOAD_REQUEST,
   MAIN_BANNER_REQUEST,
-  UPLOAD_BANNER_INIT_REQUEST,
-  VIEW_MODAL_REQUEST,
-  VIEW_CREATE_MODAL_REQUEST,
   BANNER_UPDATE_REQUEST,
   BANNER_CREATE_REQUEST,
   BANNER_DELETE_REQUEST,
+  BANNER_MOBILE_REQUEST,
 } from "../../../reducers/banner";
 import useInput from "../../../hooks/useInput";
 import wrapper from "../../../store/configureStore";
@@ -24,6 +21,7 @@ import { LOAD_MY_INFO_REQUEST } from "../../../reducers/user";
 import {
   GuideDiv,
   ModalBtn,
+  Text,
   Wrapper,
 } from "../../../components/commonComponents";
 import Theme from "../../../components/Theme";
@@ -50,23 +48,10 @@ const BannerImage = styled.img`
   object-fit: cover;
 `;
 
-const BannerInput = styled(Input)`
-  width: 1200px;
-`;
-
-const GuideWrapper = styled.section`
-  width: 1200px;
-  padding: 5px;
-  margin-bottom: 10px;
-
-  border-radius: 3px;
-  background-color: ${(props) => props.theme.adminLightGrey_C};
-`;
-
-const GuideText = styled.div`
-  font-size: 13.5px;
-  color: ${(props) => props.theme.grey_C};
-  font-weight: 700;
+const MobileImage = styled.img`
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
 `;
 
 const UploadWrapper = styled.div`
@@ -79,18 +64,32 @@ const UploadWrapper = styled.div`
   justify-content: flex-end;
 `;
 
+const MobileWrapper = styled.div`
+  margin: 5px 0;
+  width: 300px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
 const PreviewGuide = styled.p`
   font-weight: 700;
   color: ${(props) => props.theme.adminLightGrey_C};
 `;
 
-const bannerUploadNotification = (msg, content) => {
-  notification.open({
-    message: msg,
-    description: content,
-    onClick: () => {},
-  });
-};
+const InputStyle = styled(Input)`
+  width: 500px;
+  margin-left: 10px;
+`;
+
+const TextStyle = styled(Text)`
+  transition: 0.3s;
+  &:hover {
+    color: ${(props) => props.theme.subTheme3_C};
+  }
+`;
 
 const Mainbanner = () => {
   // LOAD CURRENT INFO AREA /////////////////////////////////////////////
@@ -112,65 +111,47 @@ const Mainbanner = () => {
   /////////////////////////////////////////////////////////////////////////
 
   ////// HOOKS //////
-  const [currentViewImagePath, setCurrentViewImagePath] = useState(``);
-  const [deletePopVisible, setDeletePopVisible] = useState(false);
+  const [currentData, setCurrentData] = useState(``);
   const [currentId, setCurrentId] = useState(null);
-  const [deleteId, setDeleteId] = useState(null);
+  const [updateModal, setUpdateModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
 
   const title = useInput(``);
-  const content = useInput(``);
+  const subTitle = useInput(``);
 
   const imageInput = useRef();
+  const mobileImageInput = useRef();
 
   const dispatch = useDispatch();
 
   ////// REDUX //////
   const {
     banners,
-    viewModal,
-    createModal,
+
     uploadBannerPath,
+    uploadMobilePath,
+    //
     st_bannerUploadLoading,
     st_bannerUpdateDone,
     st_bannerUpdateError,
     st_bannerCreateDone,
     st_bannerCreateError,
-    st_bannerDeleteLoading,
     st_bannerDeleteDone,
     st_bannerDeleteError,
+    st_bannerMobileLoading,
   } = useSelector((state) => state.banner);
 
   ////// USEEFFECT //////
-  useEffect(() => {
-    dispatch({
-      type: MAIN_BANNER_REQUEST,
-    });
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (viewModal) {
-        dispatch({
-          type: UPLOAD_BANNER_INIT_REQUEST,
-        });
-
-        dispatch({
-          type: MAIN_BANNER_REQUEST,
-        });
-      }
-    };
-  }, [viewModal]);
 
   useEffect(() => {
     if (st_bannerUpdateDone) {
+      setUpdateModal(false);
+
       dispatch({
-        type: VIEW_MODAL_REQUEST,
+        type: MAIN_BANNER_REQUEST,
       });
 
-      return bannerUploadNotification(
-        "ADMIN SYSTEM",
-        "입력하신 정보로 해당 데이터가 수정되었습니다."
-      );
+      return message.success(`데이터가 수정되었습니다.`);
     }
   }, [st_bannerUpdateDone]);
 
@@ -179,109 +160,82 @@ const Mainbanner = () => {
       dispatch({
         type: MAIN_BANNER_REQUEST,
       });
-
-      return bannerUploadNotification(
-        "ADMIN SYSTEM",
-        "선택한 메인베너 데이터가 삭제되었습니다."
-      );
+      return message.success(`데이터가 삭제되었습니다.`);
     }
   }, [st_bannerDeleteDone]);
 
   useEffect(() => {
     if (st_bannerCreateDone) {
-      dispatch({
-        type: VIEW_CREATE_MODAL_REQUEST,
-      });
+      setCreateModal(false);
 
       dispatch({
         type: MAIN_BANNER_REQUEST,
       });
 
-      return bannerUploadNotification(
-        "ADMIN SYSTEM",
-        "입력하신 정보로 메인베너가 생성되었습니다."
-      );
+      return message.success(`메인베너가 생성되었습니다.`);
     }
   }, [st_bannerCreateDone]);
 
   useEffect(() => {
     if (st_bannerUpdateError) {
-      bannerUploadNotification("ADMIN SYSTEM ERROR", st_bannerUpdateError);
+      message.error(st_bannerUpdateError);
     }
   }, [st_bannerUpdateError]);
 
   useEffect(() => {
     if (st_bannerDeleteError) {
-      bannerUploadNotification("ADMIN SYSTEM ERROR", st_bannerDeleteError);
+      message.error(st_bannerDeleteError);
     }
   }, [st_bannerDeleteError]);
 
   useEffect(() => {
     if (st_bannerCreateError) {
-      bannerUploadNotification("ADMIN SYSTEM ERROR", st_bannerCreateError);
+      message.error(st_bannerCreateError);
     }
   }, [st_bannerCreateError]);
 
   ////// TOGGLE //////
-  const deletePopToggle = useCallback(
-    (id) => () => {
-      setDeleteId(id);
-      setDeletePopVisible((prev) => !prev);
-    },
-    [deletePopVisible, deleteId]
-  );
 
   const viewClick = useCallback(
     (data = {}) =>
       () => {
-        dispatch({
-          type: VIEW_MODAL_REQUEST,
-        });
+        setUpdateModal((prev) => !prev);
 
-        if (!viewModal) {
+        if (!updateModal) {
           setCurrentId(data.id);
-          setCurrentViewImagePath(data.imagePath);
+          setCurrentData(data);
           title.setValue(data.title);
-          content.setValue(data.content);
+          subTitle.setValue(data.subTitle);
         }
       },
 
-    [viewModal]
+    [updateModal, currentId, currentData, title.value, subTitle.value]
   );
 
   ////// HANDLER //////
-  const deleteHandler = useCallback(() => {
-    if (!deleteId) {
-      return bannerUploadNotification(
-        "ADMIN SYSTEM ERRLR",
-        "일시적인 장애가 발생되었습니다. 잠시 후 다시 시도해주세요."
+  const deleteHandler = useCallback((id) => {
+    if (!id) {
+      return message.error(
+        `일시적인 장애가 발생되었습니다. 잠시 후 다시 시도해주세요.`
       );
     }
 
     dispatch({
       type: BANNER_DELETE_REQUEST,
-      data: { id: deleteId },
+      data: { id },
     });
-
-    setDeleteId(null);
-    setDeletePopVisible((prev) => !prev);
-  }, [deleteId]);
+  }, []);
 
   const createClick = useCallback(() => {
     title.setValue(``);
-    content.setValue(``);
+    subTitle.setValue(``);
 
-    dispatch({
-      type: VIEW_CREATE_MODAL_REQUEST,
-    });
+    setCreateModal((prev) => !prev);
   }, [createModal]);
 
   const updateClick = useCallback(() => {
     if (!currentId) {
-      return bannerUploadNotification(
-        "ADMIN SYSTEM ERROR",
-        "데이터가 소실되었습니다. 재접속 후 사용해주세요."
-      );
+      return message.error(`데이터가 소실되었습니다. 재접속 후 사용해주세요.`);
     }
 
     dispatch({
@@ -289,35 +243,52 @@ const Mainbanner = () => {
       data: {
         id: currentId,
         title: title.value,
-        imagePath: uploadBannerPath ? uploadBannerPath : currentViewImagePath,
-        content: content.value,
+        imagePath: uploadBannerPath ? uploadBannerPath : currentData.imagePath,
+        mobileImagePath: uploadMobilePath
+          ? uploadMobilePath
+          : currentData.mobileImagePath,
+        subTitle: subTitle.value,
       },
     });
-  }, [currentId, title, content, uploadBannerPath]);
+  }, [
+    currentId,
+    title.value,
+    subTitle.value,
+    uploadBannerPath,
+    uploadMobilePath,
+    currentData,
+  ]);
 
   const clickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
 
+  const clickImageMobileUpload = useCallback(() => {
+    mobileImageInput.current.click();
+  }, [mobileImageInput.current]);
+
   const bannerCreate = useCallback(() => {
     if (!uploadBannerPath) {
-      return bannerUploadNotification(
-        "ADMIN SYSTEM ERROR",
-        "이미지는 필수등록 사항 입니다."
-      );
+      return message.info(`PC 이미지를 업로드해주세요.`);
+    }
+
+    if (!uploadMobilePath) {
+      return message.info(`Mobile 이미지를 업로드해주세요.`);
     }
 
     dispatch({
       type: BANNER_CREATE_REQUEST,
       data: {
         title: title.value,
-        content: content.value,
+        subTitle: subTitle.value,
         imagePath: uploadBannerPath,
+        mobileImagePath: uploadMobilePath,
       },
     });
-  }, [title, uploadBannerPath, content]);
+  }, [title.value, uploadBannerPath, subTitle.value, uploadMobilePath]);
 
   const onChangeImages = useCallback((e) => {
+    if (e.target.files.length < 1) return;
     const formData = new FormData();
 
     [].forEach.call(e.target.files, (file) => {
@@ -330,19 +301,68 @@ const Mainbanner = () => {
     });
   });
 
+  const onChangeMobileImages = useCallback((e) => {
+    if (e.target.files.length < 1) return;
+    const formData = new FormData();
+
+    [].forEach.call(e.target.files, (file) => {
+      formData.append("image", file);
+    });
+
+    dispatch({
+      type: BANNER_MOBILE_REQUEST,
+      data: formData,
+    });
+  });
+
   ////// DATAVIEW //////
   const columns = [
     {
       title: "번호",
-      dataIndex: "id",
+      dataIndex: "num",
+      align: "center",
+      width: "5%",
     },
     {
       title: "제목",
-      dataIndex: "title",
+      render: (data) =>
+        data.title ? (
+          <Text width="100%" isEllipsis={true}>
+            {data.title}
+          </Text>
+        ) : (
+          <Text width="100%" isEllipsis={true} color={Theme.lightGrey_C}>
+            등록된 제목이 없습니다.
+          </Text>
+        ),
+      width: "20%",
+      ellipsis: true,
     },
     {
-      title: "내용",
-      dataIndex: "content",
+      title: "부제목",
+      render: (data) =>
+        data.subTitle ? (
+          <Text width="100%" isEllipsis={true}>
+            {data.subTitle}
+          </Text>
+        ) : (
+          <Text width="100%" isEllipsis={true} color={Theme.lightGrey_C}>
+            등록된 부제목이 없습니다.
+          </Text>
+        ),
+      width: "25%",
+      ellipsis: true,
+    },
+
+    {
+      title: "생성일",
+      dataIndex: "viewCreatedAt",
+      width: "15%",
+    },
+    {
+      title: "최근 수정일",
+      dataIndex: "viewUpdatedAt",
+      width: "15%",
     },
     {
       title: "데이터 수정",
@@ -351,19 +371,26 @@ const Mainbanner = () => {
           데이터 수정
         </Button>
       ),
+      width: "10%",
+      align: "center",
     },
     {
       title: "데이터 삭제",
       render: (data) => (
-        <Button
-          size="small"
-          onClick={deletePopToggle(data.id)}
-          type="danger"
-          loading={st_bannerDeleteLoading}
+        <Popconfirm
+          onConfirm={() => deleteHandler(data.id)}
+          title="정말 삭제하시겠습니까?"
+          placement="topRight"
+          okText="삭제"
+          cancelText="취소"
         >
-          데이터 삭제
-        </Button>
+          <Button size="small" type="danger">
+            데이터 삭제
+          </Button>
+        </Popconfirm>
       ),
+      width: "10%",
+      align: "center",
     },
   ];
 
@@ -401,6 +428,9 @@ const Mainbanner = () => {
             메인화면에 보여지는 이미지를 제어할 수 있습니다.
           </GuideDiv>
           <GuideDiv isImpo={true}>
+            데이터 수정을 클릭 시, 보다 자세한 데이터를 볼 수 있습니다.
+          </GuideDiv>
+          <GuideDiv isImpo={true}>
             등록된 데이터는 웹사이트 및 어플리케이션에 즉시 적용되기 때문에
             정확한 입력을 필요로 합니다.
           </GuideDiv>
@@ -417,32 +447,39 @@ const Mainbanner = () => {
 
       {/* UPDATE MODAL */}
       <Modal
-        visible={viewModal}
-        width={`1300px`}
-        title={`메인베너 상세보기`}
+        visible={updateModal}
+        width={`1250px`}
+        title={`메인베너 수정하기`}
         onCancel={viewClick()}
-        onOk={updateClick}
+        footer={null}
       >
         <BannerWrapper>
-          <GuideWrapper>
-            <GuideText>
-              메인베너 이미지 사이즈는 가로 {BANNER_WIDTH}px 과 세로{" "}
-              {BANNER_HEIGHT}px을 기준으로 합니다.
-            </GuideText>
-            <GuideText>
+          <Wrapper
+            margin={`0px 0px 10px 0px`}
+            radius="5px"
+            bgColor={Theme.adminLightGrey_C}
+            padding="5px"
+            fontSize="13px"
+            al="flex-start"
+            width="1200px"
+          >
+            <GuideDiv isImpo={true}>
               이미지 사이즈가 상이할 경우 화면에 올바르지 않게 보일 수 있으니
               이미지 사이즈를 확인해주세요.
-            </GuideText>
-            <GuideText>
-              BANNER TITLE과 BANNER CONTENT는 값을 지정하지 않을 수 있습니다.
-            </GuideText>
-          </GuideWrapper>
+            </GuideDiv>
+            <GuideDiv isImpo={true}>
+              PC와 Mobile 이미지 업로드는 필수입니다.
+            </GuideDiv>
+            <GuideDiv isImpo={true}>
+              제목, 부제목은 선택 입력 사항입니다.
+            </GuideDiv>
+          </Wrapper>
 
           <BannerImage
             src={
               uploadBannerPath
                 ? `${uploadBannerPath}`
-                : `${currentViewImagePath}`
+                : `${currentData.imagePath}`
             }
             alt="main_banner_image"
           />
@@ -463,41 +500,101 @@ const Mainbanner = () => {
               type="primary"
               onClick={clickImageUpload}
               loading={st_bannerUploadLoading}
+              size="small"
             >
-              이미지 업로드
+              PC 이미지 업로드
             </Button>
           </UploadWrapper>
 
-          <br />
-          <br />
-          <BannerInput allowClear placeholder="Banner Title" {...title} />
-          <br />
-          <BannerInput allowClear placeholder="Banner Content" {...content} />
+          <Wrapper width="1200px" dr="row" ju="space-between" margin="5px 0">
+            <Wrapper width="auto">
+              <MobileImage
+                src={
+                  uploadMobilePath
+                    ? `${uploadMobilePath}`
+                    : `${currentData.mobileImagePath}`
+                }
+                alt="main_banner_image"
+              />
+              <PreviewGuide>
+                {uploadMobilePath && `이미지 미리보기 입니다.`}
+              </PreviewGuide>
+              <MobileWrapper>
+                <input
+                  type="file"
+                  name="image"
+                  accept=".png, .jpg"
+                  // multiple
+                  hidden
+                  ref={mobileImageInput}
+                  onChange={onChangeMobileImages}
+                />
+                <Button
+                  size="small"
+                  type="primary"
+                  onClick={clickImageMobileUpload}
+                  loading={st_bannerMobileLoading}
+                >
+                  Mobile 이미지 업로드
+                </Button>
+              </MobileWrapper>
+            </Wrapper>
+            <Wrapper width="700px">
+              <Wrapper dr="row" ju="flex-end" margin="10px 0">
+                <Text>제목 :</Text>
+                <InputStyle
+                  size="small"
+                  placeholder="제목을 입력해주세요."
+                  {...title}
+                />
+              </Wrapper>
+              <Wrapper dr="row" ju="flex-end" margin="10px 0">
+                <Text>부제목 :</Text>
+                <InputStyle
+                  size="small"
+                  placeholder="부제목을 입력해주세요."
+                  {...subTitle}
+                />
+              </Wrapper>
+            </Wrapper>
+            <Wrapper al={`flex-end`}>
+              <Button type="primary" size="small" onClick={updateClick}>
+                수정하기
+              </Button>
+            </Wrapper>
+          </Wrapper>
         </BannerWrapper>
       </Modal>
 
       {/* CREATE MODAL */}
       <Modal
         visible={createModal}
-        width={`1300px`}
+        width={`1250px`}
         title={`메인베너 생성하기`}
+        footer={null}
         onCancel={createClick}
-        onOk={bannerCreate}
       >
         <BannerWrapper>
-          <GuideWrapper>
-            <GuideText>
-              메인베너 이미지 사이즈는 가로 {BANNER_WIDTH}px 과 세로
-              {BANNER_HEIGHT}px을 기준으로 합니다.
-            </GuideText>
-            <GuideText>
+          <Wrapper
+            margin={`0px 0px 10px 0px`}
+            radius="5px"
+            bgColor={Theme.adminLightGrey_C}
+            padding="5px"
+            fontSize="13px"
+            al="flex-start"
+            width="1200px"
+          >
+            <GuideDiv isImpo={true}>
               이미지 사이즈가 상이할 경우 화면에 올바르지 않게 보일 수 있으니
               이미지 사이즈를 확인해주세요.
-            </GuideText>
-            <GuideText>
-              BANNER TITLE과 BANNER CONTENT는 값을 지정하지 않을 수 있습니다.
-            </GuideText>
-          </GuideWrapper>
+            </GuideDiv>
+            <GuideDiv isImpo={true}>
+              PC와 Mobile 이미지 업로드는 필수 입력 사항입니다.
+            </GuideDiv>
+            <GuideDiv isImpo={true}>
+              제목, 부제목은 선택 입력 사항입니다.
+            </GuideDiv>
+          </Wrapper>
 
           <BannerImage
             src={
@@ -526,26 +623,68 @@ const Mainbanner = () => {
               onClick={clickImageUpload}
               loading={st_bannerUploadLoading}
             >
-              이미지 업로드
+              PC 이미지 업로드
             </Button>
           </UploadWrapper>
 
-          <br />
-          <br />
-          <BannerInput allowClear placeholder="Banner Title" {...title} />
-          <br />
-          <BannerInput allowClear placeholder="Banner Content" {...content} />
+          <Wrapper width="1200px" dr="row" ju="space-between" margin="5px 0">
+            <Wrapper width="auto">
+              <MobileImage
+                src={
+                  uploadMobilePath
+                    ? `${uploadMobilePath}`
+                    : `https://via.placeholder.com/300x400`
+                }
+                alt="main_banner_image"
+              />
+              <PreviewGuide>
+                {uploadMobilePath && `이미지 미리보기 입니다.`}
+              </PreviewGuide>
+              <MobileWrapper>
+                <input
+                  type="file"
+                  name="image"
+                  accept=".png, .jpg"
+                  // multiple
+                  hidden
+                  ref={mobileImageInput}
+                  onChange={onChangeMobileImages}
+                />
+                <Button
+                  size="small"
+                  type="primary"
+                  onClick={clickImageMobileUpload}
+                  loading={st_bannerMobileLoading}
+                >
+                  Mobile 이미지 업로드
+                </Button>
+              </MobileWrapper>
+            </Wrapper>
+            <Wrapper width="700px">
+              <Wrapper dr="row" ju="flex-end" margin="10px 0">
+                <Text>제목 :</Text>
+                <InputStyle
+                  size="small"
+                  placeholder="제목을 입력해주세요."
+                  {...title}
+                />
+              </Wrapper>
+              <Wrapper dr="row" ju="flex-end" margin="10px 0">
+                <Text>부제목 :</Text>
+                <InputStyle
+                  size="small"
+                  placeholder="부제목을 입력해주세요."
+                  {...subTitle}
+                />
+              </Wrapper>
+            </Wrapper>
+            <Wrapper al={`flex-end`}>
+              <Button type="primary" size="small" onClick={bannerCreate}>
+                생성하기
+              </Button>
+            </Wrapper>
+          </Wrapper>
         </BannerWrapper>
-      </Modal>
-
-      <Modal
-        visible={deletePopVisible}
-        onOk={deleteHandler}
-        onCancel={deletePopToggle(null)}
-        title="정말 삭제하시겠습니까?"
-      >
-        <Wrapper>삭제 된 데이터는 다시 복구할 수 없습니다.</Wrapper>
-        <Wrapper>정말 삭제하시겠습니까?</Wrapper>
       </Modal>
     </AdminLayout>
   );
@@ -564,6 +703,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: MAIN_BANNER_REQUEST,
     });
 
     // 구현부 종료

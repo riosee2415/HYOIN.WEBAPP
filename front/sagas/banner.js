@@ -20,6 +20,10 @@ import {
   BANNER_DELETE_REQUEST,
   BANNER_DELETE_SUCCESS,
   BANNER_DELETE_FAILURE,
+  /////////////////////////////
+  BANNER_MOBILE_REQUEST,
+  BANNER_MOBILE_SUCCESS,
+  BANNER_MOBILE_FAILURE,
 } from "../reducers/banner";
 
 // SAGA AREA ********************************************************************************************************
@@ -75,7 +79,32 @@ function* bannerUpload(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function MobileUploadAPI(data) {
+  return await axios.post(`/api/banner/image`, data);
+}
 
+function* MobileUpload(action) {
+  try {
+    const result = yield call(MobileUploadAPI, action.data);
+
+    yield put({
+      type: BANNER_MOBILE_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: BANNER_MOBILE_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 async function bannerUpdateAPI(data) {
@@ -171,6 +200,10 @@ function* watchBannerUpload() {
   yield takeLatest(BANNER_UPLOAD_REQUEST, bannerUpload);
 }
 
+function* watchMobileUpload() {
+  yield takeLatest(BANNER_MOBILE_REQUEST, MobileUpload);
+}
+
 function* watchBannerCreate() {
   yield takeLatest(BANNER_CREATE_REQUEST, bannerCreate);
 }
@@ -184,6 +217,7 @@ export default function* bannerSaga() {
   yield all([
     fork(watchMainBanner),
     fork(watchBannerUpload),
+    fork(watchMobileUpload),
     fork(watchMainBannerUpdate),
     fork(watchBannerCreate),
     fork(watchBannerDelete),
