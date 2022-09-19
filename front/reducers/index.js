@@ -13,6 +13,7 @@ import editor from "./editor";
 import faq from "./faq";
 import news from "./news";
 import announce from "./announce";
+import wait from "./wait";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -34,6 +35,7 @@ const rootReducer = (state, action) => {
         faq,
         news,
         announce,
+        wait,
       });
       return combinedReducer(state, action);
     }
