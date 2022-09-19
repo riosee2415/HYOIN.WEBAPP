@@ -84,13 +84,6 @@ const InputStyle = styled(Input)`
   margin-left: 10px;
 `;
 
-const TextStyle = styled(Text)`
-  transition: 0.3s;
-  &:hover {
-    color: ${(props) => props.theme.subTheme3_C};
-  }
-`;
-
 const Mainbanner = () => {
   // LOAD CURRENT INFO AREA /////////////////////////////////////////////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
