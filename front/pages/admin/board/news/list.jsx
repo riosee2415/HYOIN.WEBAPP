@@ -15,14 +15,14 @@ import {
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  NOTICE_CREATE_REQUEST,
-  NOTICE_UPDATE_REQUEST,
-  NOTICE_DELETE_REQUEST,
-  NOTICE_ADMIN_LIST_REQUEST,
-  NOTICE_IMAGE_UPLOAD_REQUEST,
-  NOTICE_FILE_UPLOAD_REQUEST,
-  NOTICE_RESET,
-} from "../../../../reducers/notice";
+  NEWS_CREATE_REQUEST,
+  NEWS_UPDATE_REQUEST,
+  NEWS_DELETE_REQUEST,
+  NEWS_ADMIN_LIST_REQUEST,
+  NEWS_IMAGE_UPLOAD_REQUEST,
+  NEWS_FILE_UPLOAD_REQUEST,
+  NEWS_RESET,
+} from "../../../../reducers/news";
 import { withRouter } from "next/router";
 
 import { END } from "redux-saga";
@@ -77,22 +77,22 @@ const List = () => {
   ////// GLOBAL STATE //////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
   const {
-    adminNoticeList,
+    adminNewsList,
     fileUpload,
     imgUpload,
     //
-    st_noticeImageUploadLoading,
-    st_noticeFileUploadLoading,
+    st_newsImageUploadLoading,
+    st_newsFileUploadLoading,
     //
-    st_noticeCreateDone,
-    st_noticeCreateError,
+    st_newsCreateDone,
+    st_newsCreateError,
 
-    st_noticeUpdateDone,
-    st_noticeUpdateError,
+    st_newsUpdateDone,
+    st_newsUpdateError,
 
-    st_noticeDeleteDone,
-    st_noticeDeleteError,
-  } = useSelector((state) => state.notice);
+    st_newsDeleteDone,
+    st_newsDeleteError,
+  } = useSelector((state) => state.news);
 
   ////// HOOKS //////
   const router = useRouter();
@@ -124,46 +124,46 @@ const List = () => {
 
   useEffect(() => {
     dispatch({
-      type: NOTICE_ADMIN_LIST_REQUEST,
+      type: NEWS_ADMIN_LIST_REQUEST,
       data: {
         searchTitle,
       },
     });
   }, [searchTitle]);
 
-  // 공지사항 생성 후처리
+  // 새소식 생성 후처리
   useEffect(() => {
-    if (st_noticeCreateDone) {
+    if (st_newsCreateDone) {
       setFileName(null);
       formRef.resetFields();
       cModalToggle();
 
       dispatch({
-        type: NOTICE_ADMIN_LIST_REQUEST,
+        type: NEWS_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
       });
 
       dispatch({
-        type: NOTICE_RESET,
+        type: NEWS_RESET,
       });
 
-      return message.success("공지사항을 생성하였습니다.");
+      return message.success("새소식을 생성하였습니다.");
     }
-  }, [st_noticeCreateDone]);
+  }, [st_newsCreateDone]);
 
   useEffect(() => {
-    if (st_noticeCreateError) {
-      return message.error(st_noticeCreateError);
+    if (st_newsCreateError) {
+      return message.error(st_newsCreateError);
     }
-  }, [st_noticeCreateError]);
+  }, [st_newsCreateError]);
 
-  // 공지사항 수정 후처리
+  // 새소식 수정 후처리
   useEffect(() => {
-    if (st_noticeUpdateDone) {
+    if (st_newsUpdateDone) {
       dispatch({
-        type: NOTICE_ADMIN_LIST_REQUEST,
+        type: NEWS_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
@@ -173,39 +173,39 @@ const List = () => {
       setUData(null);
       setFileName(null);
       dispatch({
-        type: NOTICE_RESET,
+        type: NEWS_RESET,
       });
       setUModal(false);
 
-      return message.success("공지사항을 수정하였습니다.");
+      return message.success("새소식을 수정하였습니다.");
     }
-  }, [st_noticeUpdateDone]);
+  }, [st_newsUpdateDone]);
 
   useEffect(() => {
-    if (st_noticeUpdateError) {
-      return message.error(st_noticeUpdateError);
+    if (st_newsUpdateError) {
+      return message.error(st_newsUpdateError);
     }
-  }, [st_noticeUpdateError]);
+  }, [st_newsUpdateError]);
 
-  // 공지사항 삭제 후처리
+  // 새소식 삭제 후처리
   useEffect(() => {
-    if (st_noticeDeleteDone) {
+    if (st_newsDeleteDone) {
       dispatch({
-        type: NOTICE_ADMIN_LIST_REQUEST,
+        type: NEWS_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
       });
 
-      return message.success("공지사항을 삭제하였습니다.");
+      return message.success("새소식을 삭제하였습니다.");
     }
-  }, [st_noticeDeleteDone]);
+  }, [st_newsDeleteDone]);
 
   useEffect(() => {
-    if (st_noticeDeleteError) {
-      return message.error(st_noticeDeleteError);
+    if (st_newsDeleteError) {
+      return message.error(st_newsDeleteError);
     }
-  }, [st_noticeDeleteError]);
+  }, [st_newsDeleteError]);
 
   ////// TOGGLE ///////
   const cModalToggle = useCallback(() => {
@@ -225,7 +225,7 @@ const List = () => {
       if (uModal) {
         setUData(null);
         dispatch({
-          type: NOTICE_RESET,
+          type: NEWS_RESET,
         });
         setFileName(null);
       }
@@ -255,7 +255,7 @@ const List = () => {
   const createHandler = useCallback(
     (data) => {
       dispatch({
-        type: NOTICE_CREATE_REQUEST,
+        type: NEWS_CREATE_REQUEST,
         data: {
           title: data.title,
           content: data.content,
@@ -288,7 +288,7 @@ const List = () => {
       }
 
       dispatch({
-        type: NOTICE_UPDATE_REQUEST,
+        type: NEWS_UPDATE_REQUEST,
         data: {
           title: data.title,
           content: data.content,
@@ -304,7 +304,7 @@ const List = () => {
 
   const deleteHandler = useCallback((data) => {
     dispatch({
-      type: NOTICE_DELETE_REQUEST,
+      type: NEWS_DELETE_REQUEST,
       data: {
         id: data.id,
       },
@@ -329,7 +329,7 @@ const List = () => {
     }
 
     dispatch({
-      type: NOTICE_FILE_UPLOAD_REQUEST,
+      type: NEWS_FILE_UPLOAD_REQUEST,
       data: formData,
     });
   }, []);
@@ -350,7 +350,7 @@ const List = () => {
     }
 
     dispatch({
-      type: NOTICE_IMAGE_UPLOAD_REQUEST,
+      type: NEWS_IMAGE_UPLOAD_REQUEST,
       data: formData,
     });
   }, []);
@@ -414,9 +414,9 @@ const List = () => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["공지사항 관리", "공지사항 리스트"]}
-        title={`공지사항 리스트`}
-        subTitle={`사용자에게 제공하는 공지사항을 관리할 수 있습니다.`}
+        breadcrumbs={["새소식 관리", "새소식 리스트"]}
+        title={`새소식 리스트`}
+        subTitle={`사용자에게 제공하는 새소식을 관리할 수 있습니다.`}
       />
 
       <AdminContent>
@@ -430,7 +430,7 @@ const List = () => {
           <Wrapper dr={`row`} ju={`flex-start`} width={`80%`}>
             <SearchForm form={searchForm} onFinish={searchHandler}>
               <Form.Item name="title">
-                <CustomInput size="small" placeholder="공지사항제목" />
+                <CustomInput size="small" placeholder="새소식제목" />
               </Form.Item>
 
               <Button icon={<SearchOutlined />} size="small" htmlType="submit">
@@ -450,7 +450,7 @@ const List = () => {
 
           <Wrapper dr={`row`} ju={`flex-end`} width={`20%`}>
             <ModalBtn type="primary" size="small" onClick={cModalToggle}>
-              + 공지사항 생성
+              + 새소식 생성
             </ModalBtn>
           </Wrapper>
         </Wrapper>
@@ -465,7 +465,7 @@ const List = () => {
           al="flex-start"
         >
           <GuideDiv isImpo={true}>
-            사용자가 볼 수 있는 공지사항을 관리 할 수 있습니다.
+            사용자가 볼 수 있는 새소식을 관리 할 수 있습니다.
           </GuideDiv>
           <GuideDiv isImpo={true}>
             등록된 데이터는 웹사이트 및 어플리케이션에 즉시 적용되기 때문에
@@ -477,7 +477,7 @@ const List = () => {
         <Table
           rowKey="id"
           columns={columns}
-          dataSource={adminNoticeList}
+          dataSource={adminNewsList}
           size="small"
         />
       </AdminContent>
@@ -486,7 +486,7 @@ const List = () => {
         visible={uModal}
         onCancel={uModalToggle}
         footer={null}
-        title="공지사항 수정"
+        title="새소식 수정"
         width="1100px"
       >
         <Wrapper
@@ -531,7 +531,7 @@ const List = () => {
               },
             ]}
           >
-            <Input placeholder="공지사항 제목을 입력해주세요." />
+            <Input placeholder="새소식 제목을 입력해주세요." />
           </Form.Item>
           <Form.Item
             label="내용"
@@ -545,7 +545,7 @@ const List = () => {
           >
             <TextArea
               style={{ height: `200px` }}
-              placeholder="공지사항 내용을 입력해주세요."
+              placeholder="새소식 내용을 입력해주세요."
             />
           </Form.Item>
 
@@ -577,7 +577,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={imageClickHandler}
-                loading={st_noticeImageUploadLoading}
+                loading={st_newsImageUploadLoading}
               >
                 이미지 업로드
               </Button>
@@ -609,7 +609,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={fileClickHandler}
-                loading={st_noticeFileUploadLoading}
+                loading={st_newsFileUploadLoading}
               >
                 파일 업로드
               </Button>
@@ -628,7 +628,7 @@ const List = () => {
         visible={cModal}
         onCancel={cModalToggle}
         footer={null}
-        title="공지사항 생성"
+        title="새소식 생성"
         width="1100px"
       >
         <Wrapper
@@ -674,7 +674,7 @@ const List = () => {
               },
             ]}
           >
-            <Input placeholder="공지사항 제목을 입력해주세요." />
+            <Input placeholder="새소식 제목을 입력해주세요." />
           </Form.Item>
           <Form.Item
             label="내용"
@@ -688,7 +688,7 @@ const List = () => {
           >
             <TextArea
               style={{ height: `200px` }}
-              placeholder="공지사항 내용을 입력해주세요."
+              placeholder="새소식 내용을 입력해주세요."
             />
           </Form.Item>
 
@@ -720,7 +720,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={imageClickHandler}
-                loading={st_noticeImageUploadLoading}
+                loading={st_newsImageUploadLoading}
               >
                 이미지 업로드
               </Button>
@@ -748,7 +748,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={fileClickHandler}
-                loading={st_noticeFileUploadLoading}
+                loading={st_newsFileUploadLoading}
               >
                 파일 업로드
               </Button>
@@ -782,7 +782,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: NOTICE_ADMIN_LIST_REQUEST,
+      type: NEWS_ADMIN_LIST_REQUEST,
     });
 
     // 구현부 종료
