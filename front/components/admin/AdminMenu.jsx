@@ -124,6 +124,9 @@ const AdminMenu = () => {
           <Menu.Item key="/admin/board/news/list">
             <MenuName>새소식 관리</MenuName>
           </Menu.Item>
+          <Menu.Item key="/admin/board/announce/list">
+            <MenuName>공고(입찰) 관리</MenuName>
+          </Menu.Item>
         </SubMenu>
         <SubMenu
           key="sub4"

@@ -12,6 +12,7 @@ import seo from "./seo";
 import editor from "./editor";
 import faq from "./faq";
 import news from "./news";
+import announce from "./announce";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -32,6 +33,7 @@ const rootReducer = (state, action) => {
         editor,
         faq,
         news,
+        announce,
       });
       return combinedReducer(state, action);
     }
