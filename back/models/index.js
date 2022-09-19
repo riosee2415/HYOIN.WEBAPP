@@ -14,6 +14,8 @@ const seo = require("./seo");
 const faqtype = require("./faqtype");
 const faq = require("./faq");
 const recruit = require("./recruit");
+const programdate = require("./programdate");
+const program = require("./program");
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -41,6 +43,8 @@ db.Seo = seo;
 db.FaqType = faqtype;
 db.Faq = faq;
 db.Recruit = recruit;
+db.ProgramDate = programdate;
+db.Program = program;
 
 Object.keys(db).forEach((modelName) => {
   db[modelName].init(sequelize);
