@@ -130,6 +130,9 @@ const AdminMenu = () => {
           <Menu.Item key="/admin/board/wait/list">
             <MenuName>대기자명단 관리</MenuName>
           </Menu.Item>
+          <Menu.Item key="/admin/board/recruit/list">
+            <MenuName>채용공고 관리</MenuName>
+          </Menu.Item>
         </SubMenu>
         <SubMenu
           key="sub4"
