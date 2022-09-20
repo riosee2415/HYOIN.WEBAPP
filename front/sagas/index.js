@@ -13,6 +13,7 @@ import faqSaga from "./faq";
 import newsSaga from "./news";
 import announceSaga from "./announce";
 import waitSaga from "./wait";
+import recruitSaga from "./recruit";
 //
 import axios from "axios";
 import backURL from "../config/config";
@@ -36,5 +37,6 @@ export default function* rootSaga() {
     fork(newsSaga),
     fork(announceSaga),
     fork(waitSaga),
+    fork(recruitSaga),
   ]);
 }
