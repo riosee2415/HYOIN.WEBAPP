@@ -37,7 +37,7 @@ import {
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 async function questionGetAPI(data) {
-  return await axios.get(`/api/question/list/${data.listType}`);
+  return await axios.post(`/api/question/list`, data);
 }
 
 function* questionGet(action) {
