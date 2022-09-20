@@ -64,7 +64,7 @@ router.post("/list", async (req, res, next) => {
       JOIN    programDates        B
         ON    A.ProgramDateId = B.id
      WHERE    A.isDelete = 0
-       AND    DATE_FORMAT(B.specificDate, "%Y-%m")  = DATE_FORMAT("${searchMonth}-01", "%Y-%m")
+       AND    DATE_FORMAT(B.specificDate, "%Y-%m") = DATE_FORMAT("${searchMonth}-01", "%Y-%m")
        ${
          _searchDate !== ``
            ? `AND DATE_FORMAT(B.specificDate, "%Y-%m-%d") = DATE_FORMAT("${_searchDate}", "%Y-%m-%d")`

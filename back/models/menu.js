@@ -19,7 +19,7 @@ module.exports = class Menu extends Model {
         },
         breakfaseImage: {
           type: DataTypes.STRING(600), // 아침식사 이미지
-          allowNull: false,
+          allowNull: true,
         },
         lunch: {
           type: DataTypes.STRING(1000), // 점심식사
@@ -31,7 +31,7 @@ module.exports = class Menu extends Model {
         },
         lunchImage: {
           type: DataTypes.STRING(600), // 점심식사 이미지
-          allowNull: false,
+          allowNull: true,
         },
         dinner: {
           type: DataTypes.STRING(1000), // 저녁식사
@@ -43,7 +43,7 @@ module.exports = class Menu extends Model {
         },
         dinnerImage: {
           type: DataTypes.STRING(600), // 저녁식사 이미지
-          allowNull: false,
+          allowNull: true,
         },
         morningSnack: {
           type: DataTypes.STRING(300), // 오전 간식
@@ -51,7 +51,7 @@ module.exports = class Menu extends Model {
         },
         morningSnackImage: {
           type: DataTypes.STRING(600), // 오전 간식 이미지
-          allowNull: false,
+          allowNull: true,
         },
         afternoonSnack: {
           type: DataTypes.STRING(300), // 오후 간식
@@ -59,7 +59,7 @@ module.exports = class Menu extends Model {
         },
         afternoonSnackImage: {
           type: DataTypes.STRING(600), // 오후 간식 이미지
-          allowNull: false,
+          allowNull: true,
         },
         functionDiet: {
           type: DataTypes.STRING(100), // 기능별식이
