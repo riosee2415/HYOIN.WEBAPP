@@ -257,6 +257,7 @@ const Index = () => {
                   fontSize={`18px`}
                   color={Theme.black2_C}
                   key={data.id}
+                  cursor={`pointer`}
                   onClick={() => detailHandler(data)}
                 >
                   <Wrapper
