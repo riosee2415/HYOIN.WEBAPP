@@ -80,6 +80,7 @@ router.post("/list", async (req, res, next) => {
             A.imagePath,
             A.createdAt,
             A.updatedAt,
+            DATE_FORMAT(A.createdAt, "%y.%m.%d")		    AS viewFrontCreatedAt,
             DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
             DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
     FROM	announce		A
@@ -98,6 +99,7 @@ router.post("/list", async (req, res, next) => {
             A.imagePath,
             A.createdAt,
             A.updatedAt,
+            DATE_FORMAT(A.createdAt, "%y.%m.%d")		    AS viewFrontCreatedAt,
             DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
             DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
     FROM	announce		A
@@ -144,6 +146,7 @@ router.post("/admin/list", async (req, res, next) => {
             A.imagePath,
             A.createdAt,
             A.updatedAt,
+            DATE_FORMAT(A.createdAt, "%y.%m.%d")		    AS viewFrontCreatedAt,
             DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
             DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
     FROM	announce		A
@@ -264,6 +267,7 @@ router.get("/detail/:id", async (req, res, next) => {
             A.imagePath,
             A.createdAt,
             A.updatedAt,
+            DATE_FORMAT(A.createdAt, "%y.%m.%d")		    AS viewFrontCreatedAt,
             DATE_FORMAT(A.createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
             DATE_FORMAT(A.updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
       FROM	announce		A

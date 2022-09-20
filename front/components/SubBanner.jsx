@@ -119,11 +119,11 @@ const SubBanner = ({ width, bgImg }) => {
           <RsWrapper dr={`row`} ju={`flex-start`}>
             <HomeFilled />
             &nbsp; HOME
-            <SpanText margin={`0 10px`} color={Theme.grey_C}>
+            <SpanText margin={`0 10px`} color={Theme.grey3_C}>
               <RightOutlined />
             </SpanText>
             {parentMenuName}
-            <SpanText color={Theme.grey_C} margin={`0 10px`}>
+            <SpanText color={Theme.grey3_C} margin={`0 10px`}>
               <RightOutlined />
             </SpanText>
             {currentMenuName}
