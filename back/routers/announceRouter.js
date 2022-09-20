@@ -120,6 +120,7 @@ router.post("/list", async (req, res, next) => {
     return res.status(200).json({
       announce: announce[0],
       lastPage: parseInt(lastPage),
+      announceLen: parseInt(announceLen),
     });
   } catch (error) {
     console.error(error);

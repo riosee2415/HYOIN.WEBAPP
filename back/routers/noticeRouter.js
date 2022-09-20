@@ -119,6 +119,7 @@ router.post("/list", async (req, res, next) => {
 
     return res.status(200).json({
       notice: notice[0],
+      noticeLen: parseInt(noticeLen),
       lastPage: parseInt(lastPage),
     });
   } catch (error) {

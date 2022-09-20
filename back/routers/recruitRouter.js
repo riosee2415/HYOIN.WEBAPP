@@ -131,6 +131,7 @@ router.post("/list", async (req, res, next) => {
 
     return res.status(200).json({
       recruit: recruit[0],
+      recruitLen: parseInt(recruitLen),
       lastPage: parseInt(lastPage),
     });
   } catch (error) {
