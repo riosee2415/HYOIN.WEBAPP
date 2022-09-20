@@ -1,91 +1,138 @@
 export const menus = [
   {
-    menuName: "회사소개",
-    menuLink: "/company/introduce",
+    menuName: "요양원 소개",
+    menuLink: "/",
     subMenus: [
       {
-        subMenuName: "인사말",
-        subMenuLink: "/company/introduce",
+        subMenuName: "요양원 소개",
+        subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
+        subMenuLink: "/",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
       },
       {
-        subMenuName: "오시는 길",
+        subMenuName: "시설 개요",
+        subMenuLink: "/intro/operation",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+      },
+      {
+        subMenuName: "조직도",
+        subMenuLink: "/intro/organization",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+      },
+      {
+        subMenuName: "찾아오시는 길",
+        subMenuLink: "/intro/intro",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+      },
+      {
+        subMenuName: "시설 3D 안내",
+        subMenuLink: "/intro/intro",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+      },
+    ],
+  },
+  {
+    menuName: "COMPANY",
+    menuLink: "/company/history",
+    subMenus: [
+      {
+        subMenuName: "회사연혁 & 주요 매출처",
+        subMenuLink: "/company/history",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/company.png",
+      },
+      {
+        subMenuName: "회사위치",
         subMenuLink: "/company/location",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/company.png",
       },
       {
-        subMenuName: "지역별 담당자",
-        subMenuLink: "/company/manager",
+        subMenuName: "투자계획",
+        subMenuLink: "/company/invest",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/company.png",
+      },
+      {
+        subMenuName: "측정설비 보유현황",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
+
+        subMenuLink: "/company/measuring",
+      },
+      {
+        subMenuName: "생산설비 보유현황",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
+
+        subMenuLink: "/company/production",
       },
     ],
   },
   {
-    menuName: "도서소개",
-    menuLink: "/books/new",
+    menuName: "PRODUCT",
+    menuLink: "/product/main",
     subMenus: [
       {
-        subMenuName: "신간도서",
-        subMenuLink: "/books/new",
+        subMenuName: "인증현황",
+        subMenuLink: "/product/certification",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
       },
       {
-        subMenuName: "분야별 도서",
-        subMenuLink: "/books/field",
+        subMenuName: "특허",
+        subMenuLink: "/product/patent",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
       },
       {
-        subMenuName: "도서목록",
-        subMenuLink: "/books/list",
+        subMenuName: "설계영역",
+        subMenuLink: "/product/design",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
+      },
+
+      {
+        subMenuName: "주요생산품",
+        subMenuLink: "/product/main",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
       },
     ],
   },
   {
-    menuName: "자료실",
-    menuLink: "/reference/errata",
-    subMenus: [
-      {
-        subMenuName: "정오표",
-        subMenuLink: "/reference/errata",
-      },
-      {
-        subMenuName: "강의자료실",
-        subMenuLink: "/reference/class",
-      },
-      {
-        subMenuName: "학습자료실",
-        subMenuLink: "/reference/learning",
-      },
-    ],
-  },
-  {
-    menuName: "고객지원",
-    menuLink: "/center/notice",
+    menuName: "SUPPORT",
+    menuLink: "/support/notice",
     subMenus: [
       {
         subMenuName: "공지사항",
-        subMenuLink: "/center/notice",
+        subMenuLink: "/support/notice",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/support.png",
       },
       {
-        subMenuName: "1:1문의",
-        subMenuLink: "/center/question",
-      },
-      {
-        subMenuName: "FAQ",
-        subMenuLink: "/center/faq",
-      },
-      {
-        subMenuName: "출간문의",
-        subMenuLink: "/center/publication",
-      },
-      {
-        subMenuName: "견본도서신청",
-        subMenuLink: "/center/application",
-      },
-      {
-        subMenuName: "단체구매신청",
-        subMenuLink: "/center/groupPurchase",
+        subMenuName: "자료실",
+        subMenuLink: "/support/reference",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/support.png",
       },
     ],
   },
   {
-    menuName: "모바일 앱",
-    menuLink: "/mobileApp",
-    subMenus: [],
+    menuName: "CONTACT",
+    menuLink: "/contact",
+    subMenus: [
+      {
+        subMenuName: "문의하기",
+        subMenuLink: "/contact",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/contact.png",
+      },
+    ],
   },
 ];

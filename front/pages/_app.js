@@ -68,6 +68,12 @@ const Fourleaf = ({ Component }) => {
 
         <meta name="description" content={"[[**4LEAF GEAR SAMPLE**]]"} />
         <meta property="og:description" content={"[[**4LEAF GEAR SAMPLE**]]"} />
+
+        {/* 프리텐다드 폰트 */}
+        <link
+          href="https://webfontworld.github.io/pretendard/Pretendard.css"
+          rel="stylesheet"
+        />
       </Head>
       <Component />
     </ThemeProvider>

@@ -12,6 +12,7 @@ import Head from "next/head";
 import Popup from "../components/popup/popup";
 import Mainslider from "../components/slide/MainSlider";
 import ToastEditorComponent from "../components/editor/ToastEditorComponent";
+import SubBanner from "../components/SubBanner";
 
 const Home = ({}) => {
   const width = useWidth();
@@ -36,6 +37,7 @@ const Home = ({}) => {
 
       <ClientLayout>
         <WholeWrapper>
+          <SubBanner />
           <Mainslider />
 
           <ToastEditorComponent
