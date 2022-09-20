@@ -11,18 +11,19 @@ import {
   message,
   Popconfirm,
   Image,
+  Radio,
 } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  NEWS_CREATE_REQUEST,
-  NEWS_UPDATE_REQUEST,
-  NEWS_DELETE_REQUEST,
-  NEWS_ADMIN_LIST_REQUEST,
-  NEWS_IMAGE_UPLOAD_REQUEST,
-  NEWS_FILE_UPLOAD_REQUEST,
-  NEWS_RESET,
-} from "../../../../reducers/news";
+  RECRUIT_CREATE_REQUEST,
+  RECRUIT_UPDATE_REQUEST,
+  RECRUIT_DELETE_REQUEST,
+  RECRUIT_ADMIN_LIST_REQUEST,
+  RECRUIT_IMAGE_UPLOAD_REQUEST,
+  RECRUIT_FILE_UPLOAD_REQUEST,
+  RECRUIT_RESET,
+} from "../../../../reducers/recruit";
 import { withRouter } from "next/router";
 
 import { END } from "redux-saga";
@@ -77,22 +78,22 @@ const List = () => {
   ////// GLOBAL STATE //////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
   const {
-    adminNewsList,
+    adminRecruitList,
     fileUpload,
     imgUpload,
     //
-    st_newsImageUploadLoading,
-    st_newsFileUploadLoading,
+    st_recruitImageUploadLoading,
+    st_recruitFileUploadLoading,
     //
-    st_newsCreateDone,
-    st_newsCreateError,
+    st_recruitCreateDone,
+    st_recruitCreateError,
 
-    st_newsUpdateDone,
-    st_newsUpdateError,
+    st_recruitUpdateDone,
+    st_recruitUpdateError,
 
-    st_newsDeleteDone,
-    st_newsDeleteError,
-  } = useSelector((state) => state.news);
+    st_recruitDeleteDone,
+    st_recruitDeleteError,
+  } = useSelector((state) => state.recruit);
 
   ////// HOOKS //////
   const router = useRouter();
@@ -124,46 +125,46 @@ const List = () => {
 
   useEffect(() => {
     dispatch({
-      type: NEWS_ADMIN_LIST_REQUEST,
+      type: RECRUIT_ADMIN_LIST_REQUEST,
       data: {
         searchTitle,
       },
     });
   }, [searchTitle]);
 
-  // 새소식 생성 후처리
+  // 채용공고 생성 후처리
   useEffect(() => {
-    if (st_newsCreateDone) {
+    if (st_recruitCreateDone) {
       setFileName(null);
       formRef.resetFields();
       cModalToggle();
 
       dispatch({
-        type: NEWS_ADMIN_LIST_REQUEST,
+        type: RECRUIT_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
       });
 
       dispatch({
-        type: NEWS_RESET,
+        type: RECRUIT_RESET,
       });
 
-      return message.success("새소식을 생성하였습니다.");
+      return message.success("채용공고을 생성하였습니다.");
     }
-  }, [st_newsCreateDone]);
+  }, [st_recruitCreateDone]);
 
   useEffect(() => {
-    if (st_newsCreateError) {
-      return message.error(st_newsCreateError);
+    if (st_recruitCreateError) {
+      return message.error(st_recruitCreateError);
     }
-  }, [st_newsCreateError]);
+  }, [st_recruitCreateError]);
 
-  // 새소식 수정 후처리
+  // 채용공고 수정 후처리
   useEffect(() => {
-    if (st_newsUpdateDone) {
+    if (st_recruitUpdateDone) {
       dispatch({
-        type: NEWS_ADMIN_LIST_REQUEST,
+        type: RECRUIT_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
@@ -173,39 +174,39 @@ const List = () => {
       setUData(null);
       setFileName(null);
       dispatch({
-        type: NEWS_RESET,
+        type: RECRUIT_RESET,
       });
       setUModal(false);
 
-      return message.success("새소식을 수정하였습니다.");
+      return message.success("채용공고을 수정하였습니다.");
     }
-  }, [st_newsUpdateDone]);
+  }, [st_recruitUpdateDone]);
 
   useEffect(() => {
-    if (st_newsUpdateError) {
-      return message.error(st_newsUpdateError);
+    if (st_recruitUpdateError) {
+      return message.error(st_recruitUpdateError);
     }
-  }, [st_newsUpdateError]);
+  }, [st_recruitUpdateError]);
 
-  // 새소식 삭제 후처리
+  // 채용공고 삭제 후처리
   useEffect(() => {
-    if (st_newsDeleteDone) {
+    if (st_recruitDeleteDone) {
       dispatch({
-        type: NEWS_ADMIN_LIST_REQUEST,
+        type: RECRUIT_ADMIN_LIST_REQUEST,
         data: {
           searchTitle,
         },
       });
 
-      return message.success("새소식을 삭제하였습니다.");
+      return message.success("채용공고을 삭제하였습니다.");
     }
-  }, [st_newsDeleteDone]);
+  }, [st_recruitDeleteDone]);
 
   useEffect(() => {
-    if (st_newsDeleteError) {
-      return message.error(st_newsDeleteError);
+    if (st_recruitDeleteError) {
+      return message.error(st_recruitDeleteError);
     }
-  }, [st_newsDeleteError]);
+  }, [st_recruitDeleteError]);
 
   ////// TOGGLE ///////
   const cModalToggle = useCallback(() => {
@@ -218,6 +219,7 @@ const List = () => {
         formRef.setFieldsValue({
           title: data.title,
           content: data.content,
+          period: data.status,
         });
         setUData(data);
       }
@@ -225,7 +227,7 @@ const List = () => {
       if (uModal) {
         setUData(null);
         dispatch({
-          type: NEWS_RESET,
+          type: RECRUIT_RESET,
         });
         setFileName(null);
       }
@@ -255,13 +257,14 @@ const List = () => {
   const createHandler = useCallback(
     (data) => {
       dispatch({
-        type: NEWS_CREATE_REQUEST,
+        type: RECRUIT_CREATE_REQUEST,
         data: {
           title: data.title,
           content: data.content,
           file: fileUpload,
           imagePath: imgUpload,
           filename: fileName,
+          status: data.period,
         },
       });
     },
@@ -281,6 +284,7 @@ const List = () => {
       if (
         data.title === String(uData && uData.title) &&
         data.content === String(uData && uData.content) &&
+        data.period === (uData && uData.status) &&
         !fileUpload &&
         !imgUpload
       ) {
@@ -288,7 +292,7 @@ const List = () => {
       }
 
       dispatch({
-        type: NEWS_UPDATE_REQUEST,
+        type: RECRUIT_UPDATE_REQUEST,
         data: {
           title: data.title,
           content: data.content,
@@ -296,6 +300,7 @@ const List = () => {
           file: fileUpload ? fileUpload : uData && uData.file,
           filename: fileName ? fileName : uData && uData.filename,
           imagePath: imgUpload ? imgUpload : uData && uData.imagePath,
+          status: data.period,
         },
       });
     },
@@ -304,7 +309,7 @@ const List = () => {
 
   const deleteHandler = useCallback((data) => {
     dispatch({
-      type: NEWS_DELETE_REQUEST,
+      type: RECRUIT_DELETE_REQUEST,
       data: {
         id: data.id,
       },
@@ -329,7 +334,7 @@ const List = () => {
     }
 
     dispatch({
-      type: NEWS_FILE_UPLOAD_REQUEST,
+      type: RECRUIT_FILE_UPLOAD_REQUEST,
       data: formData,
     });
   }, []);
@@ -350,7 +355,7 @@ const List = () => {
     }
 
     dispatch({
-      type: NEWS_IMAGE_UPLOAD_REQUEST,
+      type: RECRUIT_IMAGE_UPLOAD_REQUEST,
       data: formData,
     });
   }, []);
@@ -365,6 +370,10 @@ const List = () => {
       width: `40%`,
       title: "제목",
       dataIndex: "title",
+    },
+    {
+      title: "채용기간",
+      dataIndex: "viewStatus",
     },
     {
       title: "조회수",
@@ -414,9 +423,9 @@ const List = () => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["새소식 관리", "새소식 리스트"]}
-        title={`새소식 리스트`}
-        subTitle={`사용자에게 제공하는 새소식을 관리할 수 있습니다.`}
+        breadcrumbs={["채용공고 관리", "채용공고 리스트"]}
+        title={`채용공고 리스트`}
+        subTitle={`사용자에게 제공하는 채용공고을 관리할 수 있습니다.`}
       />
 
       <AdminContent>
@@ -430,7 +439,7 @@ const List = () => {
           <Wrapper dr={`row`} ju={`flex-start`} width={`80%`}>
             <SearchForm form={searchForm} onFinish={searchHandler}>
               <Form.Item name="title">
-                <CustomInput size="small" placeholder="새소식제목" />
+                <CustomInput size="small" placeholder="채용공고제목" />
               </Form.Item>
 
               <Button icon={<SearchOutlined />} size="small" htmlType="submit">
@@ -450,7 +459,7 @@ const List = () => {
 
           <Wrapper dr={`row`} ju={`flex-end`} width={`20%`}>
             <ModalBtn type="primary" size="small" onClick={cModalToggle}>
-              + 새소식 생성
+              + 채용공고 생성
             </ModalBtn>
           </Wrapper>
         </Wrapper>
@@ -465,7 +474,7 @@ const List = () => {
           al="flex-start"
         >
           <GuideDiv isImpo={true}>
-            사용자가 볼 수 있는 새소식을 관리 할 수 있습니다.
+            사용자가 볼 수 있는 채용공고을 관리 할 수 있습니다.
           </GuideDiv>
           <GuideDiv isImpo={true}>
             등록된 데이터는 웹사이트 및 어플리케이션에 즉시 적용되기 때문에
@@ -477,7 +486,7 @@ const List = () => {
         <Table
           rowKey="id"
           columns={columns}
-          dataSource={adminNewsList}
+          dataSource={adminRecruitList}
           size="small"
         />
       </AdminContent>
@@ -486,7 +495,7 @@ const List = () => {
         visible={uModal}
         onCancel={uModalToggle}
         footer={null}
-        title="새소식 수정"
+        title="채용공고 수정"
         width="1100px"
       >
         <Wrapper
@@ -497,7 +506,9 @@ const List = () => {
           fontSize="13px"
           al="flex-start"
         >
-          <GuideDiv isImpo={true}>제목 / 내용은 필수 등록사항입니다.</GuideDiv>
+          <GuideDiv isImpo={true}>
+            제목 / 내용 / 채용기간은 필수 등록사항입니다.
+          </GuideDiv>
           <GuideDiv isImpo={true}>
             이미지 / 첨부파일은 필수 등록사항이 아닙니다.
           </GuideDiv>
@@ -531,7 +542,7 @@ const List = () => {
               },
             ]}
           >
-            <Input placeholder="새소식 제목을 입력해주세요." />
+            <Input placeholder="채용공고 제목을 입력해주세요." />
           </Form.Item>
           <Form.Item
             label="내용"
@@ -545,8 +556,25 @@ const List = () => {
           >
             <TextArea
               style={{ height: `200px` }}
-              placeholder="새소식 내용을 입력해주세요."
+              placeholder="채용공고 내용을 입력해주세요."
             />
+          </Form.Item>
+
+          <Form.Item
+            label="채용기간"
+            name="period"
+            rules={[
+              {
+                required: true,
+                message: "채용기간은 필수 선택사항 입니다.",
+              },
+            ]}
+          >
+            <Radio.Group>
+              <Radio value={1}>채용시 마감</Radio>
+              <Radio value={2}>마감</Radio>
+              <Radio value={3}>상시모집</Radio>
+            </Radio.Group>
           </Form.Item>
 
           <Wrapper dr={`row`}>
@@ -577,7 +605,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={imageClickHandler}
-                loading={st_newsImageUploadLoading}
+                loading={st_recruitImageUploadLoading}
               >
                 이미지 업로드
               </Button>
@@ -609,7 +637,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={fileClickHandler}
-                loading={st_newsFileUploadLoading}
+                loading={st_recruitFileUploadLoading}
               >
                 파일 업로드
               </Button>
@@ -628,7 +656,7 @@ const List = () => {
         visible={cModal}
         onCancel={cModalToggle}
         footer={null}
-        title="새소식 생성"
+        title="채용공고 생성"
         width="1100px"
       >
         <Wrapper
@@ -639,7 +667,9 @@ const List = () => {
           fontSize="13px"
           al="flex-start"
         >
-          <GuideDiv isImpo={true}>제목 / 내용은 필수 등록사항입니다.</GuideDiv>
+          <GuideDiv isImpo={true}>
+            제목 / 내용 / 채용기간은 필수 등록사항입니다.
+          </GuideDiv>
           <GuideDiv isImpo={true}>
             이미지 / 첨부파일은 필수 등록사항이 아닙니다.
           </GuideDiv>
@@ -674,7 +704,7 @@ const List = () => {
               },
             ]}
           >
-            <Input placeholder="새소식 제목을 입력해주세요." />
+            <Input placeholder="채용공고 제목을 입력해주세요." />
           </Form.Item>
           <Form.Item
             label="내용"
@@ -688,8 +718,25 @@ const List = () => {
           >
             <TextArea
               style={{ height: `200px` }}
-              placeholder="새소식 내용을 입력해주세요."
+              placeholder="채용공고 내용을 입력해주세요."
             />
+          </Form.Item>
+
+          <Form.Item
+            label="채용기간"
+            name="period"
+            rules={[
+              {
+                required: true,
+                message: "채용기간은 필수 선택사항 입니다.",
+              },
+            ]}
+          >
+            <Radio.Group>
+              <Radio value={1}>채용시 마감</Radio>
+              <Radio value={2}>마감</Radio>
+              <Radio value={3}>상시모집</Radio>
+            </Radio.Group>
           </Form.Item>
 
           <Wrapper dr={`row`}>
@@ -720,7 +767,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={imageClickHandler}
-                loading={st_newsImageUploadLoading}
+                loading={st_recruitImageUploadLoading}
               >
                 이미지 업로드
               </Button>
@@ -748,7 +795,7 @@ const List = () => {
                 type="primary"
                 size="small"
                 onClick={fileClickHandler}
-                loading={st_newsFileUploadLoading}
+                loading={st_recruitFileUploadLoading}
               >
                 파일 업로드
               </Button>
@@ -782,7 +829,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: NEWS_ADMIN_LIST_REQUEST,
+      type: RECRUIT_ADMIN_LIST_REQUEST,
     });
 
     // 구현부 종료
