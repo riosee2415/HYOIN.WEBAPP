@@ -7,6 +7,7 @@ export const initailState = {
   fileUpload: null,
   imgUpload: null,
   lastPage: 1,
+  noticeLen: null,
 
   st_noticeAdminListLoading: false, // NoticeAdmin 가져오기
   st_noticeAdminListDone: false,
@@ -103,6 +104,7 @@ const reducer = (state = initailState, action) =>
         draft.st_noticeListError = null;
         draft.noticeList = action.data.notice;
         draft.lastPage = action.data.lastPage;
+        draft.noticeLen = action.data.noticeLen;
         break;
       }
       case NOTICE_LIST_FAILURE: {
