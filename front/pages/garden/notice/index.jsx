@@ -25,6 +25,7 @@ import { Empty, Input, message, Pagination, Select } from "antd";
 import { NOTICE_LIST_REQUEST } from "../../../reducers/notice";
 import { useRouter } from "next/router";
 import { PaperClipOutlined, SearchOutlined } from "@ant-design/icons";
+import SubBanner from "../../../components/SubBanner";
 
 const CustomPage = styled(Pagination)`
   margin: 40px 0 100px;
@@ -165,8 +166,9 @@ const Index = () => {
         <title>효인 | 공지사항</title>
       </Head>
       <ClientLayout>
-        <WholeWrapper isPre>
-          <RsWrapper margin={`300px 0 0`}>
+        <WholeWrapper>
+          <SubBanner />
+          <RsWrapper margin={`80px 0 0`}>
             <Text fontSize={`38px`} fontWeight={`700`} margin={`0 0 16px`}>
               공지사항
             </Text>
