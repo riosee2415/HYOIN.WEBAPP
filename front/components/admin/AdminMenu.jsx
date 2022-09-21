@@ -9,6 +9,7 @@ import {
   BookOutlined,
   PhoneOutlined,
   NotificationOutlined,
+  ScheduleOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -175,6 +176,16 @@ const AdminMenu = () => {
           </Menu.Item>
           <Menu.Item key="/admin/faq">
             <MenuName>FAQ 리스트 관리</MenuName>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu
+          key="sub8"
+          icon={<ScheduleOutlined />}
+          title="시간표 관리"
+          onTitleClick={titleClickHandler("sub8")}
+        >
+          <Menu.Item key="/admin/schedule/month">
+            <MenuName>월간시간표 관리</MenuName>
           </Menu.Item>
         </SubMenu>
       </Menu>

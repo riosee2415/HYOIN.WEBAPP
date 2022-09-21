@@ -124,12 +124,13 @@ export const menus = [
     ],
   },
   {
-    menuName: "CONTACT",
-    menuLink: "/contact",
+    menuName: "알림마당",
+    menuLink: "/garden",
     subMenus: [
       {
-        subMenuName: "문의하기",
-        subMenuLink: "/contact",
+        subMenuName: "공지사항",
+        subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
+        subMenuLink: "/garden/notice",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/contact.png",
       },
