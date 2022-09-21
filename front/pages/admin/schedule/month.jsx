@@ -35,6 +35,7 @@ import { LOAD_MY_INFO_REQUEST } from "../../../reducers/user";
 import wrapper from "../../../store/configureStore";
 import {
   GuideDiv,
+  Image,
   ModalBtn,
   Text,
   Wrapper,
@@ -51,7 +52,6 @@ const CustomCalendar = styled(Calendar)`
     border-top: 1px solid ${Theme.subTheme3_C};
     border-left: 1px solid ${Theme.lightGrey2_C};
     border-right: 1px solid ${Theme.lightGrey2_C};
-    border-bottom: 1px solid ${Theme.lightGrey2_C};
   }
 
   & .ant-picker-content th {
@@ -67,6 +67,15 @@ const CustomCalendar = styled(Calendar)`
 
   & .ant-picker-content th:first-child {
     border-left: none;
+  }
+
+  & tbody .ant-picker-cell {
+    border-right: 1px solid ${(props) => props.theme.lightGrey2_C};
+    border-bottom: 1px solid ${(props) => props.theme.lightGrey2_C};
+  }
+
+  & tbody .ant-picker-cell:last-child {
+    border-right: none;
   }
 `;
 
@@ -89,6 +98,8 @@ const Type = ({ router }) => {
 
   ////// HOOKS //////
 
+  const [selectDate, setSelectDate] = useState(moment());
+
   ////// REDUX //////
 
   ////// USEEFFECT //////
@@ -97,17 +108,77 @@ const Type = ({ router }) => {
 
   ////// HANDLER //////
 
-  const dateFullCellRender = (value) => {
-    // console.log(value);
-    return (
-      <Wrapper padding={`26px 10px`}>
-        <Wrapper al={`flex-start`}>
-          <Text>{value.format("DD")}</Text>
+  const selectDateHandler = useCallback(
+    (data) => {
+      setSelectDate(data);
+    },
+    [selectDate]
+  );
+
+  const dateFullCellRender = useCallback(
+    (value) => {
+      return (
+        <Wrapper className="dateBox" padding={`26px 10px`}>
+          <Wrapper al={`flex-start`}>
+            <Text
+              fontSize={`20px`}
+              fontWeight={`700`}
+              color={
+                value.format("MM") === selectDate.format("MM") &&
+                (value.format("dddd") === "Sunday"
+                  ? Theme.subTheme7_C
+                  : value.format("dddd") === "Saturday"
+                  ? Theme.subTheme8_C
+                  : Theme.grey2_C)
+              }
+            >
+              {value.format("DD")}
+            </Text>
+          </Wrapper>
+
+          <Wrapper
+            height={`320px`}
+            al={`flex-start`}
+            ju={`flex-start`}
+            overflow={`auto`}
+          >
+            <Wrapper height={`auto`}>
+              {/* LIST START */}
+              <Wrapper
+                margin={`14px 0`}
+                dr={`row`}
+                ju={`space-between`}
+                al={`flex-start`}
+              >
+                <Image
+                  width={`16px`}
+                  height={`16px`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/icon/icon_bookmark.png`}
+                  alt={`bookmark_icon`}
+                />
+                <Wrapper width={`calc(100% - 20px)`} al={`flex-start`}>
+                  <Text
+                    fontSize={`16px`}
+                    fontWeight={`bold`}
+                    margin={`0 0 6px`}
+                    lineHeight={`1.28`}
+                  >
+                    제목
+                  </Text>
+                  <Text fontSize={`14px`} lineHeight={`1.2`}>
+                    내용
+                  </Text>
+                </Wrapper>
+              </Wrapper>
+
+              {/* LIST END */}
+            </Wrapper>
+          </Wrapper>
         </Wrapper>
-        <Wrapper height={`320px`}></Wrapper>
-      </Wrapper>
-    );
-  };
+      );
+    },
+    [selectDate]
+  );
 
   ////// DATAVIEW //////
 
@@ -152,9 +223,9 @@ const Type = ({ router }) => {
               year: "년도",
             },
           }}
-          //   headerRender={() => false}
           dateFullCellRender={dateFullCellRender}
           fullscreen
+          onChange={selectDateHandler}
         />
       </AdminContent>
     </AdminLayout>
