@@ -18,11 +18,11 @@ import {
 import {
   UPDATE_MODAL_CLOSE_REQUEST,
   UPDATE_MODAL_OPEN_REQUEST,
-  QUESTION_CREATE_REQUEST,
   QUESTION_UPDATE_REQUEST,
   QUESTION_DELETE_REQUEST,
   QUESTION_GET_REQUEST,
   QUESTION_TYPE_GET_REQUEST,
+  QUESTION_LIST_REQUEST,
 } from "../../../reducers/question";
 import { LOAD_MY_INFO_REQUEST } from "../../../reducers/user";
 import { useRouter } from "next/router";
@@ -30,40 +30,55 @@ import useInput from "../../../hooks/useInput";
 import wrapper from "../../../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
-import { ColWrapper, RowWrapper } from "../../../components/commonComponents";
+import {
+  ColWrapper,
+  GuideDiv,
+  ModalBtn,
+  RowWrapper,
+  Wrapper,
+} from "../../../components/commonComponents";
 import { saveAs } from "file-saver";
 import Theme from "../../../components/Theme";
-
-const { Sider, Content } = Layout;
+import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 
 const AdminContent = styled.div`
   padding: 20px;
 `;
 
-const FileBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-`;
+// const SearchForm = styled(Form)`
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   width: auto;
 
-const Filename = styled.span`
-  margin-right: 15px;
-  color: #555;
-  font-size: 13px;
-`;
+//   & .ant-form-item {
+//     width: 200px;
+//     margin: 0;
 
-const LoadNotification = (msg, content) => {
-  notification.open({
-    message: msg,
-    description: content,
-    onClick: () => {},
-  });
-};
+//     @media (max-width: 900px) {
+//       width: 150px;
+//       margin: 5px 5px 0 0;
+//     }
+//   }
+
+//   & .ant-form-item,
+//   & .ant-form-item-control-input {
+//     min-height: 0;
+//   }
+
+//   @media (max-width: 900px) {
+//     width: 100%;
+//   }
+// `;
 
 const List = ({ location }) => {
   // LOAD CURRENT INFO AREA /////////////////////////////////////////////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
+  const { questions } = useSelector((state) => state.question);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  console.log(questions);
 
   const router = useRouter();
 
@@ -83,215 +98,96 @@ const List = ({ location }) => {
   ////// HOOKS //////
   const dispatch = useDispatch();
 
-  const [updateData, setUpdateData] = useState(null);
-
-  const [deletePopVisible, setDeletePopVisible] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
-
-  const answer = useInput("");
-
-  const {
-    questions,
-    types,
-    updateModal,
-
-    st_questionUpdateDone,
-    st_questionDeleteDone,
-
-    st_questionUpdateError,
-    st_questionDeleteError,
-  } = useSelector((state) => state.question);
+  const name = useInput("");
 
   ////// USEEFFECT //////
-  useEffect(() => {
-    const qs = router.query;
-
-    dispatch({
-      type: QUESTION_TYPE_GET_REQUEST,
-    });
-
-    dispatch({
-      type: QUESTION_GET_REQUEST,
-      data: { listType: qs.type ? qs.type : 3 },
-    });
-  }, [router.query]);
-
-  useEffect(() => {
-    if (st_questionUpdateDone) {
-      const qs = router.query;
-
-      message.success("문의내역이 처리되었습니다.");
-
-      dispatch({
-        type: QUESTION_GET_REQUEST,
-        data: { listType: qs.type ? qs.type : 3 },
-      });
-
-      dispatch({
-        type: UPDATE_MODAL_CLOSE_REQUEST,
-      });
-    }
-  }, [st_questionUpdateDone]);
-
-  useEffect(() => {
-    if (st_questionUpdateError) {
-      return message.error(st_questionUpdateError);
-    }
-  }, [st_questionUpdateError]);
-
-  useEffect(() => {
-    if (st_questionDeleteDone) {
-      const qs = router.query;
-
-      message.success("문의내역이 삭제되었습니다.");
-
-      dispatch({
-        type: QUESTION_GET_REQUEST,
-        data: { listType: qs.type ? qs.type : 3 },
-      });
-    }
-  }, [st_questionDeleteDone]);
-
-  useEffect(() => {
-    if (st_questionDeleteError) {
-      return message.error(st_questionDeleteError);
-    }
-  }, [st_questionDeleteError]);
 
   ////// TOGGLE //////
-
-  const updateModalOpen = useCallback(
-    (data) => {
-      dispatch({
-        type: UPDATE_MODAL_OPEN_REQUEST,
-      });
-
-      let type = "";
-
-      for (let i = 0; i < types.length; i++) {
-        if (data.QuestionTypeId === types[i].id) {
-          type = types[i].value;
-        }
-      }
-
-      console.log(data);
-
-      answer.setValue(data.answer);
-      setUpdateData({ ...data, type });
-    },
-    [updateModal, types]
-  );
-
-  const updateModalClose = useCallback(() => {
-    dispatch({
-      type: UPDATE_MODAL_CLOSE_REQUEST,
-    });
-    setUpdateData(null);
-  }, [updateModal]);
-
-  const deletePopToggle = useCallback(
-    (id) => () => {
-      setDeleteId(id);
-      setDeletePopVisible((prev) => !prev);
-    },
-    [deletePopVisible, deleteId]
-  );
+  const openModalToggle = useCallback((data) => {
+    setOpenModal((prev) => !prev);
+  });
 
   ////// HANDLER //////
-  const onSubmitUpdate = useCallback(() => {
-    if (!answer.value || answer.value.trim() === "") {
-      return LoadNotification("ADMIN SYSTEM ERRLR", "문의 답변을 입력해주세요");
-    }
 
+  const searchHandler = useCallback(() => {
     dispatch({
-      type: QUESTION_UPDATE_REQUEST,
+      type: QUESTION_LIST_REQUEST,
       data: {
-        id: updateData.id,
-        answer: answer.value,
-        title: updateData.title,
-        content: updateData.content,
+        searchName: name.value,
       },
     });
-  }, [updateData, answer]);
+  }, [name.value]);
 
-  const deleteQuestionHandler = useCallback(() => {
-    if (!deleteId) {
-      return LoadNotification(
-        "ADMIN SYSTEM ERRLR",
-        "일시적인 장애가 발생되었습니다. 잠시 후 다시 시도해주세요."
-      );
-    }
+  const keyPressHandler = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        searchHandler();
+      }
+    },
+    [name.value]
+  );
 
+  const allSearchHandler = useCallback(() => {
+    name.setValue("");
     dispatch({
-      type: QUESTION_DELETE_REQUEST,
-      data: { questionId: deleteId },
+      type: QUESTION_LIST_REQUEST,
     });
+  }, [name.value]);
 
-    setDeleteId(null);
-    setDeletePopVisible((prev) => !prev);
-  }, [deleteId]);
-
-  const fileDownloadHandler = useCallback(async (filePath) => {
-    let blob = await fetch(filePath).then((r) => r.blob());
-
-    const file = new Blob([blob]);
-
-    const ext = filePath.substring(
-      filePath.lastIndexOf(".") + 1,
-      filePath.length
-    );
-
-    const originName = `첨부파일.${ext}`;
-
-    saveAs(file, originName);
-  }, []);
   ////// DATAVIEW //////
 
   // Table
   const columns = [
     {
       title: "번호",
-      dataIndex: "id",
+      dataIndex: "num",
+      align: "center",
+      width: "5%",
     },
-
     {
       title: "제목",
-      render: (data) => <div>{data.title}</div>,
+      dataIndex: "title",
+      width: "20%",
+      ellipsis: true,
     },
     {
-      title: "처리여부",
-      render: (data) => <div>{data.isCompleted ? `완료` : `미완료`}</div>,
-    },
-    ,
-    {
-      title: "생성일",
-      render: (data) => {
-        return <div>{data.createdAt.substring(0, 10)}</div>;
-      },
+      title: "내용",
+      dataIndex: "content",
+      width: "25%",
+      ellipsis: true,
     },
     {
-      title: "수정일",
-      render: (data) => <div>{data.updatedAt.substring(0, 10)}</div>,
+      title: "이름",
+      dataIndex: "name",
+      align: "center",
+      width: "10%",
+      ellipsis: true,
     },
     {
-      title: "수정",
+      title: "연락처",
+      dataIndex: "mobile",
+      align: "center",
+      width: "15%",
+    },
+    {
+      title: "이메일",
+      dataIndex: "email",
+      align: "center",
+      width: "15%",
+    },
+    {
+      title: "상세보기",
       render: (data) => (
         <Button
-          size="small"
           type="primary"
-          onClick={() => updateModalOpen(data)}
+          size="small"
+          onClick={() => openModalToggle(data)}
         >
-          수정
+          상세보기
         </Button>
       ),
-    },
-    {
-      title: "삭제",
-      render: (data) => (
-        <Button size="small" type="danger" onClick={deletePopToggle(data.id)}>
-          삭제
-        </Button>
-      ),
+      align: "center",
+      width: "10%",
     },
   ];
 
@@ -305,35 +201,54 @@ const List = ({ location }) => {
       {/* <AdminTop createButton={true} createButtonAction={() => {})} /> */}
 
       <AdminContent>
-        <RowWrapper margin={`0 0 10px 0`} gutter={5}>
-          <Col>
-            <Button
+        <Wrapper
+          dr="row"
+          ju="flex-start"
+          margin="0px 0px 10px 0px"
+          borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+          padding="5px 0px"
+        >
+          <Wrapper dr={`row`} ju={`flex-start`}>
+            <Input
               size="small"
-              type={router.query && router.query.type === "3" && "primary"}
-              onClick={() => moveLinkHandler(`/admin/question/list?type=3`)}
-            >
-              전체
-            </Button>
-          </Col>
-          <Col>
+              style={{ width: "200px" }}
+              placeholder="이름으로 검색해주세요."
+              {...name}
+              onKeyPress={keyPressHandler}
+            />
             <Button
+              icon={<SearchOutlined />}
               size="small"
-              type={router.query && router.query.type === "2" && "primary"}
-              onClick={() => moveLinkHandler(`/admin/question/list?type=2`)}
+              htmlType="submit"
+              onClick={searchHandler}
             >
-              처리완료
+              검색
             </Button>
-          </Col>
-          <Col>
-            <Button
+            <ModalBtn
+              icon={<UnorderedListOutlined />}
               size="small"
-              type={router.query && router.query.type === "1" && "primary"}
-              onClick={() => moveLinkHandler(`/admin/question/list?type=1`)}
+              type="primary"
+              onClick={allSearchHandler}
             >
-              미처리
-            </Button>
-          </Col>
-        </RowWrapper>
+              전체조회
+            </ModalBtn>
+          </Wrapper>
+        </Wrapper>
+
+        {/* ADMIN GUIDE AREA */}
+        <Wrapper
+          margin={`0px 0px 10px 0px`}
+          radius="5px"
+          bgColor={Theme.adminLightGrey_C}
+          padding="5px"
+          fontSize="13px"
+          al="flex-start"
+        >
+          <GuideDiv isImpo={true}>
+            상세보기를 클릭 시 자세한 정보를 볼 수 있습니다.
+          </GuideDiv>
+        </Wrapper>
+
         <Table
           rowKey="id"
           columns={columns}
@@ -343,113 +258,113 @@ const List = ({ location }) => {
       </AdminContent>
 
       <Modal
-        visible={updateModal}
-        width={`1000px`}
-        title={`문의`}
-        onCancel={updateModalClose}
-        onOk={onSubmitUpdate}
-        okText="Complete"
-        cancelText="Cancel"
+        visible={openModal}
+        title="상세보기"
+        onCancel={openModalToggle}
+        width="600px"
+        footer={null}
       >
-        <RowWrapper padding={`50px`}>
-          <ColWrapper
-            span={12}
-            al={`flex-start`}
-            ju={`flex-start`}
-            padding={`0 30px 0 0`}
-          >
-            <RowWrapper gutter={5}>
-              <ColWrapper
-                width={`120px`}
-                height={`30px`}
-                bgColor={Theme.basicTheme_C}
+        {questions && questions[0] ? (
+          <>
+            <Wrapper
+              dr={`row`}
+              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+              margin={`0 0 5px`}
+            >
+              <Wrapper
+                al={`flex-start`}
+                width={`20%`}
+                fontWeight={`700`}
+                bgColor={Theme.adminLightGrey_C}
+                padding={`5px`}
               >
                 이름
-              </ColWrapper>
-              <ColWrapper>{`${updateData && updateData.name}(${
-                updateData && updateData.email
-              })`}</ColWrapper>
-            </RowWrapper>
-            {/*  */}
-            <RowWrapper gutter={5} margin={`10px 0`}>
-              <ColWrapper
-                width={`120px`}
-                height={`30px`}
-                bgColor={Theme.basicTheme_C}
-              >
-                문의 유형
-              </ColWrapper>
-              <ColWrapper>{updateData && updateData.type.value}</ColWrapper>
-            </RowWrapper>
-            {/*  */}
-            <RowWrapper gutter={5}>
-              <ColWrapper
-                width={`120px`}
-                height={`30px`}
-                bgColor={Theme.basicTheme_C}
-              >
-                문의 제목
-              </ColWrapper>
-              <ColWrapper>{updateData && updateData.title}</ColWrapper>
-            </RowWrapper>
-            {/*  */}
-            <RowWrapper gutter={5} margin={`10px 0`}>
-              <ColWrapper span={24} width={`100%`} bgColor={Theme.basicTheme_C}>
-                문의 내용
-              </ColWrapper>
-              <ColWrapper>{updateData && updateData.content}</ColWrapper>
-            </RowWrapper>
-          </ColWrapper>
-          <ColWrapper span={12}>
-            <ColWrapper bgColor={Theme.basicTheme_C} width={`100%`}>
-              답변
-            </ColWrapper>
-            <Input.TextArea
-              allowClear
-              placeholder="Content..."
-              autoSize={{ minRows: 10, maxRows: 10 }}
-              {...answer}
-            />
-          </ColWrapper>
-        </RowWrapper>
-        <RowWrapper padding={`20px 50px`}>
-          {updateData && updateData.file1 && (
-            <ColWrapper
-              width={`120px`}
-              height={`30px`}
-              bgColor={Theme.grey_C}
-              radius={`5px`}
-              margin={`0 10px 0 0`}
-              cursor={`pointer`}
-              color={Theme.white_C}
-              onClick={() => fileDownloadHandler(updateData.file1)}
-            >
-              첨부파일 1
-            </ColWrapper>
-          )}
-          {updateData && updateData.file2 && (
-            <ColWrapper
-              width={`120px`}
-              height={`30px`}
-              bgColor={Theme.grey_C}
-              radius={`5px`}
-              margin={`0 10px 0 0`}
-              cursor={`pointer`}
-              color={Theme.white_C}
-              onClick={() => fileDownloadHandler(updateData.file2)}
-            >
-              첨부파일 2
-            </ColWrapper>
-          )}
-        </RowWrapper>
-      </Modal>
+              </Wrapper>
+              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+                {questions[0].name}
+              </Wrapper>
+            </Wrapper>
 
-      <Modal
-        visible={deletePopVisible}
-        onOk={() => deleteQuestionHandler()}
-        onCancel={() => {}}
-        title="Ask"
-      ></Modal>
+            <Wrapper
+              dr={`row`}
+              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+              margin={`0 0 5px`}
+            >
+              <Wrapper
+                al={`flex-start`}
+                width={`20%`}
+                fontWeight={`700`}
+                bgColor={Theme.adminLightGrey_C}
+                padding={`5px`}
+              >
+                제목
+              </Wrapper>
+              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+                {questions[0].title}
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper
+              dr={`row`}
+              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+              margin={`0 0 5px`}
+            >
+              <Wrapper
+                al={`flex-start`}
+                width={`20%`}
+                fontWeight={`700`}
+                bgColor={Theme.adminLightGrey_C}
+                padding={`5px`}
+              >
+                연락처
+              </Wrapper>
+              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+                {questions[0].mobile}
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper
+              dr={`row`}
+              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+              margin={`0 0 5px`}
+            >
+              <Wrapper
+                al={`flex-start`}
+                width={`20%`}
+                fontWeight={`700`}
+                bgColor={Theme.adminLightGrey_C}
+                padding={`5px`}
+              >
+                이메일
+              </Wrapper>
+              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+                {questions[0].email}
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper
+              dr={`row`}
+              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+              margin={`0 0 5px`}
+            >
+              <Wrapper
+                al={`flex-start`}
+                width={`20%`}
+                fontWeight={`700`}
+                bgColor={Theme.adminLightGrey_C}
+                padding={`5px`}
+              >
+                내용
+              </Wrapper>
+              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+                {questions[0].content}
+              </Wrapper>
+            </Wrapper>
+          </>
+        ) : (
+          <></>
+        )}
+      </Modal>
     </AdminLayout>
   );
 };
@@ -467,6 +382,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: QUESTION_LIST_REQUEST,
     });
 
     // 구현부 종료
