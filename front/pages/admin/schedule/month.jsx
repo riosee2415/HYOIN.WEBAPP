@@ -23,6 +23,7 @@ import {
   CloseOutlined,
   CheckOutlined,
   SearchOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
@@ -153,7 +154,7 @@ const Type = ({ router }) => {
                 <Image
                   width={`16px`}
                   height={`16px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/icon/icon_bookmark.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
                   alt={`bookmark_icon`}
                 />
                 <Wrapper width={`calc(100% - 20px)`} al={`flex-start`}>
@@ -197,7 +198,11 @@ const Type = ({ router }) => {
           margin="0px 0px 10px 0px"
           borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
           padding="5px 0px"
-        ></Wrapper>
+        >
+          <Button size="small" type="primary" icon={<PlusOutlined />}>
+            시간표 추가
+          </Button>
+        </Wrapper>
 
         {/* ADMIN GUIDE AREA */}
         <Wrapper
@@ -228,6 +233,13 @@ const Type = ({ router }) => {
           onChange={selectDateHandler}
         />
       </AdminContent>
+
+      {/* CREATE.UPDATE MODAL */}
+      <Modal>
+        <Form>
+          <Form.Item></Form.Item>
+        </Form>
+      </Modal>
     </AdminLayout>
   );
 };
