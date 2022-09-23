@@ -1,7 +1,8 @@
 import produce from "../util/produce";
 
 export const initailState = {
-  valueList: [],
+  programList: [],
+  programImagePath: null, // 이미지 패스
 
   //
   st_programListLoading: false, // program 가져오기
@@ -19,6 +20,10 @@ export const initailState = {
   st_programDeleteLoading: false, // program 가져오기
   st_programDeleteDone: false,
   st_programDeleteError: null,
+  //
+  st_programImageUploadLoading: false, // program 이미지 등록
+  st_programImageUploadDone: false,
+  st_programImageUploadError: null,
 };
 
 export const PROGRAM_LIST_REQUEST = "PROGRAM_LIST_REQUEST";
@@ -37,6 +42,12 @@ export const PROGRAM_DELETE_REQUEST = "PROGRAM_DELETE_REQUEST";
 export const PROGRAM_DELETE_SUCCESS = "PROGRAM_DELETE_SUCCESS";
 export const PROGRAM_DELETE_FAILURE = "PROGRAM_DELETE_FAILURE";
 
+export const PROGRAM_IMAGE_UPLOAD_REQUEST = "PROGRAM_IMAGE_UPLOAD_REQUEST";
+export const PROGRAM_IMAGE_UPLOAD_SUCCESS = "PROGRAM_IMAGE_UPLOAD_SUCCESS";
+export const PROGRAM_IMAGE_UPLOAD_FAILURE = "PROGRAM_IMAGE_UPLOAD_FAILURE";
+
+export const PROGRAM_IMAGE_RESET = "PROGRAM_IMAGE_RESET";
+
 const reducer = (state = initailState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
@@ -50,7 +61,7 @@ const reducer = (state = initailState, action) =>
         draft.st_programListLoading = false;
         draft.st_programListDone = true;
         draft.st_programListError = null;
-        draft.aList = action.data;
+        draft.programList = action.data;
         break;
       }
       case PROGRAM_LIST_FAILURE: {
@@ -82,41 +93,69 @@ const reducer = (state = initailState, action) =>
 
       //////////////////////////////////////////////
       case PROGRAM_UPDATE_REQUEST: {
-        draft.st_aUpdateLoading = true;
-        draft.st_aUpdateDone = false;
-        draft.st_aUpdateError = null;
+        draft.st_programUpdateLoading = true;
+        draft.st_programUpdateDone = false;
+        draft.st_programUpdateError = null;
         break;
       }
       case PROGRAM_UPDATE_SUCCESS: {
-        draft.st_aUpdateLoading = false;
-        draft.st_aUpdateDone = true;
-        draft.st_aUpdateError = null;
+        draft.st_programUpdateLoading = false;
+        draft.st_programUpdateDone = true;
+        draft.st_programUpdateError = null;
         break;
       }
       case PROGRAM_UPDATE_FAILURE: {
-        draft.st_aUpdateLoading = false;
-        draft.st_aUpdateDone = false;
-        draft.st_aUpdateError = action.error;
+        draft.st_programUpdateLoading = false;
+        draft.st_programUpdateDone = false;
+        draft.st_programUpdateError = action.error;
         break;
       }
 
       //////////////////////////////////////////////
       case PROGRAM_DELETE_REQUEST: {
-        draft.st_aDeleteLoading = true;
-        draft.st_aDeleteDone = false;
-        draft.st_aDeleteError = null;
+        draft.st_programDeleteLoading = true;
+        draft.st_programDeleteDone = false;
+        draft.st_programDeleteError = null;
         break;
       }
       case PROGRAM_DELETE_SUCCESS: {
-        draft.st_aDeleteLoading = false;
-        draft.st_aDeleteDone = true;
-        draft.st_aDeleteError = null;
+        draft.st_programDeleteLoading = false;
+        draft.st_programDeleteDone = true;
+        draft.st_programDeleteError = null;
         break;
       }
       case PROGRAM_DELETE_FAILURE: {
-        draft.st_aDeleteLoading = false;
-        draft.st_aDeleteDone = false;
-        draft.st_aDeleteError = action.error;
+        draft.st_programDeleteLoading = false;
+        draft.st_programDeleteDone = false;
+        draft.st_programDeleteError = action.error;
+        break;
+      }
+
+      //////////////////////////////////////////////
+      case PROGRAM_IMAGE_UPLOAD_REQUEST: {
+        draft.st_programImageUploadLoading = true;
+        draft.st_programImageUploadDone = false;
+        draft.st_programImageUploadError = null;
+        break;
+      }
+      case PROGRAM_IMAGE_UPLOAD_SUCCESS: {
+        draft.st_programImageUploadLoading = false;
+        draft.st_programImageUploadDone = true;
+        draft.st_programImageUploadError = null;
+        draft.programImagePath = action.data.path;
+        break;
+      }
+      case PROGRAM_IMAGE_UPLOAD_FAILURE: {
+        draft.st_programImageUploadLoading = false;
+        draft.st_programImageUploadDone = false;
+        draft.st_programImageUploadError = action.error;
+        break;
+      }
+
+      //////////////////////////////////////////////
+
+      case PROGRAM_IMAGE_RESET: {
+        draft.programImagePath = action.data;
         break;
       }
 
