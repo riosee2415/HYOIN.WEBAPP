@@ -59,7 +59,7 @@ router.post("/list", async (req, res, next) => {
               A.ProgramDateId,
               B.specificDate,
               DATE_FORMAT(B.specificDate, "%Y년 %m월 %d일")  AS viewSpecificDate,
-              DATE_FORMAT(B.specificDate, "%Y-%m-%d")      AS viewFrontSpecificDate,
+              DATE_FORMAT(B.specificDate, "%Y-%m-%d")      AS viewFrontSpecificDate
       FROM    programs            A
      INNER
       JOIN    programDates        B
