@@ -15,6 +15,7 @@ import news from "./news";
 import announce from "./announce";
 import wait from "./wait";
 import recruit from "./recruit";
+import program from "./program";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -38,6 +39,7 @@ const rootReducer = (state, action) => {
         announce,
         wait,
         recruit,
+        program,
       });
       return combinedReducer(state, action);
     }
