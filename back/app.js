@@ -29,6 +29,7 @@ const listRouter = require("./routers/listRouter");
 const recruitRouter = require("./routers/recruitRouter");
 const programRouter = require("./routers/programRouter");
 const menuRouter = require("./routers/menuRouter");
+const moveserviceRouter = require("./routers/moveserviceRouter");
 
 // Config Settings
 db.sequelize
@@ -113,6 +114,7 @@ app.use("/api/list", listRouter);
 app.use("/api/recruit", recruitRouter);
 app.use("/api/program", programRouter);
 app.use("/api/menu", menuRouter);
+app.use("/api/move", moveserviceRouter);
 
 // second minute hour day-of-month month day-of-week
 const task = cron.schedule(

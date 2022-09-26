@@ -17,6 +17,9 @@ const recruit = require("./recruit");
 const programdate = require("./programdate");
 const program = require("./program");
 const menu = require("./menu");
+const moveservicecar = require("./moveservicecar");
+const moveservicetime = require("./moveservicetime");
+const moveservice = require("./moveservice");
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -47,6 +50,9 @@ db.Recruit = recruit;
 db.ProgramDate = programdate;
 db.Program = program;
 db.Menu = menu;
+db.MoveServiceCar = moveservicecar;
+db.MoveServiceTime = moveservicetime;
+db.MoveService = moveservice;
 
 Object.keys(db).forEach((modelName) => {
   db[modelName].init(sequelize);

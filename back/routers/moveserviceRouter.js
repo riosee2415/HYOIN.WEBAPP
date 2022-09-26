@@ -4,6 +4,86 @@ const models = require("../models");
 
 const router = express.Router();
 
+router.post("/list", async (req, res, next) => {
+  const { searchDate } = req.body;
+
+  const carFindQuery = `
+  SELECT	id,
+          carCount,
+          carNum,
+          moveDate,
+          DATE_FORMAT(moveDate, "%Y년 %m월 %d일")		AS viewMoveDate,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt
+    FROM	moveServiceCars
+   WHERE	DATE_FORMAT(moveDate, "%Y-%m-%d") = DATE_FORMAT("${searchDate}", "%Y-%m-%d")
+   ORDER	BY carCount ASC
+  `;
+
+  const timeFindQuery = `
+SELECT	id,
+        moveTime,
+        moverName,
+        createdAt,
+        updatedAt,
+        DATE_FORMAT(createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
+        DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt,
+        MoveServiceCarId
+  FROM	moveServiceTimes
+ WHERE  MoveServiceCarId IN (
+                              SELECT	id
+                                FROM	moveServiceCars
+                               WHERE	DATE_FORMAT(moveDate, "%Y-%m-%d") = DATE_FORMAT("${searchDate}", "%Y-%m-%d")
+                               ORDER	BY carCount ASC
+					 		              )
+  `;
+
+  const serviceFindQuery = `
+SELECT	id,
+        degree,
+        passenger,
+        count,
+        isDelete,
+        deletedAt,
+        DATE_FORMAT(deletedAt, "%Y년 %m월 %d일")		AS viewDeletedAt,
+        createdAt,
+        updatedAt,
+        DATE_FORMAT(createdAt, "%Y년 %m월 %d일")		AS viewCreatedAt,
+        DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")		AS viewUpdatedAt,
+        MoveServiceCarId,
+        MoveServiceTimeId 
+  FROM	moveServices 
+ WHERE	MoveServiceTimeId IN (
+                                SELECT	id
+                                  FROM	moveServiceTimes
+                                 WHERE  MoveServiceCarId IN (
+                                                              SELECT	id
+                                                                FROM	moveServiceCars
+                                                               WHERE	DATE_FORMAT(moveDate, "%Y-%m-%d") = DATE_FORMAT("${searchDate}", "%Y-%m-%d")
+                                                               ORDER	BY carCount ASC
+                                                            )
+ 							                )
+   AND  isDelete = 0
+  `;
+
+  try {
+    const carList = await models.sequelize.query(carFindQuery);
+    const timeList = await models.sequelize.query(timeFindQuery);
+    const serviceList = await models.sequelize.query(serviceFindQuery);
+
+    return res.status(200).json({
+      carList: carList[0],
+      timeList: timeList[0],
+      serviceList: serviceList[0],
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("정보를 조회할 수 없습니다.");
+  }
+});
+
 // 차량 등록
 router.post("/car/create", isAdminCheck, async (req, res, next) => {
   const { carCount, carNum, moveDate } = req.body;
@@ -12,6 +92,7 @@ router.post("/car/create", isAdminCheck, async (req, res, next) => {
   SELECT    *
     FROM    moveServiceCars
    WHERE    carCount = "${carCount}"
+     AND    DATE_FORMAT(moveDate, "%Y-%m-%d") = DATE_FORMAT("${moveDate}", "%Y-%m-%d")
   `;
 
   const findQuery = `
@@ -43,7 +124,7 @@ router.post("/car/create", isAdminCheck, async (req, res, next) => {
   try {
     const carNumResult = await models.sequelize.query(findCarNumQuery);
 
-    if (carNumResult[0].length === 1) {
+    if (carNumResult[0].length !== 0) {
       return res.status(401).send("이미 해당 차수의 차량이 존재합니다.");
     }
 
@@ -153,7 +234,7 @@ UPDATE  moveServiceTimes
 `;
 
   try {
-    const updateResult = await models.sequelizee.query(updateQuery);
+    const updateResult = await models.sequelize.query(updateQuery);
 
     return res.status(200).json({ result: true });
   } catch (error) {
@@ -169,7 +250,7 @@ router.post("/service/create", isAdminCheck, async (req, res, next) => {
   SELECT    *
     FROM    moveServices
    WHERE    MoveServiceTimeId = ${timeId}
-     AND    MoveServiceCar = ${carId}
+     AND    MoveServiceCarId = ${carId}
      AND    degree = "${degree}"
   `;
 
@@ -209,6 +290,48 @@ router.post("/service/create", isAdminCheck, async (req, res, next) => {
   } catch (error) {
     console.error(error);
     return res.status(401).send("정보를 추가할 수 없습니다.");
+  }
+});
+
+router.post("/service/update", isAdminCheck, async (req, res, next) => {
+  const { id, degree, passenger, count } = req.body;
+
+  const updateQuery = `
+  UPDATE  moveServices
+     SET  degree = "${degree}",
+          passenger = "${passenger}",
+          count = "${count}",
+          updatedAt = NOW()
+   WHERE  id = ${id}
+  `;
+
+  try {
+    const updateResult = await models.sequelize.query(updateQuery);
+
+    return res.status(200).json({ result: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("정보를 수정할 수 없습니다.");
+  }
+});
+
+router.post("/service/delete", isAdminCheck, async (req, res, next) => {
+  const { id } = req.body;
+
+  const deleteQuery = `
+  UPDATE  moveServices
+     SET  isDelete = 1,
+          deletedAt = NOW()
+   WHERE  id = ${id}
+  `;
+
+  try {
+    const deleteResult = await models.sequelize.query(deleteQuery);
+
+    return res.status(200).json({ result: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("정보를 삭제할 수 없습니다.");
   }
 });
 

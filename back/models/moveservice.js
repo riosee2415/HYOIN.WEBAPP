@@ -17,6 +17,15 @@ module.exports = class MoveService extends Model {
           type: DataTypes.STRING(30), // 인원 | 2명
           allowNull: false,
         },
+        isDelete: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+        },
+        deletedAt: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
       },
       {
         modelName: "MoveService",
