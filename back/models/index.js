@@ -20,6 +20,10 @@ const menu = require("./menu");
 const moveservicecar = require("./moveservicecar");
 const moveservicetime = require("./moveservicetime");
 const moveservice = require("./moveservice");
+const alladmission = require("./alladmission");
+const dementiaadmission = require("./dementiaadmission");
+const normaladmission = require("./normaladmission");
+const weekadmission = require("./weekadmission");
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -53,6 +57,10 @@ db.Menu = menu;
 db.MoveServiceCar = moveservicecar;
 db.MoveServiceTime = moveservicetime;
 db.MoveService = moveservice;
+db.AllAdmission = alladmission;
+db.DementiaAdmission = dementiaadmission;
+db.NormalAdmission = normaladmission;
+db.WeekAdmission = weekadmission;
 
 Object.keys(db).forEach((modelName) => {
   db[modelName].init(sequelize);

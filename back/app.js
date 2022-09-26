@@ -30,6 +30,7 @@ const recruitRouter = require("./routers/recruitRouter");
 const programRouter = require("./routers/programRouter");
 const menuRouter = require("./routers/menuRouter");
 const moveserviceRouter = require("./routers/moveserviceRouter");
+const admissionRouter = require("./routers/admissionRouter");
 
 // Config Settings
 db.sequelize
@@ -115,6 +116,7 @@ app.use("/api/recruit", recruitRouter);
 app.use("/api/program", programRouter);
 app.use("/api/menu", menuRouter);
 app.use("/api/move", moveserviceRouter);
+app.use("/api/admission", admissionRouter);
 
 // second minute hour day-of-month month day-of-week
 const task = cron.schedule(
