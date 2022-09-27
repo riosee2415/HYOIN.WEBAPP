@@ -7,6 +7,7 @@ import {
   RsWrapper,
   Wrapper,
   Text,
+  WholeWrapper,
 } from "./commonComponents";
 import styled from "styled-components";
 import Theme from "./Theme";
@@ -39,14 +40,33 @@ const SearchWrapper = styled(Wrapper)`
   left: 0;
 `;
 
-const WebRow = styled(RowWrapper)`
-  background: ${(props) => props.theme.white_C};
+const HoverWrapper = styled(Wrapper)`
+  position: absolute;
+  top: 104px;
+  left: 0;
+  background: ${Theme.white_C};
+  padding: 30px 0;
+  transition: 0.2s;
+  opacity: 0;
+  visibility: hidden;
+`;
+
+const WebRow = styled(WholeWrapper)`
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
   transition: 0.5s;
-  justify-content: center;
+  padding: 10px 110px;
+
+  &:hover {
+    background: ${Theme.white_C};
+
+    ${HoverWrapper} {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 
   @media (max-width: 1100px) {
     display: none;
@@ -76,58 +96,54 @@ const MobileRow = styled(RowWrapper)`
   }
 `;
 
-const MenuCol = styled(ColWrapper)`
-  width: 140px;
-  height: 100%;
-  background: transparent;
+const Menu = styled.h2`
+  margin: ${(props) => props.margin || `0 80px 0 0`};
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.3s;
   cursor: pointer;
-  transition: 0.5s;
-  font-weight: 700;
-  position: relative;
-
-  & .submenu {
-    opacity: 0;
-    visibility: hidden;
-  }
 
   &:hover {
-    color: ${(props) => props.theme.basicTheme_C};
+    color: ${Theme.subTheme2_C};
+  }
+`;
 
-    & .submenu {
-      opacity: 1;
-      visibility: visible;
-      transform: translate(10px);
+const SubMenu = styled.h2`
+  font-size: 24px;
+  font-weight: bold;
+
+  & .menu {
+    position: relative;
+    text-align: center;
+    color: ${Theme.grey3_C};
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: ${Theme.subTheme2_C};
+      transition: 0.3s;
     }
   }
 
-  @media (max-width: 1280px) {
-    width: 140px;
+  & ${Wrapper} ${Text}:hover {
+    color: ${Theme.subTheme2_C};
   }
-`;
-
-const SubMenuCol = styled(ColWrapper)`
-  position: absolute;
-  width: 100%;
-  height: auto;
-  background: ${(props) => props.theme.basicTheme_C};
-  color: ${(props) => props.theme.white_C};
-  text-align: center;
-  top: 71px;
-  transition: 0.5s;
-  border: 1px solid ${Theme.white_C};
-`;
-
-const SubMenuTextCol = styled(ColWrapper)`
-  font-weight: 500;
-  font-size: 14px;
-  position: relative;
-  height: 40px;
-  width: 100%;
-  transition: 0.3s;
 
   &:hover {
-    color: ${Theme.subTheme_C};
-    font-weight: bold;
+    cursor: pointer;
+
+    & .menu {
+      color: ${Theme.black_C};
+    }
+
+    & .menu:before {
+      width: 100%;
+    }
   }
 `;
 
@@ -223,180 +239,113 @@ const AppHeader = () => {
 
   return (
     <>
-      <WebRow>
-        <Wrapper bgColor={Theme.lightGrey_C}>
-          <RsWrapper>
-            <Wrapper
-              dr={`row`}
-              ju={`flex-end`}
-              color={Theme.grey_C}
-              padding={`5px 0`}
-              fontSize={`12px`}
-            >
-              {me ? (
-                <>
-                  <Wrapper
-                    cursor={`pointer`}
-                    width={`auto`}
-                    onClick={logoutHandler}
-                    isHover
-                  >
-                    로그아웃
-                  </Wrapper>
-
-                  <Wrapper
-                    cursor={`pointer`}
-                    width={`auto`}
-                    isHover
-                    margin={`0 30px`}
-                  >
-                    <Link href={`/mypage`}>
-                      <a>마이페이지</a>
-                    </Link>
-                  </Wrapper>
-                </>
-              ) : (
-                <>
-                  <Wrapper cursor={`pointer`} width={`auto`} isHover>
-                    <Link href={`/user/login`}>
-                      <a>로그인</a>
-                    </Link>
-                  </Wrapper>
-                  <Wrapper
-                    cursor={`pointer`}
-                    width={`auto`}
-                    isHover
-                    margin={`0 30px`}
-                  >
-                    <Link href={`/user/join`}>
-                      <a>회원가입</a>
-                    </Link>
-                  </Wrapper>
-                </>
-              )}
-
-              <Wrapper cursor={`pointer`} width={`auto`} isHover>
-                <Link href={`/cart`}>
-                  <a>장바구니</a>
-                </Link>
-              </Wrapper>
-            </Wrapper>
-          </RsWrapper>
-        </Wrapper>
-        <RsWrapper>
+      <WebRow
+        bgColor={headerScroll ? Theme.white_C : `rgba(255, 255,255, 0.6)`}
+      >
+        <RsWrapper dr={`row`} ju={`space-between`}>
           {/* web */}
-          <RowWrapper justify={`space-between`}>
-            <ColWrapper>
-              <ATag href="/">
-                <Image
-                  margin={`10px 0`}
-                  width={`117px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/edufactory/assets/images/logo/logo.png`}
-                />
-              </ATag>
-            </ColWrapper>
-
-            <RowWrapper width={`auto`}>
-              <MenuCol dr={`row`}>
-                회사소개
-                <SubMenuCol className="submenu">
-                  <SubMenuTextCol>
-                    <Link href="/company/introduce">인사말</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/company/location">오시는 길</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/company/manager">지역별담당자</Link>
-                  </SubMenuTextCol>
-                </SubMenuCol>
-              </MenuCol>
-
-              <MenuCol dr={`row`}>
-                도서소개
-                <SubMenuCol className="submenu">
-                  <SubMenuTextCol>
-                    <Link href="/books/new">신간도서</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/books/field">분야별 도서</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/books/list">도서목록</Link>
-                  </SubMenuTextCol>
-                </SubMenuCol>
-              </MenuCol>
-
-              <MenuCol dr={`row`}>
-                자료실
-                <SubMenuCol className="submenu">
-                  <SubMenuTextCol>
-                    <Link href="/reference/errata">정오표</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/reference/class">강의자료실</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/reference/learning">학습자료실</Link>
-                  </SubMenuTextCol>
-                </SubMenuCol>
-              </MenuCol>
-              <MenuCol dr={`row`}>
-                고객지원
-                <SubMenuCol className="submenu">
-                  <SubMenuTextCol>
-                    <Link href="/center/notice">공지사항</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/center/question">1:1문의</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/center/faq">FAQ</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/center/publication">출간문의</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/center/application">견본도서신청</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/center/groupPurchase">단체구매신청</Link>
-                  </SubMenuTextCol>
-                </SubMenuCol>
-              </MenuCol>
-              <Link href="/mobileApp">
-                <ATag width={`auto`}>
-                  <MenuCol>모바일앱</MenuCol>
-                </ATag>
-              </Link>
-            </RowWrapper>
-            <Wrapper width={`auto`} dr={`row`}>
-              <Wrapper width={`auto`} position={`relative`}>
-                <TxtInput
-                  {...searchTitle}
-                  placeholder={`제품명으로 검색하세요.`}
-                  onKeyDown={(e) =>
-                    e.keyCode === 13 &&
-                    searchMoveHandler(`/search?type=${searchTitle.value}`)
-                  }
-                />
-                <Wrapper
-                  width={`auto`}
-                  position={`absolute`}
-                  top={`8px`}
-                  right={`10px`}
-                  color={Theme.basicTheme_C}
-                  fontSize={`20px`}
-                  onClick={() =>
-                    searchMoveHandler(`/search?type=${searchTitle.value}`)
-                  }
-                >
-                  <SearchOutlined />
-                </Wrapper>
-              </Wrapper>
+          <ATag href="/" width={`15%`} ju={`flex-start`}>
+            <Image
+              width={`120px`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+            />
+          </ATag>
+          <Wrapper dr={`row`} width={`auto`}>
+            <Menu>요양원 소개</Menu>
+            <Menu>서비스 안내</Menu>
+            <Menu>이용 안내</Menu>
+            <Menu>행복나눔</Menu>
+            <Menu>알림마당</Menu>
+            <Menu margin={`0`}>
+              <Text>노인장기요양</Text>
+              <Text>보험제도</Text>
+            </Menu>
+          </Wrapper>
+          <Wrapper width={`15%`} al={`flex-end`}>
+            <Wrapper dr={`row`} ju={`flex-end`}>
+              <Text fontSize={`16px`} margin={`0 5px 0 0`}>
+                상담 전화
+              </Text>
+              <Image
+                alt="call icon"
+                width={`28px`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_menu-bar_call.png`}
+              />
             </Wrapper>
-          </RowWrapper>
+            <ATag width={`auto`} href={`tel:0425227118`}>
+              <Text fontSize={`26px`} fontWeight={`bold`}>
+                042-522-7118
+              </Text>
+            </ATag>
+          </Wrapper>
         </RsWrapper>
+
+        <HoverWrapper>
+          <RsWrapper dr={`row`} ju={`space-between`} al={`flex-start`}>
+            <SubMenu>
+              <Text className="menu" margin={`0 0 25px`}>
+                요양원 소개
+              </Text>
+              <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
+                <Text margin={`0 0 10px`}>인사말</Text>
+                <Text margin={`0 0 10px`}>비전/CI</Text>
+                <Text margin={`0 0 10px`}>연혁</Text>
+                <Text margin={`0 0 10px`}>조직도</Text>
+                <Text margin={`0 0 10px`}>찾아오시는 길</Text>
+                <Text>시설 3D 안내</Text>
+              </Wrapper>
+            </SubMenu>
+            <SubMenu>
+              <Text className="menu" margin={`0 0 25px`}>
+                서비스 안내
+              </Text>
+              <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
+                <Text margin={`0 0 10px`}>요양원</Text>
+                <Text margin={`0 0 10px`}>주간 보호</Text>
+                <Text>방문 요양</Text>
+              </Wrapper>
+            </SubMenu>
+            <SubMenu>
+              <Text className="menu" margin={`0 0 25px`}>
+                이용 안내
+              </Text>
+              <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
+                <Text margin={`0 0 10px`}>이용 안내</Text>
+                <Text margin={`0 0 10px`}>비용 안내</Text>
+                <Text margin={`0 0 10px`}>이용 현황</Text>
+                <Text>대기자명단</Text>
+              </Wrapper>
+            </SubMenu>
+            <SubMenu>
+              <Text className="menu" margin={`0 0 25px`}>
+                행복나눔
+              </Text>
+              <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
+                <Text margin={`0 0 10px`}>자원봉사 안내</Text>
+                <Text>후원 안내</Text>
+              </Wrapper>
+            </SubMenu>
+            <SubMenu>
+              <Text className="menu" margin={`0 0 25px`}>
+                알림마당
+              </Text>
+              <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
+                <Text margin={`0 0 10px`}>공지사항</Text>
+                <Text margin={`0 0 10px`}>새소식</Text>
+                <Text margin={`0 0 10px`}>FAQ</Text>
+                <Text margin={`0 0 10px`}>채용공고</Text>
+                <Text margin={`0 0 10px`}>공고(입찰)</Text>
+                <Text>1:1 문의</Text>
+              </Wrapper>
+            </SubMenu>
+            <SubMenu>
+              <Text className="menu" textAlign={`center`} margin={`0 0 25px`}>
+                <Text>노인장기요양</Text>
+                <Text>보험제도</Text>
+              </Text>
+            </SubMenu>
+          </RsWrapper>
+        </HoverWrapper>
       </WebRow>
       {/* mobile */}
       <MobileRow justify={`center`}>

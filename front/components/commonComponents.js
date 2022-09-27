@@ -305,6 +305,16 @@ export const Text = styled.p`
     text-overflow: ellipsis;
   `
       : ``}
+
+  ${(props) =>
+    props.isHover
+      ? `
+      transition : 0.5s;
+      &:hover{
+        color : ${props.theme.subTheme2_C}; 
+        cursor : pointer;
+      }`
+      : ``}
 `;
 
 export const PagenationWrapper = styled.div`
