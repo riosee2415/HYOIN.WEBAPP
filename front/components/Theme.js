@@ -25,7 +25,7 @@ export default {
 
   lightGrey_C: "#E2E2E2",
   lightGrey2_C: "#E0E0E3",
-  darkGrey_C: "#2d3436",
+  darkGrey_C: "#3D3D3D",
 
   //admin
   adminLightGrey_C: "#f3f3f3",

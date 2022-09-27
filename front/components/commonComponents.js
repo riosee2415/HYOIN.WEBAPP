@@ -143,6 +143,7 @@ export const Wrapper = styled.div`
   opacity: ${(props) => props.opacity};
 
   & pre {
+    font-size: 12px;
     white-space: pre-wrap;
   }
 `;

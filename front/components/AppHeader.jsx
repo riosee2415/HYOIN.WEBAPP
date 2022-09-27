@@ -73,7 +73,7 @@ const WebRow = styled(WholeWrapper)`
   }
 `;
 
-const MobileRow = styled(RowWrapper)`
+const MobileRow = styled(WholeWrapper)`
   display: none;
   position: fixed;
   top: 0;
@@ -81,10 +81,8 @@ const MobileRow = styled(RowWrapper)`
   z-index: 10000;
   transition: 0.5s;
 
-  background: ${(props) => props.theme.white_C};
-
   .ant-drawer-content-wrapper {
-    width: 90% !important;
+    width: 100% !important;
   }
 
   .ant-drawer-header-no-title .ant-drawer-close {
@@ -144,25 +142,6 @@ const SubMenu = styled.h2`
     & .menu:before {
       width: 100%;
     }
-  }
-`;
-
-const TxtInput = styled.input`
-  width: 265px;
-  background: ${Theme.white_C};
-  border: 1px solid ${Theme.basicTheme_C};
-  padding: 0 25px 0 10px;
-  height: 36px;
-  border-radius: 20px;
-  transition: 0.5s;
-
-  &:focus {
-    border: 1px solid ${Theme.subTheme3_C};
-  }
-
-  &::placeholder {
-    font-size: 13px;
-    color: ${Theme.lightGrey_C};
   }
 `;
 
@@ -348,103 +327,29 @@ const AppHeader = () => {
         </HoverWrapper>
       </WebRow>
       {/* mobile */}
-      <MobileRow justify={`center`}>
-        <Wrapper bgColor={Theme.lightGrey_C}>
-          <RsWrapper>
-            <Wrapper
-              dr={`row`}
-              ju={`flex-end`}
-              color={Theme.grey_C}
-              padding={`5px 0`}
-              fontSize={`12px`}
-            >
-              {me ? (
-                <>
-                  <Wrapper
-                    cursor={`pointer`}
-                    width={`auto`}
-                    onClick={logoutHandler}
-                  >
-                    로그아웃
-                  </Wrapper>
-
-                  <Wrapper cursor={`pointer`} width={`auto`} margin={`0 30px`}>
-                    <Link href={`/mypage`}>
-                      <a>마이페이지</a>
-                    </Link>
-                  </Wrapper>
-                </>
-              ) : (
-                <>
-                  <Wrapper cursor={`pointer`} width={`auto`}>
-                    <Link href={`/user/login`}>
-                      <a>로그인</a>
-                    </Link>
-                  </Wrapper>
-                  <Wrapper cursor={`pointer`} width={`auto`} margin={`0 30px`}>
-                    <Link href={`/user/join`}>
-                      <a>회원가입</a>
-                    </Link>
-                  </Wrapper>
-                </>
-              )}
-
-              <Wrapper cursor={`pointer`} width={`auto`}>
-                <Link href={`/cart`}>
-                  <a>장바구니</a>
-                </Link>
-              </Wrapper>
-            </Wrapper>
-          </RsWrapper>
-        </Wrapper>
+      <MobileRow
+        justify={`center`}
+        bgColor={headerScroll ? Theme.white_C : `rgba(255, 255,255, 0.6)`}
+      >
         <Wrapper position={`relative`}>
           <RsWrapper dr={`row`} padding={`10px 0`} ju={`space-between`}>
-            <Wrapper width={`20px`} al={`flex-start`} fontSize={`1.3rem`}>
-              <SearchOutlined onClick={searchToggleHandler} />
-            </Wrapper>
+            <ATag width={`auto`} href={`tel:0425227118`}>
+              <Image
+                alt="call icon"
+                width={`28px`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_menu-bar_call.png`}
+              />
+            </ATag>
             <ATag width={`auto`} href="/">
               <Image
                 width={`80px`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/edufactory/assets/images/logo/logo.png`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
               />
             </ATag>
             <Wrapper width={`20px`} al={`flex-end`} fontSize={`1.3rem`}>
               <MenuOutlined onClick={drawarToggle} />
             </Wrapper>
           </RsWrapper>
-
-          {searchToggle && (
-            <SearchWrapper dr={`row`}>
-              <Wrapper
-                width={`auto`}
-                position={`relative`}
-                margin={`0 20px 0 0`}
-              >
-                <TxtInput
-                  {...searchTitle}
-                  placeholder={`제품명으로 검색하세요.`}
-                  onKeyDown={(e) =>
-                    e.keyCode === 13 &&
-                    searchMoveHandler(`/search?type=${searchTitle.value}`)
-                  }
-                />
-                <Wrapper
-                  width={`auto`}
-                  position={`absolute`}
-                  top={`8px`}
-                  right={`10px`}
-                  color={Theme.basicTheme_C}
-                  fontSize={`20px`}
-                  onClick={() =>
-                    searchMoveHandler(`/search?type=${searchTitle.value}`)
-                  }
-                >
-                  <SearchOutlined onClick={searchToggleHandler} />
-                </Wrapper>
-              </Wrapper>
-              <Text onClick={searchToggleHandler}>닫기</Text>
-            </SearchWrapper>
-          )}
         </Wrapper>
         {drawar && (
           <Drawer
@@ -454,7 +359,11 @@ const AppHeader = () => {
             visible={drawarToggle}
             getContainer={false}
           >
-            <Wrapper position={`relative`}>
+            <Wrapper
+              position={`relative`}
+              color={Theme.black2_C}
+              fontSize={`17px`}
+            >
               <Wrapper
                 position={`absolute`}
                 top={`0`}
@@ -463,8 +372,6 @@ const AppHeader = () => {
                 height={`40px`}
                 radius={`8px`}
                 fontSize={`1.2rem`}
-                color={Theme.basicTheme_C}
-                border={`1px solid ${Theme.basicTheme_C}`}
                 zIndex={`1`}
               >
                 <CloseOutlined onClick={drawarToggle} />
@@ -472,182 +379,233 @@ const AppHeader = () => {
 
               <ColWrapper width={`100%`} al={`flex-start`} padding={`60px 0 0`}>
                 <ColWrapper
-                  borderBottom={`1px solid ${Theme.lightGrey3_C}`}
                   margin={`0 0 10px`}
-                  padding={`5px 0`}
                   width={`100%`}
                   al={`flex-start`}
-                  onClick={() => {
-                    setSubMenu(0);
-                  }}
                 >
                   <Wrapper
                     ju={`space-between`}
                     dr={`row`}
-                    color={subMenu === 0 && Theme.basicTheme_C}
+                    color={Theme.grey2_C}
+                    fontSize={`14px`}
                   >
-                    회사소개
-                    {subMenu === 0 ? <MinusOutlined /> : <PlusOutlined />}
+                    요양원 소개
                   </Wrapper>
                 </ColWrapper>
-                {subMenu === 0 && (
-                  <>
-                    <ColWrapper margin={`5px 10px 20px`} onClick={drawarToggle}>
-                      <Link href="/company/introduce">
-                        <ATag width={`auto`} color={`initial`}>
-                          인사말
-                        </ATag>
-                      </Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 20px`} onClick={drawarToggle}>
-                      <Link href="/company/location">
-                        <ATag width={`auto`} color={`initial`}>
-                          오시는 길
-                        </ATag>
-                      </Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 15px`} onClick={drawarToggle}>
-                      <Link href="/company/manager">
-                        <ATag width={`auto`} color={`initial`}>
-                          지역별담당자
-                        </ATag>
-                      </Link>
-                    </ColWrapper>
-                  </>
-                )}
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`0 0 20px`}
+                  margin={`0 0 20px`}
+                  borderBottom={`1px solid ${Theme.lightGrey_C}`}
+                >
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/intro?type=1`}>
+                      <a>인사말</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/intro?type=2`}>
+                      <a>비전/CI</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/intro?type=3`}>
+                      <a>연혁</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/intro?type=4`}>
+                      <a>조직도</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/intro?type=4`}>
+                      <a>찾아오시는 길</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper al={`flex-start`} onClick={drawarToggle}>
+                    <Link href={`/company/intro?type=4`}>
+                      <a>시설 3D 안내</a>
+                    </Link>
+                  </Wrapper>
+                </Wrapper>
                 <ColWrapper
-                  borderBottom={`1px solid ${Theme.lightGrey3_C}`}
                   margin={`0 0 10px`}
-                  padding={`5px 0`}
                   width={`100%`}
                   al={`flex-start`}
-                  onClick={() => {
-                    setSubMenu(1);
-                  }}
                 >
                   <Wrapper
                     ju={`space-between`}
                     dr={`row`}
-                    color={subMenu === 1 && Theme.basicTheme_C}
+                    color={Theme.grey2_C}
+                    fontSize={`14px`}
                   >
-                    도서소개
-                    {subMenu === 1 ? <MinusOutlined /> : <PlusOutlined />}
+                    서비스 안내
                   </Wrapper>
                 </ColWrapper>
-                {subMenu === 1 && (
-                  <>
-                    <ColWrapper margin={`5px 10px 20px`} onClick={drawarToggle}>
-                      <Link href="/books/new">
-                        <ATag width={`auto`} color={`initial`}>
-                          신간도서
-                        </ATag>
-                      </Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 20px`} onClick={drawarToggle}>
-                      <Link href="/books/field">
-                        <ATag width={`auto`} color={`initial`}>
-                          분야별 도서
-                        </ATag>
-                      </Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 15px`} onClick={drawarToggle}>
-                      <Link href="/books/list">
-                        <ATag width={`auto`} color={`initial`}>
-                          도서목록
-                        </ATag>
-                      </Link>
-                    </ColWrapper>
-                  </>
-                )}
-
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`0 0 20px`}
+                  margin={`0 0 20px`}
+                  borderBottom={`1px solid ${Theme.lightGrey_C}`}
+                >
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/intro?type=1`}>
+                      <a>요양원</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/intro?type=2`}>
+                      <a>주간 보호</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper al={`flex-start`} onClick={drawarToggle}>
+                    <Link href={`/company/intro?type=3`}>
+                      <a>방문 요양</a>
+                    </Link>
+                  </Wrapper>
+                </Wrapper>
                 <ColWrapper
-                  borderBottom={`1px solid ${Theme.lightGrey3_C}`}
                   margin={`0 0 10px`}
-                  padding={`5px 0`}
                   width={`100%`}
                   al={`flex-start`}
-                  onClick={() => {
-                    setSubMenu(2);
-                  }}
                 >
                   <Wrapper
                     ju={`space-between`}
                     dr={`row`}
-                    color={subMenu === 2 && Theme.basicTheme_C}
+                    color={Theme.grey2_C}
+                    fontSize={`14px`}
                   >
-                    자료실
-                    {subMenu === 2 ? <MinusOutlined /> : <PlusOutlined />}
+                    행복나눔
                   </Wrapper>
                 </ColWrapper>
-                {subMenu === 2 && (
-                  <>
-                    <ColWrapper margin={`5px 10px 0`} onClick={drawarToggle}>
-                      <Link href="/reference/errata">정오표</Link>
-                    </ColWrapper>
-
-                    <ColWrapper margin={`5px 10px 0`} onClick={drawarToggle}>
-                      <Link href="/reference/class">강의자료실</Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 15px`} onClick={drawarToggle}>
-                      <Link href="/reference/learning">학습자료실</Link>
-                    </ColWrapper>
-                  </>
-                )}
-
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`0 0 20px`}
+                  margin={`0 0 20px`}
+                  borderBottom={`1px solid ${Theme.lightGrey_C}`}
+                >
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/service?type=1`}>
+                      <a>자원봉사 안내</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper al={`flex-start`} onClick={drawarToggle}>
+                    <Link href={`/service?type=2`}>
+                      <a>후원 안내</a>
+                    </Link>
+                  </Wrapper>
+                </Wrapper>
                 <ColWrapper
-                  borderBottom={`1px solid ${Theme.lightGrey3_C}`}
                   margin={`0 0 10px`}
-                  padding={`5px 0`}
                   width={`100%`}
                   al={`flex-start`}
-                  onClick={() => {
-                    setSubMenu(3);
-                  }}
                 >
                   <Wrapper
                     ju={`space-between`}
                     dr={`row`}
-                    color={subMenu === 3 && Theme.basicTheme_C}
+                    color={Theme.grey2_C}
+                    fontSize={`14px`}
                   >
-                    고객지원
-                    {subMenu === 3 ? <MinusOutlined /> : <PlusOutlined />}
+                    알림마당
                   </Wrapper>
                 </ColWrapper>
-                {subMenu === 3 && (
-                  <>
-                    <ColWrapper margin={`5px 10px 0`} onClick={drawarToggle}>
-                      <Link href="/center/notice">공지사항</Link>
-                    </ColWrapper>
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`0 0 20px`}
+                  margin={`0 0 20px`}
+                  borderBottom={`1px solid ${Theme.lightGrey_C}`}
+                >
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/service?type=1`}>
+                      <a>공지사항</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/service?type=1`}>
+                      <a>새소식</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/service?type=1`}>
+                      <a>FAQ</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/service?type=1`}>
+                      <a>채용공고</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/service?type=1`}>
+                      <a>공고(입찰)</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper al={`flex-start`} onClick={drawarToggle}>
+                    <Link href={`/service?type=2`}>
+                      <a>1:1 문의</a>
+                    </Link>
+                  </Wrapper>
+                </Wrapper>
 
-                    <ColWrapper margin={`5px 10px 0`} onClick={drawarToggle}>
-                      <Link href="/center/question">1:1문의</Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 0`} onClick={drawarToggle}>
-                      <Link href="/center/faq">FAQ</Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 0`} onClick={drawarToggle}>
-                      <Link href="/center/publication">출간문의</Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 0`} onClick={drawarToggle}>
-                      <Link href="/center/application">견본도서신청</Link>
-                    </ColWrapper>
-                    <ColWrapper margin={`5px 10px 15px`} onClick={drawarToggle}>
-                      <Link href="/center/groupPurchase">단체구매신청</Link>
-                    </ColWrapper>
-                  </>
-                )}
                 <ColWrapper
-                  borderBottom={`1px solid ${Theme.lightGrey3_C}`}
                   margin={`0 0 10px`}
-                  padding={`5px 0`}
                   width={`100%`}
                   al={`flex-start`}
                 >
-                  <Link href="/mobileApp">
-                    <ATag width={`auto`}>
-                      <ColWrapper>모바일앱</ColWrapper>
-                    </ATag>
-                  </Link>
+                  노인장기요양 보험제도
                 </ColWrapper>
               </ColWrapper>
             </Wrapper>
