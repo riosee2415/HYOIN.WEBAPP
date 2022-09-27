@@ -19,6 +19,10 @@ const MainSliderWrapper = styled(RowWrapper)`
   & .ant-carousel {
     width: 100%;
   }
+
+  .ant-carousel .slick-dots-bottom {
+    bottom: 110px;
+  }
 `;
 
 const MainSlider = () => {
@@ -48,31 +52,30 @@ const MainSlider = () => {
               <ColWrapper
                 key={idx}
                 span={24}
-                height={width < 800 ? `500px` : `720px`}
-                padding={width < 800 ? `59px 0 0` : `110px 0 0`}
+                height={width < 800 ? `500px` : `760px`}
                 bgImg={`url(${data.imagePath})`}
                 position={`relative`}
                 display={`flex !important`}
+                color={Theme.white_C}
               >
-                <RsWrapper height={`100%`}>
-                  <Wrapper al={`flex-start`}>
-                    <Wrapper
-                      al={`flex-start`}
-                      color={Theme.basicTheme_C}
-                      fontSize={width < 700 ? `22px` : `40px`}
-                      lineHeight={`1.3`}
+                {data.title && (
+                  <Wrapper height={`100%`} bgColor={`rgba(0, 0, 0, 0.5)`}>
+                    <Text
+                      fontSize={width < 900 ? `20px` : `45px`}
+                      fontWeight={`bold`}
+                      color={Theme.subTheme2_C}
                     >
-                      <Text>{data.title}</Text>
-                    </Wrapper>
-                    <ColWrapper
-                      color={Theme.basicTheme_C}
-                      lineHeight={`1.5`}
-                      margin={`20px 0`}
+                      {data.title}
+                    </Text>
+
+                    <Text
+                      fontSize={width < 900 ? `15px` : `30px`}
+                      margin={`20px 0 0`}
                     >
-                      <Text fontSize={`1.125rem`}>{data.content}</Text>
-                    </ColWrapper>
+                      {data.subTitle}
+                    </Text>
                   </Wrapper>
-                </RsWrapper>
+                )}
               </ColWrapper>
             );
           })}

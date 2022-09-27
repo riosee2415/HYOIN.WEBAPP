@@ -269,7 +269,11 @@ const AppHeader = () => {
                 <Text margin={`0 0 10px`}>인사말</Text>
                 <Text margin={`0 0 10px`}>비전/CI</Text>
                 <Text margin={`0 0 10px`}>연혁</Text>
-                <Text margin={`0 0 10px`}>조직도</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/company/organization`}>
+                    <a>조직도</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>찾아오시는 길</Text>
                 <Text>시설 3D 안내</Text>
               </Wrapper>

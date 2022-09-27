@@ -1,125 +1,111 @@
 export const menus = [
   {
     menuName: "요양원 소개",
-    menuLink: "/",
+    menuLink: "/company/intro",
     subMenus: [
       {
         subMenuName: "요양원 소개",
         subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
-        subMenuLink: "/",
+        subMenuLink: "/company/intro",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
       {
         subMenuName: "시설 개요",
-        subMenuLink: "/intro/operation",
+        subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
+        subMenuLink: "/company/intro",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
       {
         subMenuName: "조직도",
-        subMenuLink: "/intro/organization",
+        subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
+        subMenuLink: "/company/organization",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
       {
         subMenuName: "찾아오시는 길",
-        subMenuLink: "/intro/intro",
+        subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
+        subMenuLink: "/company/intro",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
       {
         subMenuName: "시설 3D 안내",
+        subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
         subMenuLink: "/intro/intro",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/intro.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
     ],
   },
   {
-    menuName: "COMPANY",
-    menuLink: "/company/history",
+    menuName: "서비스 안내",
+    menuLink: "/service/history",
     subMenus: [
       {
-        subMenuName: "회사연혁 & 주요 매출처",
-        subMenuLink: "/company/history",
+        subMenuName: "요양원",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/service/history",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/company.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
       },
       {
-        subMenuName: "회사위치",
-        subMenuLink: "/company/location",
+        subMenuName: "주간 보호",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/service/location",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/company.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
       },
       {
-        subMenuName: "투자계획",
-        subMenuLink: "/company/invest",
+        subMenuName: "방문 요양",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/service/invest",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/company.png",
-      },
-      {
-        subMenuName: "측정설비 보유현황",
-        subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
-
-        subMenuLink: "/company/measuring",
-      },
-      {
-        subMenuName: "생산설비 보유현황",
-        subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
-
-        subMenuLink: "/company/production",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
       },
     ],
   },
   {
-    menuName: "PRODUCT",
-    menuLink: "/product/main",
+    menuName: "이용안내",
+    menuLink: "/inform/main",
     subMenus: [
       {
-        subMenuName: "인증현황",
-        subMenuLink: "/product/certification",
+        subMenuName: "이용안내",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/inform/certification",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
-        subMenuName: "특허",
-        subMenuLink: "/product/patent",
+        subMenuName: "입소 절차",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/inform/patent",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
-        subMenuName: "설계영역",
-        subMenuLink: "/product/design",
+        subMenuName: "비용 안내",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/inform/design",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
 
       {
-        subMenuName: "주요생산품",
-        subMenuLink: "/product/main",
+        subMenuName: "이용 현황",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/inform/main",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/product.png",
-      },
-    ],
-  },
-  {
-    menuName: "SUPPORT",
-    menuLink: "/support/notice",
-    subMenus: [
-      {
-        subMenuName: "공지사항",
-        subMenuLink: "/support/notice",
-        subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/support.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
-        subMenuName: "자료실",
-        subMenuLink: "/support/reference",
+        subMenuName: "대기자명단",
+        subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
+        subMenuLink: "/inform/main",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/support.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
     ],
   },
@@ -132,7 +118,42 @@ export const menus = [
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
         subMenuLink: "/garden/notice",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/elim/assets/images/banner/contact.png",
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+      },
+      {
+        subMenuName: "새소식",
+        subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
+        subMenuLink: "/garden/notice",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+      },
+      {
+        subMenuName: "FAQ",
+        subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
+        subMenuLink: "/garden/notice",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+      },
+      {
+        subMenuName: "채용공고",
+        subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
+        subMenuLink: "/garden/notice",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+      },
+      {
+        subMenuName: "공고(입찰)",
+        subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
+        subMenuLink: "/garden/notice",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+      },
+      {
+        subMenuName: "1:1 문의",
+        subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
+        subMenuLink: "/garden/notice",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
     ],
   },

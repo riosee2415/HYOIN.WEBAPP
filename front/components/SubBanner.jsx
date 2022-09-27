@@ -28,6 +28,14 @@ const ImgWrapper = styled(Wrapper)`
     left: 0;
     background: rgba(0, 0, 0, 0.3);
   }
+
+  @media (max-width: 900px) {
+    height: 300px;
+  }
+
+  @media (max-width: 700px) {
+    height: 250px;
+  }
 `;
 
 const Title = styled.h1`
@@ -60,6 +68,10 @@ const Menu = styled.h3`
     left: 50%;
     margin: 0 0 0 -2.5px;
     background: ${(props) => props.theme.white_C};
+  }
+
+  @media (max-width: 700px) {
+    font-size: 18px;
   }
 `;
 
@@ -101,20 +113,29 @@ const SubBanner = ({ width, bgImg }) => {
   return (
     <WholeWrapper>
       <ImgWrapper bgImg={`url(${currentImagePath ? currentImagePath : bgImg})`}>
-        <RsWrapper al={`flex-start`} ju={`flex-end`} padding={`0 0 72px`}>
-          <Title>{currentMenuName}</Title>
-          <Text color={Theme.white_C} fontSize={`24px`}>
+        <RsWrapper
+          al={`flex-start`}
+          ju={`flex-end`}
+          padding={width < 900 ? `0 0 30px` : `0 0 72px`}
+        >
+          <Title>{parentMenuName}</Title>
+          <Text color={Theme.white_C} fontSize={width < 900 ? `17px` : `24px`}>
             {currentMenuContent}
           </Text>
         </RsWrapper>
       </ImgWrapper>
 
-      <Wrapper dr={`row`} position={`relative`} ju={`flex-end`}>
+      <Wrapper
+        dr={width < 900 ? `column-reverse` : `row`}
+        position={`relative`}
+        ju={`flex-end`}
+      >
         <Wrapper
-          position={`absolute`}
+          position={width < 900 ? `relative` : `absolute`}
           bottom={`0`}
           left={`0`}
           fontSize={`16px`}
+          padding={width < 900 && `15px 0 0`}
         >
           <RsWrapper dr={`row`} ju={`flex-start`}>
             <HomeFilled />
@@ -131,15 +152,18 @@ const SubBanner = ({ width, bgImg }) => {
         </Wrapper>
         <Wrapper
           dr={`row`}
-          width={`50%`}
-          height={`144px`}
+          width={width < 1280 ? (width < 900 ? `100%` : `60%`) : `50%`}
+          height={width < 900 ? `100px` : `144px`}
           bgColor={Theme.basicTheme_C}
           shadow={`0 5px 10px rgba(0, 0, 0, 0.1)`}
           color={Theme.white_C}
-          margin={`-72px 0 0`}
-          padding={`0 0 0 80px`}
+          margin={width < 900 ? `0` : `-72px 0 0`}
+          padding={
+            width < 1280 ? (width < 700 ? `0 10px` : `0 40px`) : `0 80px`
+          }
           zIndex={`10`}
-          ju={`flex-start`}
+          ju={`space-between`}
+          display={width < 700 ? `none` : `flex`}
         >
           {currentAllMenus.map((value, idx) => {
             if (value === currentMenuName) {
@@ -152,9 +176,7 @@ const SubBanner = ({ width, bgImg }) => {
                 >
                   <a>
                     <Text
-                      display={width < 700 ? `none` : `block`}
-                      fontSize={`22px`}
-                      margin={`0 0 0 75px`}
+                      fontSize={width < 900 ? `16px` : `22px`}
                       cursor={`pointer`}
                       color={Theme.subTheme4_C}
                     >
