@@ -96,6 +96,7 @@ const MobileRow = styled(WholeWrapper)`
 
 const Menu = styled.h2`
   margin: ${(props) => props.margin || `0 80px 0 0`};
+  color: ${(props) => props.color};
   font-size: 19px;
   font-weight: bold;
   text-align: center;
@@ -230,7 +231,11 @@ const AppHeader = () => {
             />
           </ATag>
           <Wrapper dr={`row`} width={`auto`}>
-            <Menu>요양원 소개</Menu>
+            <Menu
+              color={router.pathname.includes(`/company`) && Theme.subTheme2_C}
+            >
+              요양원 소개
+            </Menu>
             <Menu>서비스 안내</Menu>
             <Menu>이용 안내</Menu>
             <Menu>행복나눔</Menu>
@@ -274,7 +279,11 @@ const AppHeader = () => {
                     <a>조직도</a>
                   </Link>
                 </Text>
-                <Text margin={`0 0 10px`}>찾아오시는 길</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/company/location`}>
+                    <a>찾아오시는 길</a>
+                  </Link>
+                </Text>
                 <Text>시설 3D 안내</Text>
               </Wrapper>
             </SubMenu>

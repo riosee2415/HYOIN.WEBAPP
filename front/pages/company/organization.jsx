@@ -45,7 +45,11 @@ const Organization = () => {
             <Image
               margin={`60px 0 0`}
               alt="organization"
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_org-chart.png`}
+              src={
+                width < 900
+                  ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_org-chart_m.png`
+                  : `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_org-chart.png`
+              }
             />
           </RsWrapper>
         </WholeWrapper>
