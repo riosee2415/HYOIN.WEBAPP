@@ -159,6 +159,15 @@ const Type = ({ router }) => {
   ////// USEEFFECT //////
 
   useEffect(() => {
+    dispatch({
+      type: PROGRAM_LIST_REQUEST,
+      data: {
+        searchMonth: moment().format("YYYY-MM"),
+      },
+    });
+  }, []);
+
+  useEffect(() => {
     if (st_programListError) {
       return message.error(st_programListError);
     }
@@ -183,6 +192,9 @@ const Type = ({ router }) => {
     if (st_programCreateDone) {
       dispatch({
         type: PROGRAM_LIST_REQUEST,
+        data: {
+          searchMonth: moment().format("YYYY-MM"),
+        },
       });
 
       cModalToggle(null);
@@ -201,6 +213,9 @@ const Type = ({ router }) => {
     if (st_programUpdateDone) {
       dispatch({
         type: PROGRAM_LIST_REQUEST,
+        data: {
+          searchMonth: moment().format("YYYY-MM"),
+        },
       });
 
       uModalToggle(null);
@@ -427,7 +442,7 @@ const Type = ({ router }) => {
         </Wrapper>
       );
     },
-    [selectDate]
+    [selectDate, programList]
   );
 
   ////// DATAVIEW //////
