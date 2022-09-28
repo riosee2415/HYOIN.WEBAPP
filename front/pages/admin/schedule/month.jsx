@@ -260,7 +260,7 @@ const Type = ({ router }) => {
         setCData(data);
       } else {
         setCData(null);
-        setCList(null);
+        setCList([]);
         dispatch({
           type: PROGRAM_IMAGE_RESET,
           data: null,
@@ -636,7 +636,11 @@ const Type = ({ router }) => {
                     <Image
                       width={`150px`}
                       height={`150px`}
-                      src={data.imagePath}
+                      src={
+                        data.imagePath
+                          ? data.imagePath
+                          : `https://via.placeholder.com/150`
+                      }
                       alt={`image`}
                     />
                     <Wrapper width={`calc(100% - 150px - 20px)`}>
