@@ -20,6 +20,7 @@ import {
   WholeWrapper,
   Wrapper,
   CommonButton,
+  CommonTitle,
 } from "../../../components/commonComponents";
 import { Empty, Input, message, Pagination, Select } from "antd";
 import { NOTICE_LIST_REQUEST } from "../../../reducers/notice";
@@ -163,17 +164,15 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인 | 공지사항</title>
+        <title>효인주야간노인복지센터 | 공지사항</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
-          <RsWrapper margin={`80px 0 0`}>
-            <Text fontSize={`38px`} fontWeight={`700`} margin={`0 0 16px`}>
-              공지사항
-            </Text>
+          <RsWrapper>
+            <CommonTitle margin={`85px 0 17px`}>공지사항</CommonTitle>
 
-            <Text fontSize={`16px`}>
+            <Text fontSize={width < 700 ? `14px` : `16px`}>
               효인 가족들에게 건강하고 행복한 노후생활을 약속드리겠습니다.
             </Text>
 
@@ -204,7 +203,7 @@ const Index = () => {
               dr={`row`}
               borderTop={`1px solid ${Theme.black_C}`}
               borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              height={`90px`}
+              height={width < 700 ? `60px` : `90px`}
               fontSize={`18px`}
             >
               <Wrapper
@@ -221,19 +220,19 @@ const Index = () => {
                       : `calc(100% - 80px - 120px - 140px - 100px)`
                     : `calc(100% - 135px - 160px - 165px - 130px)`
                 }
-                fontSize={width < 700 ? `12px` : `18px`}
+                fontSize={width < 700 ? `14px` : `18px`}
               >
                 제목
               </Wrapper>
               <Wrapper
                 width={width < 900 ? `80px` : `135px`}
-                fontSize={width < 700 ? `12px` : `18px`}
+                fontSize={width < 700 ? `14px` : `18px`}
               >
                 작성자
               </Wrapper>
               <Wrapper
                 width={width < 900 ? `80px` : `135px`}
-                fontSize={width < 700 ? `12px` : `18px`}
+                fontSize={width < 700 ? `14px` : `18px`}
               >
                 작성일
               </Wrapper>
@@ -257,10 +256,11 @@ const Index = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`90px`}
                   fontSize={`18px`}
-                  color={Theme.black2_C}
+                  color={Theme.black_C}
                   key={data.id}
                   cursor={`pointer`}
                   onClick={() => detailHandler(data)}
+                  isBgHover
                 >
                   <Wrapper
                     width={width < 900 ? `80px` : `135px`}
@@ -276,7 +276,7 @@ const Index = () => {
                           : `calc(100% - 80px - 120px - 140px - 100px)`
                         : `calc(100% - 135px - 160px - 165px - 130px)`
                     }
-                    fontSize={width < 700 ? `12px` : `20px`}
+                    fontSize={width < 700 ? `14px` : `20px`}
                     dr={`row`}
                     ju={`flex-start`}
                   >
@@ -291,13 +291,13 @@ const Index = () => {
                   </Wrapper>
                   <Wrapper
                     width={width < 900 ? `80px` : `135px`}
-                    fontSize={width < 700 ? `12px` : `18px`}
+                    fontSize={width < 700 ? `14px` : `18px`}
                   >
                     관리자
                   </Wrapper>
                   <Wrapper
                     width={width < 900 ? `80px` : `135px`}
-                    fontSize={width < 700 ? `12px` : `18px`}
+                    fontSize={width < 700 ? `14px` : `18px`}
                   >
                     {data.viewFrontCreatedAt}
                   </Wrapper>

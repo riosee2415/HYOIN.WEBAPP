@@ -239,7 +239,11 @@ const AppHeader = () => {
             <Menu>서비스 안내</Menu>
             <Menu>이용 안내</Menu>
             <Menu>행복나눔</Menu>
-            <Menu>알림마당</Menu>
+            <Menu
+              color={router.pathname.includes(`/garden`) && Theme.subTheme2_C}
+            >
+              알림마당
+            </Menu>
             <Menu margin={`0`}>
               <Text>노인장기요양</Text>
               <Text>보험제도</Text>
@@ -322,12 +326,20 @@ const AppHeader = () => {
                 알림마당
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
-                <Text margin={`0 0 10px`}>공지사항</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/garden/notice`}>
+                    <a>공지사항</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>새소식</Text>
                 <Text margin={`0 0 10px`}>FAQ</Text>
                 <Text margin={`0 0 10px`}>채용공고</Text>
                 <Text margin={`0 0 10px`}>공고(입찰)</Text>
-                <Text>1:1 문의</Text>
+                <Text>
+                  <Link href={`/garden/question`}>
+                    <a>1:1 문의</a>
+                  </Link>
+                </Text>
               </Wrapper>
             </SubMenu>
             <SubMenu>

@@ -151,7 +151,7 @@ export const menus = [
       {
         subMenuName: "1:1 문의",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
-        subMenuLink: "/garden/notice",
+        subMenuLink: "/garden/question",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
