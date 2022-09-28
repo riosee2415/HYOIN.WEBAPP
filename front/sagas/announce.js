@@ -29,6 +29,10 @@ import {
   ANNOUNCE_DELETE_REQUEST,
   ANNOUNCE_DELETE_SUCCESS,
   ANNOUNCE_DELETE_FAILURE,
+  //
+  ANNOUNCE_DETAIL_REQUEST,
+  ANNOUNCE_DETAIL_SUCCESS,
+  ANNOUNCE_DETAIL_FAILURE,
 } from "../reducers/announce";
 
 // ******************************************************************************************************************
@@ -220,6 +224,34 @@ function* announceDelete(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function announceDetailAPI(data) {
+  return await axios.get(`/api/announce/detail/${data}`);
+}
+
+function* announceDetail(action) {
+  try {
+    const result = yield call(announceDetailAPI, action.data);
+
+    yield put({
+      type: ANNOUNCE_DETAIL_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: ANNOUNCE_DETAIL_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
 //////////////////////////////////////////////////////////////
 
 function* watchAnnounceAdminList() {
@@ -243,6 +275,9 @@ function* watchAnnounceUpdate() {
 function* watchAnnounceDelete() {
   yield takeLatest(ANNOUNCE_DELETE_REQUEST, announceDelete);
 }
+function* watchDetail() {
+  yield takeLatest(ANNOUNCE_DETAIL_REQUEST, announceDetail);
+}
 
 //////////////////////////////////////////////////////////////
 export default function* announceSaga() {
@@ -254,6 +289,7 @@ export default function* announceSaga() {
     fork(watchAnnounceImageUpload),
     fork(watchAnnounceUpdate),
     fork(watchAnnounceDelete),
+    fork(watchDetail),
 
     //
   ]);

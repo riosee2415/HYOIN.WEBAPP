@@ -7,6 +7,11 @@ export const initailState = {
   fileUpload: null,
   imgUpload: null,
   lastPage: 1,
+  announceLen: null,
+
+  announceDetail: null, // 공고(입찰) 디테일
+  announcePrev: null, // 이전디테일
+  announceNext: null, // 다음디테일
 
   st_announceAdminListLoading: false, // announceAdmin 가져오기
   st_announceAdminListDone: false,
@@ -35,6 +40,10 @@ export const initailState = {
   st_announceDeleteLoading: false, // announce 삭제하기
   st_announceDeleteDone: false,
   st_announceDeleteError: null,
+  //
+  st_announceDetailLoading: false, //  디데일 리스트
+  st_announceDetailDone: false,
+  st_announceDetailError: null,
 };
 
 export const ANNOUNCE_ADMIN_LIST_REQUEST = "ANNOUNCE_ADMIN_LIST_REQUEST";
@@ -64,6 +73,10 @@ export const ANNOUNCE_UPDATE_FAILURE = "ANNOUNCE_UPDATE_FAILURE";
 export const ANNOUNCE_DELETE_REQUEST = "ANNOUNCE_DELETE_REQUEST";
 export const ANNOUNCE_DELETE_SUCCESS = "ANNOUNCE_DELETE_SUCCESS";
 export const ANNOUNCE_DELETE_FAILURE = "ANNOUNCE_DELETE_FAILURE";
+
+export const ANNOUNCE_DETAIL_REQUEST = "ANNOUNCE_DETAIL_REQUEST";
+export const ANNOUNCE_DETAIL_SUCCESS = "ANNOUNCE_DETAIL_SUCCESS";
+export const ANNOUNCE_DETAIL_FAILURE = "ANNOUNCE_DETAIL_FAILURE";
 
 export const ANNOUNCE_RESET = "ANNOUNCE_RESET";
 
@@ -103,6 +116,7 @@ const reducer = (state = initailState, action) =>
         draft.st_announceListError = null;
         draft.announceList = action.data.announce;
         draft.lastPage = action.data.lastPage;
+        draft.announceLen = action.data.announceLen;
         break;
       }
       case ANNOUNCE_LIST_FAILURE: {
@@ -211,6 +225,30 @@ const reducer = (state = initailState, action) =>
         draft.st_announceDeleteLoading = false;
         draft.st_announceDeleteDone = false;
         draft.st_announceDeleteError = action.error;
+        break;
+      }
+
+      //////////////////////////////////////////////
+
+      case ANNOUNCE_DETAIL_REQUEST: {
+        draft.st_announceDetailLoading = true;
+        draft.st_announceDetailDone = false;
+        draft.st_announceDetailError = null;
+        break;
+      }
+      case ANNOUNCE_DETAIL_SUCCESS: {
+        draft.st_announceDetailLoading = false;
+        draft.st_announceDetailDone = true;
+        draft.st_announceDetailError = null;
+        draft.announceDetail = action.data.detailData;
+        draft.announceNext = action.data.nextAnnounce;
+        draft.announcePrev = action.data.prevAnnounce;
+        break;
+      }
+      case ANNOUNCE_DETAIL_FAILURE: {
+        draft.st_announceDetailLoading = false;
+        draft.st_announceDetailDone = false;
+        draft.st_announceDetailError = action.error;
         break;
       }
 
