@@ -24,10 +24,10 @@ import {
 } from "../../../components/commonComponents";
 import { useRouter } from "next/router";
 import {
-  NOTICE_DETAIL_REQUEST,
-  NOTICE_NEXT_REQUEST,
-  NOTICE_PREV_REQUEST,
-} from "../../../reducers/notice";
+  NEWS_DETAIL_REQUEST,
+  NEWS_NEXT_REQUEST,
+  NEWS_PREV_REQUEST,
+} from "../../../reducers/news";
 import { useCallback } from "react";
 import { message } from "antd";
 
@@ -36,17 +36,17 @@ const DownloadA = styled.a`
   margin: 0 8px;
 `;
 
-const DetailNotice = () => {
+const DetailNews = () => {
   ////// GLOBAL STATE //////
 
   const {
-    noticeDetail,
-    noticePrev,
-    noticeNext,
-    st_noticeListError,
-    st_noticePrevError,
-    st_noticeNextError,
-  } = useSelector((state) => state.notice);
+    newsDetail,
+    newsPrev,
+    newsNext,
+    st_newsListError,
+    st_newsPrevError,
+    st_newsNextError,
+  } = useSelector((state) => state.news);
 
   ////// HOOKS //////
   const width = useWidth();
@@ -61,17 +61,17 @@ const DetailNotice = () => {
 
   useEffect(() => {
     dispatch({
-      type: NOTICE_DETAIL_REQUEST,
+      type: NEWS_DETAIL_REQUEST,
       data: id,
     });
     dispatch({
-      type: NOTICE_PREV_REQUEST,
+      type: NEWS_PREV_REQUEST,
       data: {
         id: parseInt(id),
       },
     });
     dispatch({
-      type: NOTICE_NEXT_REQUEST,
+      type: NEWS_NEXT_REQUEST,
       data: {
         id: parseInt(id),
       },
@@ -79,10 +79,10 @@ const DetailNotice = () => {
   }, [id]);
 
   useEffect(() => {
-    if (st_noticeListError) {
-      message.error(st_noticeListError);
+    if (st_newsListError) {
+      message.error(st_newsListError);
     }
-  }, [st_noticeListError]);
+  }, [st_newsListError]);
 
   ////// TOGGLE //////
   ////// HANDLER //////
@@ -92,20 +92,20 @@ const DetailNotice = () => {
   }, []);
 
   const prevHandler = useCallback(() => {
-    if (noticePrev) {
-      moveLinkHandler(`/garden/notice/${noticePrev.id}`);
+    if (newsPrev) {
+      moveLinkHandler(`/garden/news/${newsPrev.id}`);
     }
-  }, [noticePrev]);
+  }, [newsPrev]);
 
   const nextHandler = useCallback(() => {
-    if (noticeNext) {
-      moveLinkHandler(`/garden/notice/${noticeNext.id}`);
+    if (newsNext) {
+      moveLinkHandler(`/garden/news/${newsNext.id}`);
       window.scrollTo({ top: 0 });
     }
-  }, [noticeNext]);
+  }, [newsNext]);
 
   const listHandler = useCallback(() => {
-    moveLinkHandler(`/garden/notice`);
+    moveLinkHandler(`/garden/news`);
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -114,7 +114,7 @@ const DetailNotice = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 공지사항</title>
+        <title>효인주야간노인복지센터 | 새소식</title>
       </Head>
 
       <ClientLayout>
@@ -124,7 +124,7 @@ const DetailNotice = () => {
           <RsWrapper>
             <Wrapper margin={`90px 0 50px`}>
               <Text fontSize={`38px`} fontWeight={`700`}>
-                공지사항
+                새소식
               </Text>
             </Wrapper>
 
@@ -140,7 +140,7 @@ const DetailNotice = () => {
                 fontSize={`20px`}
                 fontWeight={`600`}
               >
-                {noticeDetail && noticeDetail.title}
+                {newsDetail && newsDetail.title}
               </Wrapper>
 
               <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
@@ -148,11 +148,11 @@ const DetailNotice = () => {
               </Wrapper>
 
               <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
-                {noticeDetail && noticeDetail.viewFrontCreatedAt}
+                {newsDetail && newsDetail.viewFrontCreatedAt}
               </Wrapper>
 
               <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
-                조회수 : {noticeDetail && noticeDetail.hit}
+                조회수 : {newsDetail && newsDetail.hit}
               </Wrapper>
             </Wrapper>
 
@@ -160,7 +160,7 @@ const DetailNotice = () => {
               borderTop={`1px solid ${Theme.lightGrey2_C}`}
               borderBottom={`1px solid ${Theme.lightGrey2_C}`}
             >
-              {noticeDetail && noticeDetail.filename && (
+              {newsDetail && newsDetail.filename && (
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
@@ -179,10 +179,10 @@ const DetailNotice = () => {
                   <Text margin={`0 0 0 6px`}>첨부파일명 :</Text>
 
                   <DownloadA
-                    href={noticeDetail.file}
-                    download={noticeDetail.filename}
+                    href={newsDetail.file}
+                    download={newsDetail.filename}
                   >
-                    {noticeDetail.filename}
+                    {newsDetail.filename}
                   </DownloadA>
                 </Wrapper>
               )}
@@ -197,10 +197,10 @@ const DetailNotice = () => {
                 <Image
                   width={`800px`}
                   margin={`0 0 20px`}
-                  src={noticeDetail && noticeDetail.imagePath}
+                  src={newsDetail && newsDetail.imagePath}
                 />
 
-                {noticeDetail && noticeDetail.content}
+                {newsDetail && newsDetail.content}
               </Wrapper>
             </Wrapper>
 
@@ -236,9 +236,9 @@ const DetailNotice = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {st_noticePrevError
+                    {st_newsPrevError
                       ? `이전 글이 존재하지 않습니다.`
-                      : noticePrev && noticePrev.title}
+                      : newsPrev && newsPrev.title}
                   </Text>
                 </Wrapper>
               </Wrapper>
@@ -258,9 +258,9 @@ const DetailNotice = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {st_noticeNextError
+                    {st_newsNextError
                       ? `다음 글이 존재하지 않습니다.`
-                      : noticeNext && noticeNext.title}{" "}
+                      : newsNext && newsNext.title}{" "}
                   </Text>
                 </Wrapper>
               </Wrapper>
@@ -294,4 +294,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default DetailNotice;
+export default DetailNews;
