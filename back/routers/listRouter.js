@@ -122,6 +122,7 @@ router.post("/getList", async (req, res, next) => {
     return res.status(200).json({
       lists: lists[0],
       lastPage: parseInt(lastPage),
+      listsLen: parseInt(listsLen),
     });
   } catch (error) {
     console.error(error);
