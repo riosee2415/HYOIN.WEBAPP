@@ -48,6 +48,7 @@ import Theme from "../../../components/Theme";
 import moment from "moment";
 import {
   PROGRAM_CREATE_REQUEST,
+  PROGRAM_DELETE_REQUEST,
   PROGRAM_IMAGE_RESET,
   PROGRAM_IMAGE_UPLOAD_REQUEST,
   PROGRAM_LIST_REQUEST,
@@ -129,11 +130,11 @@ const Type = ({ router }) => {
     //
     st_programUpdateDone,
     st_programUpdateError,
+    //
+    st_programDeleteDone,
+    st_programDeleteError,
   } = useSelector((state) => state.program);
 
-  console.log(programList);
-  console.log(st_programUpdateDone);
-  console.log(st_programUpdateDone);
   ////// HOOKS //////
 
   const imageRef = useRef();
@@ -228,6 +229,27 @@ const Type = ({ router }) => {
       return message.error(st_programUpdateError);
     }
   }, [st_programUpdateError]);
+
+  // 삭제하기
+  useEffect(() => {
+    if (st_programDeleteDone) {
+      dispatch({
+        type: PROGRAM_LIST_REQUEST,
+        data: {
+          searchMonth: moment().format("YYYY-MM"),
+        },
+      });
+
+      uModalToggle(null);
+      return message.success("시간표가 삭제되었습니다.");
+    }
+  }, [st_programDeleteDone]);
+
+  useEffect(() => {
+    if (st_programDeleteError) {
+      return message.error(st_programDeleteError);
+    }
+  }, [st_programDeleteError]);
 
   ////// TOGGLE ///////
 
@@ -368,6 +390,15 @@ const Type = ({ router }) => {
       },
     });
   }, [cList, cDate]);
+
+  const deleteHandler = useCallback(() => {
+    dispatch({
+      type: PROGRAM_DELETE_REQUEST,
+      data: {
+        id: uData.id,
+      },
+    });
+  }, [uData]);
 
   // 시간표
   const dateFullCellRender = useCallback(
@@ -681,8 +712,9 @@ const Type = ({ router }) => {
               title={`삭제하시겠습니까?`}
               cancelText="취소"
               okText="삭제"
+              onConfirm={() => deleteHandler()}
             >
-              <Button size="small" type="danger" htmlType="submit">
+              <Button size="small" type="danger">
                 삭제
               </Button>
             </Popconfirm>
