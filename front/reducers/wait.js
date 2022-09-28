@@ -7,6 +7,11 @@ export const initailState = {
   fileUpload: null,
   imgUpload: null,
   lastPage: 1,
+  waitLen: null,
+
+  waitDetail: null, // 대기자명단 디테일
+  waitPrev: null, // 이전디테일
+  waitNext: null, // 다음디테일
 
   // 백 라우터 listRouter
 
@@ -37,6 +42,10 @@ export const initailState = {
   st_waitDeleteLoading: false, // wait (list) 삭제하기
   st_waitDeleteDone: false,
   st_waitDeleteError: null,
+  //
+  st_waitDetailLoading: false, //  디데일 리스트
+  st_waitDetailDone: false,
+  st_waitDetailError: null,
 };
 
 export const WAIT_ADMIN_LIST_REQUEST = "WAIT_ADMIN_LIST_REQUEST";
@@ -66,6 +75,10 @@ export const WAIT_UPDATE_FAILURE = "WAIT_UPDATE_FAILURE";
 export const WAIT_DELETE_REQUEST = "WAIT_DELETE_REQUEST";
 export const WAIT_DELETE_SUCCESS = "WAIT_DELETE_SUCCESS";
 export const WAIT_DELETE_FAILURE = "WAIT_DELETE_FAILURE";
+
+export const WAIT_DETAIL_REQUEST = "WAIT_DETAIL_REQUEST";
+export const WAIT_DETAIL_SUCCESS = "WAIT_DETAIL_SUCCESS";
+export const WAIT_DETAIL_FAILURE = "WAIT_DETAIL_FAILURE";
 
 export const WAIT_RESET = "WAIT_RESET";
 
@@ -105,6 +118,7 @@ const reducer = (state = initailState, action) =>
         draft.st_waitListError = null;
         draft.waitList = action.data.lists;
         draft.lastPage = action.data.lastPage;
+        draft.waitLen = action.data.listsLen;
         break;
       }
       case WAIT_LIST_FAILURE: {
@@ -213,6 +227,30 @@ const reducer = (state = initailState, action) =>
         draft.st_waitDeleteLoading = false;
         draft.st_waitDeleteDone = false;
         draft.st_waitDeleteError = action.error;
+        break;
+      }
+
+      //////////////////////////////////////////////
+
+      case WAIT_DETAIL_REQUEST: {
+        draft.st_waitDetailLoading = true;
+        draft.st_waitDetailDone = false;
+        draft.st_waitDetailError = null;
+        break;
+      }
+      case WAIT_DETAIL_SUCCESS: {
+        draft.st_waitDetailLoading = false;
+        draft.st_waitDetailDone = true;
+        draft.st_waitDetailError = null;
+        draft.waitDetail = action.data.detailData;
+        draft.waitNext = action.data.nextList;
+        draft.waitPrev = action.data.prevList;
+        break;
+      }
+      case WAIT_DETAIL_FAILURE: {
+        draft.st_waitDetailLoading = false;
+        draft.st_waitDetailDone = false;
+        draft.st_waitDetailError = action.error;
         break;
       }
 

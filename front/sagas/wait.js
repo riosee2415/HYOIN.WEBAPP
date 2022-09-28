@@ -29,6 +29,10 @@ import {
   WAIT_DELETE_REQUEST,
   WAIT_DELETE_SUCCESS,
   WAIT_DELETE_FAILURE,
+  //
+  WAIT_DETAIL_REQUEST,
+  WAIT_DETAIL_SUCCESS,
+  WAIT_DETAIL_FAILURE,
 } from "../reducers/wait";
 
 // ******************************************************************************************************************
@@ -220,6 +224,34 @@ function* waitDelete(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function waitDetailAPI(data) {
+  return await axios.get(`/api/list/detail/${data}`);
+}
+
+function* waitDetail(action) {
+  try {
+    const result = yield call(waitDetailAPI, action.data);
+
+    yield put({
+      type: WAIT_DETAIL_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: WAIT_DETAIL_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
 //////////////////////////////////////////////////////////////
 
 function* watchWaitAdminList() {
@@ -243,6 +275,9 @@ function* watchWaitUpdate() {
 function* watchWaitDelete() {
   yield takeLatest(WAIT_DELETE_REQUEST, waitDelete);
 }
+function* watchDetail() {
+  yield takeLatest(WAIT_DETAIL_REQUEST, waitDetail);
+}
 
 //////////////////////////////////////////////////////////////
 export default function* waitSaga() {
@@ -254,6 +289,7 @@ export default function* waitSaga() {
     fork(watchWaitImageUpload),
     fork(watchWaitUpdate),
     fork(watchWaitDelete),
+    fork(watchDetail),
 
     //
   ]);
