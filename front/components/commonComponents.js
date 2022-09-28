@@ -225,6 +225,12 @@ export const CommonButton = styled(Button)`
     `border : 1px solid ${props.theme.subTheme_C};`}
   
   ${(props) =>
+    props.kindOf === `subTheme2` && `background : ${props.theme.subTheme2_C};`}
+  ${(props) =>
+    props.kindOf === `subTheme2` && `color : ${props.theme.white_C};`}
+
+
+  ${(props) =>
     props.kindOf === `grey` && `background : ${props.theme.lightGrey4_C};`}
   ${(props) =>
     props.kindOf === `grey` && `color : ${props.theme.subTheme10_C};`}
@@ -265,6 +271,13 @@ export const CommonButton = styled(Button)`
     ${(props) =>
       props.kindOf === `subTheme` && `background ${props.theme.white_C};`}
 
+    ${(props) =>
+      props.kindOf === `subTheme2` && `color ${props.theme.subTheme2_C};`}
+    ${(props) =>
+      props.kindOf === `subTheme2` && `background ${props.theme.white_C};`}
+    ${(props) =>
+      props.kindOf === `subTheme2` &&
+      `border : 1px solid ${props.theme.subTheme2_C};`}
         
     ${(props) =>
       props.kindOf === `grey` && `background : ${props.theme.subTheme9_C};`}

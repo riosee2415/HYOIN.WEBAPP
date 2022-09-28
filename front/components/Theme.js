@@ -24,12 +24,14 @@ export default {
   grey_C: "#747474",
   grey2_C: "#818181",
   grey3_C: "#707070",
+  grey4_C: "#ABABAB",
 
   lightGrey_C: "#E2E2E2",
   lightGrey2_C: "#E0E0E3",
   lightGrey3_C: "#D0D0D5",
   lightGrey4_C: "#F5F5F5",
   lightGrey5_C: "#ECF9FF",
+  lightGrey6_C: "#FBFBFB",
   darkGrey_C: "#3D3D3D",
 
   //admin
