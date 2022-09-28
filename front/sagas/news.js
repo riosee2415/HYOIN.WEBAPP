@@ -29,6 +29,18 @@ import {
   NEWS_DELETE_REQUEST,
   NEWS_DELETE_SUCCESS,
   NEWS_DELETE_FAILURE,
+  //
+  NEWS_DETAIL_REQUEST,
+  NEWS_DETAIL_SUCCESS,
+  NEWS_DETAIL_FAILURE,
+  //
+  NEWS_NEXT_REQUEST,
+  NEWS_NEXT_SUCCESS,
+  NEWS_NEXT_FAILURE,
+  //
+  NEWS_PREV_REQUEST,
+  NEWS_PREV_SUCCESS,
+  NEWS_PREV_FAILURE,
 } from "../reducers/news";
 
 // ******************************************************************************************************************
@@ -220,6 +232,90 @@ function* newsDelete(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function newsDetailAPI(data) {
+  return await axios.get(`/api/news/detail/${data}`);
+}
+
+function* newsDetail(action) {
+  try {
+    const result = yield call(newsDetailAPI, action.data);
+
+    yield put({
+      type: NEWS_DETAIL_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: NEWS_DETAIL_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function newsNextAPI(data) {
+  return await axios.post(`/api/news/nextNews`, data);
+}
+
+function* newsNext(action) {
+  try {
+    const result = yield call(newsNextAPI, action.data);
+
+    yield put({
+      type: NEWS_NEXT_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: NEWS_NEXT_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function newsPrevAPI(data) {
+  return await axios.post(`/api/news/prevNews`, data);
+}
+
+function* newsPrev(action) {
+  try {
+    const result = yield call(newsPrevAPI, action.data);
+
+    yield put({
+      type: NEWS_PREV_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: NEWS_PREV_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
 //////////////////////////////////////////////////////////////
 
 function* watchNewsAdminList() {
@@ -243,6 +339,15 @@ function* watchNewsUpdate() {
 function* watchNewsDelete() {
   yield takeLatest(NEWS_DELETE_REQUEST, newsDelete);
 }
+function* watchDetail() {
+  yield takeLatest(NEWS_DETAIL_REQUEST, newsDetail);
+}
+function* watchDetailNext() {
+  yield takeLatest(NEWS_NEXT_REQUEST, newsNext);
+}
+function* watchDetailPrev() {
+  yield takeLatest(NEWS_PREV_REQUEST, newsPrev);
+}
 
 //////////////////////////////////////////////////////////////
 export default function* newsSage() {
@@ -254,6 +359,9 @@ export default function* newsSage() {
     fork(watchNewsImageUpload),
     fork(watchNewsUpdate),
     fork(watchNewsDelete),
+    fork(watchDetail),
+    fork(watchDetailNext),
+    fork(watchDetailPrev),
 
     //
   ]);
