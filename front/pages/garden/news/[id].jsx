@@ -23,11 +23,7 @@ import {
   Wrapper,
 } from "../../../components/commonComponents";
 import { useRouter } from "next/router";
-import {
-  NEWS_DETAIL_REQUEST,
-  NEWS_NEXT_REQUEST,
-  NEWS_PREV_REQUEST,
-} from "../../../reducers/news";
+import { NEWS_DETAIL_REQUEST } from "../../../reducers/news";
 import { useCallback } from "react";
 import { message } from "antd";
 
@@ -39,14 +35,9 @@ const DownloadA = styled.a`
 const DetailNews = () => {
   ////// GLOBAL STATE //////
 
-  const {
-    newsDetail,
-    newsPrev,
-    newsNext,
-    st_newsListError,
-    st_newsPrevError,
-    st_newsNextError,
-  } = useSelector((state) => state.news);
+  const { newsDetail, newsPrev, newsNext, st_newsListError } = useSelector(
+    (state) => state.news
+  );
 
   ////// HOOKS //////
   const width = useWidth();
@@ -63,18 +54,6 @@ const DetailNews = () => {
     dispatch({
       type: NEWS_DETAIL_REQUEST,
       data: id,
-    });
-    dispatch({
-      type: NEWS_PREV_REQUEST,
-      data: {
-        id: parseInt(id),
-      },
-    });
-    dispatch({
-      type: NEWS_NEXT_REQUEST,
-      data: {
-        id: parseInt(id),
-      },
     });
   }, [id]);
 
@@ -236,9 +215,9 @@ const DetailNews = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {st_newsPrevError
-                      ? `이전 글이 존재하지 않습니다.`
-                      : newsPrev && newsPrev.title}
+                    {newsPrev
+                      ? newsPrev && newsPrev.title
+                      : `이전 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
               </Wrapper>
@@ -258,9 +237,9 @@ const DetailNews = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {st_newsNextError
-                      ? `다음 글이 존재하지 않습니다.`
-                      : newsNext && newsNext.title}{" "}
+                    {newsNext
+                      ? newsNext && newsNext.title
+                      : `다음 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
               </Wrapper>
