@@ -44,14 +44,6 @@ export const initailState = {
   st_noticeDetailLoading: false, //  디데일 리스트
   st_noticeDetailDone: false,
   st_noticeDetailError: null,
-  //
-  st_noticePrevLoading: false, //  이전 디데일
-  st_noticePrevDone: false,
-  st_noticePrevError: null,
-  //
-  st_noticeNextLoading: false, //  다음 디데일
-  st_noticeNextDone: false,
-  st_noticeNextError: null,
 };
 
 export const NOTICE_ADMIN_LIST_REQUEST = "NOTICE_ADMIN_LIST_REQUEST";
@@ -85,14 +77,6 @@ export const NOTICE_DELETE_FAILURE = "NOTICE_DELETE_FAILURE";
 export const NOTICE_DETAIL_REQUEST = "NOTICE_DETAIL_REQUEST";
 export const NOTICE_DETAIL_SUCCESS = "NOTICE_DETAIL_SUCCESS";
 export const NOTICE_DETAIL_FAILURE = "NOTICE_DETAIL_FAILURE";
-
-export const NOTICE_PREV_REQUEST = "NOTICE_PREV_REQUEST";
-export const NOTICE_PREV_SUCCESS = "NOTICE_PREV_SUCCESS";
-export const NOTICE_PREV_FAILURE = "NOTICE_PREV_FAILURE";
-
-export const NOTICE_NEXT_REQUEST = "NOTICE_NEXT_REQUEST";
-export const NOTICE_NEXT_SUCCESS = "NOTICE_NEXT_SUCCESS";
-export const NOTICE_NEXT_FAILURE = "NOTICE_NEXT_FAILURE";
 
 export const NOTICE_RESET = "NOTICE_RESET";
 
@@ -257,54 +241,14 @@ const reducer = (state = initailState, action) =>
         draft.st_noticeDetailDone = true;
         draft.st_noticeDetailError = null;
         draft.noticeDetail = action.data.detailData;
+        draft.noticeNext = action.data.nextNotice;
+        draft.noticePrev = action.data.prevNotice;
         break;
       }
       case NOTICE_DETAIL_FAILURE: {
         draft.st_noticeDetailLoading = false;
         draft.st_noticeDetailDone = false;
         draft.st_noticeDetailError = action.error;
-        break;
-      }
-
-      //////////////////////////////////////////////
-      case NOTICE_NEXT_REQUEST: {
-        draft.st_noticeNextLoading = true;
-        draft.st_noticeNextDone = false;
-        draft.st_noticeNextError = null;
-        break;
-      }
-      case NOTICE_NEXT_SUCCESS: {
-        draft.st_noticeNextLoading = false;
-        draft.st_noticeNextDone = true;
-        draft.st_noticeNextError = null;
-        draft.noticeNext = action.data.detailData;
-        break;
-      }
-      case NOTICE_NEXT_FAILURE: {
-        draft.st_noticeNextLoading = false;
-        draft.st_noticeNextDone = false;
-        draft.st_noticeNextError = action.error;
-        break;
-      }
-
-      //////////////////////////////////////////////
-      case NOTICE_PREV_REQUEST: {
-        draft.st_noticePrevLoading = true;
-        draft.st_noticePrevDone = false;
-        draft.st_noticePrevError = null;
-        break;
-      }
-      case NOTICE_PREV_SUCCESS: {
-        draft.st_noticePrevLoading = false;
-        draft.st_noticePrevDone = true;
-        draft.st_noticePrevError = null;
-        draft.noticePrev = action.data.detailData;
-        break;
-      }
-      case NOTICE_PREV_FAILURE: {
-        draft.st_noticePrevLoading = false;
-        draft.st_noticePrevDone = false;
-        draft.st_noticePrevError = action.error;
         break;
       }
 

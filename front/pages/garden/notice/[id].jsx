@@ -23,11 +23,7 @@ import {
   Wrapper,
 } from "../../../components/commonComponents";
 import { useRouter } from "next/router";
-import {
-  NOTICE_DETAIL_REQUEST,
-  NOTICE_NEXT_REQUEST,
-  NOTICE_PREV_REQUEST,
-} from "../../../reducers/notice";
+import { NOTICE_DETAIL_REQUEST } from "../../../reducers/notice";
 import { useCallback } from "react";
 import { message } from "antd";
 
@@ -39,14 +35,8 @@ const DownloadA = styled.a`
 const DetailNotice = () => {
   ////// GLOBAL STATE //////
 
-  const {
-    noticeDetail,
-    noticePrev,
-    noticeNext,
-    st_noticeListError,
-    st_noticePrevError,
-    st_noticeNextError,
-  } = useSelector((state) => state.notice);
+  const { noticeDetail, noticePrev, noticeNext, st_noticeListError } =
+    useSelector((state) => state.notice);
 
   ////// HOOKS //////
   const width = useWidth();
@@ -63,18 +53,6 @@ const DetailNotice = () => {
     dispatch({
       type: NOTICE_DETAIL_REQUEST,
       data: id,
-    });
-    dispatch({
-      type: NOTICE_PREV_REQUEST,
-      data: {
-        id: parseInt(id),
-      },
-    });
-    dispatch({
-      type: NOTICE_NEXT_REQUEST,
-      data: {
-        id: parseInt(id),
-      },
     });
   }, [id]);
 
@@ -236,9 +214,9 @@ const DetailNotice = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {st_noticePrevError
-                      ? `이전 글이 존재하지 않습니다.`
-                      : noticePrev && noticePrev.title}
+                    {noticePrev
+                      ? noticePrev && noticePrev.title
+                      : `이전 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
               </Wrapper>
@@ -258,9 +236,9 @@ const DetailNotice = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {st_noticeNextError
-                      ? `다음 글이 존재하지 않습니다.`
-                      : noticeNext && noticeNext.title}{" "}
+                    {noticeNext
+                      ? noticeNext && noticeNext.title
+                      : `다음 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
               </Wrapper>
