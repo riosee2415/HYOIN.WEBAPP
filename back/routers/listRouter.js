@@ -290,7 +290,8 @@ router.get("/detail/:id", async (req, res, next) => {
     const updateResult = await models.sequelize.query(updateQuery);
 
     const nextDataQuery = `
-    SELECT  title
+    SELECT  id,
+            title
       FROM  lists
      WHERE  id > ${id}
        AND  isDelete = 0
@@ -298,7 +299,8 @@ router.get("/detail/:id", async (req, res, next) => {
     `;
 
     const prevDataQuery = `
-    SELECT  title
+    SELECT  id,
+            title
       FROM  lists
      WHERE  id < ${id}
        AND  isDelete = 0
@@ -312,57 +314,6 @@ router.get("/detail/:id", async (req, res, next) => {
       nextList: !nextData[0] ? null : nextData[0][0], // 다음 게시글
       prevList: !prevData[0] ? null : prevData[0][prevData[0].length - 1], // 이전 게시글
     });
-  } catch (error) {
-    console.error(error);
-    return res.status(401).send("게시글 정보를 불러올 수 없습니다.");
-  }
-});
-
-router.post("/nextList", async (req, res, next) => {
-  const { id } = req.body;
-
-  try {
-    const nextDataQuery = `
-    SELECT  id
-      FROM  lists
-     WHERE  id > ${id}
-       AND  isDelete = 0
-     LIMIT  1
-    `;
-
-    const nextData = await models.sequelize.query(nextDataQuery);
-
-    if (nextData[0].length === 0) {
-      return res.status(401).send("마지막 게시글 입니다.");
-    }
-
-    return res.redirect(`/api/list/detail/${nextData[0][0].id}`);
-  } catch (error) {
-    console.error(error);
-    return res.status(401).send("게시글 정보를 불러올 수 없습니다.");
-  }
-});
-
-router.post("/prevList", async (req, res, next) => {
-  const { id } = req.body;
-
-  try {
-    const prevDataQuery = `
-    SELECT  id
-      FROM  lists
-     WHERE  id < ${id}
-       AND  isDelete = 0
-    `;
-
-    const prevData = await models.sequelize.query(prevDataQuery);
-
-    if (prevData[0].length === 0) {
-      return res.status(401).send("첫번째 게시글 입니다.");
-    }
-
-    return res.redirect(
-      `/api/list/detail/${prevData[0][prevData[0].length - 1].id}`
-    );
   } catch (error) {
     console.error(error);
     return res.status(401).send("게시글 정보를 불러올 수 없습니다.");
