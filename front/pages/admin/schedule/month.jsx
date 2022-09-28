@@ -20,6 +20,7 @@ import {
   Calendar,
   Empty,
   DatePicker,
+  Popconfirm,
 } from "antd";
 import {
   CloseOutlined,
@@ -50,6 +51,7 @@ import {
   PROGRAM_IMAGE_RESET,
   PROGRAM_IMAGE_UPLOAD_REQUEST,
   PROGRAM_LIST_REQUEST,
+  PROGRAM_UPDATE_REQUEST,
 } from "../../../reducers/program";
 
 const AdminContent = styled.div`
@@ -58,7 +60,7 @@ const AdminContent = styled.div`
 
 const CustomCalendar = styled(Calendar)`
   & .ant-picker-content {
-    border-top: 1px solid ${Theme.subTheme3_C};
+    border-top: 1px solid ${Theme.subTheme2_C};
     border-left: 1px solid ${Theme.lightGrey2_C};
     border-right: 1px solid ${Theme.lightGrey2_C};
   }
@@ -68,7 +70,7 @@ const CustomCalendar = styled(Calendar)`
     padding: 27px 0 !important;
     font-size: 22px;
     font-weight: 600;
-    background-color: ${(props) => props.theme.subTheme6_C};
+    background-color: ${(props) => props.theme.lightGrey5_C};
     border-bottom: 1px solid ${Theme.lightGrey2_C};
 
     border-left: 1px solid ${Theme.lightGrey2_C};
@@ -124,8 +126,14 @@ const Type = ({ router }) => {
     //
     st_programCreateDone,
     st_programCreateError,
+    //
+    st_programUpdateDone,
+    st_programUpdateError,
   } = useSelector((state) => state.program);
 
+  console.log(programList);
+  console.log(st_programUpdateDone);
+  console.log(st_programUpdateDone);
   ////// HOOKS //////
 
   const imageRef = useRef();
@@ -188,6 +196,24 @@ const Type = ({ router }) => {
     }
   }, [st_programCreateError]);
 
+  // 수정하기
+  useEffect(() => {
+    if (st_programUpdateDone) {
+      dispatch({
+        type: PROGRAM_LIST_REQUEST,
+      });
+
+      uModalToggle(null);
+      return message.success("시간표가 수정되었습니다.");
+    }
+  }, [st_programUpdateDone]);
+
+  useEffect(() => {
+    if (st_programUpdateError) {
+      return message.error(st_programUpdateError);
+    }
+  }, [st_programUpdateError]);
+
   ////// TOGGLE ///////
 
   // 생성 모달
@@ -212,8 +238,25 @@ const Type = ({ router }) => {
   const uModalToggle = useCallback(
     (data) => {
       if (data) {
+        dispatch({
+          type: PROGRAM_IMAGE_RESET,
+          data: data.imagePath,
+        });
+
+        cForm.setFieldsValue({
+          title: data.title,
+          content: data.content,
+        });
+
         setUData(data);
       } else {
+        dispatch({
+          type: PROGRAM_IMAGE_RESET,
+          data: null,
+        });
+
+        cForm.resetFields();
+
         setUData(null);
       }
       setUModal((prev) => !prev);
@@ -266,6 +309,22 @@ const Type = ({ router }) => {
       return message.success("추가되었습니다.");
     },
     [cList, programImagePath]
+  );
+
+  // 내용 수정하기
+  const cUpdateHandler = useCallback(
+    (data) => {
+      dispatch({
+        type: PROGRAM_UPDATE_REQUEST,
+        data: {
+          id: uData.id,
+          title: data.title,
+          content: data.content,
+          imagePath: programImagePath,
+        },
+      });
+    },
+    [uData, programImagePath]
   );
 
   // 생성 날짜 선택
@@ -549,7 +608,12 @@ const Type = ({ router }) => {
       </Modal>
 
       {/* UPDATE MODAL */}
-      <Modal title={`상세정보`} visible={uModal} footer={null}>
+      <Modal
+        title={`상세정보`}
+        visible={uModal}
+        onCancel={() => uModalToggle(null)}
+        footer={null}
+      >
         <Wrapper margin={`0 0 30px`}>
           <Image
             width={`150px`}
@@ -581,7 +645,7 @@ const Type = ({ router }) => {
           </Button>
         </Wrapper>
 
-        <Form form={cForm} onFinish={cAddHandler}>
+        <Form form={cForm} onFinish={cUpdateHandler}>
           <Form.Item
             label={`제목`}
             name={`title`}
@@ -597,10 +661,20 @@ const Type = ({ router }) => {
             <Input.TextArea />
           </Form.Item>
 
-          <Wrapper al={`flex-end`}>
-            <Button size="small" type="primary" htmlType="submit">
+          <Wrapper dr={`row`} ju={`flex-end`}>
+            <Popconfirm
+              title={`삭제하시겠습니까?`}
+              cancelText="취소"
+              okText="삭제"
+            >
+              <Button size="small" type="danger" htmlType="submit">
+                삭제
+              </Button>
+            </Popconfirm>
+
+            <ModalBtn size="small" type="primary" htmlType="submit">
               수정
-            </Button>
+            </ModalBtn>
           </Wrapper>
         </Form>
       </Modal>
