@@ -9,15 +9,15 @@ export const initailState = {
   st_programListDone: false,
   st_programListError: null,
   //
-  st_programCreateLoading: false, // program 가져오기
+  st_programCreateLoading: false, // program 생성
   st_programCreateDone: false,
   st_programCreateError: null,
   //
-  st_programUpdateLoading: false, // program 가져오기
+  st_programUpdateLoading: false, // program 수정
   st_programUpdateDone: false,
   st_programUpdateError: null,
   //
-  st_programDeleteLoading: false, // program 가져오기
+  st_programDeleteLoading: false, // program 삭제
   st_programDeleteDone: false,
   st_programDeleteError: null,
   //
