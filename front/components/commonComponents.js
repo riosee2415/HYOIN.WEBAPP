@@ -1,4 +1,4 @@
-import { Row, Col, Button, Form, Input, Select } from "antd";
+import { Row, Col, Button, Form, Input, Select, Pagination } from "antd";
 import styled from "styled-components";
 
 export const RowWrapper = styled(Row)`
@@ -552,6 +552,52 @@ export const CommonTitle = styled.h3`
   @media (max-width: 900px) {
     font-size: 25px;
     margin: ${(props) => props.margin || `85px 0 40px`};
+  }
+`;
+
+export const CustomPage = styled(Pagination)`
+  margin: 40px 0 100px;
+
+  & .ant-pagination-next > button {
+    border: none;
+  }
+
+  & .ant-pagination-prev > button {
+    border: none;
+  }
+
+  & {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  & .ant-pagination-item,
+  & .ant-pagination-next,
+  & .ant-pagination-prev {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => props.theme.white_C} !important;
+    border-radius: 100%;
+  }
+
+  & .ant-pagination-item-active a {
+    color: ${(props) => props.theme.subTheme10_C};
+  }
+
+  & .ant-pagination-item-active {
+    background-color: ${(props) => props.theme.subTheme9_C} !important;
+  }
+
+  & .ant-pagination-item:focus-visible a {
+    color: ${(props) => props.theme.white_C};
+  }
+
+  & .ant-pagination-item-link svg {
+    font-weight: bold;
+    color: ${(props) => props.theme.grey_C};
   }
 `;
 
