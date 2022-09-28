@@ -146,6 +146,10 @@ export const Wrapper = styled.div`
     font-size: 12px;
     white-space: pre-wrap;
   }
+
+  &:hover {
+    background: ${(props) => (props.isBgHover ? props.theme.subTheme9_C : ``)};
+  }
 `;
 
 export const RsWrapper = styled.article`
@@ -201,7 +205,7 @@ export const CommonButton = styled(Button)`
   padding: ${(props) => props.padding};
   font-size: ${(props) => props.fontSize};
   color: ${(props) => props.color || props.theme.subTheme2_C};
-  border-radius: ${(props) => props.radius || `7px`};
+  border-radius: ${(props) => props.radius};
 
   ${(props) => !props.kindOf && `background : ${props.theme.white_C};`}
   ${(props) =>
@@ -219,6 +223,15 @@ export const CommonButton = styled(Button)`
   ${(props) =>
     props.kindOf === `subTheme` &&
     `border : 1px solid ${props.theme.subTheme_C};`}
+  
+  ${(props) =>
+    props.kindOf === `grey` && `background : ${props.theme.lightGrey4_C};`}
+  ${(props) =>
+    props.kindOf === `grey` && `color : ${props.theme.subTheme10_C};`}
+  ${(props) =>
+    props.kindOf === `grey` &&
+    `border : 1px solid ${props.theme.lightGrey4_C};`}
+    
   ${(props) =>
     props.kindOf === `kakao` && `background : ${props.theme.kakao_C};`}
   ${(props) =>
@@ -251,6 +264,15 @@ export const CommonButton = styled(Button)`
       props.kindOf === `subTheme` && `color ${props.theme.subTheme_C};`}
     ${(props) =>
       props.kindOf === `subTheme` && `background ${props.theme.white_C};`}
+
+        
+    ${(props) =>
+      props.kindOf === `grey` && `background : ${props.theme.subTheme9_C};`}
+    ${(props) =>
+      props.kindOf === `grey` && `color : ${props.theme.subTheme10_C};`}
+    ${(props) =>
+      props.kindOf === `grey` &&
+      `border : 1px solid ${props.theme.subTheme9_C};`}
     ${(props) =>
       props.kindOf === `kakao` && `background : ${props.theme.kakao_C};`}
     ${(props) =>
@@ -451,7 +473,7 @@ export const SpanText = styled.span`
 export const TextInput = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height || `40px`};
-  border: ${(props) => props.border || `1px solid ${props.theme.grey_C}`};
+  border: ${(props) => props.border || `1px solid ${props.theme.lightGrey2_C}`};
   border-bottom: ${(props) => props.borderBottom};
   padding: ${(props) => props.padding || `10px`};
   transition: ${(props) => props.transition || props.theme.transition};
@@ -465,7 +487,7 @@ export const TextInput = styled.input`
 
   &:focus {
     outline: none;
-    border: 1px solid ${(props) => props.theme.subTheme_C};
+    border: 1px solid ${(props) => props.theme.subTheme10_C};
   }
 
   &:read-only {
@@ -488,17 +510,18 @@ export const TextArea = styled.textarea`
   width: ${(props) => props.width};
   height: ${(props) => props.height || `100px`};
   padding: ${(props) => props.padding || `10px`};
-  border: ${(props) => props.border || `1px solid ${props.theme.grey_C}`};
+  border: ${(props) => props.border || `1px solid ${props.theme.lightGrey2_C}`};
   border-radius: ${(props) => props.theme.radius};
   background: ${(props) => props.bgColor};
   transition: ${(props) => props.transition || props.theme.transition};
   margin: ${(props) => props.margin};
   resize: none;
-  border-radius: ${(props) => props.radius || `10px`};
+  border-radius: ${(props) => props.radius};
+  transition: 0.3s;
 
   &:focus {
     outline: none;
-    border: 1px solid ${(props) => props.theme.basicTheme_C};
+    border: 1px solid ${(props) => props.theme.subTheme10_C};
   }
 
   &::placeholder {

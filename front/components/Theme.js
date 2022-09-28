@@ -9,6 +9,8 @@ export default {
   subTheme6_C: "#223F5E",
   subTheme7_C: "#DC4444",
   subTheme8_C: "#4684C9",
+  subTheme9_C: "#ECF9FF",
+  subTheme10_C: "#44B1E1",
 
   kakao_C: "#FAE100",
   naver_C: "#00C73C",
@@ -17,7 +19,7 @@ export default {
   // black
   black_C: "#141414",
   // red
-  red_C: "#e74c3c",
+  red_C: "#F61B1B",
   // grey
   grey_C: "#747474",
   grey2_C: "#818181",

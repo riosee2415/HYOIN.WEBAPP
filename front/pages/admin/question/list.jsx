@@ -35,6 +35,7 @@ import {
   GuideDiv,
   ModalBtn,
   RowWrapper,
+  Text,
   Wrapper,
 } from "../../../components/commonComponents";
 import { saveAs } from "file-saver";
@@ -77,8 +78,7 @@ const List = ({ location }) => {
   const { questions } = useSelector((state) => state.question);
 
   const [openModal, setOpenModal] = useState(false);
-
-  console.log(questions);
+  const [detailData, setDetailData] = useState(null);
 
   const router = useRouter();
 
@@ -104,6 +104,10 @@ const List = ({ location }) => {
 
   ////// TOGGLE //////
   const openModalToggle = useCallback((data) => {
+    if (data) {
+      setDetailData(data);
+    }
+
     setOpenModal((prev) => !prev);
   });
 
@@ -264,106 +268,99 @@ const List = ({ location }) => {
         width="600px"
         footer={null}
       >
-        {questions && questions[0] ? (
-          <>
-            <Wrapper
-              dr={`row`}
-              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
-              margin={`0 0 5px`}
-            >
-              <Wrapper
-                al={`flex-start`}
-                width={`20%`}
-                fontWeight={`700`}
-                bgColor={Theme.adminLightGrey_C}
-                padding={`5px`}
-              >
-                이름
-              </Wrapper>
-              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
-                {questions[0].name}
-              </Wrapper>
-            </Wrapper>
+        <Wrapper
+          dr={`row`}
+          borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+          margin={`0 0 5px`}
+        >
+          <Wrapper
+            al={`flex-start`}
+            width={`20%`}
+            fontWeight={`700`}
+            bgColor={Theme.adminLightGrey_C}
+            padding={`5px`}
+          >
+            이름
+          </Wrapper>
+          <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+            {detailData && detailData.name}
+          </Wrapper>
+        </Wrapper>
+        <Wrapper
+          dr={`row`}
+          borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+          margin={`0 0 5px`}
+        >
+          <Wrapper
+            al={`flex-start`}
+            width={`20%`}
+            fontWeight={`700`}
+            bgColor={Theme.adminLightGrey_C}
+            padding={`5px`}
+          >
+            연락처
+          </Wrapper>
+          <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+            {detailData && detailData.mobile}
+          </Wrapper>
+        </Wrapper>
 
-            <Wrapper
-              dr={`row`}
-              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
-              margin={`0 0 5px`}
-            >
-              <Wrapper
-                al={`flex-start`}
-                width={`20%`}
-                fontWeight={`700`}
-                bgColor={Theme.adminLightGrey_C}
-                padding={`5px`}
-              >
-                제목
-              </Wrapper>
-              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
-                {questions[0].title}
-              </Wrapper>
-            </Wrapper>
+        <Wrapper
+          dr={`row`}
+          borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+          margin={`0 0 5px`}
+        >
+          <Wrapper
+            al={`flex-start`}
+            width={`20%`}
+            fontWeight={`700`}
+            bgColor={Theme.adminLightGrey_C}
+            padding={`5px`}
+          >
+            이메일
+          </Wrapper>
+          <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+            {detailData && detailData.email}
+          </Wrapper>
+        </Wrapper>
+        <Wrapper
+          dr={`row`}
+          borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+          margin={`0 0 5px`}
+        >
+          <Wrapper
+            al={`flex-start`}
+            width={`20%`}
+            fontWeight={`700`}
+            bgColor={Theme.adminLightGrey_C}
+            padding={`5px`}
+          >
+            제목
+          </Wrapper>
+          <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+            {detailData && detailData.title}
+          </Wrapper>
+        </Wrapper>
 
-            <Wrapper
-              dr={`row`}
-              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
-              margin={`0 0 5px`}
-            >
-              <Wrapper
-                al={`flex-start`}
-                width={`20%`}
-                fontWeight={`700`}
-                bgColor={Theme.adminLightGrey_C}
-                padding={`5px`}
-              >
-                연락처
-              </Wrapper>
-              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
-                {questions[0].mobile}
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper
-              dr={`row`}
-              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
-              margin={`0 0 5px`}
-            >
-              <Wrapper
-                al={`flex-start`}
-                width={`20%`}
-                fontWeight={`700`}
-                bgColor={Theme.adminLightGrey_C}
-                padding={`5px`}
-              >
-                이메일
-              </Wrapper>
-              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
-                {questions[0].email}
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper
-              dr={`row`}
-              borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
-              margin={`0 0 5px`}
-            >
-              <Wrapper
-                al={`flex-start`}
-                width={`20%`}
-                fontWeight={`700`}
-                bgColor={Theme.adminLightGrey_C}
-                padding={`5px`}
-              >
-                내용
-              </Wrapper>
-              <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
-                {questions[0].content}
-              </Wrapper>
-            </Wrapper>
-          </>
-        ) : (
-          <></>
-        )}
+        <Wrapper
+          dr={`row`}
+          borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
+          margin={`0 0 5px`}
+          al={`flex-start`}
+        >
+          <Wrapper
+            al={`flex-start`}
+            width={`20%`}
+            fontWeight={`700`}
+            bgColor={Theme.adminLightGrey_C}
+            padding={`5px`}
+          >
+            내용
+          </Wrapper>
+          <Wrapper al={`flex-start`} width={`80%`} padding={`5px`}>
+            <Text>{detailData && detailData.content}</Text>
+          </Wrapper>
+        </Wrapper>
       </Modal>
     </AdminLayout>
   );
