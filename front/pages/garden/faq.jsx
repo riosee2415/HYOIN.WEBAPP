@@ -125,12 +125,6 @@ const Faq = () => {
     });
   }, [searchTab, searchTitle, currentPage]);
 
-  useEffect(() => {
-    dispatch({
-      type: FAQ_TYPE_LIST_REQUEST,
-    });
-  }, []);
-
   ////// TOGGLE /////
 
   const searchTabToggle = useCallback(
@@ -165,6 +159,8 @@ const Faq = () => {
   const otherPageCall = useCallback(
     (page) => {
       setCurrentPage(page);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     [currentPage]
   );
@@ -335,6 +331,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: FAQ_TYPE_LIST_REQUEST,
     });
 
     context.store.dispatch({

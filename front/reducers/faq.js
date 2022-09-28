@@ -94,8 +94,7 @@ const reducer = (state = initailState, action) =>
         draft.st_faqTypeListDone = true;
         draft.st_faqTypeListError = null;
         draft.faqTypes = action.data;
-        draft.faqs = action.data.faqs;
-        draft.faqLastPage = action.data.lastPage;
+
         break;
       }
       case FAQ_TYPE_LIST_FAILURE: {
@@ -177,6 +176,7 @@ const reducer = (state = initailState, action) =>
         draft.st_faqListDone = true;
         draft.st_faqListError = null;
         draft.faqs = action.data;
+        draft.faqLastPage = action.data.lastPage;
         break;
       }
       case FAQ_LIST_FAILURE: {
