@@ -23,7 +23,7 @@ import {
   Wrapper,
 } from "../../../components/commonComponents";
 import { useRouter } from "next/router";
-import { NOTICE_DETAIL_REQUEST } from "../../../reducers/notice";
+import { ANNOUNCE_DETAIL_REQUEST } from "../../../reducers/announce";
 import { useCallback } from "react";
 import { message } from "antd";
 
@@ -32,11 +32,11 @@ const DownloadA = styled.a`
   margin: 0 8px;
 `;
 
-const DetailNotice = () => {
+const DetailAnnounce = () => {
   ////// GLOBAL STATE //////
 
-  const { noticeDetail, noticePrev, noticeNext, st_noticeListError } =
-    useSelector((state) => state.notice);
+  const { announceDetail, announcePrev, announceNext, st_announceListError } =
+    useSelector((state) => state.announce);
 
   ////// HOOKS //////
   const width = useWidth();
@@ -51,16 +51,16 @@ const DetailNotice = () => {
 
   useEffect(() => {
     dispatch({
-      type: NOTICE_DETAIL_REQUEST,
+      type: ANNOUNCE_DETAIL_REQUEST,
       data: id,
     });
   }, [id]);
 
   useEffect(() => {
-    if (st_noticeListError) {
-      message.error(st_noticeListError);
+    if (st_announceListError) {
+      message.error(st_announceListError);
     }
-  }, [st_noticeListError]);
+  }, [st_announceListError]);
 
   ////// TOGGLE //////
   ////// HANDLER //////
@@ -70,20 +70,20 @@ const DetailNotice = () => {
   }, []);
 
   const prevHandler = useCallback(() => {
-    if (noticePrev) {
-      moveLinkHandler(`/garden/notice/${noticePrev.id}`);
+    if (announcePrev) {
+      moveLinkHandler(`/garden/announce/${announcePrev.id}`);
     }
-  }, [noticePrev]);
+  }, [announcePrev]);
 
   const nextHandler = useCallback(() => {
-    if (noticeNext) {
-      moveLinkHandler(`/garden/notice/${noticeNext.id}`);
+    if (announceNext) {
+      moveLinkHandler(`/garden/announce/${announceNext.id}`);
       window.scrollTo({ top: 0 });
     }
-  }, [noticeNext]);
+  }, [announceNext]);
 
   const listHandler = useCallback(() => {
-    moveLinkHandler(`/garden/notice`);
+    moveLinkHandler(`/garden/announce`);
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -92,7 +92,7 @@ const DetailNotice = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 공지사항</title>
+        <title>효인주야간노인복지센터 | 공고(입찰)</title>
       </Head>
 
       <ClientLayout>
@@ -102,7 +102,7 @@ const DetailNotice = () => {
           <RsWrapper>
             <Wrapper margin={`90px 0 50px`}>
               <Text fontSize={`38px`} fontWeight={`700`}>
-                공지사항
+                공고(입찰)
               </Text>
             </Wrapper>
 
@@ -118,7 +118,7 @@ const DetailNotice = () => {
                 fontSize={`20px`}
                 fontWeight={`600`}
               >
-                {noticeDetail && noticeDetail.title}
+                {announceDetail && announceDetail.title}
               </Wrapper>
 
               <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
@@ -126,11 +126,11 @@ const DetailNotice = () => {
               </Wrapper>
 
               <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
-                {noticeDetail && noticeDetail.viewFrontCreatedAt}
+                {announceDetail && announceDetail.viewFrontCreatedAt}
               </Wrapper>
 
               <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
-                조회수 : {noticeDetail && noticeDetail.hit}
+                조회수 : {announceDetail && announceDetail.hit}
               </Wrapper>
             </Wrapper>
 
@@ -138,7 +138,7 @@ const DetailNotice = () => {
               borderTop={`1px solid ${Theme.lightGrey2_C}`}
               borderBottom={`1px solid ${Theme.lightGrey2_C}`}
             >
-              {noticeDetail && noticeDetail.filename && (
+              {announceDetail && announceDetail.filename && (
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
@@ -157,10 +157,10 @@ const DetailNotice = () => {
                   <Text margin={`0 0 0 6px`}>첨부파일명 :</Text>
 
                   <DownloadA
-                    href={noticeDetail.file}
-                    download={noticeDetail.filename}
+                    href={announceDetail.file}
+                    download={announceDetail.filename}
                   >
-                    {noticeDetail.filename}
+                    {announceDetail.filename}
                   </DownloadA>
                 </Wrapper>
               )}
@@ -175,10 +175,10 @@ const DetailNotice = () => {
                 <Image
                   width={`800px`}
                   margin={`0 0 20px`}
-                  src={noticeDetail && noticeDetail.imagePath}
+                  src={announceDetail && announceDetail.imagePath}
                 />
 
-                {noticeDetail && noticeDetail.content}
+                {announceDetail && announceDetail.content}
               </Wrapper>
             </Wrapper>
 
@@ -214,8 +214,8 @@ const DetailNotice = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {noticePrev
-                      ? noticePrev && noticePrev.title
+                    {announcePrev
+                      ? announcePrev && announcePrev.title
                       : `이전 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
@@ -236,8 +236,8 @@ const DetailNotice = () => {
                   fontSize={`18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {noticeNext
-                      ? noticeNext && noticeNext.title
+                    {announceNext
+                      ? announceNext && announceNext.title
                       : `다음 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
@@ -272,4 +272,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default DetailNotice;
+export default DetailAnnounce;

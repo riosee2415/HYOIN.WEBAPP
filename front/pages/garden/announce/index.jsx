@@ -23,7 +23,7 @@ import {
   CommonTitle,
 } from "../../../components/commonComponents";
 import { Empty, Input, message, Pagination, Select } from "antd";
-import { NOTICE_LIST_REQUEST } from "../../../reducers/notice";
+import { ANNOUNCE_LIST_REQUEST } from "../../../reducers/announce";
 import { useRouter } from "next/router";
 import { PaperClipOutlined, SearchOutlined } from "@ant-design/icons";
 import SubBanner from "../../../components/SubBanner";
@@ -45,9 +45,8 @@ const SearchInput = styled(Input)`
 const Index = () => {
   ////// GLOBAL STATE //////
 
-  const { noticeList, noticeLen, lastPage, st_noticeListError } = useSelector(
-    (state) => state.notice
-  );
+  const { announceList, announceLen, lastPage, st_announceListError } =
+    useSelector((state) => state.announce);
 
   ////// HOOKS //////
   const width = useWidth();
@@ -56,27 +55,27 @@ const Index = () => {
 
   const dispatch = useDispatch();
 
-  const searchNotice = useInput("");
+  const searchAnnounce = useInput("");
 
   const [currentPage, setCurrentPage] = useState(1); // 페이지네이션
 
   ////// REDUX //////
   ////// USEEFFECT //////
   useEffect(() => {
-    if (st_noticeListError) {
-      message.error(st_noticeListError);
+    if (st_announceListError) {
+      message.error(st_announceListError);
     }
-  }, [st_noticeListError]);
+  }, [st_announceListError]);
 
   useEffect(() => {
     dispatch({
-      type: NOTICE_LIST_REQUEST,
+      type: ANNOUNCE_LIST_REQUEST,
       data: {
         page: currentPage,
-        searchTitle: searchNotice.value,
+        searchTitle: searchAnnounce.value,
       },
     });
-  }, [currentPage, searchNotice.value]);
+  }, [currentPage, searchAnnounce.value]);
   ////// TOGGLE //////
 
   ////// HANDLER //////
@@ -87,12 +86,12 @@ const Index = () => {
 
   const searchHandler = useCallback(() => {
     dispatch({
-      type: NOTICE_LIST_REQUEST,
+      type: ANNOUNCE_LIST_REQUEST,
       data: {
-        searchTitle: searchNotice.value,
+        searchTitle: searchAnnounce.value,
       },
     });
-  }, [searchNotice.value]);
+  }, [searchAnnounce.value]);
 
   const enterKey = (e) => {
     if (e.key === "Enter") {
@@ -101,7 +100,7 @@ const Index = () => {
   };
 
   const detailHandler = useCallback((data) => {
-    moveLinkHandler(`/garden/notice/${data.id}`);
+    moveLinkHandler(`/garden/announce/${data.id}`);
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -118,17 +117,13 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 공지사항</title>
+        <title>효인주야간노인복지센터 | 공고(입찰)</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
           <RsWrapper>
-            <CommonTitle margin={`85px 0 17px`}>공지사항</CommonTitle>
-
-            <Text fontSize={width < 700 ? `14px` : `16px`}>
-              효인 가족들에게 건강하고 행복한 노후생활을 약속드리겠습니다.
-            </Text>
+            <CommonTitle margin={`85px 0 17px`}>공고(입찰)</CommonTitle>
 
             <Wrapper
               dr={`row`}
@@ -137,12 +132,12 @@ const Index = () => {
               margin={`32px 0 24px`}
             >
               <Text fontSize={`16px`} color={Theme.grey2_C}>
-                총 {noticeLen}개의 게시물이 있습니다.
+                총 {announceLen}개의 게시물이 있습니다.
               </Text>
 
               <SearchInput
                 placeholder={"검색어를 입력해주세요."}
-                {...searchNotice}
+                {...searchAnnounce}
                 onKeyPress={enterKey}
                 suffix={
                   <SearchOutlined
@@ -198,13 +193,13 @@ const Index = () => {
               </Wrapper>
             </Wrapper>
 
-            {noticeList && noticeList.length === 0 ? (
+            {announceList && announceList.length === 0 ? (
               <Wrapper height={`200px`}>
                 <Empty description={false}>등록된 게시글이 없습니다.</Empty>
               </Wrapper>
             ) : (
-              noticeList &&
-              noticeList.map((data) => (
+              announceList &&
+              announceList.map((data) => (
                 <Wrapper
                   dr={`row`}
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
@@ -297,7 +292,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: NOTICE_LIST_REQUEST,
+      type: ANNOUNCE_LIST_REQUEST,
     });
 
     // 구현부 종료
