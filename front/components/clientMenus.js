@@ -42,12 +42,12 @@ export const menus = [
   },
   {
     menuName: "서비스 안내",
-    menuLink: "/service/history",
+    menuLink: "/service/nursing",
     subMenus: [
       {
         subMenuName: "요양원",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
-        subMenuLink: "/service/history",
+        subMenuLink: "/service/nursing",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
       },

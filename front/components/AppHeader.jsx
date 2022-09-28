@@ -236,7 +236,11 @@ const AppHeader = () => {
             >
               요양원 소개
             </Menu>
-            <Menu>서비스 안내</Menu>
+            <Menu
+              color={router.pathname.includes(`/service`) && Theme.subTheme2_C}
+            >
+              서비스 안내
+            </Menu>
             <Menu>이용 안내</Menu>
             <Menu>행복나눔</Menu>
             <Menu
@@ -296,7 +300,11 @@ const AppHeader = () => {
                 서비스 안내
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
-                <Text margin={`0 0 10px`}>요양원</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/service/nursing/`}>
+                    <a>요양원</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>주간 보호</Text>
                 <Text>방문 요양</Text>
               </Wrapper>
