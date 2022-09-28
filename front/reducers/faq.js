@@ -3,6 +3,7 @@ import produce from "../util/produce";
 export const initailState = {
   faqTypes: [],
   faqs: [],
+  faqLastPage: 1,
   adminFaqs: [],
   //
   st_faqTypeListLoading: false, // faq 타입 가져오기
@@ -93,6 +94,8 @@ const reducer = (state = initailState, action) =>
         draft.st_faqTypeListDone = true;
         draft.st_faqTypeListError = null;
         draft.faqTypes = action.data;
+        draft.faqs = action.data.faqs;
+        draft.faqLastPage = action.data.lastPage;
         break;
       }
       case FAQ_TYPE_LIST_FAILURE: {

@@ -19,7 +19,7 @@ import {
   TextInput,
   WholeWrapper,
   Wrapper,
-  CommonButton,
+  CustomPage,
   CommonTitle,
 } from "../../../components/commonComponents";
 import { Empty, Input, message, Pagination, Select } from "antd";
@@ -27,52 +27,6 @@ import { NOTICE_LIST_REQUEST } from "../../../reducers/notice";
 import { useRouter } from "next/router";
 import { PaperClipOutlined, SearchOutlined } from "@ant-design/icons";
 import SubBanner from "../../../components/SubBanner";
-
-const CustomPage = styled(Pagination)`
-  margin: 40px 0 100px;
-
-  & .ant-pagination-next > button {
-    border: none;
-  }
-
-  & .ant-pagination-prev > button {
-    border: none;
-  }
-
-  & {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  & .ant-pagination-item,
-  & .ant-pagination-next,
-  & .ant-pagination-prev {
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${Theme.white_C} !important;
-    border-radius: 100%;
-  }
-
-  & .ant-pagination-item-active a {
-    color: ${Theme.white_C};
-  }
-
-  & .ant-pagination-item-active {
-    background-color: ${Theme.basicTheme_C} !important;
-  }
-
-  & .ant-pagination-item:focus-visible a {
-    color: ${Theme.white_C};
-  }
-
-  & .ant-pagination-item-link svg {
-    font-weight: bold;
-    color: ${Theme.grey_C};
-  }
-`;
 
 const SearchInput = styled(Input)`
   width: 270px;

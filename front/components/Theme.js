@@ -30,6 +30,7 @@ export default {
   lightGrey3_C: "#D0D0D5",
   lightGrey4_C: "#F5F5F5",
   lightGrey5_C: "#ECF9FF",
+  lightGrey6_C: "#FBFBFB",
   darkGrey_C: "#3D3D3D",
 
   //admin
