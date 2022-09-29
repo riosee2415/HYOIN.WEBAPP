@@ -16,6 +16,7 @@ import Head from "next/head";
 import SubBanner from "../../../components/SubBanner";
 import {
   CommonButton,
+  CommonTitle,
   Image,
   RsWrapper,
   Text,
@@ -98,39 +99,56 @@ const DetailNews = () => {
 
       <ClientLayout>
         <WholeWrapper>
-          <SubBanner />
+          <SubBanner
+            menuName={`새소식`}
+            bgImg={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png`}
+          />
 
           <RsWrapper>
-            <Wrapper margin={`90px 0 50px`}>
-              <Text fontSize={`38px`} fontWeight={`700`}>
-                새소식
-              </Text>
-            </Wrapper>
+            <CommonTitle>새소식</CommonTitle>
 
             <Wrapper
               borderTop={`2px solid ${Theme.basicTheme_C}`}
-              height={`90px`}
+              height={width < 900 ? `auto` : `90px`}
+              padding={width < 900 && `10px 0`}
               dr={`row`}
             >
               <Wrapper
-                width={`calc(100% - 135px - 135px - 135px)`}
-                padding={`0 0 0 30px`}
+                width={
+                  width < 900 ? `100%` : `calc(100% - 135px - 135px - 135px)`
+                }
+                padding={width < 900 ? `0 0 15px` : `0 0 0 30px`}
                 al={`flex-start`}
-                fontSize={`20px`}
+                fontSize={width < 900 ? `18px` : `20px`}
                 fontWeight={`600`}
               >
                 {newsDetail && newsDetail.title}
               </Wrapper>
 
-              <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
+              <Wrapper
+                width={width < 900 ? `calc(100% / 3)` : `135px`}
+                fontSize={width < 900 ? `15px` : `18px`}
+                al={width < 900 ? `flex-start` : `center`}
+                fontWeight={`600`}
+              >
                 관리자
               </Wrapper>
 
-              <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
+              <Wrapper
+                width={width < 900 ? `calc(100% / 3)` : `135px`}
+                fontSize={width < 900 ? `15px` : `18px`}
+                al={width < 900 ? `flex-start` : `center`}
+                fontWeight={`600`}
+              >
                 {newsDetail && newsDetail.viewFrontCreatedAt}
               </Wrapper>
 
-              <Wrapper width={`135px`} fontSize={`18px`} fontWeight={`600`}>
+              <Wrapper
+                width={width < 900 ? `calc(100% / 3)` : `135px`}
+                fontSize={width < 900 ? `15px` : `18px`}
+                al={width < 900 ? `flex-start` : `center`}
+                fontWeight={`600`}
+              >
                 조회수 : {newsDetail && newsDetail.hit}
               </Wrapper>
             </Wrapper>
@@ -145,7 +163,7 @@ const DetailNews = () => {
                   ju={`flex-start`}
                   color={Theme.grey2_C}
                   bgColor={Theme.lightGrey6_C}
-                  padding={`0 35px`}
+                  padding={width < 900 ? `0 10px` : `0 35px`}
                   height={`40px`}
                   fontSize={`15px`}
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
@@ -167,11 +185,11 @@ const DetailNews = () => {
               )}
 
               <Wrapper
-                padding={`50px 0`}
+                padding={width < 900 ? `20px 0` : `50px 0`}
                 al={`flex-start`}
                 ju={`flex-start`}
                 minHeight={`300px`}
-                fontSize={`18px`}
+                fontSize={width < 900 ? `16px` : `18px`}
               >
                 <Image
                   width={`800px`}
@@ -187,7 +205,7 @@ const DetailNews = () => {
               width={`160px`}
               height={`50px`}
               margin={`50px 0`}
-              fontSize={`20px`}
+              fontSize={width < 900 ? `16px` : `20px`}
               kindOf={`subTheme2`}
               onClick={() => listHandler()}
             >
@@ -206,13 +224,16 @@ const DetailNews = () => {
                 onClick={() => prevHandler()}
                 cursor={`pointer`}
               >
-                <Wrapper width={`220px`} color={Theme.grey2_C}>
+                <Wrapper
+                  width={width < 900 ? `25%` : `220px`}
+                  color={Theme.grey2_C}
+                >
                   이전
                 </Wrapper>
                 <Wrapper
-                  width={`calc(100% - 220px)`}
+                  width={width < 900 ? `75%` : `calc(100% - 220px)`}
                   al={`flex-start`}
-                  fontSize={`18px`}
+                  fontSize={width < 900 ? `16px` : `18px`}
                 >
                   <Text width={`100%`} isEllipsis>
                     {newsPrev
@@ -228,13 +249,16 @@ const DetailNews = () => {
                 cursor={`pointer`}
                 onClick={() => nextHandler()}
               >
-                <Wrapper width={`220px`} color={Theme.grey2_C}>
+                <Wrapper
+                  width={width < 900 ? `25%` : `220px`}
+                  color={Theme.grey2_C}
+                >
                   다음글
                 </Wrapper>
                 <Wrapper
-                  width={`calc(100% - 220px)`}
+                  width={width < 900 ? `75%` : `calc(100% - 220px)`}
                   al={`flex-start`}
-                  fontSize={`18px`}
+                  fontSize={width < 900 ? `16px` : `18px`}
                 >
                   <Text width={`100%`} isEllipsis>
                     {newsNext

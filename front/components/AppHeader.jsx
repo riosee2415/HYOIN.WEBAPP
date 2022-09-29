@@ -241,7 +241,9 @@ const AppHeader = () => {
             >
               서비스 안내
             </Menu>
-            <Menu>이용 안내</Menu>
+            <Menu color={router.pathname.includes(`/use`) && Theme.subTheme2_C}>
+              이용 안내
+            </Menu>
             <Menu>행복나눔</Menu>
             <Menu
               color={router.pathname.includes(`/garden`) && Theme.subTheme2_C}
@@ -317,7 +319,11 @@ const AppHeader = () => {
                 <Text margin={`0 0 10px`}>이용 안내</Text>
                 <Text margin={`0 0 10px`}>비용 안내</Text>
                 <Text margin={`0 0 10px`}>이용 현황</Text>
-                <Text>대기자명단</Text>
+                <Text>
+                  <Link href={`/use/wait`}>
+                    <a>대기자명단</a>
+                  </Link>
+                </Text>
               </Wrapper>
             </SubMenu>
             <SubMenu>
@@ -339,14 +345,22 @@ const AppHeader = () => {
                     <a>공지사항</a>
                   </Link>
                 </Text>
-                <Text margin={`0 0 10px`}>새소식</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/garden/news`}>
+                    <a>새소식</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/garden/faq`}>
                     <a>FAQ</a>
                   </Link>
                 </Text>
                 <Text margin={`0 0 10px`}>채용공고</Text>
-                <Text margin={`0 0 10px`}>공고(입찰)</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/garden/announce`}>
+                    <a>공고(입찰)</a>
+                  </Link>
+                </Text>
                 <Text>
                   <Link href={`/garden/question`}>
                     <a>1:1 문의</a>

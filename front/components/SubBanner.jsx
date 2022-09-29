@@ -75,7 +75,7 @@ const Menu = styled.h3`
   }
 `;
 
-const SubBanner = ({ width, bgImg }) => {
+const SubBanner = ({ width, bgImg, menuName }) => {
   const [parentMenuName, setParentMenuName] = useState(``);
   const [currentMenuName, setCurrentMenuName] = useState(``);
   const [currentMenuContent, setCurrentMenuContent] = useState(``);
@@ -147,7 +147,7 @@ const SubBanner = ({ width, bgImg }) => {
             <SpanText color={Theme.grey3_C} margin={`0 10px`}>
               <RightOutlined />
             </SpanText>
-            {currentMenuName}
+            {currentMenuName ? currentMenuName : menuName}
           </RsWrapper>
         </Wrapper>
         <Wrapper

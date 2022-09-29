@@ -43,11 +43,14 @@ const Daily = () => {
         </ATag>
       </Wrapper>
 
-      <Image
-        alt="시간표"
-        margin={`0 0 20px`}
-        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/daily.png`}
-      />
+      <Wrapper overflow={`auto`}>
+        <Image
+          minWidth={`800px`}
+          alt="시간표"
+          margin={`0 0 20px`}
+          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/daily.png`}
+        />
+      </Wrapper>
 
       <Wrapper al={`flex-start`} fontSize={width < 700 ? `15px` : `18px`}>
         ※ 특별활동으로는 음악활동, 꽃꽂이, 뜨개질, 보훈시네마, 오카리나,

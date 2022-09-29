@@ -69,26 +69,26 @@ export const menus = [
   },
   {
     menuName: "이용안내",
-    menuLink: "/inform/main",
+    menuLink: "/use/main",
     subMenus: [
       {
         subMenuName: "이용안내",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
-        subMenuLink: "/inform/certification",
+        subMenuLink: "/use/certification",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
         subMenuName: "입소 절차",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
-        subMenuLink: "/inform/patent",
+        subMenuLink: "/use/patent",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
         subMenuName: "비용 안내",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
-        subMenuLink: "/inform/design",
+        subMenuLink: "/use/design",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
@@ -96,14 +96,14 @@ export const menus = [
       {
         subMenuName: "이용 현황",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
-        subMenuLink: "/inform/main",
+        subMenuLink: "/use/main",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
         subMenuName: "대기자명단",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
-        subMenuLink: "/inform/main",
+        subMenuLink: "/use/wait",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
@@ -123,7 +123,7 @@ export const menus = [
       {
         subMenuName: "새소식",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
-        subMenuLink: "/garden/notice",
+        subMenuLink: "/garden/news",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
@@ -144,7 +144,7 @@ export const menus = [
       {
         subMenuName: "공고(입찰)",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
-        subMenuLink: "/garden/notice",
+        subMenuLink: "/garden/announce",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
