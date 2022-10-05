@@ -29,6 +29,10 @@ import {
   RECRUIT_DELETE_REQUEST,
   RECRUIT_DELETE_SUCCESS,
   RECRUIT_DELETE_FAILURE,
+  //
+  RECRUIT_DETAIL_REQUEST,
+  RECRUIT_DETAIL_SUCCESS,
+  RECRUIT_DETAIL_FAILURE,
 } from "../reducers/recruit";
 
 // ******************************************************************************************************************
@@ -220,6 +224,34 @@ function* recruitDelete(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function recruitDetailAPI(data) {
+  return await axios.get(`/api/recruit/detail/${data}`);
+}
+
+function* recruitDetail(action) {
+  try {
+    const result = yield call(recruitDetailAPI, action.data);
+
+    yield put({
+      type: RECRUIT_DETAIL_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: RECRUIT_DETAIL_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
 //////////////////////////////////////////////////////////////
 
 function* watchRecruitAdminList() {
@@ -243,6 +275,9 @@ function* watchRecruitUpdate() {
 function* watchRecruitDelete() {
   yield takeLatest(RECRUIT_DELETE_REQUEST, recruitDelete);
 }
+function* watchDetail() {
+  yield takeLatest(RECRUIT_DETAIL_REQUEST, recruitDetail);
+}
 
 //////////////////////////////////////////////////////////////
 export default function* recruitSage() {
@@ -254,6 +289,7 @@ export default function* recruitSage() {
     fork(watchRecruitImageUpload),
     fork(watchRecruitUpdate),
     fork(watchRecruitDelete),
+    fork(watchDetail),
 
     //
   ]);

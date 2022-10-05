@@ -7,6 +7,11 @@ export const initailState = {
   fileUpload: null,
   imgUpload: null,
   lastPage: 1,
+  recruitLen: null,
+
+  recruitDetail: null, // 대기자명단 디테일
+  recruitPrev: null, // 이전디테일
+  recruitNext: null, // 다음디테일
 
   st_recruitAdminListLoading: false, // recruitAdmin 가져오기
   st_recruitAdminListDone: false,
@@ -35,6 +40,10 @@ export const initailState = {
   st_recruitDeleteLoading: false, // recruit 삭제하기
   st_recruitDeleteDone: false,
   st_recruitDeleteError: null,
+  //
+  st_recruitDetailLoading: false, //  디데일 리스트
+  st_recruitDetailDone: false,
+  st_recruitDetailError: null,
 };
 
 export const RECRUIT_ADMIN_LIST_REQUEST = "RECRUIT_ADMIN_LIST_REQUEST";
@@ -64,6 +73,10 @@ export const RECRUIT_UPDATE_FAILURE = "RECRUIT_UPDATE_FAILURE";
 export const RECRUIT_DELETE_REQUEST = "RECRUIT_DELETE_REQUEST";
 export const RECRUIT_DELETE_SUCCESS = "RECRUIT_DELETE_SUCCESS";
 export const RECRUIT_DELETE_FAILURE = "RECRUIT_DELETE_FAILURE";
+
+export const RECRUIT_DETAIL_REQUEST = "RECRUIT_DETAIL_REQUEST";
+export const RECRUIT_DETAIL_SUCCESS = "RECRUIT_DETAIL_SUCCESS";
+export const RECRUIT_DETAIL_FAILURE = "RECRUIT_DETAIL_FAILURE";
 
 export const RECRUIT_RESET = "RECRUIT_RESET";
 
@@ -103,6 +116,7 @@ const reducer = (state = initailState, action) =>
         draft.st_recruitListError = null;
         draft.recruitList = action.data.recruit;
         draft.lastPage = action.data.lastPage;
+        draft.recruitLen = action.data.recruitLen;
         break;
       }
       case RECRUIT_LIST_FAILURE: {
@@ -211,6 +225,30 @@ const reducer = (state = initailState, action) =>
         draft.st_recruitDeleteLoading = false;
         draft.st_recruitDeleteDone = false;
         draft.st_recruitDeleteError = action.error;
+        break;
+      }
+
+      //////////////////////////////////////////////
+
+      case RECRUIT_DETAIL_REQUEST: {
+        draft.st_recruitDetailLoading = true;
+        draft.st_recruitDetailDone = false;
+        draft.st_recruitDetailError = null;
+        break;
+      }
+      case RECRUIT_DETAIL_SUCCESS: {
+        draft.st_recruitDetailLoading = false;
+        draft.st_recruitDetailDone = true;
+        draft.st_recruitDetailError = null;
+        draft.recruitDetail = action.data.detailData;
+        draft.recruitNext = action.data.nextRecruit;
+        draft.recruitPrev = action.data.prevRecruit;
+        break;
+      }
+      case RECRUIT_DETAIL_FAILURE: {
+        draft.st_recruitDetailLoading = false;
+        draft.st_recruitDetailDone = false;
+        draft.st_recruitDetailError = action.error;
         break;
       }
 
