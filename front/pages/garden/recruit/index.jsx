@@ -25,7 +25,11 @@ import {
 import { Empty, Input, message, Pagination, Select } from "antd";
 import { RECRUIT_LIST_REQUEST } from "../../../reducers/recruit";
 import { useRouter } from "next/router";
-import { PaperClipOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  EyeOutlined,
+  PaperClipOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import SubBanner from "../../../components/SubBanner";
 
 const SearchInput = styled(Input)`
@@ -47,6 +51,11 @@ const PeriodBtn = styled(Wrapper)`
   height: 30px;
   border-radius: 30px;
   color: ${Theme.white_C};
+
+  @media (max-width: 900px) {
+    width: 100%;
+    padding: 0 15px;
+  }
 `;
 
 const Index = () => {
@@ -132,10 +141,21 @@ const Index = () => {
           <RsWrapper>
             <CommonTitle margin={`85px 0 17px`}>채용공고</CommonTitle>
 
-            <Text fontSize={width < 700 ? `14px` : `16px`}>
-              효인요양원과 함께 어르신들의 삶의 질을 높여갈 전문 인력을
-              모십니다.
-            </Text>
+            {width < 900 ? (
+              <>
+                <Text fontSize={width < 700 ? `14px` : `16px`}>
+                  효인요양원과 함께 어르신들의 삶의 질을
+                </Text>
+                <Text fontSize={width < 700 ? `14px` : `16px`}>
+                  높여갈 전문 인력을 모십니다.
+                </Text>
+              </>
+            ) : (
+              <Text fontSize={width < 700 ? `14px` : `16px`}>
+                효인요양원과 함께 어르신들의 삶의 질을 높여갈 전문 인력을
+                모십니다.
+              </Text>
+            )}
 
             <Wrapper
               dr={`row`}
@@ -166,6 +186,7 @@ const Index = () => {
               borderBottom={`1px solid ${Theme.lightGrey2_C}`}
               height={width < 700 ? `60px` : `90px`}
               fontSize={`18px`}
+              display={width < 900 ? `none` : `flex`}
             >
               <Wrapper
                 width={width < 900 ? `80px` : `135px`}
@@ -217,85 +238,136 @@ const Index = () => {
               </Wrapper>
             ) : (
               recruitList &&
-              recruitList.map((data) => (
-                <Wrapper
-                  dr={`row`}
-                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`90px`}
-                  fontSize={`18px`}
-                  color={Theme.black_C}
-                  key={data.id}
-                  cursor={`pointer`}
-                  onClick={() => detailHandler(data)}
-                  isBgHover
-                >
+              recruitList.map((data) =>
+                width < 900 ? (
                   <Wrapper
-                    width={width < 900 ? `80px` : `135px`}
-                    display={width < 700 ? `none` : `flex`}
+                    radius={`10px`}
+                    margin={`0 0 5px`}
+                    border={`1px solid ${Theme.lightGrey2_C}`}
+                    padding={`15px 10px`}
+                    onClick={() => detailHandler(data)}
                   >
-                    {data.num}
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      <Text
+                        maxWidth={`calc(100% - 20px)`}
+                        margin={`0 5px 0 0`}
+                        isEllipsis={true}
+                      >
+                        {data.title}
+                      </Text>
+                      {data.file && <PaperClipOutlined />}
+                    </Wrapper>
+                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                      <Wrapper
+                        dr={`row`}
+                        width={`calc(100% / 3)`}
+                        ju={`flex-start`}
+                      >
+                        <EyeOutlined />
+                        &nbsp;{data.hit}
+                      </Wrapper>
+                      <Wrapper width={`calc(100% / 3)`}>
+                        {data.viewFrontCreatedAt}
+                      </Wrapper>
+                      <Wrapper width={`calc(100% / 3)`}>
+                        <PeriodBtn
+                          bgColor={
+                            data.status === 1
+                              ? Theme.subTheme_C
+                              : data.status === 2
+                              ? Theme.black_C
+                              : data.status === 3 && Theme.subTheme10_C
+                          }
+                        >
+                          {data.status === 1
+                            ? data.viewStatus
+                            : data.status === 2
+                            ? data.viewStatus
+                            : data.status === 3 && data.viewStatus}
+                        </PeriodBtn>
+                      </Wrapper>
+                    </Wrapper>
                   </Wrapper>
+                ) : (
                   <Wrapper
-                    width={
-                      width < 900
-                        ? width < 700
-                          ? `calc(100% - 80px - 80px - 80px)`
-                          : `calc(100% - 80px - 120px - 140px - 100px)`
-                        : `calc(100% - 135px - 135px - 135px - 135px - 135px)`
-                    }
-                    fontSize={width < 700 ? `14px` : `20px`}
                     dr={`row`}
-                    ju={`flex-start`}
+                    borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                    height={`90px`}
+                    fontSize={`18px`}
+                    color={Theme.black_C}
+                    key={data.id}
+                    cursor={`pointer`}
+                    onClick={() => detailHandler(data)}
+                    isBgHover
                   >
-                    <Text
-                      maxWidth={`calc(100% - 20px)`}
-                      margin={`0 5px 0 0`}
-                      isEllipsis={true}
+                    <Wrapper
+                      width={width < 900 ? `80px` : `135px`}
+                      display={width < 700 ? `none` : `flex`}
                     >
-                      {data.title}
-                    </Text>
-                    {data.file && <PaperClipOutlined />}
-                  </Wrapper>
-                  <Wrapper
-                    width={width < 900 ? `80px` : `135px`}
-                    fontSize={width < 700 ? `14px` : `18px`}
-                  >
-                    관리자
-                  </Wrapper>
-                  <Wrapper
-                    width={width < 900 ? `80px` : `135px`}
-                    fontSize={width < 700 ? `14px` : `18px`}
-                  >
-                    {data.viewFrontCreatedAt}
-                  </Wrapper>
-                  <Wrapper
-                    width={width < 900 ? `80px` : `135px`}
-                    display={width < 700 ? `none` : `flex`}
-                  >
-                    {data.hit}
-                  </Wrapper>
-                  <Wrapper
-                    width={width < 900 ? `80px` : `135px`}
-                    fontSize={width < 700 ? `14px` : `16px`}
-                  >
-                    <PeriodBtn
-                      bgColor={
-                        data.status === 1
-                          ? Theme.subTheme_C
-                          : data.status === 2
-                          ? Theme.black_C
-                          : data.status === 3 && Theme.subTheme10_C
+                      {data.num}
+                    </Wrapper>
+                    <Wrapper
+                      width={
+                        width < 900
+                          ? width < 700
+                            ? `calc(100% - 80px - 80px - 80px)`
+                            : `calc(100% - 80px - 120px - 140px - 100px)`
+                          : `calc(100% - 135px - 135px - 135px - 135px - 135px)`
                       }
+                      fontSize={width < 700 ? `14px` : `20px`}
+                      dr={`row`}
+                      ju={`flex-start`}
                     >
-                      {data.status === 1
-                        ? data.viewStatus
-                        : data.status === 2
-                        ? data.viewStatus
-                        : data.status === 3 && data.viewStatus}
-                    </PeriodBtn>
+                      <Text
+                        maxWidth={`calc(100% - 20px)`}
+                        margin={`0 5px 0 0`}
+                        isEllipsis={true}
+                      >
+                        {data.title}
+                      </Text>
+                      {data.file && <PaperClipOutlined />}
+                    </Wrapper>
+                    <Wrapper
+                      width={width < 900 ? `80px` : `135px`}
+                      fontSize={width < 700 ? `14px` : `18px`}
+                    >
+                      관리자
+                    </Wrapper>
+                    <Wrapper
+                      width={width < 900 ? `80px` : `135px`}
+                      fontSize={width < 700 ? `14px` : `18px`}
+                    >
+                      {data.viewFrontCreatedAt}
+                    </Wrapper>
+                    <Wrapper
+                      width={width < 900 ? `80px` : `135px`}
+                      display={width < 700 ? `none` : `flex`}
+                    >
+                      {data.hit}
+                    </Wrapper>
+                    <Wrapper
+                      width={width < 900 ? `80px` : `135px`}
+                      fontSize={width < 700 ? `14px` : `16px`}
+                    >
+                      <PeriodBtn
+                        bgColor={
+                          data.status === 1
+                            ? Theme.subTheme_C
+                            : data.status === 2
+                            ? Theme.black_C
+                            : data.status === 3 && Theme.subTheme10_C
+                        }
+                      >
+                        {data.status === 1
+                          ? data.viewStatus
+                          : data.status === 2
+                          ? data.viewStatus
+                          : data.status === 3 && data.viewStatus}
+                      </PeriodBtn>
+                    </Wrapper>
                   </Wrapper>
-                </Wrapper>
-              ))
+                )
+              )
             )}
 
             <Wrapper margin={`50px 0 100px`}>

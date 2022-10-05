@@ -224,7 +224,7 @@ const DetailRecruit = () => {
                 fontSize={`18px`}
               >
                 <Image
-                  width={`800px`}
+                  width={width < 1000 ? `100%` : `800px`}
                   margin={`0 0 20px`}
                   src={recruitDetail && recruitDetail.imagePath}
                 />

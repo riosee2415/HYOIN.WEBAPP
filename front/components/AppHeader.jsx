@@ -355,7 +355,11 @@ const AppHeader = () => {
                     <a>FAQ</a>
                   </Link>
                 </Text>
-                <Text margin={`0 0 10px`}>채용공고</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/garden/recruit`}>
+                    <a>채용공고</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/garden/announce`}>
                     <a>공고(입찰)</a>
