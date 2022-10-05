@@ -23,7 +23,7 @@ import {
   CommonTitle,
 } from "../../../components/commonComponents";
 import { Empty, Input, message, Pagination, Select } from "antd";
-import { ANNOUNCE_LIST_REQUEST } from "../../../reducers/announce";
+import { RECRUIT_LIST_REQUEST } from "../../../reducers/recruit";
 import { useRouter } from "next/router";
 import { PaperClipOutlined, SearchOutlined } from "@ant-design/icons";
 import SubBanner from "../../../components/SubBanner";
@@ -42,11 +42,18 @@ const SearchInput = styled(Input)`
   }
 `;
 
+const PeriodBtn = styled(Wrapper)`
+  width: 100px;
+  height: 30px;
+  border-radius: 30px;
+  color: ${Theme.white_C};
+`;
+
 const Index = () => {
   ////// GLOBAL STATE //////
 
-  const { announceList, announceLen, lastPage, st_announceListError } =
-    useSelector((state) => state.announce);
+  const { recruitList, recruitLen, lastPage, st_recruitListError } =
+    useSelector((state) => state.recruit);
 
   ////// HOOKS //////
   const width = useWidth();
@@ -55,27 +62,27 @@ const Index = () => {
 
   const dispatch = useDispatch();
 
-  const searchAnnounce = useInput("");
+  const searchRecruit = useInput("");
 
   const [currentPage, setCurrentPage] = useState(1); // 페이지네이션
 
   ////// REDUX //////
   ////// USEEFFECT //////
   useEffect(() => {
-    if (st_announceListError) {
-      message.error(st_announceListError);
+    if (st_recruitListError) {
+      message.error(st_recruitListError);
     }
-  }, [st_announceListError]);
+  }, [st_recruitListError]);
 
   useEffect(() => {
     dispatch({
-      type: ANNOUNCE_LIST_REQUEST,
+      type: RECRUIT_LIST_REQUEST,
       data: {
         page: currentPage,
-        searchTitle: searchAnnounce.value,
+        searchTitle: searchRecruit.value,
       },
     });
-  }, [currentPage, searchAnnounce.value]);
+  }, [currentPage, searchRecruit.value]);
   ////// TOGGLE //////
 
   ////// HANDLER //////
@@ -86,12 +93,12 @@ const Index = () => {
 
   const searchHandler = useCallback(() => {
     dispatch({
-      type: ANNOUNCE_LIST_REQUEST,
+      type: RECRUIT_LIST_REQUEST,
       data: {
-        searchTitle: searchAnnounce.value,
+        searchTitle: searchRecruit.value,
       },
     });
-  }, [searchAnnounce.value]);
+  }, [searchRecruit.value]);
 
   const enterKey = (e) => {
     if (e.key === "Enter") {
@@ -100,7 +107,7 @@ const Index = () => {
   };
 
   const detailHandler = useCallback((data) => {
-    moveLinkHandler(`/garden/announce/${data.id}`);
+    moveLinkHandler(`/garden/recruit/${data.id}`);
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -117,13 +124,18 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 공고(입찰)</title>
+        <title>효인주야간노인복지센터 | 채용공고</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
           <RsWrapper>
-            <CommonTitle margin={`85px 0 17px`}>공고(입찰)</CommonTitle>
+            <CommonTitle margin={`85px 0 17px`}>채용공고</CommonTitle>
+
+            <Text fontSize={width < 700 ? `14px` : `16px`}>
+              효인요양원과 함께 어르신들의 삶의 질을 높여갈 전문 인력을
+              모십니다.
+            </Text>
 
             <Wrapper
               dr={`row`}
@@ -132,12 +144,12 @@ const Index = () => {
               margin={`32px 0 24px`}
             >
               <Text fontSize={`16px`} color={Theme.grey2_C}>
-                총 {announceLen}개의 게시물이 있습니다.
+                총 {recruitLen}개의 게시물이 있습니다.
               </Text>
 
               <SearchInput
                 placeholder={"검색어를 입력해주세요."}
-                {...searchAnnounce}
+                {...searchRecruit}
                 onKeyPress={enterKey}
                 suffix={
                   <SearchOutlined
@@ -165,9 +177,9 @@ const Index = () => {
                 width={
                   width < 900
                     ? width < 700
-                      ? `calc(100% - 80px - 80px)`
+                      ? `calc(100% - 80px - 80px - 80px)`
                       : `calc(100% - 80px - 120px - 140px - 100px)`
-                    : `calc(100% - 135px - 160px - 165px - 130px)`
+                    : `calc(100% - 135px - 135px - 135px - 135px - 135px)`
                 }
                 fontSize={width < 700 ? `14px` : `18px`}
               >
@@ -191,15 +203,21 @@ const Index = () => {
               >
                 조회수
               </Wrapper>
+              <Wrapper
+                width={width < 900 ? `80px` : `135px`}
+                fontSize={width < 700 ? `14px` : `18px`}
+              >
+                채용기간
+              </Wrapper>
             </Wrapper>
 
-            {announceList && announceList.length === 0 ? (
+            {recruitList && recruitList.length === 0 ? (
               <Wrapper height={`200px`}>
                 <Empty description={false}>등록된 게시글이 없습니다.</Empty>
               </Wrapper>
             ) : (
-              announceList &&
-              announceList.map((data) => (
+              recruitList &&
+              recruitList.map((data) => (
                 <Wrapper
                   dr={`row`}
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
@@ -221,9 +239,9 @@ const Index = () => {
                     width={
                       width < 900
                         ? width < 700
-                          ? `calc(100% - 80px - 80px)`
+                          ? `calc(100% - 80px - 80px - 80px)`
                           : `calc(100% - 80px - 120px - 140px - 100px)`
-                        : `calc(100% - 135px - 160px - 165px - 130px)`
+                        : `calc(100% - 135px - 135px - 135px - 135px - 135px)`
                     }
                     fontSize={width < 700 ? `14px` : `20px`}
                     dr={`row`}
@@ -255,6 +273,26 @@ const Index = () => {
                     display={width < 700 ? `none` : `flex`}
                   >
                     {data.hit}
+                  </Wrapper>
+                  <Wrapper
+                    width={width < 900 ? `80px` : `135px`}
+                    fontSize={width < 700 ? `14px` : `16px`}
+                  >
+                    <PeriodBtn
+                      bgColor={
+                        data.status === 1
+                          ? Theme.subTheme_C
+                          : data.status === 2
+                          ? Theme.black_C
+                          : data.status === 3 && Theme.subTheme10_C
+                      }
+                    >
+                      {data.status === 1
+                        ? data.viewStatus
+                        : data.status === 2
+                        ? data.viewStatus
+                        : data.status === 3 && data.viewStatus}
+                    </PeriodBtn>
                   </Wrapper>
                 </Wrapper>
               ))
@@ -292,7 +330,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: ANNOUNCE_LIST_REQUEST,
+      type: RECRUIT_LIST_REQUEST,
     });
 
     // 구현부 종료

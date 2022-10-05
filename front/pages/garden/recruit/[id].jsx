@@ -24,7 +24,7 @@ import {
   Wrapper,
 } from "../../../components/commonComponents";
 import { useRouter } from "next/router";
-import { ANNOUNCE_DETAIL_REQUEST } from "../../../reducers/announce";
+import { RECRUIT_DETAIL_REQUEST } from "../../../reducers/recruit";
 import { useCallback } from "react";
 import { message } from "antd";
 
@@ -33,11 +33,18 @@ const DownloadA = styled.a`
   margin: 0 8px;
 `;
 
-const DetailAnnounce = () => {
+const PeriodBtn = styled(Wrapper)`
+  width: 100px;
+  height: 30px;
+  border-radius: 30px;
+  color: ${Theme.white_C};
+`;
+
+const DetailRecruit = () => {
   ////// GLOBAL STATE //////
 
-  const { announceDetail, announcePrev, announceNext, st_announceListError } =
-    useSelector((state) => state.announce);
+  const { recruitDetail, recruitPrev, recruitNext, st_recruitListError } =
+    useSelector((state) => state.recruit);
 
   ////// HOOKS //////
   const width = useWidth();
@@ -52,16 +59,16 @@ const DetailAnnounce = () => {
 
   useEffect(() => {
     dispatch({
-      type: ANNOUNCE_DETAIL_REQUEST,
+      type: RECRUIT_DETAIL_REQUEST,
       data: id,
     });
   }, [id]);
 
   useEffect(() => {
-    if (st_announceListError) {
-      message.error(st_announceListError);
+    if (st_recruitListError) {
+      message.error(st_recruitListError);
     }
-  }, [st_announceListError]);
+  }, [st_recruitListError]);
 
   ////// TOGGLE //////
   ////// HANDLER //////
@@ -71,20 +78,20 @@ const DetailAnnounce = () => {
   }, []);
 
   const prevHandler = useCallback(() => {
-    if (announcePrev) {
-      moveLinkHandler(`/garden/announce/${announcePrev.id}`);
+    if (recruitPrev) {
+      moveLinkHandler(`/garden/recruit/${recruitPrev.id}`);
     }
-  }, [announcePrev]);
+  }, [recruitPrev]);
 
   const nextHandler = useCallback(() => {
-    if (announceNext) {
-      moveLinkHandler(`/garden/announce/${announceNext.id}`);
+    if (recruitNext) {
+      moveLinkHandler(`/garden/recruit/${recruitNext.id}`);
       window.scrollTo({ top: 0 });
     }
-  }, [announceNext]);
+  }, [recruitNext]);
 
   const listHandler = useCallback(() => {
-    moveLinkHandler(`/garden/announce`);
+    moveLinkHandler(`/garden/recruit`);
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -93,18 +100,18 @@ const DetailAnnounce = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 공고(입찰)</title>
+        <title>효인주야간노인복지센터 | 채용공고</title>
       </Head>
 
       <ClientLayout>
         <WholeWrapper>
           <SubBanner
-            menuName={`공고(입찰)`}
+            menuName={`채용공고`}
             bgImg={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png`}
           />
 
           <RsWrapper>
-            <CommonTitle>공고(입찰)</CommonTitle>
+            <CommonTitle>채용공고</CommonTitle>
 
             <Wrapper
               borderTop={`2px solid ${Theme.basicTheme_C}`}
@@ -114,18 +121,20 @@ const DetailAnnounce = () => {
             >
               <Wrapper
                 width={
-                  width < 900 ? `100%` : `calc(100% - 135px - 135px - 135px)`
+                  width < 900
+                    ? `100%`
+                    : `calc(100% - 135px - 135px - 135px - 135px)`
                 }
                 padding={width < 900 ? `0 0 15px` : `0 0 0 30px`}
                 al={`flex-start`}
                 fontSize={width < 900 ? `18px` : `20px`}
                 fontWeight={`600`}
               >
-                {announceDetail && announceDetail.title}
+                {recruitDetail && recruitDetail.title}
               </Wrapper>
 
               <Wrapper
-                width={width < 900 ? `calc(100% / 3)` : `135px`}
+                width={width < 900 ? `calc(100% / 4)` : `135px`}
                 fontSize={width < 900 ? `15px` : `18px`}
                 al={width < 900 ? `flex-start` : `center`}
                 fontWeight={`600`}
@@ -134,21 +143,45 @@ const DetailAnnounce = () => {
               </Wrapper>
 
               <Wrapper
-                width={width < 900 ? `calc(100% / 3)` : `135px`}
+                width={width < 900 ? `calc(100% / 4)` : `135px`}
                 fontSize={width < 900 ? `15px` : `18px`}
                 al={width < 900 ? `flex-start` : `center`}
                 fontWeight={`600`}
               >
-                {announceDetail && announceDetail.viewFrontCreatedAt}
+                {recruitDetail && recruitDetail.viewFrontCreatedAt}
               </Wrapper>
 
               <Wrapper
-                width={width < 900 ? `calc(100% / 3)` : `135px`}
+                width={width < 900 ? `calc(100% / 4)` : `135px`}
                 fontSize={width < 900 ? `15px` : `18px`}
                 al={width < 900 ? `flex-start` : `center`}
                 fontWeight={`600`}
               >
-                조회수 : {announceDetail && announceDetail.hit}
+                조회수 : {recruitDetail && recruitDetail.hit}
+              </Wrapper>
+              <Wrapper
+                width={width < 900 ? `calc(100% / 4)` : `135px`}
+                fontSize={width < 900 ? `14px` : `16px`}
+                al={width < 900 ? `flex-start` : `center`}
+                fontWeight={`600`}
+              >
+                {recruitDetail && (
+                  <PeriodBtn
+                    bgColor={
+                      recruitDetail.status === 1
+                        ? Theme.subTheme_C
+                        : recruitDetail.status === 2
+                        ? Theme.black_C
+                        : recruitDetail.status === 3 && Theme.subTheme10_C
+                    }
+                  >
+                    {recruitDetail.status === 1
+                      ? recruitDetail.viewStatus
+                      : recruitDetail.status === 2
+                      ? recruitDetail.viewStatus
+                      : recruitDetail.status === 3 && recruitDetail.viewStatus}
+                  </PeriodBtn>
+                )}
               </Wrapper>
             </Wrapper>
 
@@ -156,7 +189,7 @@ const DetailAnnounce = () => {
               borderTop={`1px solid ${Theme.lightGrey2_C}`}
               borderBottom={`1px solid ${Theme.lightGrey2_C}`}
             >
-              {announceDetail && announceDetail.filename && (
+              {recruitDetail && recruitDetail.filename && (
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
@@ -175,10 +208,10 @@ const DetailAnnounce = () => {
                   <Text margin={`0 0 0 6px`}>첨부파일명 :</Text>
 
                   <DownloadA
-                    href={announceDetail.file}
-                    download={announceDetail.filename}
+                    href={recruitDetail.file}
+                    download={recruitDetail.filename}
                   >
-                    {announceDetail.filename}
+                    {recruitDetail.filename}
                   </DownloadA>
                 </Wrapper>
               )}
@@ -193,10 +226,10 @@ const DetailAnnounce = () => {
                 <Image
                   width={`800px`}
                   margin={`0 0 20px`}
-                  src={announceDetail && announceDetail.imagePath}
+                  src={recruitDetail && recruitDetail.imagePath}
                 />
 
-                {announceDetail && announceDetail.content}
+                {recruitDetail && recruitDetail.content}
               </Wrapper>
             </Wrapper>
 
@@ -235,8 +268,8 @@ const DetailAnnounce = () => {
                   fontSize={width < 900 ? `16px` : `18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {announcePrev
-                      ? announcePrev && announcePrev.title
+                    {recruitPrev
+                      ? recruitPrev && recruitPrev.title
                       : `이전 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
@@ -260,8 +293,8 @@ const DetailAnnounce = () => {
                   fontSize={width < 900 ? `16px` : `18px`}
                 >
                   <Text width={`100%`} isEllipsis>
-                    {announceNext
-                      ? announceNext && announceNext.title
+                    {recruitNext
+                      ? recruitNext && recruitNext.title
                       : `다음 글이 존재하지 않습니다.`}
                   </Text>
                 </Wrapper>
@@ -296,4 +329,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default DetailAnnounce;
+export default DetailRecruit;
