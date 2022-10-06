@@ -1,0 +1,439 @@
+import React from "react";
+import ClientLayout from "../../components/ClientLayout";
+import Head from "next/head";
+import wrapper from "../../store/configureStore";
+import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
+import axios from "axios";
+import { END } from "redux-saga";
+import useWidth from "../../hooks/useWidth";
+import {
+  CommonTitle,
+  Image,
+  RsWrapper,
+  Text,
+  WholeWrapper,
+  Wrapper,
+} from "../../components/commonComponents";
+import SubBanner from "../../components/SubBanner";
+import Theme from "../../components/Theme";
+
+const List = () => {
+  ////// GLOBAL STATE //////
+  ////// HOOKS //////
+  const width = useWidth();
+  ////// REDUX //////
+  ////// USEEFFECT //////
+  ////// TOGGLE //////
+  ////// HANDLER //////
+  ////// DATAVIEW //////
+
+  return (
+    <>
+      <Head>
+        <title>효인주야간노인복지센터 | 이용현황</title>
+      </Head>
+      <ClientLayout>
+        <WholeWrapper>
+          <SubBanner />
+          <RsWrapper padding={`80px 0 120px`}>
+            <CommonTitle fontSize={`38px`} fontWeight={`700`}>
+              이용 현황
+            </CommonTitle>
+
+            <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 40px`}>
+              <Wrapper
+                width={`18px`}
+                height={`18px`}
+                border={`1px solid ${Theme.subTheme2_C}`}
+                radius={`100%`}
+                margin={`0 15px 0 0`}
+              ></Wrapper>
+
+              <Text fontSize={width < 700 ? `20px` : `28px`} fontWeight={`500`}>
+                요양원 전체(치매전담+일반) 입소 현황
+              </Text>
+            </Wrapper>
+
+            <Wrapper dr={`row`}>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  정원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={width < 700 ? `` : `none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  총원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  이용가능 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  대기 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 40px`}>
+              <Wrapper
+                width={`8px`}
+                height={`8px`}
+                bgColor={Theme.grey2_C}
+                radius={`100%`}
+                margin={`0 15px 0 0`}
+              ></Wrapper>
+
+              <Text fontSize={width < 700 ? `20px` : `28px`} fontWeight={`500`}>
+                요양원(치매전담) 입소 현황
+              </Text>
+            </Wrapper>
+
+            <Wrapper dr={`row`}>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  정원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={width < 700 ? `` : `none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  총원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  이용가능 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  대기 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 40px`}>
+              <Wrapper
+                width={`8px`}
+                height={`8px`}
+                bgColor={Theme.grey2_C}
+                radius={`100%`}
+                margin={`0 15px 0 0`}
+              ></Wrapper>
+
+              <Text fontSize={width < 700 ? `20px` : `28px`} fontWeight={`500`}>
+                요양원(일반) 입소 현황
+              </Text>
+            </Wrapper>
+
+            <Wrapper dr={`row`}>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  정원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={width < 700 ? `` : `none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  총원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  이용가능 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.grey2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.lightGrey4_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  대기 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper dr={`row`} ju={`flex-start`} margin={`100px 0 40px`}>
+              <Wrapper
+                width={`18px`}
+                height={`18px`}
+                border={`1px solid ${Theme.subTheme2_C}`}
+                radius={`100%`}
+                margin={`0 15px 0 0`}
+              ></Wrapper>
+
+              <Text fontSize={width < 700 ? `20px` : `28px`} fontWeight={`500`}>
+                주간보호 이용 현황
+              </Text>
+            </Wrapper>
+
+            <Wrapper dr={`row`}>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  정원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={width < 700 ? `` : `none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  총원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderRight={`none`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  이용가능 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                width={width < 700 ? `calc(100% / 2)` : `calc(100% / 4)`}
+              >
+                <Wrapper
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                  height={`80px`}
+                  bgColor={Theme.subTheme9_C}
+                  fontSize={`22px`}
+                  fontWeight={`700`}
+                >
+                  대기 인원
+                </Wrapper>
+                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                  -
+                </Wrapper>
+              </Wrapper>
+            </Wrapper>
+          </RsWrapper>
+        </WholeWrapper>
+      </ClientLayout>
+    </>
+  );
+};
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async (context) => {
+    // SSR Cookie Settings For Data Load/////////////////////////////////////
+    const cookie = context.req ? context.req.headers.cookie : "";
+    axios.defaults.headers.Cookie = "";
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+    ////////////////////////////////////////////////////////////////////////
+    // 구현부
+
+    context.store.dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    });
+
+    // 구현부 종료
+    context.store.dispatch(END);
+    console.log("🍀 SERVER SIDE PROPS END");
+    await context.store.sagaTask.toPromise();
+  }
+);
+
+export default List;
