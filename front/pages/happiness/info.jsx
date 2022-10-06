@@ -78,15 +78,29 @@ const Info = () => {
                   "봉사하는 당신이 아름답습니다"
                 </Text>
               </Wrapper>
-              <Image src="" alt="bgImg" />
+              <Image
+                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban.png"
+                alt="bgImg"
+              />
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`space-between`} margin={`0 0 130px`}>
-              <Wrapper width={`48%`} radius={`20px`} overflow={`hidden`}>
-                <Image src="" alt="bgImg" />
+              <Wrapper
+                width={width < 700 ? `100%` : `48%`}
+                radius={`20px`}
+                overflow={`hidden`}
+              >
+                <Image
+                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_purpose.png"
+                  alt="bgImg"
+                />
               </Wrapper>
 
-              <Wrapper width={`48%`} al={`flex-start`}>
+              <Wrapper
+                width={width < 700 ? `100%` : `48%`}
+                al={`flex-start`}
+                margin={width < 700 ? `30px 0 0` : `0`}
+              >
                 <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
                   <Wrapper
                     width={`18px`}
@@ -122,7 +136,11 @@ const Info = () => {
               </Text>
 
               <Wrapper dr={`row`} ju={`space-between`}>
-                <Wrapper al={`flex-start`} fontSize={`18px`} width={`27%`}>
+                <Wrapper
+                  al={`flex-start`}
+                  fontSize={`18px`}
+                  width={width < 700 ? `100%` : `27%`}
+                >
                   자원봉사라는 말을 문자가 뜻하는 그대로 해석하면 '스스로 원해서
                   받들고 섬긴다'는 의미가 담겨 있는 한자말입니다. 자원봉사활동의
                   정신을 볼런터리즘(voluntarism)이라 하는데 이 말의 본래 의미는
@@ -130,10 +148,13 @@ const Info = () => {
                 </Wrapper>
 
                 <Wrapper
-                  radius={`40%`}
+                  radius={`50%`}
                   overflow={`hidden`}
                   position={`relative`}
-                  width={`450px`}
+                  width={
+                    width < 1100 ? (width < 700 ? `100%` : `350px`) : `450px`
+                  }
+                  margin={width < 700 ? `30px 0` : `0`}
                 >
                   <Wrapper
                     position={`absolute`}
@@ -157,10 +178,17 @@ const Info = () => {
                       voluntarism
                     </Text>
                   </Wrapper>
-                  <Image src="" alt="bgImg" />
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_voluntarism.png"
+                    alt="bgImg"
+                  />
                 </Wrapper>
 
-                <Wrapper al={`flex-end`} fontSize={`18px`} width={`27%`}>
+                <Wrapper
+                  al={`flex-end`}
+                  fontSize={`18px`}
+                  width={width < 700 ? `100%` : `27%`}
+                >
                   따라서, 자원봉사란 인간을 사랑하는 마음을 가진 사람이 누구의
                   강요를 받아서가 아니라 자기 스스로 결정해서 남을 위해 또는
                   내가 사는 지역사회의 복지를 위해 자신의 정신적 육체적 자원을
@@ -172,7 +200,7 @@ const Info = () => {
 
             <Wrapper dr={`row`} ju={`space-between`}>
               <Wrapper
-                width={`35%`}
+                width={width < 900 ? `100%` : `35%`}
                 padding={`20px`}
                 radius={`20px`}
                 bgColor={Theme.lightGrey6_C}
@@ -180,30 +208,48 @@ const Info = () => {
                 <Text fontSize={`24px`} fontWeight={`600`}>
                   자원봉사 지원자격
                 </Text>
-                <Image src="" alt="img" width={`200px`} />
+                <Image
+                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_illust.png"
+                  alt="img"
+                  width={`200px`}
+                />
               </Wrapper>
-              <Wrapper width={`60%`}>
+              <Wrapper
+                width={width < 900 ? `100%` : `60%`}
+                margin={width < 900 ? `30px 0 0` : `0`}
+              >
                 <Wrapper
                   radius={`20px`}
-                  padding={`50px 35px`}
+                  padding={width < 700 ? `20px 10px` : `50px 35px`}
                   dr={`row`}
                   ju={`flex-start`}
                   bgColor={Theme.lightGrey6_C}
                 >
                   <Wrapper
-                    width={`42px`}
-                    height={`42px`}
+                    width={width < 700 ? `30px` : `42px`}
+                    height={width < 700 ? `30px` : `42px`}
                     radius={`100%`}
                     bgColor={Theme.subTheme10_C}
                     color={Theme.white_C}
-                    fontSize={`30px`}
+                    fontSize={width < 700 ? `20px` : `30px`}
                     fontWeight={`700`}
-                    margin={`0 35px 0 0`}
+                    margin={width < 700 ? `0 15px 0 0` : `0 35px 0 0`}
                   >
                     1
                   </Wrapper>
 
-                  <Text fontSize={`32px`} fontWeight={`600`}>
+                  <Text
+                    fontSize={
+                      width < 1350
+                        ? width < 1100
+                          ? width < 700
+                            ? `16px`
+                            : `20px`
+                          : `25px`
+                        : `32px`
+                    }
+                    fontWeight={`600`}
+                  >
                     자원봉사를 희망하는&nbsp;
                   </Text>
                   <BottomText
@@ -211,6 +257,15 @@ const Info = () => {
                     bottomBgColor={Theme.subTheme11_C}
                     fontWeight={`600`}
                     margin={`0`}
+                    fontSize={
+                      width < 1350
+                        ? width < 1100
+                          ? width < 700
+                            ? `16px`
+                            : `20px`
+                          : `25px`
+                        : `32px`
+                    }
                   >
                     누구나
                   </BottomText>
@@ -218,38 +273,69 @@ const Info = () => {
 
                 <Wrapper
                   radius={`20px`}
-                  padding={`50px 35px`}
+                  padding={width < 700 ? `20px 10px` : `50px 35px`}
                   dr={`row`}
                   ju={`flex-start`}
                   bgColor={Theme.lightGrey6_C}
                   margin={`30px 0 0`}
                 >
                   <Wrapper
-                    width={`42px`}
-                    height={`42px`}
+                    width={width < 700 ? `30px` : `42px`}
+                    height={width < 700 ? `30px` : `42px`}
                     radius={`100%`}
                     bgColor={Theme.subTheme10_C}
                     color={Theme.white_C}
-                    fontSize={`30px`}
+                    fontSize={width < 700 ? `20px` : `30px`}
                     fontWeight={`700`}
-                    margin={`0 35px 0 0`}
+                    margin={width < 700 ? `0 15px 0 0` : `0 35px 0 0`}
                   >
                     2
                   </Wrapper>
 
-                  <Text fontSize={`32px`} fontWeight={`600`}>
-                    1회성이 아닌
+                  <Text
+                    fontSize={
+                      width < 1350
+                        ? width < 1100
+                          ? width < 700
+                            ? `16px`
+                            : `20px`
+                          : `25px`
+                        : `32px`
+                    }
+                    fontWeight={`600`}
+                  >
+                    1회성이 아닌&nbsp;
                   </Text>
                   <BottomText
                     color={Theme.black_C}
                     bottomBgColor={Theme.subTheme11_C}
                     fontWeight={`600`}
                     margin={`0`}
+                    fontSize={
+                      width < 1350
+                        ? width < 1100
+                          ? width < 700
+                            ? `16px`
+                            : `20px`
+                          : `25px`
+                        : `32px`
+                    }
                   >
-                    &nbsp;지속적인&nbsp;
+                    지속적인
                   </BottomText>
-                  <Text fontSize={`32px`} fontWeight={`600`}>
-                    자원봉사가 가능한 자
+                  <Text
+                    fontSize={
+                      width < 1350
+                        ? width < 1100
+                          ? width < 700
+                            ? `16px`
+                            : `20px`
+                          : `25px`
+                        : `32px`
+                    }
+                    fontWeight={`600`}
+                  >
+                    &nbsp;자원봉사가 가능한 자
                   </Text>
                 </Wrapper>
               </Wrapper>
