@@ -244,7 +244,13 @@ const AppHeader = () => {
             <Menu color={router.pathname.includes(`/use`) && Theme.subTheme2_C}>
               이용 안내
             </Menu>
-            <Menu>행복나눔</Menu>
+            <Menu
+              color={
+                router.pathname.includes(`/happiness`) && Theme.subTheme2_C
+              }
+            >
+              행복나눔
+            </Menu>
             <Menu
               color={router.pathname.includes(`/garden`) && Theme.subTheme2_C}
             >
@@ -321,7 +327,11 @@ const AppHeader = () => {
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
                 <Text margin={`0 0 10px`}>이용 안내</Text>
                 <Text margin={`0 0 10px`}>비용 안내</Text>
-                <Text margin={`0 0 10px`}>이용 현황</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/use/list`}>
+                    <a>이용 현황</a>
+                  </Link>
+                </Text>
                 <Text>
                   <Link href={`/use/wait`}>
                     <a>대기자명단</a>
@@ -334,8 +344,16 @@ const AppHeader = () => {
                 행복나눔
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
-                <Text margin={`0 0 10px`}>자원봉사 안내</Text>
-                <Text>후원 안내</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/happiness/info`}>
+                    <a>자원봉사 안내</a>
+                  </Link>
+                </Text>
+                <Text>
+                  <Link href={`/happiness/support`}>
+                    <a>후원 안내</a>
+                  </Link>
+                </Text>
               </Wrapper>
             </SubMenu>
             <SubMenu>
@@ -496,7 +514,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/company/intro?type=4`}>
+                    <Link href={`/company/organization`}>
                       <a>조직도</a>
                     </Link>
                   </Wrapper>
@@ -505,12 +523,12 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/company/intro?type=4`}>
+                    <Link href={`/company/location`}>
                       <a>찾아오시는 길</a>
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
-                    <Link href={`/company/intro?type=4`}>
+                    <Link href={`/`}>
                       <a>시설 3D 안내</a>
                     </Link>
                   </Wrapper>
@@ -540,7 +558,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/company/intro?type=1`}>
+                    <Link href={`/service/nursing`}>
                       <a>요양원</a>
                     </Link>
                   </Wrapper>
@@ -549,13 +567,75 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/company/intro?type=2`}>
+                    <Link href={`/service/location`}>
                       <a>주간 보호</a>
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
-                    <Link href={`/company/intro?type=3`}>
+                    <Link href={`/service/invest`}>
                       <a>방문 요양</a>
+                    </Link>
+                  </Wrapper>
+                </Wrapper>
+                <ColWrapper
+                  margin={`0 0 10px`}
+                  width={`100%`}
+                  al={`flex-start`}
+                >
+                  <Wrapper
+                    ju={`space-between`}
+                    dr={`row`}
+                    color={Theme.grey2_C}
+                    fontSize={`14px`}
+                  >
+                    이용안내
+                  </Wrapper>
+                </ColWrapper>
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`0 0 20px`}
+                  margin={`0 0 20px`}
+                  borderBottom={`1px solid ${Theme.lightGrey_C}`}
+                >
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/use/certification`}>
+                      <a>이용안내</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/use/patent`}>
+                      <a>입소 절차</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    margin={`0 0 10px`}
+                    al={`flex-start`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/use/design`}>
+                      <a>비용 안내</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    margin={`0 0 10px`}
+                    al={`flex-start`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/use/list`}>
+                      <a>이용 현황</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper al={`flex-start`} onClick={drawarToggle}>
+                    <Link href={`/use/wait`}>
+                      <a>대기자명단</a>
                     </Link>
                   </Wrapper>
                 </Wrapper>
@@ -584,12 +664,12 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/service?type=1`}>
+                    <Link href={`/happiness/info`}>
                       <a>자원봉사 안내</a>
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
-                    <Link href={`/service?type=2`}>
+                    <Link href={`/happiness/support`}>
                       <a>후원 안내</a>
                     </Link>
                   </Wrapper>
@@ -619,7 +699,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/service?type=1`}>
+                    <Link href={`/garden/notice`}>
                       <a>공지사항</a>
                     </Link>
                   </Wrapper>
@@ -628,7 +708,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/service?type=1`}>
+                    <Link href={`/garden/news`}>
                       <a>새소식</a>
                     </Link>
                   </Wrapper>
@@ -637,7 +717,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/service?type=1`}>
+                    <Link href={`/garden/faq`}>
                       <a>FAQ</a>
                     </Link>
                   </Wrapper>
@@ -646,7 +726,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/service?type=1`}>
+                    <Link href={`/garden/recruit`}>
                       <a>채용공고</a>
                     </Link>
                   </Wrapper>
@@ -655,24 +735,29 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/service?type=1`}>
+                    <Link href={`/garden/announce`}>
                       <a>공고(입찰)</a>
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
-                    <Link href={`/service?type=2`}>
+                    <Link href={`/garden/question`}>
                       <a>1:1 문의</a>
                     </Link>
                   </Wrapper>
                 </Wrapper>
 
-                <ColWrapper
-                  margin={`0 0 10px`}
-                  width={`100%`}
-                  al={`flex-start`}
-                >
-                  노인장기요양 보험제도
-                </ColWrapper>
+                <Link href={`/care`}>
+                  <a>
+                    {" "}
+                    <ColWrapper
+                      margin={`0 0 10px`}
+                      width={`100%`}
+                      al={`flex-start`}
+                    >
+                      노인장기요양 보험제도
+                    </ColWrapper>
+                  </a>
+                </Link>
               </ColWrapper>
             </Wrapper>
           </Drawer>
