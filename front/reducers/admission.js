@@ -1,7 +1,10 @@
 import produce from "../util/produce";
 
 export const initailState = {
-  admissionList: [],
+  allList: null,
+  normalList: null,
+  dementiaList: null,
+  weekList: null,
 
   //
   st_admissionAllListLoading: false, // 이용현황 전체 가져오기
@@ -64,7 +67,10 @@ const reducer = (state = initailState, action) =>
         draft.st_admissionAllListLoading = false;
         draft.st_admissionAllListDone = true;
         draft.st_admissionAllListError = null;
-        draft.admissionList = action.data;
+        draft.allList = action.data.allList;
+        draft.normalList = action.data.normalList;
+        draft.dementiaList = action.data.dementialList;
+        draft.weekList = action.data.weekList;
         break;
       }
       case ADMISSION_ALL_LIST_FAILURE: {
