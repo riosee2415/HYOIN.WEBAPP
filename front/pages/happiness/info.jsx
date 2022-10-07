@@ -572,6 +572,13 @@ const Info = () => {
                 </Text>
               </Wrapper>
             </Wrapper>
+            <Wrapper
+              al={`flex-sntart`}
+              margin={`20px 0 0`}
+              fontSize={width < 700 ? `12px` : `16px`}
+            >
+              ※ 사회복지 현장 실습 문의 : 042-000-0000
+            </Wrapper>
           </RsWrapper>
         </WholeWrapper>
       </ClientLayout>

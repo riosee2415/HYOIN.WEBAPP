@@ -40,7 +40,7 @@ const List = () => {
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
-          <RsWrapper padding={`80px 0 120px`}>
+          <RsWrapper padding={`0 0 120px`}>
             <CommonTitle fontSize={`38px`} fontWeight={`700`}>
               이용 현황
             </CommonTitle>
@@ -70,12 +70,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   정원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {allList && allList.personnel}
                 </Wrapper>
               </Wrapper>
@@ -89,12 +93,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   총원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {allList && allList.totalPeople}
                 </Wrapper>
               </Wrapper>
@@ -108,12 +116,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   이용가능 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {allList && allList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
@@ -126,12 +138,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   대기 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {allList && allList.waitingPeople}
                 </Wrapper>
               </Wrapper>
@@ -162,12 +178,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   정원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {dementiaList && dementiaList.personnel}
                 </Wrapper>
               </Wrapper>
@@ -181,12 +201,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   총원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {dementiaList && dementiaList.totalPeople}
                 </Wrapper>
               </Wrapper>
@@ -200,12 +224,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   이용가능 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {dementiaList && dementiaList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
@@ -218,12 +246,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   대기 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {dementiaList && dementiaList.waitingPeople}
                 </Wrapper>
               </Wrapper>
@@ -254,12 +286,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   정원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {normalList && normalList.personnel}
                 </Wrapper>
               </Wrapper>
@@ -273,12 +309,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   총원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {normalList && normalList.totalPeople}
                 </Wrapper>
               </Wrapper>
@@ -292,12 +332,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   이용가능 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {normalList && normalList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
@@ -310,12 +354,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.lightGrey4_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   대기 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {normalList && normalList.waitingPeople}
                 </Wrapper>
               </Wrapper>
@@ -346,12 +394,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   정원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {weekList && weekList.personnel}
                 </Wrapper>
               </Wrapper>
@@ -365,12 +417,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   총원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {weekList && weekList.totalPeople}
                 </Wrapper>
               </Wrapper>
@@ -384,12 +440,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   이용가능 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {weekList && weekList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
@@ -402,12 +462,16 @@ const List = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                   height={`80px`}
                   bgColor={Theme.subTheme9_C}
-                  fontSize={`22px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
                   fontWeight={`700`}
                 >
                   대기 인원
                 </Wrapper>
-                <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
+                <Wrapper
+                  height={`80px`}
+                  fontSize={width < 700 ? `18px` : `22px`}
+                  fontWeight={`700`}
+                >
                   {weekList && weekList.waitingPeople}
                 </Wrapper>
               </Wrapper>
