@@ -188,6 +188,16 @@ const AdminMenu = () => {
             <MenuName>월간시간표 관리</MenuName>
           </Menu.Item>
         </SubMenu>
+        <SubMenu
+          key="sub9"
+          icon={<ScheduleOutlined />}
+          title="이용현황 관리"
+          onTitleClick={titleClickHandler("sub9")}
+        >
+          <Menu.Item key="/admin/center/list">
+            <MenuName>이용현황 리스트</MenuName>
+          </Menu.Item>
+        </SubMenu>
       </Menu>
     </>
   );

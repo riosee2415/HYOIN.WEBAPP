@@ -15,6 +15,7 @@ import announceSaga from "./announce";
 import waitSaga from "./wait";
 import recruitSaga from "./recruit";
 import programSaga from "./program";
+import admissionSaga from "./admission";
 //
 import axios from "axios";
 import backURL from "../config/config";
@@ -40,5 +41,6 @@ export default function* rootSaga() {
     fork(waitSaga),
     fork(recruitSaga),
     fork(programSaga),
+    fork(admissionSaga),
   ]);
 }
