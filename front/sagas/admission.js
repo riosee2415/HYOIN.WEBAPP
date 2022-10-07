@@ -5,18 +5,6 @@ import {
   ADMISSION_ALL_LIST_SUCCESS,
   ADMISSION_ALL_LIST_FAILURE,
   //
-  ADMISSION_NORMAL_LIST_REQUEST,
-  ADMISSION_NORMAL_LIST_SUCCESS,
-  ADMISSION_NORMAL_LIST_FAILURE,
-  //
-  ADMISSION_DEMENTIA_LIST_REQUEST,
-  ADMISSION_DEMENTIA_LIST_SUCCESS,
-  ADMISSION_DEMENTIA_LIST_FAILURE,
-  //
-  ADMISSION_WEEK_LIST_REQUEST,
-  ADMISSION_WEEK_LIST_SUCCESS,
-  ADMISSION_WEEK_LIST_FAILURE,
-  //
   ADMISSION_ALL_UPDATE_REQUEST,
   ADMISSION_ALL_UPDATE_SUCCESS,
   ADMISSION_ALL_UPDATE_FAILURE,
@@ -52,75 +40,6 @@ function* admissionList(action) {
     console.error(err);
     yield put({
       type: ADMISSION_ALL_LIST_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-async function admissionDementiaListAPI(data) {
-  return await axios.post(`/api/admission/dementia/list`, data);
-}
-
-function* admissionDementiaList(action) {
-  try {
-    const result = yield call(admissionDementiaListAPI, action.data);
-
-    yield put({
-      type: ADMISSION_DEMENTIA_LIST_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: ADMISSION_DEMENTIA_LIST_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-async function admissionNormalListAPI(data) {
-  return await axios.post(`/api/admission/normal/list`, data);
-}
-
-function* admissionNoramlList(action) {
-  try {
-    const result = yield call(admissionNormalListAPI, action.data);
-
-    yield put({
-      type: ADMISSION_NORMAL_LIST_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: ADMISSION_NORMAL_LIST_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-async function admissionWeekListAPI(data) {
-  return await axios.post(`/api/admission/week/list`, data);
-}
-
-function* admissionWeekList(action) {
-  try {
-    const result = yield call(admissionWeekListAPI, action.data);
-
-    yield put({
-      type: ADMISSION_WEEK_LIST_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: ADMISSION_WEEK_LIST_FAILURE,
       error: err.response.data,
     });
   }

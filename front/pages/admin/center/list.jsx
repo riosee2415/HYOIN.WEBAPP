@@ -37,6 +37,12 @@ import {
   Wrapper,
 } from "../../../components/commonComponents";
 import Theme from "../../../components/Theme";
+import {
+  ADMISSION_ALL_LIST_REQUEST,
+  ADMISSION_DEMENTIA_LIST_REQUEST,
+  ADMISSION_NORMAL_LIST_REQUEST,
+  ADMISSION_WEEK_LIST_REQUEST,
+} from "../../../reducers/admission";
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -45,6 +51,7 @@ const AdminContent = styled.div`
 const List = ({ router }) => {
   // LOAD CURRENT INFO AREA /////////////////////////////////////////////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
+  const { admissionList } = useSelector((state) => state.admission);
 
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
@@ -115,7 +122,8 @@ const List = ({ router }) => {
           <GuideDiv isImpo={true}>삭제된 데이터는 복구할 수 없습니다.</GuideDiv>
         </Wrapper>
 
-        <Table rowKey="id" columns={columns} dataSource={[]} size="small" />
+        {console.log(admissionList)}
+        <Wrapper dr={`row`}></Wrapper>
       </AdminContent>
     </AdminLayout>
   );
@@ -134,6 +142,22 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: ADMISSION_ALL_LIST_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: ADMISSION_NORMAL_LIST_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: ADMISSION_DEMENTIA_LIST_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: ADMISSION_WEEK_LIST_REQUEST,
     });
 
     // 구현부 종료
