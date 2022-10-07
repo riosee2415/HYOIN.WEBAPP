@@ -110,6 +110,26 @@ export const menus = [
     ],
   },
   {
+    menuName: "행복나눔",
+    menuLink: "/happiness/main",
+    subMenus: [
+      {
+        subMenuName: "자원봉사안내",
+        subMenuContent: "사랑이 모여 따뜻한 세상을 만들어 가고 있습니다.",
+        subMenuLink: "/happiness/info",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/volunteer.png",
+      },
+      {
+        subMenuName: "후원안내",
+        subMenuContent: "사랑이 모여 따뜻한 세상을 만들어 가고 있습니다.",
+        subMenuLink: "/happiness/support",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/volunteer.png",
+      },
+    ],
+  },
+  {
     menuName: "알림마당",
     menuLink: "/garden",
     subMenus: [

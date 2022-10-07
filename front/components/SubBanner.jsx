@@ -174,7 +174,11 @@ const SubBanner = ({ width, bgImg, menuName }) => {
               width < 1280 ? (width < 700 ? `0 10px` : `0 40px`) : `0 80px`
             }
             zIndex={`10`}
-            ju={`space-between`}
+            ju={
+              router.pathname.includes(`/happiness`)
+                ? `space-around`
+                : `space-between`
+            }
             display={width < 700 ? `none` : `flex`}
           >
             {currentAllMenus.map((value, idx) => {
