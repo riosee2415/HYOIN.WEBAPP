@@ -96,7 +96,7 @@ export const menus = [
       {
         subMenuName: "이용 현황",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
-        subMenuLink: "/use/main",
+        subMenuLink: "/use/list",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },

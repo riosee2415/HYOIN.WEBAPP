@@ -16,9 +16,14 @@ import {
 } from "../../components/commonComponents";
 import SubBanner from "../../components/SubBanner";
 import Theme from "../../components/Theme";
+import { ADMISSION_ALL_LIST_REQUEST } from "../../reducers/admission";
+import { useSelector } from "react-redux";
 
 const List = () => {
   ////// GLOBAL STATE //////
+  const { allList, normalList, dementiaList, weekList } = useSelector(
+    (state) => state.admission
+  );
   ////// HOOKS //////
   const width = useWidth();
   ////// REDUX //////
@@ -71,7 +76,7 @@ const List = () => {
                   정원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {allList && allList.personnel}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -90,7 +95,7 @@ const List = () => {
                   총원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {allList && allList.totalPeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -109,7 +114,7 @@ const List = () => {
                   이용가능 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {allList && allList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -127,7 +132,7 @@ const List = () => {
                   대기 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {allList && allList.waitingPeople}
                 </Wrapper>
               </Wrapper>
             </Wrapper>
@@ -163,7 +168,7 @@ const List = () => {
                   정원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {dementiaList && dementiaList.personnel}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -182,7 +187,7 @@ const List = () => {
                   총원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {dementiaList && dementiaList.totalPeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -201,7 +206,7 @@ const List = () => {
                   이용가능 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {dementiaList && dementiaList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -219,7 +224,7 @@ const List = () => {
                   대기 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {dementiaList && dementiaList.waitingPeople}
                 </Wrapper>
               </Wrapper>
             </Wrapper>
@@ -255,7 +260,7 @@ const List = () => {
                   정원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {normalList && normalList.personnel}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -274,7 +279,7 @@ const List = () => {
                   총원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {normalList && normalList.totalPeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -293,7 +298,7 @@ const List = () => {
                   이용가능 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {normalList && normalList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -311,7 +316,7 @@ const List = () => {
                   대기 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {normalList && normalList.waitingPeople}
                 </Wrapper>
               </Wrapper>
             </Wrapper>
@@ -347,7 +352,7 @@ const List = () => {
                   정원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {weekList && weekList.personnel}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -366,7 +371,7 @@ const List = () => {
                   총원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {weekList && weekList.totalPeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -385,7 +390,7 @@ const List = () => {
                   이용가능 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {weekList && weekList.avaliablePeople}
                 </Wrapper>
               </Wrapper>
               <Wrapper
@@ -403,7 +408,7 @@ const List = () => {
                   대기 인원
                 </Wrapper>
                 <Wrapper height={`80px`} fontSize={`22px`} fontWeight={`700`}>
-                  -
+                  {weekList && weekList.waitingPeople}
                 </Wrapper>
               </Wrapper>
             </Wrapper>
@@ -427,6 +432,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: ADMISSION_ALL_LIST_REQUEST,
     });
 
     // 구현부 종료
