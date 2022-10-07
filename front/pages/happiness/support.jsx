@@ -56,7 +56,7 @@ const Support = () => {
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
-          <RsWrapper padding={`80px 0 120px`}>
+          <RsWrapper padding={`0 0 120px`}>
             <CommonTitle fontSize={`38px`} fontWeight={`700`}>
               후원안내
             </CommonTitle>
@@ -80,7 +80,11 @@ const Support = () => {
                 </Text>
               </Wrapper>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban.png"
+                src={
+                  width < 700
+                    ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban_m.png`
+                    : "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban.png"
+                }
                 alt="bgImg"
               />
             </Wrapper>

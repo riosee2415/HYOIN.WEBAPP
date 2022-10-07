@@ -17,6 +17,26 @@ import {
 import SubBanner from "../../components/SubBanner";
 import Theme from "../../components/Theme";
 import styled from "styled-components";
+import { RightOutlined } from "@ant-design/icons";
+
+const Box = styled(Wrapper)`
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background: ${Theme.grey4_C};
+  cursor: pointer;
+  padding: 20px;
+
+  &:hover {
+    background: ${Theme.subTheme2_C};
+  }
+
+  @media (max-width: 700px) {
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+  }
+`;
 
 const BottomText = styled(Text)`
   font-size: ${(props) => props.fontSize || `32px`};
@@ -55,7 +75,7 @@ const Info = () => {
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
-          <RsWrapper padding={`80px 0 120px`}>
+          <RsWrapper padding={`0 0 120px`}>
             <CommonTitle fontSize={`38px`} fontWeight={`700`}>
               자원봉사안내
             </CommonTitle>
@@ -79,7 +99,11 @@ const Info = () => {
                 </Text>
               </Wrapper>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban.png"
+                src={
+                  width < 700
+                    ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban_m.png`
+                    : "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban.png"
+                }
                 alt="bgImg"
               />
             </Wrapper>
@@ -338,6 +362,214 @@ const Info = () => {
                     &nbsp;자원봉사가 가능한 자
                   </Text>
                 </Wrapper>
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper dr={`row`} ju={`flex-start`} margin={`100px 0 30px`}>
+              <Wrapper
+                width={`18px`}
+                height={`18px`}
+                radius={`100%`}
+                border={`1px solid ${Theme.subTheme2_C}`}
+                margin={`0 15px 0 0`}
+              ></Wrapper>
+
+              <Text fontSize={`28px`} fontWeight={`700`}>
+                자원봉사활동 과정 안내
+              </Text>
+            </Wrapper>
+
+            <Wrapper dr={`row`} ju={width < 700 ? `center` : `space-between`}>
+              <Wrapper
+                bgColor={Theme.lightGrey6_C}
+                border={`1px solid ${Theme.lightGrey4_C}`}
+                radius={`20px`}
+                width={width < 700 ? `50%` : `calc(100% / 5 - 20px)`}
+                padding={`30px 0`}
+              >
+                <Wrapper
+                  width={`100px`}
+                  height={`100px`}
+                  bgColor={Theme.white_C}
+                  radius={`100%`}
+                  margin={`0 0 15px`}
+                >
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process1.png"
+                    alt="icon"
+                    width={`auto`}
+                  />
+                </Wrapper>
+
+                <Text fontSize={width < 1100 ? `16px` : `24px`}>
+                  자원봉사 신청
+                </Text>
+              </Wrapper>
+              <Text fontSize={`20px`} display={width < 700 ? `none` : `flex`}>
+                <RightOutlined />
+              </Text>
+              <Wrapper
+                bgColor={Theme.lightGrey6_C}
+                border={`1px solid ${Theme.lightGrey4_C}`}
+                radius={`20px`}
+                width={width < 700 ? `50%` : `calc(100% / 5 - 20px)`}
+                padding={`30px 0`}
+              >
+                <Wrapper
+                  width={`100px`}
+                  height={`100px`}
+                  bgColor={Theme.white_C}
+                  radius={`100%`}
+                  margin={`0 0 15px`}
+                >
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process2.png"
+                    alt="icon"
+                    width={`auto`}
+                  />
+                </Wrapper>
+
+                <Text fontSize={width < 1100 ? `16px` : `24px`}>
+                  자원봉사 OT
+                </Text>
+              </Wrapper>
+              <Text fontSize={`20px`} display={width < 700 ? `none` : `flex`}>
+                <RightOutlined />
+              </Text>
+              <Wrapper
+                bgColor={Theme.lightGrey6_C}
+                border={`1px solid ${Theme.lightGrey4_C}`}
+                radius={`20px`}
+                width={width < 700 ? `50%` : `calc(100% / 5 - 20px)`}
+                padding={`30px 0`}
+              >
+                <Wrapper
+                  width={`100px`}
+                  height={`100px`}
+                  bgColor={Theme.white_C}
+                  radius={`100%`}
+                  margin={`0 0 15px`}
+                >
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process3.png"
+                    alt="icon"
+                    width={`auto`}
+                  />
+                </Wrapper>
+
+                <Text fontSize={width < 1100 ? `16px` : `24px`}>
+                  희망분야 배치
+                </Text>
+              </Wrapper>
+
+              <Text fontSize={`20px`} display={width < 700 ? `none` : `flex`}>
+                <RightOutlined />
+              </Text>
+              <Wrapper
+                bgColor={Theme.lightGrey6_C}
+                border={`1px solid ${Theme.lightGrey4_C}`}
+                radius={`20px`}
+                width={width < 700 ? `50%` : `calc(100% / 5 - 20px)`}
+                padding={`30px 0`}
+              >
+                <Wrapper
+                  width={`100px`}
+                  height={`100px`}
+                  bgColor={Theme.white_C}
+                  radius={`100%`}
+                  margin={`0 0 15px`}
+                >
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process4.png"
+                    alt="icon"
+                    width={`auto`}
+                  />
+                </Wrapper>
+
+                <Text fontSize={width < 1100 ? `16px` : `24px`}>
+                  봉사활동 실시
+                </Text>
+              </Wrapper>
+              <Text fontSize={`20px`} display={width < 700 ? `none` : `flex`}>
+                <RightOutlined />
+              </Text>
+              <Wrapper
+                bgColor={Theme.lightGrey6_C}
+                border={`1px solid ${Theme.lightGrey4_C}`}
+                radius={`20px`}
+                width={width < 700 ? `100%` : `calc(100% / 5 - 20px)`}
+                padding={`30px 0`}
+              >
+                <Wrapper
+                  width={`100px`}
+                  height={`100px`}
+                  bgColor={Theme.white_C}
+                  radius={`100%`}
+                  margin={`0 0 15px`}
+                >
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process5.png"
+                    alt="icon"
+                    width={`auto`}
+                  />
+                </Wrapper>
+
+                <Text fontSize={width < 1100 ? `16px` : `24px`}>
+                  종결 및 확인서 발급
+                </Text>
+              </Wrapper>
+            </Wrapper>
+
+            <Wrapper dr={`row`} ju={`flex-start`} margin={`100px 0 30px`}>
+              <Wrapper
+                width={`18px`}
+                height={`18px`}
+                radius={`100%`}
+                border={`1px solid ${Theme.subTheme2_C}`}
+                margin={`0 15px 0 0`}
+              ></Wrapper>
+
+              <Text fontSize={`28px`} fontWeight={`700`}>
+                문의 연락처
+              </Text>
+            </Wrapper>
+
+            <Wrapper dr={`row`} ju={`space-between`}>
+              <Wrapper
+                width={`calc(100% / 2 - 10px)`}
+                padding={`25px 0`}
+                bgColor={Theme.lightGrey6_C}
+                border={`1px solid ${Theme.lightGrey4_C}`}
+                radius={`20px`}
+              >
+                <Box>
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_volunteer_call.png"
+                    alt="icon"
+                  />
+                </Box>
+                <Text margin={`15px 0 10px`}>전화</Text>
+                <Text fontSize={width < 700 ? `14px` : `18px`}>
+                  042-000-0000
+                </Text>
+              </Wrapper>
+              <Wrapper
+                width={`calc(100% / 2 - 10px)`}
+                padding={`25px 0`}
+                bgColor={Theme.lightGrey6_C}
+                border={`1px solid ${Theme.lightGrey4_C}`}
+                radius={`20px`}
+              >
+                <Box>
+                  <Image
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_volunteer_email.png"
+                    alt="icon"
+                  />
+                </Box>
+                <Text margin={`15px 0 10px`}>이메일</Text>
+                <Text fontSize={width < 700 ? `14px` : `18px`}>
+                  example@email.com
+                </Text>
               </Wrapper>
             </Wrapper>
           </RsWrapper>
