@@ -146,18 +146,6 @@ function* watchAdmissionAllList() {
   yield takeLatest(ADMISSION_ALL_LIST_REQUEST, admissionList);
 }
 
-function* watchAdmissionNormalList() {
-  yield takeLatest(ADMISSION_NORMAL_LIST_REQUEST, admissionNoramlList);
-}
-
-function* watchAdmissionDementiaList() {
-  yield takeLatest(ADMISSION_DEMENTIA_LIST_REQUEST, admissionDementiaList);
-}
-
-function* watchAdmissionWeekList() {
-  yield takeLatest(ADMISSION_WEEK_LIST_REQUEST, admissionWeekList);
-}
-
 function* watchAdmissionAllUpdate() {
   yield takeLatest(ADMISSION_ALL_UPDATE_REQUEST, admissionAllUpdate);
 }
@@ -178,9 +166,6 @@ function* watchAdmissionWeekUpdate() {
 export default function* admissionSaga() {
   yield all([
     fork(watchAdmissionAllList),
-    fork(watchAdmissionNormalList),
-    fork(watchAdmissionDementiaList),
-    fork(watchAdmissionWeekList),
     fork(watchAdmissionAllUpdate),
     fork(watchAdmissionNormalUpdate),
     fork(watchAdmissionDementiaUpdate),
