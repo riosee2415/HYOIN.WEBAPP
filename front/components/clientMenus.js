@@ -157,4 +157,16 @@ export const menus = [
       },
     ],
   },
+  {
+    menuName: "노인장기요양보험제도",
+    menuLink: "/care",
+    subMenus: [
+      {
+        subMenuName: "노인장기요양보험제도",
+        subMenuLink: "/care",
+        subBannerImagePath:
+          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/insurance.png",
+      },
+    ],
+  },
 ];

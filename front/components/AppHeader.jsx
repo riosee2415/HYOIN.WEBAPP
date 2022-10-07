@@ -250,7 +250,10 @@ const AppHeader = () => {
             >
               알림마당
             </Menu>
-            <Menu margin={`0`}>
+            <Menu
+              margin={`0`}
+              color={router.pathname.includes(`/care`) && Theme.subTheme2_C}
+            >
               <Text>노인장기요양</Text>
               <Text>보험제도</Text>
             </Menu>
@@ -373,10 +376,18 @@ const AppHeader = () => {
               </Wrapper>
             </SubMenu>
             <SubMenu>
-              <Text className="menu" textAlign={`center`} margin={`0 0 25px`}>
-                <Text>노인장기요양</Text>
-                <Text>보험제도</Text>
-              </Text>
+              <Link href={`/care`}>
+                <a>
+                  <Text
+                    className="menu"
+                    textAlign={`center`}
+                    margin={`0 0 25px`}
+                  >
+                    <Text>노인장기요양</Text>
+                    <Text>보험제도</Text>
+                  </Text>
+                </a>
+              </Link>
             </SubMenu>
           </RsWrapper>
         </HoverWrapper>

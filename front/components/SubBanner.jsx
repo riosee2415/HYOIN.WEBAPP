@@ -131,10 +131,17 @@ const SubBanner = ({ width, bgImg, menuName }) => {
         ju={`flex-end`}
       >
         <Wrapper
-          position={width < 900 ? `relative` : `absolute`}
+          position={
+            router.pathname === "/care"
+              ? `relative`
+              : width < 900
+              ? `relative`
+              : `absolute`
+          }
           bottom={`0`}
           left={`0`}
           fontSize={`16px`}
+          margin={router.pathname === "/care" && `53px 0 0`}
           padding={width < 900 && `15px 0 0`}
         >
           <RsWrapper dr={`row`} ju={`flex-start`}>
@@ -144,50 +151,56 @@ const SubBanner = ({ width, bgImg, menuName }) => {
               <RightOutlined />
             </SpanText>
             {parentMenuName}
-            <SpanText color={Theme.grey3_C} margin={`0 10px`}>
-              <RightOutlined />
-            </SpanText>
-            {currentMenuName ? currentMenuName : menuName}
+            {router.pathname === "/care" ? null : (
+              <>
+                <SpanText color={Theme.grey3_C} margin={`0 10px`}>
+                  <RightOutlined />
+                </SpanText>
+                {currentMenuName ? currentMenuName : menuName}
+              </>
+            )}
           </RsWrapper>
         </Wrapper>
-        <Wrapper
-          dr={`row`}
-          width={width < 1280 ? (width < 900 ? `100%` : `60%`) : `50%`}
-          height={width < 900 ? `100px` : `144px`}
-          bgColor={Theme.basicTheme_C}
-          shadow={`0 5px 10px rgba(0, 0, 0, 0.1)`}
-          color={Theme.white_C}
-          margin={width < 900 ? `0` : `-72px 0 0`}
-          padding={
-            width < 1280 ? (width < 700 ? `0 10px` : `0 40px`) : `0 80px`
-          }
-          zIndex={`10`}
-          ju={`space-between`}
-          display={width < 700 ? `none` : `flex`}
-        >
-          {currentAllMenus.map((value, idx) => {
-            if (value === currentMenuName) {
-              return <Menu key={value}>{value}</Menu>;
-            } else {
-              return (
-                <Link
-                  href={currentAllLinks && currentAllLinks[idx]}
-                  key={value}
-                >
-                  <a>
-                    <Text
-                      fontSize={width < 900 ? `16px` : `22px`}
-                      cursor={`pointer`}
-                      color={Theme.subTheme4_C}
-                    >
-                      {value}
-                    </Text>
-                  </a>
-                </Link>
-              );
+        {router.pathname === "/care" ? null : (
+          <Wrapper
+            dr={`row`}
+            width={width < 1280 ? (width < 900 ? `100%` : `60%`) : `50%`}
+            height={width < 900 ? `100px` : `144px`}
+            bgColor={Theme.basicTheme_C}
+            shadow={`0 5px 10px rgba(0, 0, 0, 0.1)`}
+            color={Theme.white_C}
+            margin={width < 900 ? `0` : `-72px 0 0`}
+            padding={
+              width < 1280 ? (width < 700 ? `0 10px` : `0 40px`) : `0 80px`
             }
-          })}
-        </Wrapper>
+            zIndex={`10`}
+            ju={`space-between`}
+            display={width < 700 ? `none` : `flex`}
+          >
+            {currentAllMenus.map((value, idx) => {
+              if (value === currentMenuName) {
+                return <Menu key={value}>{value}</Menu>;
+              } else {
+                return (
+                  <Link
+                    href={currentAllLinks && currentAllLinks[idx]}
+                    key={value}
+                  >
+                    <a>
+                      <Text
+                        fontSize={width < 900 ? `16px` : `22px`}
+                        cursor={`pointer`}
+                        color={Theme.subTheme4_C}
+                      >
+                        {value}
+                      </Text>
+                    </a>
+                  </Link>
+                );
+              }
+            })}
+          </Wrapper>
+        )}
       </Wrapper>
     </WholeWrapper>
   );
