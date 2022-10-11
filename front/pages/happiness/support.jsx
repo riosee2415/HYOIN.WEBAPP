@@ -374,7 +374,7 @@ const Support = () => {
               <Text fontSize={width < 700 ? `16px` : `18px`}>
                 자세한 문의 사항은&nbsp;
                 <SpanText fontWeight={`700`} color={Theme.red_C}>
-                  042-000-0000
+                  042-522-7118
                 </SpanText>
                 로 연락 바랍니다.
               </Text>
