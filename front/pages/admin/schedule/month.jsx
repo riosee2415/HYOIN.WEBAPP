@@ -459,7 +459,11 @@ const Type = ({ router }) => {
                           >
                             {data.title}
                           </Text>
-                          <Text fontSize={`14px`} lineHeight={`1.2`}>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
                             {data.content}
                           </Text>
                         </Wrapper>
@@ -609,7 +613,7 @@ const Type = ({ router }) => {
           margin={`20px 0 0`}
           bgColor={Theme.lightGrey2_C}
         >
-          <Text>추가 리스트</Text>
+          <Text>날짜를 선택해주세요.</Text>
         </Wrapper>
         <DatePicker
           value={cDate}
