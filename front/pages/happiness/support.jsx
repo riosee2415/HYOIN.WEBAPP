@@ -75,7 +75,11 @@ const Support = () => {
                 height={`100%`}
               >
                 <BottomText sCore={true}>나눔</BottomText>
-                <Text color={Theme.white_C} fontSize={`20px`}>
+                <Text
+                  color={Theme.white_C}
+                  fontSize={width < 700 ? `18px` : `20px`}
+                  textAlign={`center`}
+                >
                   아름다운 동행, 사람이 모여 따뜻한 세상을 만들어 가고 있습니다.
                 </Text>
               </Wrapper>

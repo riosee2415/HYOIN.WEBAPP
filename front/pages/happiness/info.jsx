@@ -94,7 +94,10 @@ const Info = () => {
                 height={`100%`}
               >
                 <BottomText sCore={true}>나눔</BottomText>
-                <Text color={Theme.white_C} fontSize={`20px`}>
+                <Text
+                  color={Theme.white_C}
+                  fontSize={width < 700 ? `18px` : `20px`}
+                >
                   "봉사하는 당신이 아름답습니다"
                 </Text>
               </Wrapper>
