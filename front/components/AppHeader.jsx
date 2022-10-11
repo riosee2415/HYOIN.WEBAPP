@@ -312,12 +312,16 @@ const AppHeader = () => {
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
                 <Text margin={`0 0 10px`}>
-                  <Link href={`/service/nursing/`}>
+                  <Link href={`/service/nursing`}>
                     <a>요양원</a>
                   </Link>
                 </Text>
                 <Text margin={`0 0 10px`}>주간 보호</Text>
-                <Text>방문 요양</Text>
+                <Text>
+                  <Link href={`/service/visit`}>
+                    <a>방문 요양</a>
+                  </Link>
+                </Text>
               </Wrapper>
             </SubMenu>
             <SubMenu>
@@ -572,7 +576,7 @@ const AppHeader = () => {
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
-                    <Link href={`/service/invest`}>
+                    <Link href={`/service/visit`}>
                       <a>방문 요양</a>
                     </Link>
                   </Wrapper>
