@@ -553,7 +553,7 @@ const Info = () => {
                 </Box>
                 <Text margin={`15px 0 10px`}>전화</Text>
                 <Text fontSize={width < 700 ? `14px` : `18px`}>
-                  042-000-0000
+                  042-522-7118
                 </Text>
               </Wrapper>
               <Wrapper
@@ -580,7 +580,7 @@ const Info = () => {
               margin={`20px 0 0`}
               fontSize={width < 700 ? `12px` : `16px`}
             >
-              ※ 사회복지 현장 실습 문의 : 042-000-0000
+              ※ 사회복지 현장 실습 문의 : 042-522-7118
             </Wrapper>
           </RsWrapper>
         </WholeWrapper>
