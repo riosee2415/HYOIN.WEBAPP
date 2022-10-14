@@ -6,12 +6,17 @@ import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
 import axios from "axios";
 import { END } from "redux-saga";
 import useWidth from "../../hooks/useWidth";
-import { RsWrapper, WholeWrapper } from "../../components/commonComponents";
+import {
+  CommonTitle,
+  RsWrapper,
+  WholeWrapper,
+} from "../../components/commonComponents";
+import SubBanner from "../../components/SubBanner";
 
 const Intro = () => {
   ////// GLOBAL STATE //////
-  const width = useWidth();
   ////// HOOKS //////
+  const width = useWidth();
   ////// REDUX //////
   ////// USEEFFECT //////
   ////// TOGGLE //////
@@ -21,11 +26,14 @@ const Intro = () => {
   return (
     <>
       <Head>
-        <title>페이지 이름을 적어주세요</title>
+        <title>효인주야간노인복지센터 | 요양원 소개</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
-          <RsWrapper>개발환경</RsWrapper>
+          <SubBanner />
+          <RsWrapper>
+            <CommonTitle>요양원 소개</CommonTitle>
+          </RsWrapper>
         </WholeWrapper>
       </ClientLayout>
     </>

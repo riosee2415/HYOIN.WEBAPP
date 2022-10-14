@@ -290,9 +290,11 @@ const AppHeader = () => {
                 요양원 소개
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
-                <Text margin={`0 0 10px`}>인사말</Text>
-                <Text margin={`0 0 10px`}>비전/CI</Text>
-                <Text margin={`0 0 10px`}>연혁</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/company/intro`}>
+                    <a>요양원 소개</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/company/organization`}>
                     <a>조직도</a>
@@ -496,28 +498,11 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/company/intro?type=1`}>
-                      <a>인사말</a>
+                    <Link href={`/company/intro`}>
+                      <a>요양원 소개</a>
                     </Link>
                   </Wrapper>
-                  <Wrapper
-                    al={`flex-start`}
-                    margin={`0 0 10px`}
-                    onClick={drawarToggle}
-                  >
-                    <Link href={`/company/intro?type=2`}>
-                      <a>비전/CI</a>
-                    </Link>
-                  </Wrapper>
-                  <Wrapper
-                    al={`flex-start`}
-                    margin={`0 0 10px`}
-                    onClick={drawarToggle}
-                  >
-                    <Link href={`/company/intro?type=3`}>
-                      <a>연혁</a>
-                    </Link>
-                  </Wrapper>
+
                   <Wrapper
                     al={`flex-start`}
                     margin={`0 0 10px`}
