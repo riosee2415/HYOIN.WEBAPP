@@ -330,6 +330,11 @@ const AppHeader = () => {
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
                 <Text margin={`0 0 10px`}>이용 안내</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/use/admission`}>
+                    <a>입소 절차</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>비용 안내</Text>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/use/list`}>
@@ -615,7 +620,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/use/patent`}>
+                    <Link href={`/use/admission`}>
                       <a>입소 절차</a>
                     </Link>
                   </Wrapper>

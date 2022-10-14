@@ -30,7 +30,7 @@ const Circle = styled.div`
 
 const ListText = styled(Text)`
   display: list-item;
-  margin: 0 0 0 24px;
+  margin: ${(props) => props.margin || `0 0 0 24px`};
   font-size: 22px;
 
   &::marker {
