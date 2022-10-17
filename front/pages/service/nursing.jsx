@@ -17,6 +17,7 @@ import styled from "styled-components";
 import Theme from "../../components/Theme";
 import Daily from "../../components/nursing/Daily";
 import Unit from "../../components/nursing/Unit";
+import Monthly from "../../components/nursing/Monthly";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -97,6 +98,7 @@ const Nursing = () => {
 
             {currentTab === 0 && <Unit />}
             {currentTab === 1 && <Daily />}
+            {currentTab === 2 && <Monthly />}
           </RsWrapper>
         </WholeWrapper>
       </ClientLayout>
