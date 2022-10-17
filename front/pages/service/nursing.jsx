@@ -16,6 +16,7 @@ import SubBanner from "../../components/SubBanner";
 import styled from "styled-components";
 import Theme from "../../components/Theme";
 import Daily from "../../components/nursing/Daily";
+import Monthly from "../../components/nursing/Monthly";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -95,6 +96,7 @@ const Nursing = () => {
             </Wrapper>
 
             {currentTab === 1 && <Daily />}
+            {currentTab === 2 && <Monthly />}
           </RsWrapper>
         </WholeWrapper>
       </ClientLayout>
