@@ -318,7 +318,11 @@ const AppHeader = () => {
                     <a>요양원</a>
                   </Link>
                 </Text>
-                <Text margin={`0 0 10px`}>주간 보호</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/service/protection`}>
+                    <a>주간 보호</a>
+                  </Link>
+                </Text>
                 <Text>
                   <Link href={`/service/visit`}>
                     <a>방문 요양</a>
@@ -561,7 +565,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/service/location`}>
+                    <Link href={`/service/protection`}>
                       <a>주간 보호</a>
                     </Link>
                   </Wrapper>

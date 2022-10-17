@@ -15,8 +15,7 @@ import {
 import SubBanner from "../../components/SubBanner";
 import styled from "styled-components";
 import Theme from "../../components/Theme";
-import Daily from "../../components/nursing/Daily";
-import Unit from "../../components/nursing/Unit";
+import Dementia from "../../components/protection/Dementia";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -58,9 +57,9 @@ const Tab = styled(Wrapper)`
   }
 `;
 
-const Nursing = () => {
+const Protection = () => {
   ////// GLOBAL STATE //////
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(1);
   ////// HOOKS //////
   const width = useWidth();
   ////// REDUX //////
@@ -72,31 +71,27 @@ const Nursing = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 요양원</title>
+        <title>효인주야간노인복지센터 | 주간 보호</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
           <RsWrapper>
-            <CommonTitle>요양원</CommonTitle>
+            <CommonTitle>주간 보호</CommonTitle>
 
             <Wrapper dr={`row`}>
               <Tab onClick={() => setCurrentTab(0)} isActive={currentTab === 0}>
-                맞춤 서비스(Unit Care)
+                일반형
               </Tab>
               <Tab onClick={() => setCurrentTab(1)} isActive={currentTab === 1}>
-                일일생활시간표
+                치매 특화형
               </Tab>
               <Tab onClick={() => setCurrentTab(2)} isActive={currentTab === 2}>
-                월간 프로그램 시간표
-              </Tab>
-              <Tab onClick={() => setCurrentTab(3)} isActive={currentTab === 3}>
-                주간 식단표
+                이동서비스 시간표
               </Tab>
             </Wrapper>
 
-            {currentTab === 0 && <Unit />}
-            {currentTab === 1 && <Daily />}
+            {currentTab === 1 && <Dementia />}
           </RsWrapper>
         </WholeWrapper>
       </ClientLayout>
@@ -126,4 +121,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default Nursing;
+export default Protection;
