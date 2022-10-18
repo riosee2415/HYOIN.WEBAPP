@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PROGRAM_LIST_REQUEST } from "../../reducers/program";
 import { Wrapper, Text, Image, CommonButton } from "../commonComponents";
 import moment from "moment";
-import { Calendar, Modal } from "antd";
+import { Calendar, Empty, Modal } from "antd";
 import {
   PrinterOutlined,
   LeftOutlined,
@@ -11,6 +11,10 @@ import {
 } from "@ant-design/icons";
 import styled from "styled-components";
 import Theme from "../Theme";
+import useWidth from "../../hooks/useWidth";
+
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const CustomCalendar = styled(Calendar)`
   & .ant-picker-content {
@@ -62,6 +66,11 @@ const Monthly = () => {
 
   ////// HOOKS //////
   const dispatch = useDispatch();
+
+  const width = useWidth();
+
+  // pdf
+  const pdfRef = useRef();
 
   // 날짜
   const [monthMoment, setMonthMoment] = useState(moment());
@@ -189,195 +198,236 @@ const Monthly = () => {
   );
 
   return (
-    <Wrapper margin={`0 0 120px`}>
-      {/* 날짜 컨트롤 */}
+    <>
+      <Wrapper margin={`0 0 120px`}>
+        {/* 날짜 컨트롤 */}
 
-      <Wrapper margin={`60px 0`} dr={`row`}>
-        <CommonButton
-          radius={`100%`}
-          width={`36px`}
-          height={`36px`}
-          padding={`0`}
-          onClick={() => selectMonthHandler("-1")}
-        >
-          <LeftOutlined />
-        </CommonButton>
-        <Text
-          margin={`0 24px`}
-          fontSize={`32px`}
-          fontWeight={`600`}
-          color={Theme.subTheme2_C}
-        >
-          {monthMoment.format("YYYY년 MM월")}
-        </Text>
+        <Wrapper margin={`60px 0`} dr={`row`}>
+          <CommonButton
+            radius={`100%`}
+            width={`36px`}
+            height={`36px`}
+            padding={`0`}
+            onClick={() => selectMonthHandler("-1")}
+          >
+            <LeftOutlined />
+          </CommonButton>
+          <Text
+            margin={`0 24px`}
+            fontSize={`32px`}
+            fontWeight={`600`}
+            color={Theme.subTheme2_C}
+          >
+            {monthMoment.format("YYYY년 MM월")}
+          </Text>
 
-        <CommonButton
-          radius={`100%`}
-          width={`36px`}
-          height={`36px`}
-          padding={`0`}
-          onClick={() => selectMonthHandler("1")}
-        >
-          <RightOutlined />
-        </CommonButton>
-      </Wrapper>
-
-      {/* 주간 시간표 */}
-      <Wrapper>
-        <Wrapper dr={`row`} ju={`space-between`} margin={`40px 0`}>
-          <Wrapper width={`auto`} dr={`row`} ju={`flex-start`}>
-            <Wrapper
-              radius={`100%`}
-              border={`1px solid ${Theme.subTheme2_C}`}
-              width={`18px`}
-              height={`18px`}
-              margin={`0 16px 0 0`}
-            />
-            <Text fontSize={`18px`} fontWeight={`600`}>
-              주간생활시간표
-            </Text>
-          </Wrapper>
-          <CommonButton icon={<PrinterOutlined />}>인쇄하기</CommonButton>
+          <CommonButton
+            radius={`100%`}
+            width={`36px`}
+            height={`36px`}
+            padding={`0`}
+            onClick={() => selectMonthHandler("1")}
+          >
+            <RightOutlined />
+          </CommonButton>
         </Wrapper>
 
-        <Wrapper
-          dr={`row`}
-          ju={`space-between`}
-          border={`1px solid ${Theme.subTheme2_C}`}
-        >
-          {week &&
-            week.map((value, idx) => {
-              return (
-                <Wrapper
-                  key={idx}
-                  width={`calc(100% / 7)`}
-                  className="dateBox"
-                  borderRight={idx !== 6 && `1px solid ${Theme.subTheme9_C}`}
-                >
-                  <Wrapper bgColor={Theme.subTheme9_C} padding={`18px 0`}>
-                    <Text
-                      fontSize={`20px`}
-                      fontWeight={`700`}
-                      color={Theme.subTheme2_C}
-                    >
-                      {value[1].split("-")[2]}({value[0]})
-                    </Text>
-                  </Wrapper>
+        {/* 주간 시간표 */}
+        <Wrapper>
+          <Wrapper dr={`row`} ju={`space-between`} margin={`40px 0`}>
+            <Wrapper width={`auto`} dr={`row`} ju={`flex-start`}>
+              <Wrapper
+                radius={`100%`}
+                border={`1px solid ${Theme.subTheme2_C}`}
+                width={`18px`}
+                height={`18px`}
+                margin={`0 16px 0 0`}
+              />
+              <Text fontSize={`18px`} fontWeight={`600`}>
+                주간생활시간표
+              </Text>
+            </Wrapper>
+            <CommonButton
+              icon={<PrinterOutlined />}
+              onClick={() => {
+                html2canvas(pdfRef.current, {
+                  allowTaint: true,
+                  useCORS: true,
+                  width: 2480,
+                  height: 3508,
+                }).then((canvas) => {
+                  const doc = new jsPDF(`p`, `px`, "a4");
 
+                  const extra_canvas = document.createElement("canvas");
+                  extra_canvas.setAttribute("width", 1400);
+                  extra_canvas.setAttribute("height", 1800);
+                  const ctx = extra_canvas.getContext("2d");
+                  let c_width = (canvas.width / 1400) * 1.12;
+                  let c_height = (canvas.height / 1800) * 1.22;
+
+                  ctx.drawImage(
+                    canvas,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height,
+                    0,
+                    0,
+                    canvas.width / c_width,
+                    canvas.height / c_height
+                  );
+                  const dataURL = extra_canvas.toDataURL("image/jpg");
+
+                  doc.addImage(dataURL, `PNG`, 0, 0);
+                  doc.save("월간프로그램 시간표.pdf");
+                });
+              }}
+            >
+              인쇄하기
+            </CommonButton>
+          </Wrapper>
+
+          <Wrapper
+            dr={`row`}
+            ju={`space-between`}
+            border={`1px solid ${Theme.subTheme2_C}`}
+          >
+            {week &&
+              week.map((value, idx) => {
+                return (
                   <Wrapper
-                    height={`320px`}
-                    al={`flex-start`}
-                    ju={`flex-start`}
-                    overflow={`auto`}
-                    padding={`30px 12px`}
+                    key={idx}
+                    width={width < 700 ? `100%` : `calc(100% / 7)`}
+                    className="dateBox"
+                    borderRight={idx !== 6 && `1px solid ${Theme.subTheme9_C}`}
                   >
-                    <Wrapper height={`auto`}>
-                      {/* LIST START */}
-                      {programList &&
-                        programList
-                          .filter(
-                            (data) =>
-                              data.viewFrontSpecificDate ===
-                              moment(value[1]).format("YYYY-MM-DD")
-                          )
-                          .map((data, idx) => {
-                            return (
-                              <HoverListWrapper
-                                key={idx}
-                                dr={`row`}
-                                ju={`space-between`}
-                                al={`flex-start`}
-                                margin={`0 0 26px`}
-                                padding={`0 !important`}
-                                onClick={() => monthModalToggle(data)}
-                              >
-                                <Wrapper>
-                                  <Text
-                                    fontSize={`16px`}
-                                    fontWeight={`bold`}
-                                    lineHeight={`1.28`}
-                                  >
-                                    {data.title}
-                                  </Text>
-                                </Wrapper>
-                              </HoverListWrapper>
-                            );
-                          })}
+                    <Wrapper bgColor={Theme.subTheme9_C} padding={`18px 0`}>
+                      <Text
+                        fontSize={`20px`}
+                        fontWeight={`700`}
+                        color={Theme.subTheme2_C}
+                      >
+                        {value[1].split("-")[2]}({value[0]})
+                      </Text>
+                    </Wrapper>
 
-                      {/* LIST END */}
+                    <Wrapper
+                      height={width < 700 ? `200px` : `320px`}
+                      al={`flex-start`}
+                      ju={`flex-start`}
+                      overflow={`auto`}
+                      padding={`30px 0`}
+                    >
+                      <Wrapper height={`auto`}>
+                        {/* LIST START */}
+                        {programList &&
+                          programList
+                            .filter(
+                              (data) =>
+                                data.viewFrontSpecificDate ===
+                                moment(value[1]).format("YYYY-MM-DD")
+                            )
+                            .map((data, idx) => {
+                              return (
+                                <HoverListWrapper
+                                  key={idx}
+                                  dr={`row`}
+                                  ju={`space-between`}
+                                  al={`flex-start`}
+                                  margin={`0 0 26px`}
+                                  padding={`0 !important`}
+                                  onClick={() => monthModalToggle(data)}
+                                >
+                                  <Wrapper>
+                                    <Text
+                                      fontSize={`16px`}
+                                      fontWeight={`bold`}
+                                      lineHeight={`1.28`}
+                                    >
+                                      {data.title}
+                                    </Text>
+                                  </Wrapper>
+                                </HoverListWrapper>
+                              );
+                            })}
+
+                        {/* LIST END */}
+                      </Wrapper>
                     </Wrapper>
                   </Wrapper>
+                );
+              })}
+          </Wrapper>
+        </Wrapper>
+
+        {/* 월간 시간표 */}
+        <Wrapper ref={pdfRef}>
+          <Wrapper display={width < 700 && "none"}>
+            <Wrapper dr={`row`} ju={`flex-start`} margin={`40px 0`}>
+              <Wrapper
+                radius={`100%`}
+                border={`1px solid ${Theme.subTheme2_C}`}
+                width={`18px`}
+                height={`18px`}
+                margin={`0 16px 0 0`}
+              />
+              <Text fontSize={`18px`} fontWeight={`600`}>
+                월간생활시간표
+              </Text>
+            </Wrapper>
+            <CustomCalendar
+              value={monthMoment}
+              headerRender={() => null}
+              locale={{
+                lang: {
+                  locale: "ko",
+                  month: "월간",
+                  year: "년도",
+                },
+              }}
+              dateFullCellRender={dateFullCellRender}
+              fullscreen={false}
+            />
+          </Wrapper>
+        </Wrapper>
+
+        <Modal
+          title={`자세히보기`}
+          visible={monthModal}
+          onCancel={() => monthModalToggle(null)}
+          footer={null}
+        >
+          {monthData && (
+            <Wrapper>
+              <Image src={monthData.imagePath} alt="image" />
+
+              <Wrapper
+                border={`1px solid ${Theme.subTheme2_C}`}
+                padding={`20px 20px`}
+                al={`flex-start`}
+              >
+                <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 10px`}>
+                  <WordBreakText fontSize={`18px`} fontWeight={`600`}>
+                    제목 :&nbsp;
+                  </WordBreakText>
+                  <WordBreakText fontSize={`18px`}>
+                    {monthData.title}
+                  </WordBreakText>
                 </Wrapper>
-              );
-            })}
-        </Wrapper>
-      </Wrapper>
-
-      {/* 월간 시간표 */}
-      <Wrapper>
-        <Wrapper dr={`row`} ju={`flex-start`} margin={`40px 0`}>
-          <Wrapper
-            radius={`100%`}
-            border={`1px solid ${Theme.subTheme2_C}`}
-            width={`18px`}
-            height={`18px`}
-            margin={`0 16px 0 0`}
-          />
-          <Text fontSize={`18px`} fontWeight={`600`}>
-            월간생활시간표
-          </Text>
-        </Wrapper>
-        <CustomCalendar
-          value={monthMoment}
-          headerRender={() => null}
-          locale={{
-            lang: {
-              locale: "ko",
-              month: "월간",
-              year: "년도",
-            },
-          }}
-          dateFullCellRender={dateFullCellRender}
-          fullscreen={false}
-        />
-      </Wrapper>
-
-      <Modal
-        title={`자세히보기`}
-        visible={monthModal}
-        onCancel={() => monthModalToggle(null)}
-        footer={null}
-      >
-        {monthData && (
-          <Wrapper>
-            <Image src={monthData.imagePath} alt="image" />
-
-            <Wrapper
-              border={`1px solid ${Theme.subTheme2_C}`}
-              padding={`20px 20px`}
-              al={`flex-start`}
-            >
-              <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 10px`}>
-                <WordBreakText fontSize={`18px`} fontWeight={`600`}>
-                  제목 :&nbsp;
-                </WordBreakText>
-                <WordBreakText fontSize={`18px`}>
-                  {monthData.title}
-                </WordBreakText>
-              </Wrapper>
-              <Wrapper dr={`row`} ju={`flex-start`}>
-                <WordBreakText fontSize={`18px`} fontWeight={`600`}>
-                  내용 :&nbsp;
-                </WordBreakText>
-                <WordBreakText fontSize={`18px`}>
-                  {monthData.content}
-                </WordBreakText>
+                <Wrapper dr={`row`} ju={`flex-start`}>
+                  <WordBreakText fontSize={`18px`} fontWeight={`600`}>
+                    내용 :&nbsp;
+                  </WordBreakText>
+                  <WordBreakText fontSize={`18px`}>
+                    {monthData.content}
+                  </WordBreakText>
+                </Wrapper>
               </Wrapper>
             </Wrapper>
-          </Wrapper>
-        )}
-      </Modal>
-    </Wrapper>
+          )}
+        </Modal>
+      </Wrapper>
+    </>
   );
 };
 
