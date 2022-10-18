@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
-  RowWrapper,
   ColWrapper,
   Image,
   ATag,
@@ -11,33 +10,25 @@ import {
 } from "./commonComponents";
 import styled from "styled-components";
 import Theme from "./Theme";
-import {
-  MenuOutlined,
-  MinusOutlined,
-  PlusOutlined,
-  SearchOutlined,
-  CloseOutlined,
-} from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import { Drawer, message } from "antd";
 import Link from "next/link";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import wrapper from "../store/configureStore";
 import axios from "axios";
 import { END } from "@redux-saga/core";
-import {
-  LOAD_MY_INFO_REQUEST,
-  // LOGOUT_REQUEST
-} from "../reducers/user";
-import { useSelector } from "react-redux";
+import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import { useDispatch } from "react-redux";
-import useInput from "../hooks/useInput";
 import useWidth from "../hooks/useWidth";
 
-const SearchWrapper = styled(Wrapper)`
-  background: ${(props) => props.theme.subTheme2_C};
-  padding: 10px;
-  position: absolute;
-  left: 0;
+const HeaderRs = styled(Wrapper)`
+  padding-left: 110px;
+  padding-right: 110px;
+
+  @media (max-width: 1600px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 const HoverWrapper = styled(Wrapper)`
@@ -57,7 +48,7 @@ const WebRow = styled(WholeWrapper)`
   left: 0;
   z-index: 1000;
   transition: 0.5s;
-  padding: 10px 110px;
+  padding: 10px 0;
 
   &:hover {
     background: ${Theme.white_C};
@@ -106,6 +97,10 @@ const Menu = styled.h2`
   &:hover {
     color: ${Theme.subTheme2_C};
   }
+
+  @media (max-width: 1350px) {
+    margin: ${(props) => props.margin || `0 30px 0 0`};
+  }
 `;
 
 const SubMenu = styled.h2`
@@ -152,15 +147,6 @@ const AppHeader = () => {
 
   const router = useRouter();
 
-  const searchTitle = useInput("");
-
-  const {
-    me,
-    //
-    st_logoutDone,
-    st_logoutError,
-  } = useSelector((state) => state.user);
-
   ////////////// - USE STATE- ///////////////
   const [headerScroll, setHeaderScroll] = useState(false);
   const [pageY, setPageY] = useState(0);
@@ -168,17 +154,12 @@ const AppHeader = () => {
 
   const [drawar, setDrawar] = useState(false);
   const [subMenu, setSubMenu] = useState(``);
-  const [searchToggle, setSearchToggle] = useState(false);
 
   ///////////// - EVENT HANDLER- ////////////
 
   const drawarToggle = useCallback(() => {
     setDrawar((prev) => !prev);
   }, [drawar]);
-
-  const searchToggleHandler = useCallback(() => {
-    setSearchToggle((prev) => !prev);
-  }, [searchToggle]);
 
   const handleScroll = useCallback(() => {
     const { pageYOffset } = window;
@@ -188,41 +169,18 @@ const AppHeader = () => {
     setPageY(pageYOffset);
   });
 
-  const logoutHandler = useCallback(() => {
-    dispatch({
-      type: LOGOUT_REQUEST,
-    });
-  });
-
-  const searchMoveHandler = useCallback((link) => {
-    router.push(link);
-  }, []);
-
   ////////////// - USE EFFECT- //////////////
   useEffect(() => {
     document.addEventListener("scroll", handleScroll);
     return () => document.removeEventListener("scroll", handleScroll);
   }, [pageY]);
 
-  useEffect(() => {
-    if (st_logoutDone) {
-      message.success({
-        content: "로그아웃이 되었습니다.",
-        className: "custom-class",
-        style: {
-          marginTop: "100px",
-        },
-      });
-      Router.replace("/");
-    }
-  }, [st_logoutDone]);
-
   return (
     <>
       <WebRow
         bgColor={headerScroll ? Theme.white_C : `rgba(255, 255,255, 0.6)`}
       >
-        <RsWrapper dr={`row`} ju={`space-between`}>
+        <HeaderRs dr={`row`} ju={`space-between`}>
           {/* web */}
           <ATag href="/" width={`15%`} ju={`flex-start`}>
             <Image
@@ -281,10 +239,10 @@ const AppHeader = () => {
               </Text>
             </ATag>
           </Wrapper>
-        </RsWrapper>
+        </HeaderRs>
 
         <HoverWrapper>
-          <RsWrapper dr={`row`} ju={`space-between`} al={`flex-start`}>
+          <HeaderRs dr={`row`} ju={`space-between`} al={`flex-start`}>
             <SubMenu>
               <Text className="menu" margin={`0 0 25px`}>
                 요양원 소개
@@ -335,13 +293,21 @@ const AppHeader = () => {
                 이용 안내
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
-                <Text margin={`0 0 10px`}>이용 안내</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/use`}>
+                    <a>이용 안내</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/use/admission`}>
                     <a>입소 절차</a>
                   </Link>
                 </Text>
-                <Text margin={`0 0 10px`}>비용 안내</Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/use/design`}>
+                    <a>비용 안내</a>
+                  </Link>
+                </Text>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/use/list`}>
                     <a>이용 현황</a>
@@ -422,7 +388,7 @@ const AppHeader = () => {
                 </a>
               </Link>
             </SubMenu>
-          </RsWrapper>
+          </HeaderRs>
         </HoverWrapper>
       </WebRow>
       {/* mobile */}
