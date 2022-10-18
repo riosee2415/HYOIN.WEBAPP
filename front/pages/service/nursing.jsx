@@ -18,6 +18,7 @@ import Theme from "../../components/Theme";
 import Daily from "../../components/nursing/Daily";
 import Unit from "../../components/nursing/Unit";
 import Monthly from "../../components/nursing/Monthly";
+import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -119,6 +120,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: PROGRAM_WEEK_LIST_REQUEST,
     });
 
     // 구현부 종료

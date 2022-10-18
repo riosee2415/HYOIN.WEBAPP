@@ -4,6 +4,9 @@ export const initailState = {
   programList: [],
   programImagePath: null, // 이미지 패스
 
+  week: [],
+  programWeekList: [],
+
   //
   st_programListLoading: false, // program 가져오기
   st_programListDone: false,
@@ -24,11 +27,19 @@ export const initailState = {
   st_programImageUploadLoading: false, // program 이미지 등록
   st_programImageUploadDone: false,
   st_programImageUploadError: null,
+  //
+  st_programWeekListLoading: false, // week program 가져오기
+  st_programWeekListDone: false,
+  st_programWeekListError: null,
 };
 
 export const PROGRAM_LIST_REQUEST = "PROGRAM_LIST_REQUEST";
 export const PROGRAM_LIST_SUCCESS = "PROGRAM_LIST_SUCCESS";
 export const PROGRAM_LIST_FAILURE = "PROGRAM_LIST_FAILURE";
+
+export const PROGRAM_WEEK_LIST_REQUEST = "PROGRAM_WEEK_LIST_REQUEST";
+export const PROGRAM_WEEK_LIST_SUCCESS = "PROGRAM_WEEK_LIST_SUCCESS";
+export const PROGRAM_WEEK_LIST_FAILURE = "PROGRAM_WEEK_LIST_FAILURE";
 
 export const PROGRAM_CREATE_REQUEST = "PROGRAM_CREATE_REQUEST";
 export const PROGRAM_CREATE_SUCCESS = "PROGRAM_CREATE_SUCCESS";
@@ -68,6 +79,28 @@ const reducer = (state = initailState, action) =>
         draft.st_programListLoading = false;
         draft.st_programListDone = false;
         draft.st_programListError = action.error;
+        break;
+      }
+
+      //////////////////////////////////////////////
+      case PROGRAM_WEEK_LIST_REQUEST: {
+        draft.st_programWeekListLoading = true;
+        draft.st_programWeekListDone = false;
+        draft.st_programWeekListError = null;
+        break;
+      }
+      case PROGRAM_WEEK_LIST_SUCCESS: {
+        draft.st_programWeekListLoading = false;
+        draft.st_programWeekListDone = true;
+        draft.st_programWeekListError = null;
+        draft.programWeekList = action.data.weekDatum;
+        draft.week = action.data.week;
+        break;
+      }
+      case PROGRAM_WEEK_LIST_FAILURE: {
+        draft.st_programWeekListLoading = false;
+        draft.st_programWeekListDone = false;
+        draft.st_programWeekListError = action.error;
         break;
       }
 

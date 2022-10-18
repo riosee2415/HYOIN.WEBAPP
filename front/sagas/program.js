@@ -5,6 +5,10 @@ import {
   PROGRAM_LIST_SUCCESS,
   PROGRAM_LIST_FAILURE,
   //
+  PROGRAM_WEEK_LIST_REQUEST,
+  PROGRAM_WEEK_LIST_SUCCESS,
+  PROGRAM_WEEK_LIST_FAILURE,
+  //
   PROGRAM_CREATE_REQUEST,
   PROGRAM_CREATE_SUCCESS,
   PROGRAM_CREATE_FAILURE,
@@ -45,6 +49,34 @@ function* programList(action) {
     });
   }
 }
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function programWeekListAPI(data) {
+  return await axios.post(`/api/program/week/list`, data);
+}
+
+function* programWeekList(action) {
+  try {
+    const result = yield call(programWeekListAPI, action.data);
+
+    yield put({
+      type: PROGRAM_WEEK_LIST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: PROGRAM_WEEK_LIST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
@@ -165,6 +197,10 @@ function* watchProgramList() {
   yield takeLatest(PROGRAM_LIST_REQUEST, programList);
 }
 
+function* watchProgramWeekList() {
+  yield takeLatest(PROGRAM_WEEK_LIST_REQUEST, programWeekList);
+}
+
 function* watchProgramCreate() {
   yield takeLatest(PROGRAM_CREATE_REQUEST, programCreate);
 }
@@ -185,6 +221,7 @@ function* watchProgramImageUpload() {
 export default function* programSaga() {
   yield all([
     fork(watchProgramList),
+    fork(watchProgramWeekList),
     fork(watchProgramCreate),
     fork(watchProgramUpdate),
     fork(watchProgramDelete),
