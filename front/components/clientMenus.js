@@ -69,7 +69,7 @@ export const menus = [
   },
   {
     menuName: "이용안내",
-    menuLink: "/use/main",
+    menuLink: "/use",
     subMenus: [
       {
         subMenuName: "이용안내",

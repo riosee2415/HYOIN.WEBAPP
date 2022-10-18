@@ -123,6 +123,7 @@ export const Wrapper = styled.div`
   border-radius: ${(props) => props.radius};
   box-shadow: ${(props) => props.shadow};
   font-size: ${(props) => props.fontSize};
+  font-family: ${(props) => props.fontFamily};
   font-weight: ${(props) => props.fontWeight};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
@@ -149,11 +150,21 @@ export const Wrapper = styled.div`
 
   &:hover {
     background: ${(props) => (props.isBgHover ? props.theme.subTheme9_C : ``)};
+
+    ${(props) =>
+      props.isHover
+        ? `
+      transition : 0.5s;
+      &:hover{
+        color : ${props.theme.subTheme2_C}; 
+        cursor : pointer;
+      }`
+        : ``}
   }
 `;
 
 export const RsWrapper = styled.article`
-  width: 1350px;
+  width: 100%;
   height: ${(props) => props.height || `100%`};
   ${(props) => props.minHeight}
   color: ${(props) => props.color};
@@ -167,34 +178,41 @@ export const RsWrapper = styled.article`
   backdrop-filter: ${(props) => props.filter};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  padding-left: 285px;
+  padding-right: 285px;
   overflow: ${(props) => props.overflow};
   border-bottom: ${(props) => props.borderBottom};
   border: ${(props) => props.border};
   font-size: ${(props) => props.fontSize};
   position: ${(props) => props.position};
 
+  @media (max-width: 1700px) {
+    padding-left: 170px;
+    padding-right: 170px;
+  }
   @media (max-width: 1500px) {
-    width: 1350px;
+    padding-left: 150px;
+    padding-right: 150px;
   }
   @media (max-width: 1350px) {
-    width: 1280px;
+    padding-left: 110px;
+    padding-right: 110px;
   }
   @media (max-width: 1280px) {
-    width: 1100px;
+    padding-left: 70px;
+    padding-right: 70px;
   }
   @media (max-width: 1100px) {
-    width: 900px;
+    padding-left: 50px;
+    padding-right: 50px;
   }
   @media (max-width: 900px) {
-    width: 800px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   @media (max-width: 800px) {
-    width: 700px;
-  }
-  @media (max-width: 700px) {
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 `;
 
@@ -327,6 +345,7 @@ export const Text = styled.p`
   left: ${(props) => props.left};
   right: ${(props) => props.right};
   font-style: ${(props) => props.fontStyle};
+  font-family: ${(props) => props.fontFamily};
   cursor: ${(props) => props.cursor};
   z-index: 1;
   white-space: pre-wrap;
@@ -547,9 +566,11 @@ export const TextArea = styled.textarea`
 `;
 
 export const CommonTitle = styled.h3`
-  font-size: 38px;
+  font-size: ${(props) => props.fontSize || `38px`};
   margin: ${(props) => props.margin || `85px 0 60px`};
   font-family: "S-CoreDream-6Bold";
+  color: ${(props) => props.color};
+  line-height: ${(props) => props.lineHeight};
 
   @media (max-width: 900px) {
     font-size: 25px;

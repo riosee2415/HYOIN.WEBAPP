@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import ClientLayout from "../components/ClientLayout";
 import axios from "axios";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import {
+  ATag,
+  CommonTitle,
   Image,
   RsWrapper,
   Text,
@@ -17,6 +19,40 @@ import styled from "styled-components";
 import Head from "next/head";
 import Popup from "../components/popup/popup";
 import Mainslider from "../components/slide/MainSlider";
+import NursingSlider from "../components/slide/NursingSlider";
+import Link from "next/link";
+import { NOTICE_LIST_REQUEST } from "../reducers/notice";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { Empty } from "antd";
+import { SwapRightOutlined } from "@ant-design/icons";
+import { RECRUIT_LIST_REQUEST } from "../reducers/recruit";
+
+const MainWrapper = styled(Wrapper)`
+  padding-left: 285px;
+
+  @media (max-width: 1700px) {
+    padding-left: 200px;
+  }
+  @media (max-width: 1500px) {
+    padding-left: 150px;
+  }
+  @media (max-width: 1350px) {
+    padding-left: 120px;
+  }
+  @media (max-width: 1280px) {
+    padding-left: 90px;
+  }
+  @media (max-width: 1100px) {
+    padding-left: 50px;
+  }
+  @media (max-width: 900px) {
+    padding-left: 30px;
+  }
+  @media (max-width: 800px) {
+    padding-left: 10px;
+  }
+`;
 
 const QuickWrapper = styled(Wrapper)`
   width: calc(100% / 5);
@@ -60,16 +96,175 @@ const QuickWrapper = styled(Wrapper)`
   }
 `;
 
+const ShadowWrapper = styled(Wrapper)`
+  &:hover {
+    box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+`;
+
+const InfoBtn = styled(Wrapper)`
+  width: 290px;
+  height: 112px;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 28px;
+  font-family: "S-CoreDream-6Bold";
+  flex-direction: row;
+  position: absolute;
+  bottom: 140px;
+  z-index: 5;
+`;
+
+const InfoHover1 = styled(Wrapper)`
+  height: 100%;
+  padding-left: 285px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 2;
+
+  @media (max-width: 1700px) {
+    padding-left: 200px;
+  }
+  @media (max-width: 1500px) {
+    padding-left: 150px;
+  }
+  @media (max-width: 1350px) {
+    padding-left: 120px;
+  }
+  @media (max-width: 1280px) {
+    padding-left: 90px;
+  }
+  @media (max-width: 1100px) {
+    padding-left: 50px;
+  }
+  @media (max-width: 900px) {
+    padding-left: 30px;
+  }
+  @media (max-width: 800px) {
+    padding-left: 10px;
+  }
+`;
+
+const InfoHover2 = styled(Wrapper)`
+  height: 100%;
+  padding-right: 285px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 2;
+
+  @media (max-width: 1700px) {
+    padding-right: 200px;
+  }
+  @media (max-width: 1500px) {
+    padding-right: 150px;
+  }
+  @media (max-width: 1350px) {
+    padding-right: 120px;
+  }
+  @media (max-width: 1280px) {
+    padding-right: 90px;
+  }
+  @media (max-width: 1100px) {
+    padding-right: 50px;
+  }
+  @media (max-width: 900px) {
+    padding-right: 30px;
+  }
+  @media (max-width: 800px) {
+    padding-right: 10px;
+  }
+`;
+
+const InfoWrapper = styled(Wrapper)`
+  width: 50%;
+  height: 740px;
+  position: relative;
+  transition: 0.5s;
+
+  &:hover {
+    width: 90%;
+
+    ${InfoBtn} {
+      background: ${Theme.white_C};
+    }
+  }
+
+  &:first-child:hover {
+    ${InfoHover1} {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &:last-child:hover {
+    ${InfoHover2} {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+`;
+
+const GoBtn = styled(Wrapper)`
+  width: 110px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  font-weight: bold;
+
+  &:hover {
+    background: ${Theme.white_C};
+  }
+`;
+
 const Home = ({}) => {
   ////// GLOBAL STATE //////
+  const { noticeList } = useSelector((state) => state.notice);
+  const { recruitList } = useSelector((state) => state.recruit);
 
   ////// HOOKS //////
   const width = useWidth();
+  const router = useRouter();
+
   ////// REDUX //////
   ////// USEEFFECT //////
   ////// TOGGLE //////
   ////// HANDLER //////
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  }, []);
+
+  const noticeDetailHandler = useCallback((data) => {
+    moveLinkHandler(`/garden/notice/${data.id}`);
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  const recruitDetailHandler = useCallback((data) => {
+    moveLinkHandler(`/garden/recruit/${data.id}`);
+    window.scrollTo({ top: 0 });
+  }, []);
+
   ////// DATAVIEW //////
+
+  const data = [
+    {
+      imagePath:
+        "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum1.png",
+    },
+    {
+      imagePath:
+        "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum2.png",
+    },
+    {
+      imagePath:
+        "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum3.png",
+    },
+    {
+      imagePath:
+        "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum4.png",
+    },
+  ];
 
   return (
     <>
@@ -128,20 +323,20 @@ const Home = ({}) => {
                   fontWeight={`bold`}
                   margin={`14px 0 8px`}
                 >
-                  요양원-식단표
+                  식단표
                 </Text>
-                <Text fontSize={`16px`}>요양원의</Text>
+                <Text fontSize={`16px`}>효인의</Text>
                 <Text fontSize={`16px`}>식단표 열람이 가능합니다.</Text>
               </QuickWrapper>
               <QuickWrapper>
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_day-meal.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_timetable.png`}
                   width={`35px`}
                 />
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_day-meal_h.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_timetable_h.png`}
                   width={`35px`}
                   className={`hover`}
                 />
@@ -150,10 +345,10 @@ const Home = ({}) => {
                   fontWeight={`bold`}
                   margin={`14px 0 8px`}
                 >
-                  주간보호-식단표
+                  프로그램 시간표
                 </Text>
-                <Text fontSize={`16px`}>주간보호의</Text>
-                <Text fontSize={`16px`}>식단표 열람이 가능합니다.</Text>
+                <Text fontSize={`16px`}>건강한 삶을 위해</Text>
+                <Text fontSize={`16px`}>체계적인 활동을 도모합니다.</Text>
               </QuickWrapper>
               <QuickWrapper>
                 <Image
@@ -203,14 +398,513 @@ const Home = ({}) => {
           </RsWrapper>
 
           <Wrapper
-            bgImg={`url("")`}
+            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section1.png")`}
             padding={`130px 0`}
-            dr={`row`}
-            al={`flex-start`}
-            ju={`space-between`}
           >
-            <Wrapper width={`50%`}></Wrapper>
-            <Wrapper width={`50%`}></Wrapper>
+            <MainWrapper dr={`row`} al={`flex-start`}>
+              <Wrapper al={`flex-start`} width={`40%`}>
+                <Image
+                  width={`330px`}
+                  alt="logo"
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_neo.png`}
+                />
+                <Wrapper
+                  width={`auto`}
+                  borderBottom={`2px solid ${Theme.basicTheme_C}`}
+                  margin={`45px 0 25px`}
+                >
+                  <CommonTitle
+                    fontSize={`32px`}
+                    margin={`0`}
+                    color={Theme.basicTheme_C}
+                    lineHeight={`1.1`}
+                  >
+                    孝를 실천하는 아름다운 사람들
+                  </CommonTitle>
+                </Wrapper>
+                <Text fontSize={`20px`}>
+                  어르신들께 가족같은 마음으로 서비스를 제공하고
+                </Text>
+                <Text fontSize={`20px`}>
+                  어르신과 보호자 욕구에 맞는 최고의 서비스를 제공하여
+                </Text>
+                <Text fontSize={`20px`}>
+                  심리, 사회적 안정을 지원하겠습니다.
+                </Text>
+              </Wrapper>
+              <Image alt="image" src={``} width={`60%`} />
+            </MainWrapper>
+          </Wrapper>
+
+          <NursingSlider datum={data} />
+
+          <Wrapper
+            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-bg.png")`}
+            padding={`120px 0`}
+          >
+            <RsWrapper>
+              <Text
+                fontSize={`20px`}
+                fontWeight={`bold`}
+                color={Theme.subTheme10_C}
+              >
+                서비스 안내
+              </Text>
+              <Text
+                fontFamily={`"S-CoreDream-3Light"`}
+                fontSize={`32px`}
+                margin={`30px 0 0`}
+              >
+                효인에서 제공하는
+              </Text>
+              <Text
+                fontFamily={`"S-CoreDream-6Bold"`}
+                fontSize={`32px`}
+                margin={`0 0 60px`}
+              >
+                최상의 서비스를 만나보세요.
+              </Text>
+              <Wrapper dr={`row`} ju={`space-between`}>
+                <Wrapper width={`calc(100% / 4.2)`}>
+                  <Wrapper
+                    width={`76px`}
+                    height={`76px`}
+                    radius={`100%`}
+                    bgColor={Theme.subTheme10_C}
+                    color={Theme.white_C}
+                    fontSize={`18px`}
+                    fontWeight={`bold`}
+                    margin={`0 0 -38px`}
+                    zIndex={`10`}
+                  >
+                    요양원
+                  </Wrapper>
+                  <ShadowWrapper>
+                    <Image
+                      alt="image"
+                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum1.png`}
+                    />
+                    <Wrapper
+                      fontSize={`24px`}
+                      fontWeight={`bold`}
+                      height={`90px`}
+                      bgColor={Theme.white_C}
+                    >
+                      맞춤형 서비스
+                    </Wrapper>
+                  </ShadowWrapper>
+                </Wrapper>
+
+                <Wrapper width={`calc(100% / 4.2)`}>
+                  <Wrapper
+                    width={`76px`}
+                    height={`76px`}
+                    radius={`100%`}
+                    bgColor={Theme.basicTheme_C}
+                    color={Theme.white_C}
+                    fontSize={`18px`}
+                    fontWeight={`bold`}
+                    margin={`0 0 -38px`}
+                    zIndex={`10`}
+                  >
+                    주간보호
+                  </Wrapper>
+                  <ShadowWrapper>
+                    <Image
+                      alt="image"
+                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum2.png`}
+                    />
+                    <Wrapper
+                      fontSize={`24px`}
+                      fontWeight={`bold`}
+                      height={`90px`}
+                      bgColor={Theme.white_C}
+                    >
+                      일반형
+                    </Wrapper>
+                  </ShadowWrapper>
+                </Wrapper>
+                <Wrapper width={`calc(100% / 4.2)`}>
+                  <Wrapper
+                    width={`76px`}
+                    height={`76px`}
+                    radius={`100%`}
+                    bgColor={Theme.basicTheme_C}
+                    color={Theme.white_C}
+                    fontSize={`18px`}
+                    fontWeight={`bold`}
+                    margin={`0 0 -38px`}
+                    zIndex={`10`}
+                  >
+                    주간보호
+                  </Wrapper>
+                  <ShadowWrapper>
+                    <Image
+                      alt="image"
+                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum3.png`}
+                    />
+                    <Wrapper
+                      fontSize={`24px`}
+                      fontWeight={`bold`}
+                      height={`90px`}
+                      bgColor={Theme.white_C}
+                    >
+                      치매 특화형
+                    </Wrapper>
+                  </ShadowWrapper>
+                </Wrapper>
+                <Wrapper width={`calc(100% / 4.2)`}>
+                  <Link href={`/service/visit`}>
+                    <ATag>
+                      <Wrapper
+                        width={`76px`}
+                        height={`76px`}
+                        radius={`100%`}
+                        bgColor={Theme.subTheme3_C}
+                        color={Theme.white_C}
+                        fontSize={`18px`}
+                        fontWeight={`bold`}
+                        margin={`0 0 -38px`}
+                        zIndex={`10`}
+                      >
+                        방문요양
+                      </Wrapper>
+                      <ShadowWrapper>
+                        <Image
+                          alt="image"
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum4.png`}
+                        />
+                        <Wrapper
+                          fontSize={`24px`}
+                          fontWeight={`bold`}
+                          height={`90px`}
+                          bgColor={Theme.white_C}
+                        >
+                          방문 요양 서비스
+                        </Wrapper>
+                      </ShadowWrapper>
+                    </ATag>
+                  </Link>
+                </Wrapper>
+              </Wrapper>
+            </RsWrapper>
+          </Wrapper>
+          <Wrapper dr={`row`} wrap={`nowrap`}>
+            <InfoWrapper
+              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left.png")`}
+            >
+              <InfoBtn right={`0`}>
+                <Image
+                  alt="icon"
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_prev_black.png`}
+                  width={`16px`}
+                  margin={`0 30px 8px 0`}
+                />
+                후원 안내
+              </InfoBtn>
+              <InfoHover1
+                al={`flex-start`}
+                bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left-bg.png")`}
+              >
+                <Wrapper dr={`row`} ju={`flex-start`} al={`flex-end`}>
+                  <Image
+                    alt="thum"
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left-thum.png`}
+                    width={`400px`}
+                  />
+                  <Link href={`/happiness/support`}>
+                    <a>
+                      <GoBtn color={Theme.subTheme12_C}>바로가기</GoBtn>
+                    </a>
+                  </Link>
+                </Wrapper>
+
+                <Text
+                  fontSize={`20px`}
+                  fontWeight={`bold`}
+                  color={Theme.subTheme13_C}
+                  margin={`45px 0 22px`}
+                >
+                  후원 안내
+                </Text>
+                <Text
+                  fontSize={`32px`}
+                  lineHeight={`1.2`}
+                  color={Theme.white_C}
+                >
+                  아름다운 동행, 사람이 모여
+                </Text>
+                <Text
+                  fontSize={`32px`}
+                  lineHeight={`1.2`}
+                  fontWeight={`bold`}
+                  color={Theme.white_C}
+                >
+                  따뜻한 세상을 만들어 가고 있습니다.
+                </Text>
+              </InfoHover1>
+            </InfoWrapper>
+            <InfoWrapper
+              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right.png")`}
+            >
+              <InfoBtn left={`0`}>
+                자원봉사 안내
+                <Image
+                  alt="icon"
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_next_black.png`}
+                  width={`16px`}
+                  margin={`0 0 8px 30px`}
+                />
+              </InfoBtn>
+
+              <InfoHover2
+                al={`flex-end`}
+                bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right-bg.png")`}
+              >
+                <Wrapper dr={`row`} ju={`flex-end`} al={`flex-end`}>
+                  <Link href={`/happiness/info`}>
+                    <a>
+                      <GoBtn color={Theme.basicTheme_C}>바로가기</GoBtn>
+                    </a>
+                  </Link>
+                  <Image
+                    alt="thum"
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right-thum.png`}
+                    width={`400px`}
+                  />
+                </Wrapper>
+
+                <Text
+                  fontSize={`20px`}
+                  fontWeight={`bold`}
+                  color={Theme.subTheme4_C}
+                  margin={`45px 0 22px`}
+                >
+                  자원봉사 안내
+                </Text>
+                <Text
+                  fontSize={`32px`}
+                  lineHeight={`1.2`}
+                  color={Theme.white_C}
+                >
+                  자원봉사, 나와 이웃을
+                </Text>
+                <Text
+                  fontSize={`32px`}
+                  lineHeight={`1.2`}
+                  color={Theme.white_C}
+                >
+                  자라게 하는 기쁨입니다.
+                </Text>
+              </InfoHover2>
+            </InfoWrapper>
+          </Wrapper>
+
+          <Wrapper
+            height={`100vh`}
+            attachment={`fixed`}
+            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section5.png")`}
+          >
+            <Wrapper
+              height={`100%`}
+              bgColor={`rgba(0, 0, 0, 0.6)`}
+              color={Theme.white_C}
+            >
+              <RsWrapper>
+                <CommonTitle color={Theme.white_C} margin={`0`}>
+                  알림마당
+                </CommonTitle>
+                <Text fontSize={`18px`} margin={`16px 0 60px`}>
+                  효인 요양원의 다양한 소식을 전합니다.
+                </Text>
+                <Wrapper dr={`row`} ju={`space-between`}>
+                  <Wrapper
+                    width={`calc(100% / 3.2)`}
+                    ju={`flex-start`}
+                    bgColor={Theme.white_C}
+                    minHeight={`345px`}
+                    padding={`50px`}
+                    al={`flex-start`}
+                    color={Theme.black_C}
+                  >
+                    <Wrapper
+                      width={`95px`}
+                      height={`36px`}
+                      bgColor={Theme.subTheme10_C}
+                      color={Theme.white_C}
+                      fontSize={`18px`}
+                      fontWeight={`bold`}
+                      margin={`0 0 20px`}
+                    >
+                      공지사항
+                    </Wrapper>
+                    <Wrapper
+                      al={`flex-start`}
+                      padding={`0 4px`}
+                      minHeight={`160px`}
+                      ju={`flex-start`}
+                    >
+                      {noticeList && noticeList.length === 0 ? (
+                        <Wrapper height={`150px`}>
+                          <Empty description={false}>
+                            등록된 게시글이 없습니다.
+                          </Empty>
+                        </Wrapper>
+                      ) : (
+                        noticeList &&
+                        noticeList.slice(0, 4).map((data) => (
+                          <Text
+                            fontSize={`16px`}
+                            width={`100%`}
+                            isEllipsis
+                            margin={`0 0 12px`}
+                            isHover
+                            onClick={() => noticeDetailHandler(data)}
+                          >
+                            {data.title}
+                          </Text>
+                        ))
+                      )}
+                    </Wrapper>
+                    <Link href={`/garden/notice`}>
+                      <ATag>
+                        <Wrapper
+                          dr={`row`}
+                          ju={`space-between`}
+                          fontSize={`20px`}
+                          color={Theme.grey4_C}
+                          isHover
+                        >
+                          <Text>자세히 보기</Text>
+                          <SwapRightOutlined />
+                        </Wrapper>
+                      </ATag>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    width={`calc(100% / 3.2)`}
+                    ju={`flex-start`}
+                    bgColor={Theme.white_C}
+                    minHeight={`345px`}
+                    padding={`50px`}
+                    al={`flex-start`}
+                    color={Theme.black_C}
+                  >
+                    <Wrapper
+                      width={`95px`}
+                      height={`36px`}
+                      bgColor={Theme.basicTheme_C}
+                      color={Theme.white_C}
+                      fontSize={`18px`}
+                      fontWeight={`bold`}
+                      margin={`0 0 20px`}
+                    >
+                      채용안내
+                    </Wrapper>
+                    <Wrapper
+                      al={`flex-start`}
+                      padding={`0 4px`}
+                      minHeight={`160px`}
+                      ju={`flex-start`}
+                    >
+                      {recruitList && recruitList.length === 0 ? (
+                        <Wrapper height={`150px`}>
+                          <Empty description={false}>
+                            등록된 게시글이 없습니다.
+                          </Empty>
+                        </Wrapper>
+                      ) : (
+                        recruitList &&
+                        recruitList.slice(0, 4).map((data) => (
+                          <Text
+                            fontSize={`16px`}
+                            width={`100%`}
+                            isEllipsis
+                            margin={`0 0 12px`}
+                            isHover
+                            onClick={() => recruitDetailHandler(data)}
+                          >
+                            {data.title}
+                          </Text>
+                        ))
+                      )}
+                    </Wrapper>
+                    <Link href={`/garden/recruit`}>
+                      <ATag>
+                        <Wrapper
+                          dr={`row`}
+                          ju={`space-between`}
+                          fontSize={`20px`}
+                          color={Theme.grey4_C}
+                          isHover
+                        >
+                          <Text>자세히 보기</Text>
+                          <SwapRightOutlined />
+                        </Wrapper>
+                      </ATag>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    width={`calc(100% / 3.2)`}
+                    ju={`flex-start`}
+                    bgColor={Theme.white_C}
+                    color={Theme.black_C}
+                    minHeight={`345px`}
+                    padding={`50px`}
+                    al={`flex-start`}
+                  >
+                    <Wrapper
+                      width={`95px`}
+                      height={`36px`}
+                      bgColor={Theme.subTheme3_C}
+                      color={Theme.white_C}
+                      fontSize={`18px`}
+                      fontWeight={`bold`}
+                      margin={`0 0 20px`}
+                    >
+                      소통공간
+                    </Wrapper>
+                    <Text fontSize={`20px`}>효인 요양원과 함께 하세요.</Text>
+                    <Wrapper
+                      dr={`row`}
+                      ju={`space-between`}
+                      margin={`35px 0 0`}
+                    >
+                      <Wrapper width={`auto`}>
+                        <Image
+                          alt="band"
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_band.png`}
+                          width={`74px`}
+                        />
+                        <Text margin={`10px 0 0`} fontSize={`18px`}>
+                          밴드
+                        </Text>
+                      </Wrapper>
+                      <Wrapper width={`auto`}>
+                        <Image
+                          alt="kakao"
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_kakao.png`}
+                          width={`74px`}
+                        />
+                        <Text margin={`10px 0 0`} fontSize={`18px`}>
+                          카카오톡
+                        </Text>
+                      </Wrapper>
+                      <Wrapper width={`auto`}>
+                        <Image
+                          alt="facebook"
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_face-book.png`}
+                          width={`74px`}
+                        />
+                        <Text margin={`10px 0 0`} fontSize={`18px`}>
+                          페이스북
+                        </Text>
+                      </Wrapper>
+                    </Wrapper>
+                  </Wrapper>
+                </Wrapper>
+              </RsWrapper>
+            </Wrapper>
           </Wrapper>
           <Popup />
         </WholeWrapper>
@@ -232,6 +926,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: NOTICE_LIST_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: RECRUIT_LIST_REQUEST,
     });
 
     // 구현부 종료
