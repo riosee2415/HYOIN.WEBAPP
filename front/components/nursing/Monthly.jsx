@@ -321,6 +321,18 @@ const Monthly = () => {
                       <Wrapper height={`auto`}>
                         {/* LIST START */}
                         {programList &&
+                        programList.filter(
+                          (data) =>
+                            data.viewFrontSpecificDate ===
+                            moment(value[1]).format("YYYY-MM-DD")
+                        ).length === 0 ? (
+                          <Wrapper>
+                            <Empty
+                              image={Empty.PRESENTED_IMAGE_SIMPLE}
+                              description={`일정이 없습니다.`}
+                            />
+                          </Wrapper>
+                        ) : (
                           programList
                             .filter(
                               (data) =>
@@ -349,7 +361,8 @@ const Monthly = () => {
                                   </Wrapper>
                                 </HoverListWrapper>
                               );
-                            })}
+                            })
+                        )}
 
                         {/* LIST END */}
                       </Wrapper>

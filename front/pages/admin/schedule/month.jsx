@@ -259,6 +259,7 @@ const Type = ({ router }) => {
       if (data) {
         setCData(data);
       } else {
+        setCDate(null);
         setCData(null);
         setCList([]);
         dispatch({
@@ -268,7 +269,7 @@ const Type = ({ router }) => {
       }
       setCModal((prev) => !prev);
     },
-    [cModal, cData]
+    [cModal, cData, cDate, cList]
   );
 
   // 수정 모달
