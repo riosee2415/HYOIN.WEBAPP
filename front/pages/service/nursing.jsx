@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import ClientLayout from "../../components/ClientLayout";
 import Head from "next/head";
 import wrapper from "../../store/configureStore";
@@ -16,9 +16,10 @@ import SubBanner from "../../components/SubBanner";
 import styled from "styled-components";
 import Theme from "../../components/Theme";
 import Daily from "../../components/nursing/Daily";
-import Unit from "../../components/nursing/Unit";
+import Unit from "../../components/nursing/unit";
 import Monthly from "../../components/nursing/Monthly";
 import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
+import { useRouter } from "next/router";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -62,12 +63,17 @@ const Tab = styled(Wrapper)`
 
 const Nursing = () => {
   ////// GLOBAL STATE //////
-  const [currentTab, setCurrentTab] = useState(0);
   ////// HOOKS //////
   const width = useWidth();
+  const router = useRouter();
+
   ////// REDUX //////
   ////// USEEFFECT //////
   ////// TOGGLE //////
+  const pageChangeToggle = useCallback((type) => {
+    router.replace(`/service/nursing?type=${type}`);
+  }, []);
+
   ////// HANDLER //////
   ////// DATAVIEW //////
 
@@ -83,23 +89,41 @@ const Nursing = () => {
             <CommonTitle>요양원</CommonTitle>
 
             <Wrapper dr={`row`}>
-              <Tab onClick={() => setCurrentTab(0)} isActive={currentTab === 0}>
+              <Tab
+                onClick={() => pageChangeToggle(1)}
+                isActive={router && router.query.type === "1"}
+              >
                 맞춤 서비스(Unit Care)
               </Tab>
-              <Tab onClick={() => setCurrentTab(1)} isActive={currentTab === 1}>
+              <Tab
+                onClick={() => pageChangeToggle(2)}
+                isActive={router && router.query.type === "2"}
+              >
                 일일생활시간표
               </Tab>
-              <Tab onClick={() => setCurrentTab(2)} isActive={currentTab === 2}>
+              <Tab
+                onClick={() => pageChangeToggle(3)}
+                isActive={router && router.query.type === "3"}
+              >
                 월간 프로그램 시간표
               </Tab>
-              <Tab onClick={() => setCurrentTab(3)} isActive={currentTab === 3}>
+              <Tab
+                onClick={() => pageChangeToggle(4)}
+                isActive={router && router.query.type === "4"}
+              >
                 주간 식단표
               </Tab>
             </Wrapper>
 
-            {currentTab === 0 && <Unit />}
-            {currentTab === 1 && <Daily />}
-            {currentTab === 2 && <Monthly />}
+            {router && router.query.type === "1" ? (
+              <Unit />
+            ) : router.query.type === "2" ? (
+              <Daily />
+            ) : router.query.type === "3" ? (
+              <Monthly />
+            ) : (
+              <Unit />
+            )}
           </RsWrapper>
         </WholeWrapper>
       </ClientLayout>

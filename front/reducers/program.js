@@ -3,6 +3,7 @@ import produce from "../util/produce";
 export const initailState = {
   programList: [],
   programImagePath: null, // 이미지 패스
+  programSlideList: [], // 메인 슬라이드 이미지
 
   week: [],
   programWeekList: [],
@@ -31,6 +32,10 @@ export const initailState = {
   st_programWeekListLoading: false, // week program 가져오기
   st_programWeekListDone: false,
   st_programWeekListError: null,
+  //
+  st_programSlideListLoading: false, // program 사진 가져오기
+  st_programSlideListDone: false,
+  st_programSlideListError: null,
 };
 
 export const PROGRAM_LIST_REQUEST = "PROGRAM_LIST_REQUEST";
@@ -56,6 +61,10 @@ export const PROGRAM_DELETE_FAILURE = "PROGRAM_DELETE_FAILURE";
 export const PROGRAM_IMAGE_UPLOAD_REQUEST = "PROGRAM_IMAGE_UPLOAD_REQUEST";
 export const PROGRAM_IMAGE_UPLOAD_SUCCESS = "PROGRAM_IMAGE_UPLOAD_SUCCESS";
 export const PROGRAM_IMAGE_UPLOAD_FAILURE = "PROGRAM_IMAGE_UPLOAD_FAILURE";
+
+export const PROGRAM_SLIDE_LIST_REQUEST = "PROGRAM_SLIDE_LIST_REQUEST";
+export const PROGRAM_SLIDE_LIST_SUCCESS = "PROGRAM_SLIDE_LIST_SUCCESS";
+export const PROGRAM_SLIDE_LIST_FAILURE = "PROGRAM_SLIDE_LIST_FAILURE";
 
 export const PROGRAM_IMAGE_RESET = "PROGRAM_IMAGE_RESET";
 
@@ -182,6 +191,27 @@ const reducer = (state = initailState, action) =>
         draft.st_programImageUploadLoading = false;
         draft.st_programImageUploadDone = false;
         draft.st_programImageUploadError = action.error;
+        break;
+      }
+
+      //////////////////////////////////////////////
+      case PROGRAM_SLIDE_LIST_REQUEST: {
+        draft.st_programSlideListLoading = true;
+        draft.st_programSlideListDone = false;
+        draft.st_programSlideListError = null;
+        break;
+      }
+      case PROGRAM_SLIDE_LIST_SUCCESS: {
+        draft.st_programSlideListLoading = false;
+        draft.st_programSlideListDone = true;
+        draft.st_programSlideListError = null;
+        draft.programSlideList = action.data;
+        break;
+      }
+      case PROGRAM_SLIDE_LIST_FAILURE: {
+        draft.st_programSlideListLoading = false;
+        draft.st_programSlideListDone = false;
+        draft.st_programSlideListError = action.error;
         break;
       }
 
