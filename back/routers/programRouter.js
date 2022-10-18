@@ -137,6 +137,26 @@ SELECT  B.id,
   }
 });
 
+router.post("/slide/list", async (req, res, next) => {
+  const selectQuery = `
+  SELECT  title,
+          imagePath
+    FROM  programs
+   WHERE  imagePath IS NOT NULL
+   ORDER  BY createdAt DESC
+   LIMIT  10
+  `;
+
+  try {
+    const list = await models.sequelize.query(selectQuery);
+
+    return res.status(200).json(list[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("프로그램 사진 목록을 불러올 수 없습니다.");
+  }
+});
+
 router.post(
   "/image",
   isAdminCheck,
