@@ -173,6 +173,7 @@ const Monthly = () => {
                             fontWeight={`bold`}
                             margin={`0 0 6px`}
                             lineHeight={`1.28`}
+                            textAlign={`start`}
                           >
                             {data.title}
                           </Text>
@@ -343,6 +344,7 @@ const Monthly = () => {
                                       fontSize={`16px`}
                                       fontWeight={`bold`}
                                       lineHeight={`1.28`}
+                                      textAlign={`start`}
                                     >
                                       {data.title}
                                     </Text>

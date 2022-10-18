@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ClientLayout from "../../components/ClientLayout";
 import Head from "next/head";
 import wrapper from "../../store/configureStore";
@@ -16,6 +16,9 @@ import SubBanner from "../../components/SubBanner";
 import styled from "styled-components";
 import Theme from "../../components/Theme";
 import Dementia from "../../components/protection/Dementia";
+import { useRouter } from "next/router";
+import Monthly from "../../components/nursing/Monthly";
+import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -59,12 +62,17 @@ const Tab = styled(Wrapper)`
 
 const Protection = () => {
   ////// GLOBAL STATE //////
-  const [currentTab, setCurrentTab] = useState(1);
   ////// HOOKS //////
   const width = useWidth();
+  const router = useRouter();
+
   ////// REDUX //////
   ////// USEEFFECT //////
   ////// TOGGLE //////
+  const pageChangeToggle = useCallback((type) => {
+    router.replace(`/service/protection?type=${type}`);
+  }, []);
+
   ////// HANDLER //////
   ////// DATAVIEW //////
 
@@ -80,18 +88,43 @@ const Protection = () => {
             <CommonTitle>주간 보호</CommonTitle>
 
             <Wrapper dr={`row`}>
-              <Tab onClick={() => setCurrentTab(0)} isActive={currentTab === 0}>
+              <Tab
+                onClick={() => pageChangeToggle(1)}
+                isActive={router && router.query.type === "1"}
+              >
                 일반형
               </Tab>
-              <Tab onClick={() => setCurrentTab(1)} isActive={currentTab === 1}>
+              <Tab
+                onClick={() => pageChangeToggle(2)}
+                isActive={router && router.query.type === "2"}
+              >
                 치매 특화형
               </Tab>
-              <Tab onClick={() => setCurrentTab(2)} isActive={currentTab === 2}>
+              <Tab
+                onClick={() => pageChangeToggle(3)}
+                isActive={router && router.query.type === "3"}
+              >
+                프로그램 시간표
+              </Tab>
+              <Tab
+                onClick={() => pageChangeToggle(4)}
+                isActive={router && router.query.type === "4"}
+              >
                 이동서비스 시간표
               </Tab>
             </Wrapper>
 
-            {currentTab === 1 && <Dementia />}
+            {router && router.query.type === "1" ? (
+              <Dementia />
+            ) : router.query.type === "2" ? (
+              <Dementia />
+            ) : router.query.type === "3" ? (
+              <Monthly />
+            ) : router.query.type === "4" ? (
+              <Dementia />
+            ) : (
+              <Dementia />
+            )}
           </RsWrapper>
         </WholeWrapper>
       </ClientLayout>
@@ -112,6 +145,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: PROGRAM_WEEK_LIST_REQUEST,
     });
 
     // 구현부 종료

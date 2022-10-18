@@ -98,14 +98,18 @@ const NursingSlider = ({
   line = 1, // Row 슬라이드 행 수
   //
 }) => {
-  const width = useWidth();
-
   const [slideDatum, setSlideDatum] = useState(null);
   const [isDots, setIsDots] = useState(0);
 
+  const width = useWidth();
   const slideRef = useRef();
-
   const router = useRouter();
+
+  ////// HANDLER //////
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const moveSlideHandler = (isNext) => {
     if (isNext) {
@@ -203,6 +207,7 @@ const NursingSlider = ({
                 fontWeight={`bold`}
                 borderBottom={`2px solid ${Theme.white_C}`}
                 isHover
+                onClick={() => moveLinkHandler(`/service/nursing?type=3`)}
               >
                 자세히
               </Wrapper>

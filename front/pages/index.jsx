@@ -284,16 +284,17 @@ const Home = ({}) => {
   ////// HANDLER //////
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const noticeDetailHandler = useCallback((data) => {
     moveLinkHandler(`/garden/notice/${data.id}`);
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const recruitDetailHandler = useCallback((data) => {
     moveLinkHandler(`/garden/recruit/${data.id}`);
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   ////// DATAVIEW //////
@@ -316,7 +317,7 @@ const Home = ({}) => {
               shadow={`0 6px 10px rgba(0, 0, 0, 0.1)`}
               zIndex={`10`}
             >
-              <QuickWrapper>
+              <QuickWrapper onClick={() => moveLinkHandler(`/company/intro`)}>
                 <Image
                   alt="icon"
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_intro.png`}
@@ -368,7 +369,9 @@ const Home = ({}) => {
                   </>
                 )}
               </QuickWrapper>
-              <QuickWrapper>
+              <QuickWrapper
+                onClick={() => moveLinkHandler(`/service/nursing?type=3`)}
+              >
                 <Image
                   alt="icon"
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_timetable.png`}
@@ -394,7 +397,7 @@ const Home = ({}) => {
                   </>
                 )}
               </QuickWrapper>
-              <QuickWrapper>
+              <QuickWrapper onClick={() => moveLinkHandler(`/garden/notice`)}>
                 <Image
                   alt="icon"
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_notice.png`}
@@ -420,7 +423,9 @@ const Home = ({}) => {
                   </>
                 )}
               </QuickWrapper>
-              <QuickWrapper>
+              <QuickWrapper
+                onClick={() => moveLinkHandler(`/company/location`)}
+              >
                 <Image
                   alt="icon"
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_map.png`}
@@ -528,6 +533,7 @@ const Home = ({}) => {
                 <Wrapper
                   width={width < 900 ? `49%` : `calc(100% / 4.2)`}
                   margin={width < 900 && `0 0 15px`}
+                  onClick={() => moveLinkHandler(`/service/nursing?type=1`)}
                 >
                   <Wrapper
                     width={`76px`}
@@ -561,6 +567,7 @@ const Home = ({}) => {
                 <Wrapper
                   width={width < 900 ? `49%` : `calc(100% / 4.2)`}
                   margin={width < 900 && `0 0 15px`}
+                  onClick={() => moveLinkHandler(`/service/protection?type=1`)}
                 >
                   <Wrapper
                     width={`76px`}
@@ -593,6 +600,7 @@ const Home = ({}) => {
                 <Wrapper
                   width={width < 900 ? `49%` : `calc(100% / 4.2)`}
                   margin={width < 900 && `0 0 15px`}
+                  onClick={() => moveLinkHandler(`/service/protection?type=2`)}
                 >
                   <Wrapper
                     width={`76px`}
