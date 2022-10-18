@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const NursingSliderWrapper = styled(Wrapper)`
-  height: auto;
+  height: 700px;
   overflow: hidden;
 
   & .ant-carousel {
@@ -135,10 +135,6 @@ const NursingSlider = ({
     }
   };
 
-  const moveLinkHandler = useCallback((link) => {
-    window.open(link);
-  }, []);
-
   useEffect(() => {
     if (datum) {
       let tempArr = [];
@@ -171,13 +167,13 @@ const NursingSlider = ({
   return (
     <NursingSliderWrapper dr={`row`} al={`flex-start`}>
       <Wrapper
-        width={width < 1000 ? `100%` : `630px`}
+        width={width < 1350 ? (width < 1000 ? `100%` : `450px`) : `630px`}
         bgColor={Theme.basicTheme_C}
       >
         <NursingWrapper
           bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_bg.png")`}
           position={`relative`}
-          padding={`150px 0`}
+          padding={width < 900 ? `80px 0` : `150px 0`}
         >
           <Image
             position={`absolute`}
@@ -188,10 +184,10 @@ const NursingSlider = ({
             width={`70%`}
           />
           <Wrapper
-            height={`400px`}
+            height={width < 900 ? `300px` : `400px`}
             ju={`space-between`}
             color={Theme.white_C}
-            padding={`0 50px 0 0`}
+            padding={width < 900 ? `0 10px` : `0 50px 0 0`}
           >
             <Wrapper al={`flex-start`}>
               <CommonTitle color={Theme.white_C} margin={`0`}>
@@ -239,30 +235,36 @@ const NursingSlider = ({
         </NursingWrapper>
       </Wrapper>
       <Wrapper
-        width={width < 1000 ? `100%` : `calc(100% - 630px)`}
-        padding={`150px 0`}
+        width={
+          width < 1350
+            ? width < 1000
+              ? `100%`
+              : `calc(100% - 450px)`
+            : `calc(100% - 630px)`
+        }
+        padding={width < 900 ? `50px 0` : `150px 0`}
         bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_bg2.png")`}
       >
-        <SliderWrapper
-          effect={effect}
-          dots={false}
-          infinite={true}
-          slidesToShow={width < 1200 ? 1 : 2} // 한 화면에 몇개의 슬라이드가 보여지는지 결정
-          ref={slideRef}
-          autoplay={autoplay}
-          centerMode={true} // 양쪽에 겹쳐서 보이는 디자인
-          centerPadding={`100px`} // 얼만큼 겹쳐 보일건지 결정
-          slide={true} // fade or slide
-          variableWidth={false} // 각각 다른 크기를 지정할 수 있음
-          initialSlide={0} // 초기에 몇번째 슬라이드를 보여줄 것인지 결정
-          draggable={true}
-        >
-          {slideDatum.length === 0 ? (
-            <Wrapper height={`320px`} display={`flex !important`}>
-              <Empty description="조회된 글이 없습니다." />
-            </Wrapper>
-          ) : (
-            slideDatum.map((data, idx) => {
+        {slideDatum.length === 0 ? (
+          <Wrapper height={`400px`} display={`flex !important`}>
+            <Empty description="조회된 사진이 없습니다." />
+          </Wrapper>
+        ) : (
+          <SliderWrapper
+            effect={effect}
+            dots={false}
+            infinite={true}
+            slidesToShow={width < 1200 ? 1 : 2} // 한 화면에 몇개의 슬라이드가 보여지는지 결정
+            ref={slideRef}
+            autoplay={autoplay}
+            centerMode={true} // 양쪽에 겹쳐서 보이는 디자인
+            centerPadding={width < 1000 ? `30px` : `100px`} // 얼만큼 겹쳐 보일건지 결정
+            slide={true} // fade or slide
+            variableWidth={false} // 각각 다른 크기를 지정할 수 있음
+            initialSlide={0} // 초기에 몇번째 슬라이드를 보여줄 것인지 결정
+            draggable={true}
+          >
+            {slideDatum.map((data, idx) => {
               return (
                 <Wrapper
                   key={idx}
@@ -281,9 +283,9 @@ const NursingSlider = ({
                   />
                 </Wrapper>
               );
-            })
-          )}
-        </SliderWrapper>
+            })}
+          </SliderWrapper>
+        )}
       </Wrapper>
     </NursingSliderWrapper>
   );

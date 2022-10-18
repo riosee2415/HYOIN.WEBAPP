@@ -24,6 +24,11 @@ import {
   PROGRAM_IMAGE_UPLOAD_REQUEST,
   PROGRAM_IMAGE_UPLOAD_SUCCESS,
   PROGRAM_IMAGE_UPLOAD_FAILURE,
+  //
+  PROGRAM_SLIDE_LIST_REQUEST,
+  PROGRAM_SLIDE_LIST_SUCCESS,
+  PROGRAM_SLIDE_LIST_FAILURE,
+  //
 } from "../reducers/program";
 
 // ******************************************************************************************************************
@@ -192,6 +197,33 @@ function* programImageUpload(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// ******************************************************************************************************************
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+async function programSlideListAPI(data) {
+  return await axios.post(`/api/program/slide/list`, data);
+}
+
+function* programSlideList(action) {
+  try {
+    const result = yield call(programSlideListAPI, action.data);
+
+    yield put({
+      type: PROGRAM_SLIDE_LIST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: PROGRAM_SLIDE_LIST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
 //////////////////////////////////////////////////////////////
 function* watchProgramList() {
   yield takeLatest(PROGRAM_LIST_REQUEST, programList);
@@ -217,6 +249,10 @@ function* watchProgramImageUpload() {
   yield takeLatest(PROGRAM_IMAGE_UPLOAD_REQUEST, programImageUpload);
 }
 
+function* watchProgramSlideList() {
+  yield takeLatest(PROGRAM_SLIDE_LIST_REQUEST, programSlideList);
+}
+
 //////////////////////////////////////////////////////////////
 export default function* programSaga() {
   yield all([
@@ -226,6 +262,7 @@ export default function* programSaga() {
     fork(watchProgramUpdate),
     fork(watchProgramDelete),
     fork(watchProgramImageUpload),
+    fork(watchProgramSlideList),
 
     //
   ]);
