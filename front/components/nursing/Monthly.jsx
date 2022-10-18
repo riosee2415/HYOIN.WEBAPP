@@ -102,7 +102,7 @@ const Monthly = () => {
 
   const selectMonthHandler = useCallback(
     (type) => {
-      setMonthMoment(monthMoment.add(type, "M"));
+      setMonthMoment(moment(monthMoment.format("YYYY-MM-01")).add(type, "M"));
     },
     [monthMoment]
   );
