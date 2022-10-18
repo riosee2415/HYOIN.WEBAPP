@@ -84,6 +84,59 @@ router.post("/list", async (req, res, next) => {
   }
 });
 
+router.post("/week/list", async (req, res, next) => {
+  const selectQuery = `
+SELECT  B.id,
+        B.title,
+        B.content,
+        B.imagePath,
+        B.createdAt,
+        B.updatedAt,
+        DATE_FORMAT(B.createdAt, "%Y년 %m월 %d일")      AS viewCreatedAt,
+        DATE_FORMAT(B.updatedAt, "%Y년 %m월 %d일")      AS viewUpdatedAt,
+        B.ProgramDateId,
+        A.specificDate,
+        DATE_FORMAT(A.specificDate, "%Y년 %m월 %d일")   AS viewSpecificDate,
+        DATE_FORMAT(A.specificDate, "%Y-%m-%d")       AS viewFrontSpecificDate
+  FROM  programDates 	A 
+ INNER
+  JOIN  programs 		  B
+    ON  B.ProgramDateId = A.id
+ WHERE  A.specificDate IN (
+ 							ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 0 ),
+							ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 1 ),
+							ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 2 ),
+							ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 3 ),
+							ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 4 ),
+							ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 5 ),
+							ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 6 )
+ 							)
+ ORDER  BY A.specificDate ASC
+  `;
+
+  const weekQuery = `
+   SELECT ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) - 1 ) AS 일,
+          ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 0 ) AS 월,
+          ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 1 ) AS 화,
+          ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 2 ) AS 수,
+          ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 3 ) AS 목,
+          ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 4 ) AS 금,
+          ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 5 ) AS 토
+  `;
+  try {
+    const list = await models.sequelize.query(selectQuery);
+
+    const weekDate = await models.sequelize.query(weekQuery);
+
+    const weekData = Object.entries(weekDate[0][0]);
+
+    return res.status(200).json({ weekDatum: list[0], week: weekData });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("프로그램 목록을 불러올 수 없습니다.");
+  }
+});
+
 router.post(
   "/image",
   isAdminCheck,
