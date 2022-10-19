@@ -19,6 +19,7 @@ import Dementia from "../../components/protection/Dementia";
 import { useRouter } from "next/router";
 import Monthly from "../../components/nursing/Monthly";
 import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
+import Normal from "../../components/protection/Normal";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -115,7 +116,7 @@ const Protection = () => {
             </Wrapper>
 
             {router && router.query.type === "1" ? (
-              <Dementia />
+              <Normal />
             ) : router.query.type === "2" ? (
               <Dementia />
             ) : router.query.type === "3" ? (
@@ -123,7 +124,7 @@ const Protection = () => {
             ) : router.query.type === "4" ? (
               <Dementia />
             ) : (
-              <Dementia />
+              <Normal />
             )}
           </RsWrapper>
         </WholeWrapper>

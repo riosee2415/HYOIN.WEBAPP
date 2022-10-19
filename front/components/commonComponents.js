@@ -211,8 +211,8 @@ export const RsWrapper = styled.article`
     padding-right: 30px;
   }
   @media (max-width: 800px) {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 `;
 
