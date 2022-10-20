@@ -7,6 +7,7 @@ import axios from "axios";
 import { END } from "redux-saga";
 import useWidth from "../../hooks/useWidth";
 import {
+  ATag,
   CommonTitle,
   Image,
   RsWrapper,
@@ -99,6 +100,7 @@ const Design = () => {
                     ? `calc(100% - 5px - 8px)`
                     : `calc(100% - 8px - 16px)`
                 }
+                al={`flex-start`}
               >
                 <Text fontSize={width < 700 ? `14px` : `22px`}>
                   장기요양 인정서 1부, 표준 장기요양 이용계획서 1부(공단에서
@@ -179,15 +181,17 @@ const Design = () => {
                 효인요양원 급여비용 &#60;2022년 기준&#62;
               </Text>
 
-              <DownloadBtn>
-                <Image
-                  width={`14px`}
-                  margin={`0 4px 0 0`}
-                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
-                  alt="icon"
-                />
-                <Text>다운로드</Text>
-              </DownloadBtn>
+              <ATag width={`auto`} href="" download={true}>
+                <DownloadBtn>
+                  <Image
+                    width={`14px`}
+                    margin={`0 4px 0 0`}
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
+                    alt="icon"
+                  />
+                  <Text>다운로드</Text>
+                </DownloadBtn>
+              </ATag>
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 20px`}>
@@ -202,19 +206,21 @@ const Design = () => {
                 효인요양원 급여비용[치매전담] &#60;2022년 기준&#62;
               </Text>
 
-              <DownloadBtn
-                bgColor={Theme.subTheme2_C}
-                color={Theme.white_C}
-                hoverBgColor={Theme.basicTheme_C}
-              >
-                <Image
-                  width={`14px`}
-                  margin={`0 4px 0 0`}
-                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download.png"
-                  alt="icon"
-                />
-                <Text>다운로드</Text>
-              </DownloadBtn>
+              <ATag width={`auto`} href="" download={true}>
+                <DownloadBtn
+                  bgColor={Theme.subTheme2_C}
+                  color={Theme.white_C}
+                  hoverBgColor={Theme.basicTheme_C}
+                >
+                  <Image
+                    width={`14px`}
+                    margin={`0 4px 0 0`}
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download.png"
+                    alt="icon"
+                  />
+                  <Text>다운로드</Text>
+                </DownloadBtn>
+              </ATag>
             </Wrapper>
 
             <Wrapper al={`flex-start`} margin={`0 0 100px`}>
@@ -255,15 +261,17 @@ const Design = () => {
                 효인주간보호 급여비용[일반] &#60;2022년 기준&#62;
               </Text>
 
-              <DownloadBtn>
-                <Image
-                  width={`14px`}
-                  margin={`0 4px 0 0`}
-                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
-                  alt="icon"
-                />
-                <Text>다운로드</Text>
-              </DownloadBtn>
+              <ATag width={`auto`} href="" download={true}>
+                <DownloadBtn>
+                  <Image
+                    width={`14px`}
+                    margin={`0 4px 0 0`}
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
+                    alt="icon"
+                  />
+                  <Text>다운로드</Text>
+                </DownloadBtn>
+              </ATag>
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 20px`}>
@@ -278,15 +286,17 @@ const Design = () => {
                 효인주간보호 급여비용[치매전담실] &#60;2022년 기준&#62;
               </Text>
 
-              <DownloadBtn>
-                <Image
-                  width={`14px`}
-                  margin={`0 4px 0 0`}
-                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
-                  alt="icon"
-                />
-                <Text>다운로드</Text>
-              </DownloadBtn>
+              <ATag width={`auto`} href="" download={true}>
+                <DownloadBtn>
+                  <Image
+                    width={`14px`}
+                    margin={`0 4px 0 0`}
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
+                    alt="icon"
+                  />
+                  <Text>다운로드</Text>
+                </DownloadBtn>
+              </ATag>
             </Wrapper>
 
             <Wrapper al={`flex-start`} margin={`0 0 100px`}>
@@ -327,15 +337,17 @@ const Design = () => {
                 효인방문요양원 급여비용(방문당) &#60;2022년 기준&#62;
               </Text>
 
-              <DownloadBtn>
-                <Image
-                  width={`14px`}
-                  margin={`0 4px 0 0`}
-                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
-                  alt="icon"
-                />
-                <Text>다운로드</Text>
-              </DownloadBtn>
+              <ATag width={`auto`} href="" download={true}>
+                <DownloadBtn>
+                  <Image
+                    width={`14px`}
+                    margin={`0 4px 0 0`}
+                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
+                    alt="icon"
+                  />
+                  <Text>다운로드</Text>
+                </DownloadBtn>
+              </ATag>
             </Wrapper>
 
             <Wrapper al={`flex-start`} margin={`0 0 100px`}>
@@ -540,18 +552,22 @@ const Design = () => {
               </Wrapper>
             </Wrapper>
 
-            <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
-              <Wrapper
-                width={width < 700 ? `5px` : `8px`}
-                height={width < 700 ? `5px` : `8px`}
-                bgColor={Theme.subTheme2_C}
-                radius={`100%`}
-                margin={width < 700 ? `0 8px 0 0` : `0 16px 0 0`}
-              ></Wrapper>
+            <Wrapper dr={`row`} ju={`space-between`} margin={`0 0 30px`}>
+              <Wrapper dr={`row`} width={`auto`}>
+                <Wrapper
+                  width={width < 700 ? `5px` : `8px`}
+                  height={width < 700 ? `5px` : `8px`}
+                  bgColor={Theme.subTheme2_C}
+                  radius={`100%`}
+                  margin={width < 700 ? `0 8px 0 0` : `0 16px 0 0`}
+                ></Wrapper>
 
-              <Text fontSize={width < 700 ? `14px` : `22px`}>
-                이용시간별 수가 (야간 가산 20%, 공휴일 가산 30%)
-              </Text>
+                <Text fontSize={width < 700 ? `14px` : `22px`}>
+                  이용시간별 수가 (야간 가산 20%, 공휴일 가산 30%)
+                </Text>
+              </Wrapper>
+
+              <Text fontSize={width < 700 ? `10px` : `16px`}>1일 / 원</Text>
             </Wrapper>
 
             <Wrapper overflow={`auto`} margin={`0 0 100px`}>
