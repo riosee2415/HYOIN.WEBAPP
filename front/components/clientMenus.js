@@ -13,7 +13,7 @@ export const menus = [
       {
         subMenuName: "시설 개요",
         subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
-        subMenuLink: "/company/intro",
+        subMenuLink: "/company/facility",
         subBannerImagePath:
           "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },

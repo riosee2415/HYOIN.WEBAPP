@@ -49,7 +49,7 @@ const Fourleaf = ({ Component }) => {
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
       <Head>
-        <title>[[**4LEAF GEAR SAMPLE**]] | administrator</title>
+        <title>효인주야간노인복지센터 | administrator</title>
 
         <meta name="author" content="4LEAF SOFTWARE <4leaf.ysh@gmail.com>" />
         {/* <!-- OG tag  --> */}

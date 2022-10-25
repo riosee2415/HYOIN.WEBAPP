@@ -69,7 +69,7 @@ const MobileRow = styled(WholeWrapper)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 1000;
   transition: 0.5s;
 
   .ant-drawer-content-wrapper {
@@ -251,6 +251,11 @@ const AppHeader = () => {
                 <Text margin={`0 0 10px`}>
                   <Link href={`/company/intro`}>
                     <a>요양원 소개</a>
+                  </Link>
+                </Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/company/facility`}>
+                    <a>시설 개요</a>
                   </Link>
                 </Text>
                 <Text margin={`0 0 10px`}>
@@ -470,6 +475,15 @@ const AppHeader = () => {
                   >
                     <Link href={`/company/intro`}>
                       <a>요양원 소개</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/facility`}>
+                      <a>시설 개요</a>
                     </Link>
                   </Wrapper>
 
