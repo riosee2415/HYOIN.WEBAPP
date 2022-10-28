@@ -18,6 +18,7 @@ import recruit from "./recruit";
 import program from "./program";
 import admission from "./admission";
 import menu from "./menu";
+import moveService from "./moveService";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -44,6 +45,7 @@ const rootReducer = (state, action) => {
         program,
         admission,
         menu,
+        moveService,
       });
       return combinedReducer(state, action);
     }
