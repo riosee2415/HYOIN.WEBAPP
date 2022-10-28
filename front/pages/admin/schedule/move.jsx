@@ -1,37 +1,12 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import AdminLayout from "../../../components/AdminLayout";
-import AdminTop from "../../../components/admin/AdminTop";
 import PageHeader from "../../../components/admin/PageHeader";
 import styled from "styled-components";
-import {
-  Button,
-  Table,
-  Modal,
-  Form,
-  Input,
-  Select,
-  Switch,
-  notification,
-  Row,
-  Col,
-  message,
-} from "antd";
-import {
-  CloseOutlined,
-  CheckOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { DatePicker, Table } from "antd";
+
 import { useDispatch, useSelector } from "react-redux";
-import {
-  CREATE_MODAL_CLOSE_REQUEST,
-  CREATE_MODAL_OPEN_REQUEST,
-  NOTICE_CREATE_REQUEST,
-  NOTICE_UPDATE_REQUEST,
-  NOTICE_DELETE_REQUEST,
-  NOTICE_LIST_REQUEST,
-} from "../../../reducers/notice";
+
 import { withRouter } from "next/router";
-import useInput from "../../../hooks/useInput";
 
 import { END } from "redux-saga";
 import axios from "axios";
@@ -44,6 +19,10 @@ import {
   Wrapper,
 } from "../../../components/commonComponents";
 import Theme from "../../../components/Theme";
+import {
+  MOVE_SERVICE_CAR_CREATE_REQUEST,
+  MOVE_SERVICE_LIST_REQUEST,
+} from "../../../reducers/moveService";
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -52,6 +31,11 @@ const AdminContent = styled.div`
 const Move = ({ router }) => {
   // LOAD CURRENT INFO AREA /////////////////////////////////////////////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
+  const { moveServiceList, carList, timeList } = useSelector(
+    (state) => state.moveService
+  );
+
+  console.log(moveServiceList, carList, timeList);
 
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
@@ -69,28 +53,48 @@ const Move = ({ router }) => {
   ////// HOOKS //////
 
   ////// REDUX //////
+  const dispatch = useDispatch();
 
   ////// USEEFFECT //////
 
   ////// TOGGLE ///////
 
+  ////// HANDLER ///////
+  const dateHandler = useCallback((data) => {
+    dispatch({
+      type: MOVE_SERVICE_LIST_REQUEST,
+      data: {
+        searchDate: data.format("YYYY-MM-DD"),
+      },
+    });
+  }, []);
+
   ////// DATAVIEW //////
   const columns = [
     {
-      title: "번호",
-      dataIndex: "id",
+      title: "호차",
+      dataIndex: "carCount",
     },
     {
-      title: "제목",
-      dataIndex: "title",
-    },
-    {
-      title: "작성자",
-      dataIndex: "author",
+      title: "기사님",
+      children: [
+        {
+          title: "오전",
+          dataIndex: "id",
+          key: "building",
+          width: 100,
+        },
+        {
+          title: "오후",
+          dataIndex: "id",
+          key: "number",
+          width: 100,
+        },
+      ],
     },
     {
       title: "조회수",
-      dataIndex: "hit",
+      dataIndex: "id",
     },
   ];
 
@@ -105,11 +109,19 @@ const Move = ({ router }) => {
       <AdminContent>
         <Wrapper
           dr="row"
-          ju="flex-end"
+          ju="space-between"
           margin="0px 0px 10px 0px"
           borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
           padding="5px 0px"
         >
+          <Wrapper dr={`row`} width={`auto`}>
+            <DatePicker
+              style={{ width: `300px` }}
+              size="small"
+              onChange={dateHandler}
+            />
+          </Wrapper>
+
           <ModalBtn type="primary" size="small">
             + 이동서비스 생성
           </ModalBtn>
@@ -134,7 +146,7 @@ const Move = ({ router }) => {
           <GuideDiv isImpo={true}>삭제된 데이터는 복구할 수 없습니다.</GuideDiv>
         </Wrapper>
 
-        <Table rowKey="id" columns={columns} dataSource={[]} size="small" />
+        <Table columns={columns} dataSource={carList} bordered size="small" />
       </AdminContent>
     </AdminLayout>
   );
@@ -153,6 +165,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: MOVE_SERVICE_LIST_REQUEST,
+      data: {
+        searchDate: "2022-10-29",
+      },
     });
 
     // 구현부 종료
