@@ -145,12 +145,12 @@ const AdminMenu = () => {
         </SubMenu>
         <SubMenu
           key="sub5"
-          icon={<UserOutlined />}
-          title="회원 관리"
+          icon={<ScheduleOutlined />}
+          title="식단표 관리"
           onTitleClick={titleClickHandler("sub5")}
         >
-          <Menu.Item key="/admin/user/userList">
-            <MenuName>회원 리스트</MenuName>
+          <Menu.Item key="/admin/diet/list">
+            <MenuName>식단표 리스트</MenuName>
           </Menu.Item>
         </SubMenu>
         <SubMenu
