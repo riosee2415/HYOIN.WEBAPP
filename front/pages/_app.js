@@ -74,6 +74,11 @@ const Fourleaf = ({ Component }) => {
           href="https://webfontworld.github.io/pretendard/Pretendard.css"
           rel="stylesheet"
         />
+
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+        />
       </Head>
       <Component />
     </ThemeProvider>

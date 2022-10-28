@@ -300,7 +300,11 @@ const AppHeader = () => {
                     <a>찾아오시는 길</a>
                   </Link>
                 </Text>
-                <Text>시설 3D 안내</Text>
+                <Link href={`/company/vr`}>
+                  <a>
+                    <Text>시설 3D 안내</Text>
+                  </a>
+                </Link>
               </Wrapper>
             </SubMenu>
             <SubMenu>
