@@ -81,8 +81,8 @@ const AdminHome = () => {
           <Wrapper height={`100%`} padding={`30px`}>
             <Image
               alt="logo"
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/4LEAFSOFTWARE/assets/images/LOGO/logo1.png`}
-              width={`300px`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+              width={`150px`}
             />
             <Wrapper width={`80%`}>
               <Wrapper margin={`20px 0`}>
@@ -101,16 +101,16 @@ const AdminHome = () => {
                   </Link>
                 </ColWrapper>
                 <ColWrapper span={6}>
-                  <Link href={`/admin/info/businessInformation`}>
+                  <Link href={`/admin/schedule/month`}>
                     <CommonButton width={`200px`}>
-                      사업자정보 관리 바로가기
+                      월간시간표 관리 바로가기
                     </CommonButton>
                   </Link>
                 </ColWrapper>
                 <ColWrapper span={6}>
-                  <Link href={`/admin/info/popup`}>
+                  <Link href={`/admin/question/list`}>
                     <CommonButton width={`200px`}>
-                      팝업 관리 바로가기
+                      문의 관리 바로가기
                     </CommonButton>
                   </Link>
                 </ColWrapper>

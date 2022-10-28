@@ -48,19 +48,21 @@ const Popup = ({ cookies }) => {
               key={data.id}
               id={`popup-${data.id}-js`}
               position={`absolute`}
-              top={width > 900 ? `150px` : `70px`}
-              right={`50%`}
+              top={width > 900 ? `150px` : `100px`}
+              left={width < 900 ? `50%` : `5%`}
               zIndex={`${9999 - idx}`}
               shadow={`0px 5px 10px ${Theme.lightGrey_C}`}
               margin={
-                width > 900
-                  ? `${idx * 55}px ${idx * -50}px 0 0`
-                  : `0 -165px 0 0`
+                width < 1300
+                  ? width < 900
+                    ? `0 0 0 -175px`
+                    : `0 0 0 ${idx * 200}px`
+                  : `0 0 0 ${idx * 410}px`
               }
-              width={`340px`}
+              width={width < 900 ? `350px` : `400px`}
             >
               <Wrapper>
-                <Image src={data.imagePath} alt={`popup`} height={`454px`} />
+                <Image src={data.imagePath} alt={`popup`} height={`500px`} />
               </Wrapper>
               <Wrapper dr={`row`}>
                 <Wrapper

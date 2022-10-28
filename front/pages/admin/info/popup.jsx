@@ -13,7 +13,6 @@ import {
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  POPUP_CREATE_MODAL_TOGGLE,
   POPUP_GET_REQUEST,
   POPUP_IMAGE_UPLOAD_REQUEST,
   POPUP_IMAGE_INIT,
@@ -30,6 +29,7 @@ import { LOAD_MY_INFO_REQUEST } from "../../../reducers/user";
 import {
   GuideDiv,
   ModalBtn,
+  Text,
   Wrapper,
 } from "../../../components/commonComponents";
 import Theme from "../../../components/Theme";
@@ -70,7 +70,7 @@ const UploadWrapper = styled.div`
 
 const PreviewGuide = styled.p`
   font-weight: 700;
-  color: ${Theme.adminLightGrey_C};
+  color: ${Theme.grey_C};
 `;
 
 const PopuploadNotification = (msg, content) => {
@@ -87,16 +87,21 @@ const Popup = () => {
 
   const {
     popups,
+
     st_popupError,
-    createModal,
+
     uploadImagePath,
     st_popupImageUploadLoading,
+
     st_popupCreateDone,
     st_popupCreateError,
+
     st_popupDeleteDone,
     st_popupDeleteError,
+
     st_popupUseUpdateDone,
     st_popupUseUpdateError,
+
     st_popupUpdateDone,
     st_popupUpdateError,
   } = useSelector((state) => state.popup);
@@ -107,6 +112,9 @@ const Popup = () => {
   const dispatch = useDispatch();
 
   const imageInput = useRef();
+
+  const [cModal, setCModal] = useState(false); // 등록 모달
+  const [uModal, setUModal] = useState(false); // 수정 모달
 
   const [deletePopVisible, setDeletePopVisible] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -131,13 +139,17 @@ const Popup = () => {
   ///////////////////// 팝업 생성 후처리 /////////////////////
   useEffect(() => {
     if (st_popupCreateDone) {
-      message.success("팝업이 생성되었습니다.");
-
       createModalToggle();
 
       dispatch({
         type: POPUP_GET_REQUEST,
       });
+
+      dispatch({
+        type: POPUP_IMAGE_INIT,
+      });
+
+      return message.success("팝업이 생성되었습니다.");
     }
   }, [st_popupCreateDone]);
 
@@ -150,11 +162,11 @@ const Popup = () => {
   ///////////////////// 팝업 삭제 후처리 /////////////////////
   useEffect(() => {
     if (st_popupDeleteDone) {
-      message.success("팝업이 삭제되었습니다.");
-
       dispatch({
         type: POPUP_GET_REQUEST,
       });
+
+      return message.success("팝업이 삭제되었습니다.");
     }
   }, [st_popupDeleteDone]);
 
@@ -167,11 +179,11 @@ const Popup = () => {
   ///////////////////// 팝업 사용여부 후처리 /////////////////////
   useEffect(() => {
     if (st_popupUseUpdateDone) {
-      message.success("팝업 사용여부가 수정되었습니다.");
-
       dispatch({
         type: POPUP_GET_REQUEST,
       });
+
+      return message.success("팝업 사용여부가 수정되었습니다.");
     }
   }, [st_popupUseUpdateDone]);
 
@@ -184,15 +196,17 @@ const Popup = () => {
   ///////////////////// 팝업 수정 후처리 /////////////////////
   useEffect(() => {
     if (st_popupUpdateDone) {
-      message.success("팝업이 수정되었습니다.");
-
       dispatch({
         type: POPUP_GET_REQUEST,
       });
 
       dispatch({
-        type: POPUP_CREATE_MODAL_TOGGLE,
+        type: POPUP_IMAGE_INIT,
       });
+
+      updatePopToggle(null);
+
+      return message.success("팝업이 수정되었습니다.");
     }
   }, [st_popupUpdateDone]);
 
@@ -204,16 +218,17 @@ const Popup = () => {
 
   ////// TOGGLE //////
   const createModalToggle = useCallback(() => {
-    dispatch({
-      type: POPUP_CREATE_MODAL_TOGGLE,
-    });
+    setCModal((prev) => !prev);
+  }, [cModal]);
 
-    if (createModal) {
-      dispatch({
-        type: POPUP_IMAGE_INIT,
-      });
-    }
-  }, [createModal]);
+  const updatePopToggle = useCallback(
+    (data) => {
+      setUModal((prev) => !prev);
+
+      setUpdateId(data);
+    },
+    [uModal, updateId]
+  );
 
   const deletePopToggle = useCallback(
     (id) => () => {
@@ -221,17 +236,6 @@ const Popup = () => {
       setDeletePopVisible((prev) => !prev);
     },
     [deletePopVisible, deleteId]
-  );
-
-  const updatePopToggle = useCallback(
-    (id) => () => {
-      dispatch({
-        type: POPUP_CREATE_MODAL_TOGGLE,
-      });
-
-      setUpdateId(id);
-    },
-    [updateId]
   );
 
   ////// HANDLER //////
@@ -257,9 +261,9 @@ const Popup = () => {
     }
     dispatch({
       type: POPUP_UPDATE_REQUEST,
-      data: { id: updateId, imagePath: uploadImagePath },
+      data: { id: updateId.id, imagePath: uploadImagePath },
     });
-  }, [uploadImagePath]);
+  }, [uploadImagePath, updateId]);
 
   // IMAGE FUNCATION
   const clickImageUpload = useCallback(() => {
@@ -327,16 +331,20 @@ const Popup = () => {
     },
     {
       title: "생성일",
-      dataIndex: "createdAt",
+      render: (data) => <Text>{data.createdAt.substring(0, 10)}</Text>,
     },
     {
       title: "수정일",
-      dataIndex: "updatedAt",
+      render: (data) => <Text>{data.updatedAt.substring(0, 10)}</Text>,
     },
     {
       title: "데이터 수정",
       render: (data) => (
-        <Button size="small" type="primary" onClick={updatePopToggle(data.id)}>
+        <Button
+          size="small"
+          type="primary"
+          onClick={() => updatePopToggle(data)}
+        >
           데이터 수정
         </Button>
       ),
@@ -367,9 +375,11 @@ const Popup = () => {
           borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
           padding="5px 0px"
         >
-          <ModalBtn type="primary" size="small" onClick={createModalToggle}>
-            + 팝업 생성
-          </ModalBtn>
+          {popups && popups.length < 3 && (
+            <ModalBtn type="primary" size="small" onClick={createModalToggle}>
+              + 팝업 생성
+            </ModalBtn>
+          )}
         </Wrapper>
         {/* ADMIN GUIDE AREA */}
         <Wrapper
@@ -382,6 +392,9 @@ const Popup = () => {
         >
           <GuideDiv isImpo={true}>
             메인화면에 보여지는 팝업 제어할 수 있습니다.
+          </GuideDiv>
+          <GuideDiv isImpo={true}>
+            팝업은 최대 3개까지만 등록이 가능합니다.
           </GuideDiv>
           <GuideDiv isImpo={true}>
             등록된 데이터는 웹사이트 및 어플리케이션에 즉시 적용되기 때문에
@@ -399,12 +412,11 @@ const Popup = () => {
 
       {/* CREATE MODAL */}
       <Modal
-        visible={createModal}
-        footer={null}
+        visible={cModal}
         width={`${parseInt(POPUP_WIDTH) + 50}px`}
         title={`팝업 생성하기`}
         onCancel={createModalToggle}
-        onOk={updateId ? updateHandler : createHandler}
+        onOk={createHandler}
       >
         <ModalWrapper>
           <PopupImage
@@ -430,12 +442,49 @@ const Popup = () => {
               onChange={onChangeImages}
             />
             <Button
-              size="small"
               type="primary"
               onClick={clickImageUpload}
               loading={st_popupImageUploadLoading}
             >
-              이미지 업로드
+              UPLOAD
+            </Button>
+          </UploadWrapper>
+        </ModalWrapper>
+      </Modal>
+
+      {/* UPDATE MODAL */}
+      <Modal
+        visible={uModal}
+        width={`${parseInt(POPUP_WIDTH) + 50}px`}
+        title={`팝업 수정하기`}
+        onCancel={updatePopToggle}
+        onOk={updateHandler}
+      >
+        <ModalWrapper>
+          <PopupImage
+            alt="popup"
+            src={
+              uploadImagePath ? uploadImagePath : updateId && updateId.imagePath
+            }
+          />
+          <PreviewGuide>이미지 미리보기 입니다.</PreviewGuide>
+
+          <UploadWrapper>
+            <input
+              type="file"
+              name="image"
+              accept=".png, .jpg"
+              // multiple
+              hidden
+              ref={imageInput}
+              onChange={onChangeImages}
+            />
+            <Button
+              type="primary"
+              onClick={clickImageUpload}
+              loading={st_popupImageUploadLoading}
+            >
+              UPLOAD
             </Button>
           </UploadWrapper>
         </ModalWrapper>
