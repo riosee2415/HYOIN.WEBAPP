@@ -272,7 +272,7 @@ router.post("/create", isAdminCheck, async (req, res, next) => {
   )
   VALUES
   (
-    ${saveDate ? `"${saveDate}"` : null},
+    "${saveDate}",
     ${breakfast1 ? `"${breakfast1}"` : null},
     ${breakfast2 ? `"${breakfast2}"` : null},
     ${breakfast3 ? `"${breakfast3}"` : null},
@@ -331,7 +331,6 @@ router.post("/create", isAdminCheck, async (req, res, next) => {
 router.post("/update", isAdminCheck, async (req, res, next) => {
   const {
     id,
-    saveDate,
     breakfast1,
     breakfast2,
     breakfast3,
@@ -370,8 +369,7 @@ router.post("/update", isAdminCheck, async (req, res, next) => {
 
   const updateQuery = `
     UPDATE    menus
-       SET    saveDate = ${saveDate ? `"${saveDate}"` : null},
-              breakfast1 = ${breakfast1 ? `"${breakfast1}"` : null},
+       SET    breakfast1 = ${breakfast1 ? `"${breakfast1}"` : null},
               breakfast2 = ${breakfast2 ? `"${breakfast2}"` : null},
               breakfast3 = ${breakfast3 ? `"${breakfast3}"` : null},
               breakfast4 = ${breakfast4 ? `"${breakfast4}"` : null},

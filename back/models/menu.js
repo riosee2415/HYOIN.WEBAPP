@@ -7,7 +7,7 @@ module.exports = class Menu extends Model {
       {
         saveDate: {
           type: DataTypes.DATE, // 날짜
-          allowNull: true,
+          allowNull: false,
         },
         breakfast1: {
           type: DataTypes.STRING(100), // 아침식사 1
