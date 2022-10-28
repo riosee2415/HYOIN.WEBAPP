@@ -86,55 +86,44 @@ SELECT	id,
 
 // 차량 등록
 router.post("/car/create", isAdminCheck, async (req, res, next) => {
-  const { carCount, carNum, moveDate } = req.body;
-
-  const findCarNumQuery = `
-  SELECT    *
-    FROM    moveServiceCars
-   WHERE    carCount = "${carCount}"
-     AND    DATE_FORMAT(moveDate, "%Y-%m-%d") = DATE_FORMAT("${moveDate}", "%Y-%m-%d")
-  `;
+  const { moveDate } = req.body;
 
   const findQuery = `
   SELECT    *
     FROM    moveServiceCars
-   WHERE    carCount = "${carCount}"
-     AND    DATE_FORMAT(moveDate, "%Y-%m-%d") = DATE_FORMAT("${moveDate}", "%Y-%m-%d")
-  `;
-
-  const insertQuery = `
-  INSERT    INTO    moveServiceCars
-  (
-    carCount,
-    carNum,
-    moveDate,
-    createdAt,
-    updatedAt
-  )
-  VALUES
-  (
-    "${carCount}",
-    "${carNum}",
-    "${moveDate}",
-    NOW(),
-    NOW()
-  )
+   WHERE    DATE_FORMAT(moveDate, "%Y-%m-%d") = DATE_FORMAT("${moveDate}", "%Y-%m-%d")
   `;
 
   try {
-    const carNumResult = await models.sequelize.query(findCarNumQuery);
-
-    if (carNumResult[0].length !== 0) {
-      return res.status(401).send("이미 해당 차수의 차량이 존재합니다.");
-    }
-
     const findResult = await models.sequelize.query(findQuery);
 
     if (findResult[0].length !== 0) {
-      return res.status(401).send("이미 해당 날짜에 존재하는 차량입니다.");
+      return res.status(401).send("이미 해당 날짜에 차량 정보가 존재합니다.");
     }
 
-    const insertResult = await models.sequelize.query(insertQuery);
+    const carCnt = 6;
+
+    for (let i = 0; i < carCnt; i++) {
+      const insertQuery = `
+        INSERT    INTO    moveServiceCars
+        (
+          carCount,
+          carNum,
+          moveDate,
+          createdAt,
+          updatedAt
+        )
+        VALUES
+        (
+          "${i + 1}호차",
+          "0000",
+          "${moveDate}",
+          NOW(),
+          NOW()
+        )`;
+
+      await models.sequelize.query(insertQuery);
+    }
 
     return res.status(201).json({ result: true });
   } catch (error) {

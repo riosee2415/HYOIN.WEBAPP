@@ -7,35 +7,35 @@ module.exports = class Menu extends Model {
       {
         saveDate: {
           type: DataTypes.DATE, // 날짜
-          allowNull: false,
+          allowNull: true,
         },
         breakfast1: {
           type: DataTypes.STRING(100), // 아침식사 1
-          allowNull: false,
+          allowNull: true,
         },
         breakfast2: {
           type: DataTypes.STRING(100), // 아침식사 2
-          allowNull: false,
+          allowNull: true,
         },
         breakfast3: {
           type: DataTypes.STRING(100), // 아침식사 3
-          allowNull: false,
+          allowNull: true,
         },
         breakfast4: {
           type: DataTypes.STRING(100), // 아침식사 4
-          allowNull: false,
+          allowNull: true,
         },
         breakfast5: {
           type: DataTypes.STRING(100), // 아침식사 5
-          allowNull: false,
+          allowNull: true,
         },
         breakfast6: {
           type: DataTypes.STRING(100), // 아침식사 6
-          allowNull: false,
+          allowNull: true,
         },
         breakfastCalorie: {
           type: DataTypes.STRING(50), // 아침식사 칼로리
-          allowNull: false,
+          allowNull: true,
         },
         breakfaseImage: {
           type: DataTypes.STRING(600), // 아침식사 이미지
@@ -43,31 +43,31 @@ module.exports = class Menu extends Model {
         },
         lunch1: {
           type: DataTypes.STRING(100), // 점심식사1
-          allowNull: false,
+          allowNull: true,
         },
         lunch2: {
           type: DataTypes.STRING(100), // 점심식사2
-          allowNull: false,
+          allowNull: true,
         },
         lunch3: {
           type: DataTypes.STRING(100), // 점심식사3
-          allowNull: false,
+          allowNull: true,
         },
         lunch4: {
           type: DataTypes.STRING(100), // 점심식사4
-          allowNull: false,
+          allowNull: true,
         },
         lunch5: {
           type: DataTypes.STRING(100), // 점심식사5
-          allowNull: false,
+          allowNull: true,
         },
         lunch6: {
           type: DataTypes.STRING(100), // 점심식사6
-          allowNull: false,
+          allowNull: true,
         },
         lunchCalorie: {
           type: DataTypes.STRING(50), // 점심식사 칼로리
-          allowNull: false,
+          allowNull: true,
         },
         lunchImage: {
           type: DataTypes.STRING(600), // 점심식사 이미지
@@ -75,31 +75,31 @@ module.exports = class Menu extends Model {
         },
         dinner1: {
           type: DataTypes.STRING(100), // 저녁식사1
-          allowNull: false,
+          allowNull: true,
         },
         dinner2: {
           type: DataTypes.STRING(100), // 저녁식사2
-          allowNull: false,
+          allowNull: true,
         },
         dinner3: {
           type: DataTypes.STRING(100), // 저녁식사3
-          allowNull: false,
+          allowNull: true,
         },
         dinner4: {
           type: DataTypes.STRING(100), // 저녁식사4
-          allowNull: false,
+          allowNull: true,
         },
         dinner5: {
           type: DataTypes.STRING(100), // 저녁식사5
-          allowNull: false,
+          allowNull: true,
         },
         dinner6: {
           type: DataTypes.STRING(100), // 저녁식사6
-          allowNull: false,
+          allowNull: true,
         },
         dinnerCalorie: {
           type: DataTypes.STRING(50), // 저녁식사 칼로리
-          allowNull: false,
+          allowNull: true,
         },
         dinnerImage: {
           type: DataTypes.STRING(600), // 저녁식사 이미지
@@ -107,11 +107,11 @@ module.exports = class Menu extends Model {
         },
         morningSnack1: {
           type: DataTypes.STRING(300), // 오전 간식1
-          allowNull: false,
+          allowNull: true,
         },
         morningSnack2: {
           type: DataTypes.STRING(300), // 오전 간식2
-          allowNull: false,
+          allowNull: true,
         },
         morningSnackImage: {
           type: DataTypes.STRING(600), // 오전 간식 이미지
@@ -119,11 +119,11 @@ module.exports = class Menu extends Model {
         },
         afternoonSnack1: {
           type: DataTypes.STRING(300), // 오후 간식1
-          allowNull: false,
+          allowNull: true,
         },
         afternoonSnack2: {
           type: DataTypes.STRING(300), // 오후 간식2
-          allowNull: false,
+          allowNull: true,
         },
         afternoonSnackImage: {
           type: DataTypes.STRING(600), // 오후 간식 이미지
@@ -147,7 +147,7 @@ module.exports = class Menu extends Model {
         },
         isDelete: {
           type: DataTypes.BOOLEAN,
-          allowNull: false,
+          allowNull: true,
           defaultValue: false,
         },
         deletedAt: {
