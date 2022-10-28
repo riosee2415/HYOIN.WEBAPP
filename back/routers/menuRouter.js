@@ -296,10 +296,10 @@ router.post("/create", isAdminCheck, async (req, res, next) => {
     "${dinnerCalorie}",
     ${dinnerImage ? `"${dinnerImage}"` : null},
     "${morningSnack1}",
-    "${morningSnack2}",
+    ${morningSnack2 ? `"${morningSnack2}"` : null},
     ${morningSnackImage ? `"${morningSnackImage}"` : null},
     "${afternoonSnack1}",
-    "${afternoonSnack2}",
+    ${afternoonSnack2 ? `"${afternoonSnack2}"` : null},
     ${afternoonSnackImage ? `"${afternoonSnackImage}"` : null},
     ${functionDiet ? `"${functionDiet}"` : null},
     ${diabetes ? `"${diabetes}"` : null},
@@ -394,12 +394,14 @@ router.post("/update", isAdminCheck, async (req, res, next) => {
               dinnerCalorie = "${dinnerCalorie}",
               dinnerImage = ${dinnerImage ? `"${dinnerImage}"` : null},
               morningSnack1 = "${morningSnack1}",
-              morningSnack2 = "${morningSnack2}",
+              morningSnack2 = ${morningSnack2 ? `"${morningSnack2}"` : null},
               morningSnackImage = ${
                 morningSnackImage ? `"${morningSnackImage}"` : null
               },
               afternoonSnack1 = "${afternoonSnack1}",
-              afternoonSnack2 = "${afternoonSnack2}",
+              afternoonSnack2 = ${
+                afternoonSnack2 ? `"${afternoonSnack2}"` : null
+              },
               afternoonSnackImage = ${
                 afternoonSnackImage ? `"${afternoonSnackImage}"` : null
               },
