@@ -189,38 +189,70 @@ const AppHeader = () => {
             />
           </ATag>
           <Wrapper dr={`row`} width={`auto`}>
-            <Menu
-              color={router.pathname.includes(`/company`) && Theme.subTheme2_C}
-            >
-              요양원 소개
-            </Menu>
-            <Menu
-              color={router.pathname.includes(`/service`) && Theme.subTheme2_C}
-            >
-              서비스 안내
-            </Menu>
-            <Menu color={router.pathname.includes(`/use`) && Theme.subTheme2_C}>
-              이용 안내
-            </Menu>
-            <Menu
-              color={
-                router.pathname.includes(`/happiness`) && Theme.subTheme2_C
-              }
-            >
-              행복나눔
-            </Menu>
-            <Menu
-              color={router.pathname.includes(`/garden`) && Theme.subTheme2_C}
-            >
-              알림마당
-            </Menu>
-            <Menu
-              margin={`0`}
-              color={router.pathname.includes(`/care`) && Theme.subTheme2_C}
-            >
-              <Text>노인장기요양</Text>
-              <Text>보험제도</Text>
-            </Menu>
+            <Link href={`/company/intro`}>
+              <a>
+                <Menu
+                  color={
+                    router.pathname.includes(`/company`) && Theme.subTheme2_C
+                  }
+                >
+                  요양원 소개
+                </Menu>
+              </a>
+            </Link>
+            <Link href={`/service/nursing?type=1`}>
+              <a>
+                <Menu
+                  color={
+                    router.pathname.includes(`/service`) && Theme.subTheme2_C
+                  }
+                >
+                  서비스 안내
+                </Menu>
+              </a>
+            </Link>
+            <Link href={`/use`}>
+              <a>
+                <Menu
+                  color={router.pathname.includes(`/use`) && Theme.subTheme2_C}
+                >
+                  이용 안내
+                </Menu>
+              </a>
+            </Link>
+            <Link href={`/happiness/info`}>
+              <a>
+                <Menu
+                  color={
+                    router.pathname.includes(`/happiness`) && Theme.subTheme2_C
+                  }
+                >
+                  행복나눔
+                </Menu>
+              </a>
+            </Link>
+            <Link href={`/garden/notice`}>
+              <a>
+                <Menu
+                  color={
+                    router.pathname.includes(`/garden`) && Theme.subTheme2_C
+                  }
+                >
+                  알림마당
+                </Menu>
+              </a>
+            </Link>
+            <Link href={`/care`}>
+              <a>
+                <Menu
+                  margin={`0`}
+                  color={router.pathname.includes(`/care`) && Theme.subTheme2_C}
+                >
+                  <Text>노인장기요양</Text>
+                  <Text>보험제도</Text>
+                </Menu>
+              </a>
+            </Link>
           </Wrapper>
           <Wrapper width={`15%`} al={`flex-end`}>
             <Wrapper dr={`row`} ju={`flex-end`}>

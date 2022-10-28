@@ -99,10 +99,16 @@ const Index = () => {
                   신청대상 :
                 </SpanText>
               </ListText>
-              <Text textAlign={`center`} display={width < 1100 && `contents`}>
+              <Text
+                textAlign={width < 900 && `center`}
+                display={width < 1100 && `contents`}
+              >
                 소득수준과 상관없이 노인장기요양보험 가입자(국민건강보험
                 가입자와 동일)와 그 피부양자
-                <Text textAlign={`center`} display={width < 1100 && `contents`}>
+                <Text
+                  textAlign={width < 900 && `center`}
+                  display={width < 1100 && `contents`}
+                >
                   의료급여수급권자로서 65세 이상 노인과 65세 미만의 노인성
                   질병이 있는 자
                 </Text>
@@ -120,10 +126,16 @@ const Index = () => {
                   급여대상 :
                 </SpanText>
               </ListText>
-              <Text textAlign={`center`} display={width < 1100 && `contents`}>
+              <Text
+                textAlign={width < 900 && `center`}
+                display={width < 1100 && `contents`}
+              >
                 65세 이상 노인 또는 치매, 중풍, 파킨스병 등 노인성 질병을 앓고
                 있는 65세 미만인 자 중
-                <Text textAlign={`center`} display={width < 1100 && `contents`}>
+                <Text
+                  textAlign={width < 900 && `center`}
+                  display={width < 1100 && `contents`}
+                >
                   6개월 이상의 기간 동안 일상생활을 수행하기 어려워
                   장기요양서비스가 필요하다고 인정되는 자
                 </Text>

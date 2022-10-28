@@ -18,6 +18,7 @@ import {
 import SubBanner from "../../components/SubBanner";
 import Theme from "../../components/Theme";
 import styled from "styled-components";
+import Fade from "react-reveal/Fade";
 
 const BottomText = styled(Text)`
   font-size: ${(props) => props.fontSize || `32px`};
@@ -74,14 +75,17 @@ const Support = () => {
                 bgColor={`rgba(0,0,0,0.5)`}
                 height={`100%`}
               >
-                <BottomText sCore={true}>나눔</BottomText>
-                <Text
-                  color={Theme.white_C}
-                  fontSize={width < 700 ? `18px` : `20px`}
-                  textAlign={`center`}
-                >
-                  아름다운 동행, 사람이 모여 따뜻한 세상을 만들어 가고 있습니다.
-                </Text>
+                <Fade bottom>
+                  <BottomText sCore={true}>나눔</BottomText>
+                  <Text
+                    color={Theme.white_C}
+                    fontSize={width < 700 ? `18px` : `20px`}
+                    textAlign={`center`}
+                  >
+                    아름다운 동행, 사람이 모여 따뜻한 세상을 만들어 가고
+                    있습니다.
+                  </Text>
+                </Fade>
               </Wrapper>
               <Image
                 src={
@@ -131,13 +135,14 @@ const Support = () => {
                 <Text margin={`20px 0`} fontSize={`24px`} fontWeight={`600`}>
                   금품 후원
                 </Text>
-
-                <Text fontSize={width < 1100 ? `16px` : `20px`}>
-                  계좌이체 및 방문납입 등의 방법으로
-                </Text>
-                <Text fontSize={width < 1100 ? `16px` : `20px`}>
-                  일정금액을 정기/비정기적으로 후원
-                </Text>
+                <Fade bottom>
+                  <Text fontSize={width < 1100 ? `16px` : `20px`}>
+                    계좌이체 및 방문납입 등의 방법으로
+                  </Text>
+                  <Text fontSize={width < 1100 ? `16px` : `20px`}>
+                    일정금액을 정기/비정기적으로 후원
+                  </Text>
+                </Fade>
               </Wrapper>
 
               <Wrapper
@@ -164,13 +169,14 @@ const Support = () => {
                 <Text margin={`20px 0`} fontSize={`24px`} fontWeight={`600`}>
                   특별 후원
                 </Text>
-
-                <Text fontSize={width < 1100 ? `16px` : `20px`}>
-                  계좌이체 및 방문납입 등의 방법으로
-                </Text>
-                <Text fontSize={width < 1100 ? `16px` : `20px`}>
-                  일시 기부금 및 지정 기부금 후원
-                </Text>
+                <Fade bottom>
+                  <Text fontSize={width < 1100 ? `16px` : `20px`}>
+                    계좌이체 및 방문납입 등의 방법으로
+                  </Text>
+                  <Text fontSize={width < 1100 ? `16px` : `20px`}>
+                    일시 기부금 및 지정 기부금 후원
+                  </Text>
+                </Fade>
               </Wrapper>
 
               <Wrapper
@@ -196,13 +202,14 @@ const Support = () => {
                 <Text margin={`20px 0`} fontSize={`24px`} fontWeight={`600`}>
                   물품 후원
                 </Text>
-
-                <Text fontSize={width < 1100 ? `16px` : `20px`}>
-                  어르신의 생활에 도움이 되는
-                </Text>
-                <Text fontSize={width < 1100 ? `16px` : `20px`}>
-                  각종 물품 후원
-                </Text>
+                <Fade bottom>
+                  <Text fontSize={width < 1100 ? `16px` : `20px`}>
+                    어르신의 생활에 도움이 되는
+                  </Text>
+                  <Text fontSize={width < 1100 ? `16px` : `20px`}>
+                    각종 물품 후원
+                  </Text>
+                </Fade>
               </Wrapper>
             </Wrapper>
 
@@ -214,7 +221,9 @@ const Support = () => {
               textAlign={`center`}
               fontWeight={`600`}
             >
-              후원은 어르신들 필요물품 구입 및 프로그램 운영 등에 사용됩니다.
+              <Fade bottom>
+                후원은 어르신들 필요물품 구입 및 프로그램 운영 등에 사용됩니다.
+              </Fade>
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`100px 0 40px`}>

@@ -95,6 +95,7 @@ export const WholeWrapper = styled.section`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   border-radius: ${(props) => props.radius};
+  overflow: ${(props) => props.overflowX};
 `;
 
 export const Wrapper = styled.div`
