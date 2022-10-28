@@ -97,10 +97,10 @@ const Location = () => {
                 top={`90px`}
                 bottom={`auto`}
                 left={`0`}
-                zIndex={`100`}
               >
                 <RsWrapper al={`flex-start`} position={`relative`}>
                   <Wrapper
+                    zIndex={`100`}
                     width={`auto`}
                     bgColor={Theme.basicTheme_C}
                     color={Theme.white_C}

@@ -3,6 +3,7 @@ import { ATag, Text, Wrapper, Image } from "../commonComponents";
 import styled from "styled-components";
 import Theme from "../Theme";
 import useWidth from "../../hooks/useWidth";
+import Fade from "react-reveal/Fade";
 
 const ListText = styled(Text)`
   display: list-item;
@@ -51,14 +52,16 @@ const Normal = () => {
           padding={width < 900 ? `80px 10px` : `120px 10px`}
           color={Theme.white_C}
         >
-          <Title>주간보호</Title>
-          <Text fontSize={width < 900 ? `16px` : `20px`} textAlign={`center`}>
-            효인주간보호는 어르신이 가능한 오랫동안 집에서 생활을 유지할 수
-            있도록
-          </Text>
-          <Text fontSize={width < 900 ? `16px` : `20px`} textAlign={`center`}>
-            자립생활을 지원하는 것을 목표로 합니다.
-          </Text>
+          <Fade bottom>
+            <Title>주간보호</Title>
+            <Text fontSize={width < 900 ? `16px` : `20px`} textAlign={`center`}>
+              효인주간보호는 어르신이 가능한 오랫동안 집에서 생활을 유지할 수
+              있도록
+            </Text>
+            <Text fontSize={width < 900 ? `16px` : `20px`} textAlign={`center`}>
+              자립생활을 지원하는 것을 목표로 합니다.
+            </Text>
+          </Fade>
         </Wrapper>
       </Wrapper>
 
@@ -81,19 +84,21 @@ const Normal = () => {
       </Wrapper>
 
       <Wrapper al={`flex-start`}>
-        <ListText margin={`0 0 16px 24px`}>
-          노인성 질활 및 만성 질환으로 인하여 일상생활이 불편한 어르신들에게
-          심신기능의 강화 및 회복을 지원합니다.
-        </ListText>
-        <ListText margin={`0 0 16px 24px`}>
-          가족 부양을 받을 수 없는 어르신들에게 낮 동안 일상생활에 필요한
-          서비스를 제공합니다.
-        </ListText>
-        <ListText margin={`0 0 16px 24px`}>
-          유지 · 개선 등을 위하여 기본프로그램과 수급자 상태별 맞춤형 프로그램을
-          제공합니다.
-        </ListText>
-        <ListText>목욕, 사회적응 훈련을 주 1회 이상 제공</ListText>
+        <Fade bottom>
+          <ListText margin={`0 0 16px 24px`}>
+            노인성 질활 및 만성 질환으로 인하여 일상생활이 불편한 어르신들에게
+            심신기능의 강화 및 회복을 지원합니다.
+          </ListText>
+          <ListText margin={`0 0 16px 24px`}>
+            가족 부양을 받을 수 없는 어르신들에게 낮 동안 일상생활에 필요한
+            서비스를 제공합니다.
+          </ListText>
+          <ListText margin={`0 0 16px 24px`}>
+            유지 · 개선 등을 위하여 기본프로그램과 수급자 상태별 맞춤형
+            프로그램을 제공합니다.
+          </ListText>
+          <ListText>목욕, 사회적응 훈련을 주 1회 이상 제공</ListText>
+        </Fade>
       </Wrapper>
       <Wrapper
         dr={`row`}

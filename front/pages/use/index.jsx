@@ -17,6 +17,7 @@ import {
 } from "../../components/commonComponents";
 import SubBanner from "../../components/SubBanner";
 import Theme from "../../components/Theme";
+import Fade from "react-reveal/Fade";
 
 const Index = () => {
   ////// GLOBAL STATE //////
@@ -67,32 +68,34 @@ const Index = () => {
               radius={`20px`}
               margin={`0 0 100px`}
             >
-              <Text
-                fontSize={
-                  width < 1100 ? (width < 700 ? `14px` : `16px`) : `20px`
-                }
-                textAlign={`center`}
-              >
-                <SpanText fontWeight={`600`}>
-                  65세 이상 노인 또는 65세 미만
-                </SpanText>
-                으로서 노인성 질환으로&nbsp;
-                <SpanText fontWeight={`600`}>
-                  스스로 일상생활을 수행하기 어렵고,
-                </SpanText>
-              </Text>
-              <Text
-                fontSize={
-                  width < 1100 ? (width < 700 ? `14px` : `16px`) : `20px`
-                }
-                textAlign={`center`}
-              >
-                <SpanText fontWeight={`600`}>
-                  장기요양 판정위원회에서 1~2등급 또는 3~5등급(시설급여) 판정을
-                  받은 어르신
-                </SpanText>{" "}
-                주간보호 이용 자격
-              </Text>
+              <Fade bottom>
+                <Text
+                  fontSize={
+                    width < 1100 ? (width < 700 ? `14px` : `16px`) : `20px`
+                  }
+                  textAlign={`center`}
+                >
+                  <SpanText fontWeight={`600`}>
+                    65세 이상 노인 또는 65세 미만
+                  </SpanText>
+                  으로서 노인성 질환으로&nbsp;
+                  <SpanText fontWeight={`600`}>
+                    스스로 일상생활을 수행하기 어렵고,
+                  </SpanText>
+                </Text>
+                <Text
+                  fontSize={
+                    width < 1100 ? (width < 700 ? `14px` : `16px`) : `20px`
+                  }
+                  textAlign={`center`}
+                >
+                  <SpanText fontWeight={`600`}>
+                    장기요양 판정위원회에서 1~2등급 또는 3~5등급(시설급여)
+                    판정을 받은 어르신
+                  </SpanText>
+                  주간보호 이용 자격
+                </Text>
+              </Fade>
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 40px`}>

@@ -10,6 +10,7 @@ import {
 import styled from "styled-components";
 import Theme from "../Theme";
 import useWidth from "../../hooks/useWidth";
+import Fade from "react-reveal/Fade";
 
 const Title = styled(Wrapper)`
   font-size: 32px;
@@ -53,49 +54,52 @@ const Unit = () => {
 
   return (
     <Wrapper padding={`80px 0 120px`}>
-      <Title>소그룹으로 나눈 전문 케어 유닛</Title>
-      {width < 900 ? (
-        <Text fontSize={`16px`} margin={`25px 0 0`} textAlign={`center`}>
-          신체 및 인지 기능 등에 따라 4Unit 구분 배정하여, 4Program, 12종
-          서비스로 각각의 제공기준을 적용하여 어르신 특성에 맞게 서비스를
-          제공합니다.
-        </Text>
-      ) : (
-        <>
-          <Text fontSize={`18px`} margin={`25px 0 0`}>
+      <Fade bottom>
+        <Title>소그룹으로 나눈 전문 케어 유닛</Title>
+        {width < 900 ? (
+          <Text fontSize={`16px`} margin={`25px 0 0`} textAlign={`center`}>
             신체 및 인지 기능 등에 따라 4Unit 구분 배정하여, 4Program, 12종
-            서비스로
+            서비스로 각각의 제공기준을 적용하여 어르신 특성에 맞게 서비스를
+            제공합니다.
           </Text>
-          <Text fontSize={`18px`}>
-            각각의 제공기준을 적용하여 어르신 특성에 맞게 서비스를 제공합니다.
-          </Text>
-        </>
-      )}
-
+        ) : (
+          <>
+            <Text fontSize={`18px`} margin={`25px 0 0`}>
+              신체 및 인지 기능 등에 따라 4Unit 구분 배정하여, 4Program, 12종
+              서비스로
+            </Text>
+            <Text fontSize={`18px`}>
+              각각의 제공기준을 적용하여 어르신 특성에 맞게 서비스를 제공합니다.
+            </Text>
+          </>
+        )}
+      </Fade>
       <Wrapper dr={`row`} margin={`60px 0 80px`}>
         <Wrapper
           fontSize={width < 900 ? `17px` : `20px`}
           fontWeight={`bold`}
           width={width < 900 ? `170px` : `300px`}
         >
-          <Wrapper
-            width={width < 900 ? `150px` : `200px`}
-            height={width < 900 ? `150px` : `200px`}
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_care-1.png")`}
-            radius={`100%`}
-            overflow={`hidden`}
-            margin={`0 0 20px`}
-          >
+          <Fade bottom>
             <Wrapper
-              bgColor={`rgba(13, 42, 74, 0.6)`}
-              color={Theme.white_C}
-              height={`100%`}
-              fontSize={width < 900 ? `20px` : `28px`}
-              fontWeight={`bold`}
+              width={width < 900 ? `150px` : `200px`}
+              height={width < 900 ? `150px` : `200px`}
+              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_care-1.png")`}
+              radius={`100%`}
+              overflow={`hidden`}
+              margin={`0 0 20px`}
             >
-              4 유닛
+              <Wrapper
+                bgColor={`rgba(13, 42, 74, 0.6)`}
+                color={Theme.white_C}
+                height={`100%`}
+                fontSize={width < 900 ? `20px` : `28px`}
+                fontWeight={`bold`}
+              >
+                4 유닛
+              </Wrapper>
             </Wrapper>
-          </Wrapper>
+          </Fade>
           <Text>신체 및 인지 기능에</Text>
           <Text>따라 유닛 배정</Text>
         </Wrapper>
@@ -104,24 +108,26 @@ const Unit = () => {
           fontWeight={`bold`}
           width={width < 900 ? `170px` : `300px`}
         >
-          <Wrapper
-            width={width < 900 ? `150px` : `200px`}
-            height={width < 900 ? `150px` : `200px`}
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_care-2.png")`}
-            radius={`100%`}
-            overflow={`hidden`}
-            margin={`0 0 20px`}
-          >
+          <Fade bottom delay={100}>
             <Wrapper
-              bgColor={`rgba(13, 42, 74, 0.6)`}
-              color={Theme.white_C}
-              height={`100%`}
-              fontSize={width < 900 ? `20px` : `28px`}
-              fontWeight={`bold`}
+              width={width < 900 ? `150px` : `200px`}
+              height={width < 900 ? `150px` : `200px`}
+              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_care-2.png")`}
+              radius={`100%`}
+              overflow={`hidden`}
+              margin={`0 0 20px`}
             >
-              4 프로그램
+              <Wrapper
+                bgColor={`rgba(13, 42, 74, 0.6)`}
+                color={Theme.white_C}
+                height={`100%`}
+                fontSize={width < 900 ? `20px` : `28px`}
+                fontWeight={`bold`}
+              >
+                4 프로그램
+              </Wrapper>
             </Wrapper>
-          </Wrapper>
+          </Fade>
           <Text>4가지 영역</Text>
           <Text>프로그램 구분</Text>
         </Wrapper>
@@ -130,24 +136,26 @@ const Unit = () => {
           fontWeight={`bold`}
           width={width < 900 ? `170px` : `300px`}
         >
-          <Wrapper
-            width={width < 900 ? `150px` : `200px`}
-            height={width < 900 ? `150px` : `200px`}
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_care-3.png")`}
-            radius={`100%`}
-            overflow={`hidden`}
-            margin={`0 0 20px`}
-          >
+          <Fade bottom delay={200}>
             <Wrapper
-              bgColor={`rgba(13, 42, 74, 0.6)`}
-              color={Theme.white_C}
-              height={`100%`}
-              fontSize={width < 900 ? `20px` : `28px`}
-              fontWeight={`bold`}
+              width={width < 900 ? `150px` : `200px`}
+              height={width < 900 ? `150px` : `200px`}
+              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_care-3.png")`}
+              radius={`100%`}
+              overflow={`hidden`}
+              margin={`0 0 20px`}
             >
-              12 서비스
+              <Wrapper
+                bgColor={`rgba(13, 42, 74, 0.6)`}
+                color={Theme.white_C}
+                height={`100%`}
+                fontSize={width < 900 ? `20px` : `28px`}
+                fontWeight={`bold`}
+              >
+                12 서비스
+              </Wrapper>
             </Wrapper>
-          </Wrapper>
+          </Fade>
           <Text>12가지 케어로</Text>
           <Text>맞춤형 서비스</Text>
         </Wrapper>
@@ -195,7 +203,7 @@ const Unit = () => {
             기능회복 유닛
           </Text>
 
-          <ListText margin={`0 0 15px`} fontWeight={`bold`}>
+          <ListText margin={`0 0 15px 24px`} fontWeight={`bold`}>
             보행 및 인지가능하고 일상생활 자립이 가능한 어르신
           </ListText>
           <ListText>
@@ -242,7 +250,7 @@ const Unit = () => {
             인지향상 유닛
           </Text>
 
-          <ListText margin={`0 0 15px`} fontWeight={`bold`}>
+          <ListText margin={`0 0 15px 24px`} fontWeight={`bold`}>
             행동변화 조절 인지기능 유지 및 향상
           </ListText>
           <ListText>
@@ -363,12 +371,14 @@ const Unit = () => {
               <Text fontSize={width < 900 ? `17px` : `20px`}>(5개 분야)</Text>
             </Wrapper>
           </Wrapper>
-          <ListText
-            fontSize={width < 900 ? `16px` : `18px`}
-            fontWeight={`bold`}
-          >
-            상담, 일상지원, 신체지원, 영양급식, 안전지원 서비스 등
-          </ListText>
+          <Fade bottom>
+            <ListText
+              fontSize={width < 900 ? `16px` : `18px`}
+              fontWeight={`bold`}
+            >
+              상담, 일상지원, 신체지원, 영양급식, 안전지원 서비스 등
+            </ListText>
+          </Fade>
         </Wrapper>
         <Wrapper
           width={width < 900 ? `49%` : `calc(100% / 4.2)`}
@@ -390,12 +400,14 @@ const Unit = () => {
               <Text fontSize={width < 900 ? `17px` : `20px`}>(3개 분야)</Text>
             </Wrapper>
           </Wrapper>
-          <ListText
-            fontSize={width < 900 ? `16px` : `18px`}
-            fontWeight={`bold`}
-          >
-            건강증진, 기능회복, 인지향상 서비스 등
-          </ListText>
+          <Fade bottom>
+            <ListText
+              fontSize={width < 900 ? `16px` : `18px`}
+              fontWeight={`bold`}
+            >
+              건강증진, 기능회복, 인지향상 서비스 등
+            </ListText>
+          </Fade>
         </Wrapper>
         <Wrapper
           width={width < 900 ? `49%` : `calc(100% / 4.2)`}
@@ -417,12 +429,14 @@ const Unit = () => {
               <Text fontSize={width < 900 ? `17px` : `20px`}>(2개 분야)</Text>
             </Wrapper>
           </Wrapper>
-          <ListText
-            fontSize={width < 900 ? `16px` : `18px`}
-            fontWeight={`bold`}
-          >
-            여가지원, 정서지원 서비스 등
-          </ListText>
+          <Fade bottom>
+            <ListText
+              fontSize={width < 900 ? `16px` : `18px`}
+              fontWeight={`bold`}
+            >
+              여가지원, 정서지원 서비스 등
+            </ListText>
+          </Fade>
         </Wrapper>
         <Wrapper
           width={width < 900 ? `49%` : `calc(100% / 4.2)`}
@@ -444,12 +458,14 @@ const Unit = () => {
               <Text fontSize={width < 900 ? `17px` : `20px`}>(2개 분야)</Text>
             </Wrapper>
           </Wrapper>
-          <ListText
-            fontSize={width < 900 ? `16px` : `18px`}
-            fontWeight={`bold`}
-          >
-            가족지원, 특화지원 서비스 등
-          </ListText>
+          <Fade bottom>
+            <ListText
+              fontSize={width < 900 ? `16px` : `18px`}
+              fontWeight={`bold`}
+            >
+              가족지원, 특화지원 서비스 등
+            </ListText>
+          </Fade>
         </Wrapper>
       </Wrapper>
 

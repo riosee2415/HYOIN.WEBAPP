@@ -3,6 +3,7 @@ import { ATag, Text, Wrapper, Image } from "../commonComponents";
 import styled from "styled-components";
 import Theme from "../Theme";
 import useWidth from "../../hooks/useWidth";
+import Fade from "react-reveal/Fade";
 
 const ListText = styled(Text)`
   display: list-item;
@@ -42,19 +43,21 @@ const Dementia = () => {
       </Wrapper>
 
       <Wrapper al={`flex-start`}>
-        <ListText>
-          {width < 900 ? (
-            `치매 어르신들의 저하된 인지기능 회복 및 유지를 위한 전문적인 프로그램 제공으로 부양가족들의 부담감을 경감시키고 어르신들의 심리 · 사회적 안정을 지원합니다.`
-          ) : (
-            <>
-              <Text>
-                치매 어르신들의 저하된 인지기능 회복 및 유지를 위한 전문적인
-                프로그램 제공으로 부양가족들의 부담감을 경감시키고
-              </Text>
-              어르신들의 심리 · 사회적 안정을 지원합니다.
-            </>
-          )}
-        </ListText>
+        <Fade bottom>
+          <ListText>
+            {width < 900 ? (
+              `치매 어르신들의 저하된 인지기능 회복 및 유지를 위한 전문적인 프로그램 제공으로 부양가족들의 부담감을 경감시키고 어르신들의 심리 · 사회적 안정을 지원합니다.`
+            ) : (
+              <>
+                <Text>
+                  치매 어르신들의 저하된 인지기능 회복 및 유지를 위한 전문적인
+                  프로그램 제공으로 부양가족들의 부담감을 경감시키고
+                </Text>
+                어르신들의 심리 · 사회적 안정을 지원합니다.
+              </>
+            )}
+          </ListText>
+        </Fade>
       </Wrapper>
       <Wrapper
         dr={`row`}

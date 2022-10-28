@@ -28,6 +28,7 @@ import { Empty } from "antd";
 import { SwapRightOutlined } from "@ant-design/icons";
 import { RECRUIT_LIST_REQUEST } from "../reducers/recruit";
 import { PROGRAM_SLIDE_LIST_REQUEST } from "../reducers/program";
+import Fade from "react-reveal/Fade";
 
 const MainWrapper = styled(Wrapper)`
   padding-left: 285px;
@@ -463,34 +464,40 @@ const Home = ({}) => {
                 al={`flex-start`}
                 width={width < 1280 ? (width < 900 ? `100%` : `50%`) : `40%`}
               >
-                <Image
-                  width={width < 900 ? `200px` : `330px`}
-                  alt="logo"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_neo.png`}
-                />
-                <Wrapper
-                  width={`auto`}
-                  borderBottom={`2px solid ${Theme.basicTheme_C}`}
-                  margin={`45px 0 25px`}
-                >
-                  <CommonTitle
-                    fontSize={width < 900 ? `25px` : `32px`}
-                    margin={`0`}
-                    color={Theme.basicTheme_C}
-                    lineHeight={`1.1`}
+                <Fade bottom>
+                  <Image
+                    width={width < 900 ? `200px` : `330px`}
+                    alt="logo"
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_neo.png`}
+                  />
+                </Fade>
+                <Fade bottom>
+                  <Wrapper
+                    width={`auto`}
+                    borderBottom={`2px solid ${Theme.basicTheme_C}`}
+                    margin={`45px 0 25px`}
                   >
-                    孝를 실천하는 아름다운 사람들
-                  </CommonTitle>
-                </Wrapper>
-                <Text fontSize={width < 900 ? `16px` : `20px`}>
-                  어르신들께 가족같은 마음으로 서비스를 제공하고
-                </Text>
-                <Text fontSize={width < 900 ? `16px` : `20px`}>
-                  어르신과 보호자 욕구에 맞는 최고의 서비스를 제공하여
-                </Text>
-                <Text fontSize={width < 900 ? `16px` : `20px`}>
-                  심리, 사회적 안정을 지원하겠습니다.
-                </Text>
+                    <CommonTitle
+                      fontSize={width < 900 ? `25px` : `32px`}
+                      margin={`0`}
+                      color={Theme.basicTheme_C}
+                      lineHeight={`1.1`}
+                    >
+                      孝를 실천하는 아름다운 사람들
+                    </CommonTitle>
+                  </Wrapper>
+                </Fade>
+                <Fade bottom>
+                  <Text fontSize={width < 900 ? `16px` : `20px`}>
+                    어르신들께 가족같은 마음으로 서비스를 제공하고
+                  </Text>
+                  <Text fontSize={width < 900 ? `16px` : `20px`}>
+                    어르신과 보호자 욕구에 맞는 최고의 서비스를 제공하여
+                  </Text>
+                  <Text fontSize={width < 900 ? `16px` : `20px`}>
+                    심리, 사회적 안정을 지원하겠습니다.
+                  </Text>
+                </Fade>
               </Wrapper>
               <Image
                 alt="image"
@@ -508,27 +515,29 @@ const Home = ({}) => {
             padding={width < 900 ? `80px 0` : `120px 0`}
           >
             <RsWrapper>
-              <Text
-                fontSize={width < 900 ? `16px` : `20px`}
-                fontWeight={`bold`}
-                color={Theme.subTheme10_C}
-              >
-                서비스 안내
-              </Text>
-              <Text
-                fontFamily={`"S-CoreDream-3Light"`}
-                fontSize={width < 900 ? `25px` : `32px`}
-                margin={`30px 0 0`}
-              >
-                효인에서 제공하는
-              </Text>
-              <Text
-                fontFamily={`"S-CoreDream-6Bold"`}
-                fontSize={width < 900 ? `25px` : `32px`}
-                margin={`0 0 60px`}
-              >
-                최상의 서비스를 만나보세요.
-              </Text>
+              <Fade bottom>
+                <Text
+                  fontSize={width < 900 ? `16px` : `20px`}
+                  fontWeight={`bold`}
+                  color={Theme.subTheme10_C}
+                >
+                  서비스 안내
+                </Text>
+                <Text
+                  fontFamily={`"S-CoreDream-3Light"`}
+                  fontSize={width < 900 ? `25px` : `32px`}
+                  margin={`30px 0 0`}
+                >
+                  효인에서 제공하는
+                </Text>
+                <Text
+                  fontFamily={`"S-CoreDream-6Bold"`}
+                  fontSize={width < 900 ? `25px` : `32px`}
+                  margin={`0 0 60px`}
+                >
+                  최상의 서비스를 만나보세요.
+                </Text>
+              </Fade>
               <Wrapper dr={`row`} ju={`space-between`}>
                 <Wrapper
                   width={width < 900 ? `49%` : `calc(100% / 4.2)`}

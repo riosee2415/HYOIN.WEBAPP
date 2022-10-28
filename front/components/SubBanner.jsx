@@ -5,7 +5,6 @@ import {
   RsWrapper,
   WholeWrapper,
   Wrapper,
-  Image,
   Text,
   SpanText,
 } from "./commonComponents";
@@ -14,6 +13,7 @@ import Theme from "./Theme";
 import Link from "next/link";
 import { withResizeDetector } from "react-resize-detector";
 import { HomeFilled, RightOutlined } from "@ant-design/icons";
+import Fade from "react-reveal/Fade";
 
 const ImgWrapper = styled(Wrapper)`
   height: 540px;
@@ -118,10 +118,15 @@ const SubBanner = ({ width, bgImg, menuName }) => {
           ju={`flex-end`}
           padding={width < 900 ? `0 0 30px` : `0 0 72px`}
         >
-          <Title>{parentMenuName}</Title>
-          <Text color={Theme.white_C} fontSize={width < 900 ? `17px` : `24px`}>
-            {currentMenuContent}
-          </Text>
+          <Fade bottom>
+            <Title>{parentMenuName}</Title>
+            <Text
+              color={Theme.white_C}
+              fontSize={width < 900 ? `17px` : `24px`}
+            >
+              {currentMenuContent}
+            </Text>
+          </Fade>
         </RsWrapper>
       </ImgWrapper>
 

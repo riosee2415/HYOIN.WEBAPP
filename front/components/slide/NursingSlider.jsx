@@ -6,6 +6,7 @@ import styled from "styled-components";
 import useWidth from "../../hooks/useWidth";
 import { useRouter } from "next/router";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import Fade from "react-reveal/Fade";
 
 const NursingSliderWrapper = styled(Wrapper)`
   height: 700px;
@@ -194,13 +195,15 @@ const NursingSlider = ({
             padding={width < 900 ? `0 10px` : `0 50px 0 0`}
           >
             <Wrapper al={`flex-start`}>
-              <CommonTitle color={Theme.white_C} margin={`0`}>
-                요양원
-              </CommonTitle>
-              <Text fontSize={`18px`} margin={`40px 0`}>
-                가족을 돌보는 마음으로 이동지원서비스, 급식(간식)서비스,
-                개인위생서비스, 목욕서비스, 이미용서비스를 지원하고 있습니다.
-              </Text>
+              <Fade bottom>
+                <CommonTitle color={Theme.white_C} margin={`0`}>
+                  요양원
+                </CommonTitle>
+                <Text fontSize={`18px`} margin={`40px 0`}>
+                  가족을 돌보는 마음으로 이동지원서비스, 급식(간식)서비스,
+                  개인위생서비스, 목욕서비스, 이미용서비스를 지원하고 있습니다.
+                </Text>
+              </Fade>
               <Wrapper
                 width={`auto`}
                 fontSize={`18px`}
