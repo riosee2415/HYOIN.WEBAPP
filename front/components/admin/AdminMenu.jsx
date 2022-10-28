@@ -185,6 +185,9 @@ const AdminMenu = () => {
           <Menu.Item key="/admin/schedule/month">
             <MenuName>월간시간표 관리</MenuName>
           </Menu.Item>
+          <Menu.Item key="/admin/schedule/move">
+            <MenuName>이동서비스 시간표 관리</MenuName>
+          </Menu.Item>
         </SubMenu>
         <SubMenu
           key="sub9"
