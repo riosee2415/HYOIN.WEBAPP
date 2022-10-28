@@ -47,13 +47,17 @@ import {
 import Theme from "../../../components/Theme";
 import moment from "moment";
 import {
-  PROGRAM_CREATE_REQUEST,
-  PROGRAM_DELETE_REQUEST,
-  PROGRAM_IMAGE_RESET,
-  PROGRAM_IMAGE_UPLOAD_REQUEST,
-  PROGRAM_LIST_REQUEST,
-  PROGRAM_UPDATE_REQUEST,
-} from "../../../reducers/program";
+  ADMIN_MENU_LIST_REQUEST,
+  MENU_AM_IMG_UPLOAD_REQUEST,
+  MENU_BR_IMG_UPLOAD_REQUEST,
+  MENU_CREATE_REQUEST,
+  MENU_DELETE_REQUEST,
+  MENU_DI_IMG_UPLOAD_REQUEST,
+  MENU_IMAGE_RESET,
+  MENU_LU_IMG_UPLOAD_REQUEST,
+  MENU_PM_IMG_UPLOAD_REQUEST,
+  MENU_UPDATE_REQUEST,
+} from "../../../reducers/menu";
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -98,49 +102,63 @@ const HoverListWrapper = styled(Wrapper)`
   }
 `;
 
-const Type = ({ router }) => {
-  // LOAD CURRENT INFO AREA /////////////////////////////////////////////
+const List = ({ router }) => {
+  ////// GOLBAL STATE //////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
 
-  const moveLinkHandler = useCallback((link) => {
-    router.push(link);
-  }, []);
-
-  useEffect(() => {
-    if (st_loadMyInfoDone) {
-      if (!me || parseInt(me.level) < 3) {
-        moveLinkHandler(`/admin`);
-      }
-    }
-  }, [st_loadMyInfoDone]);
-  /////////////////////////////////////////////////////////////////////////
-
-  ////// GOLBAL STATE //////
   const {
-    programList,
-    programImagePath,
-    st_programListError,
+    adminMenuList,
+
+    menuBrImgPath,
+    menuLuImgPath,
+    menuDiImgPath,
+    menuAMImgPath,
+    menuPMImgPath,
     //
-    st_programImageUploadLoading,
-    st_programImageUploadDone,
-    st_programImageUploadError,
-    //
-    st_programCreateDone,
-    st_programCreateError,
-    //
-    st_programUpdateDone,
-    st_programUpdateError,
-    //
-    st_programDeleteDone,
-    st_programDeleteError,
-  } = useSelector((state) => state.program);
+    st_adminMenuListError,
+
+    st_menuBrImgUploadLoading,
+    st_menuBrImgUploadDone,
+    st_menuBrImgUploadError,
+
+    st_menuLuImgUploadLoading,
+    st_menuLuImgUploadDone,
+    st_menuLuImgUploadError,
+
+    st_menuDiImgUploadLoading,
+    st_menuDiImgUploadDone,
+    st_menuDiImgUploadError,
+
+    st_menuAMImgUploadLoading,
+    st_menuAMImgUploadDone,
+    st_menuAMImgUploadError,
+
+    st_menuPMImgUploadLoading,
+    st_menuPMImgUploadDone,
+    st_menuPMImgUploadError,
+
+    st_menuCreateDone,
+    st_menuCreateError,
+
+    st_menuUpdateDone,
+    st_menuUpdateError,
+
+    st_menuDeleteDone,
+    st_menuDeleteError,
+  } = useSelector((state) => state.menu);
 
   ////// HOOKS //////
-
-  const imageRef = useRef();
   const dispatch = useDispatch();
 
+  const brImageRef = useRef();
+  const luImageRef = useRef();
+  const diImageRef = useRef();
+  const amImageRef = useRef();
+  const pmImageRef = useRef();
+
   const [cForm] = Form.useForm();
+  const [createForm] = Form.useForm();
+  const [updateForm] = Form.useForm();
 
   // 날짜
   const [selectDate, setSelectDate] = useState(moment());
@@ -158,10 +176,17 @@ const Type = ({ router }) => {
   ////// REDUX //////
 
   ////// USEEFFECT //////
+  useEffect(() => {
+    if (st_loadMyInfoDone) {
+      if (!me || parseInt(me.level) < 3) {
+        moveLinkHandler(`/admin`);
+      }
+    }
+  }, [st_loadMyInfoDone]);
 
   useEffect(() => {
     dispatch({
-      type: PROGRAM_LIST_REQUEST,
+      type: ADMIN_MENU_LIST_REQUEST,
       data: {
         searchMonth: moment().format("YYYY-MM"),
       },
@@ -169,140 +194,206 @@ const Type = ({ router }) => {
   }, []);
 
   useEffect(() => {
-    if (st_programListError) {
-      return message.error(st_programListError);
+    if (st_adminMenuListError) {
+      return message.error(st_adminMenuListError);
     }
-  }, [st_programListError]);
+  }, [st_adminMenuListError]);
 
-  // 이미지 업로드
+  // 아침메뉴 업로드
   useEffect(() => {
-    if (st_programImageUploadDone) {
-      setCImage(null);
-      return message.success("이미지가 업로드 되었습니다.");
+    if (st_menuBrImgUploadDone) {
+      return message.success("아침메뉴가 업로드 되었습니다.");
     }
-  }, [st_programImageUploadDone]);
+  }, [st_menuBrImgUploadDone]);
 
   useEffect(() => {
-    if (st_programImageUploadError) {
-      return message.error(st_programImageUploadError);
+    if (st_menuBrImgUploadError) {
+      return message.error(st_menuBrImgUploadError);
     }
-  }, [st_programImageUploadError]);
+  }, [st_menuBrImgUploadError]);
+
+  // 점심메뉴 업로드
+  useEffect(() => {
+    if (st_menuLuImgUploadDone) {
+      return message.success("점심메뉴가 업로드 되었습니다.");
+    }
+  }, [st_menuLuImgUploadDone]);
+
+  useEffect(() => {
+    if (st_menuLuImgUploadError) {
+      return message.error(st_menuLuImgUploadError);
+    }
+  }, [st_menuLuImgUploadError]);
+
+  // 저녁메뉴 업로드
+  useEffect(() => {
+    if (st_menuDiImgUploadDone) {
+      return message.success("저녁메뉴가 업로드 되었습니다.");
+    }
+  }, [st_menuDiImgUploadDone]);
+
+  useEffect(() => {
+    if (st_menuDiImgUploadError) {
+      return message.error(st_menuDiImgUploadError);
+    }
+  }, [st_menuDiImgUploadError]);
+
+  // 오전간식 업로드
+  useEffect(() => {
+    if (st_menuAMImgUploadDone) {
+      return message.success("오전간식이 업로드 되었습니다.");
+    }
+  }, [st_menuAMImgUploadDone]);
+
+  useEffect(() => {
+    if (st_menuAMImgUploadError) {
+      return message.error(st_menuAMImgUploadError);
+    }
+  }, [st_menuAMImgUploadError]);
+
+  // 오후간식 업로드
+  useEffect(() => {
+    if (st_menuPMImgUploadDone) {
+      return message.success("오후간식이 업로드 되었습니다.");
+    }
+  }, [st_menuPMImgUploadDone]);
+
+  useEffect(() => {
+    if (st_menuPMImgUploadError) {
+      return message.error(st_menuPMImgUploadError);
+    }
+  }, [st_menuPMImgUploadError]);
 
   // 생성하기
   useEffect(() => {
-    if (st_programCreateDone) {
+    if (st_menuCreateDone) {
       dispatch({
-        type: PROGRAM_LIST_REQUEST,
+        type: ADMIN_MENU_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
+      });
+
+      dispatch({
+        type: MENU_IMAGE_RESET,
       });
 
       cModalToggle(null);
-      return message.success("시간표가 생성되었습니다.");
+      createForm.resetFields();
+
+      return message.success("식단표가 생성되었습니다.");
     }
-  }, [st_programCreateDone]);
+  }, [st_menuCreateDone]);
 
   useEffect(() => {
-    if (st_programCreateError) {
-      return message.error(st_programCreateError);
+    if (st_menuCreateError) {
+      return message.error(st_menuCreateError);
     }
-  }, [st_programCreateError]);
+  }, [st_menuCreateError]);
 
   // 수정하기
   useEffect(() => {
-    if (st_programUpdateDone) {
+    if (st_menuUpdateDone) {
       dispatch({
-        type: PROGRAM_LIST_REQUEST,
+        type: ADMIN_MENU_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
       });
 
+      dispatch({
+        type: MENU_IMAGE_RESET,
+      });
+
       uModalToggle(null);
-      return message.success("시간표가 수정되었습니다.");
+      return message.success("식단표가 수정되었습니다.");
     }
-  }, [st_programUpdateDone]);
+  }, [st_menuUpdateDone]);
 
   useEffect(() => {
-    if (st_programUpdateError) {
-      return message.error(st_programUpdateError);
+    if (st_menuUpdateError) {
+      return message.error(st_menuUpdateError);
     }
-  }, [st_programUpdateError]);
+  }, [st_menuUpdateError]);
 
   // 삭제하기
   useEffect(() => {
-    if (st_programDeleteDone) {
+    if (st_menuDeleteDone) {
       dispatch({
-        type: PROGRAM_LIST_REQUEST,
+        type: ADMIN_MENU_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
       });
 
       uModalToggle(null);
-      return message.success("시간표가 삭제되었습니다.");
+      return message.success("식단표가 삭제되었습니다.");
     }
-  }, [st_programDeleteDone]);
+  }, [st_menuDeleteDone]);
 
   useEffect(() => {
-    if (st_programDeleteError) {
-      return message.error(st_programDeleteError);
+    if (st_menuDeleteError) {
+      return message.error(st_menuDeleteError);
     }
-  }, [st_programDeleteError]);
+  }, [st_menuDeleteError]);
 
   ////// TOGGLE ///////
 
   // 생성 모달
-  const cModalToggle = useCallback(
-    (data) => {
-      if (data) {
-        setCData(data);
-      } else {
-        setCDate(null);
-        setCData(null);
-        setCList([]);
-        dispatch({
-          type: PROGRAM_IMAGE_RESET,
-          data: null,
-        });
-      }
-      setCModal((prev) => !prev);
-    },
-    [cModal, cData, cDate, cList]
-  );
+  const cModalToggle = useCallback(() => {
+    setCModal((prev) => !prev);
+  }, [cModal]);
 
   // 수정 모달
   const uModalToggle = useCallback(
     (data) => {
-      if (data) {
-        dispatch({
-          type: PROGRAM_IMAGE_RESET,
-          data: data.imagePath,
-        });
-
-        cForm.setFieldsValue({
-          title: data.title,
-          content: data.content,
-        });
-
-        setUData(data);
-      } else {
-        dispatch({
-          type: PROGRAM_IMAGE_RESET,
-          data: null,
-        });
-
-        cForm.resetFields();
-
-        setUData(null);
-      }
       setUModal((prev) => !prev);
+
+      if (data) {
+        setUData(data);
+        updateForm.setFieldsValue({
+          sDate: moment(data.saveDate),
+          breakfast1: data.breakfast1,
+          breakfast2: data.breakfast2,
+          breakfast3: data.breakfast3,
+          breakfast4: data.breakfast4,
+          breakfast5: data.breakfast5,
+          breakfast6: data.breakfast6,
+          brCalorie: data.breakfastCalorie,
+          lunch1: data.lunch1,
+          lunch2: data.lunch2,
+          lunch3: data.lunch3,
+          lunch4: data.lunch4,
+          lunch5: data.lunch5,
+          lunch6: data.lunch6,
+          luCalorie: data.lunchCalorie,
+          dinner1: data.dinner1,
+          dinner2: data.dinner2,
+          dinner3: data.dinner3,
+          dinner4: data.dinner4,
+          dinner5: data.dinner5,
+          dinner6: data.dinner6,
+          diCalorie: data.dinnerCalorie,
+          amSnack1: data.morningSnack1,
+          amSnack2: data.morningSnack2,
+          pmSnack1: data.afternoonSnack1,
+          pmSnack2: data.afternoonSnack2,
+          fnDiet: data.functionDiet,
+          diabetes: data.diabetes,
+          scene: data.scene,
+          lowSalt: data.lowSalt,
+        });
+      }
     },
     [uData, uModal]
   );
 
+  console.log(uData);
+
   ////// HANDLER //////
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  }, []);
 
   // 날짜 선택
   const selectDateHandler = useCallback(
@@ -312,58 +403,115 @@ const Type = ({ router }) => {
     [selectDate]
   );
 
-  // 이미지 업로드
-  const onChangeImages = useCallback((e) => {
+  // 아침메뉴 업로드
+  const onChangeBrImages = useCallback((e) => {
     const formData = new FormData();
 
     [].forEach.call(e.target.files, (file) => {
       formData.append("image", file);
     });
 
+    if (e.target.files.length < 1) {
+      return;
+    }
+
     dispatch({
-      type: PROGRAM_IMAGE_UPLOAD_REQUEST,
+      type: MENU_BR_IMG_UPLOAD_REQUEST,
       data: formData,
     });
   });
 
-  const clickImageUpload = useCallback(() => {
-    imageRef.current.click();
-  }, [imageRef.current]);
+  const clickBrImageUpload = useCallback(() => {
+    brImageRef.current.click();
+  }, [brImageRef.current]);
 
-  // 생성 내용 추가하기
-  const cAddHandler = useCallback(
-    (data) => {
-      let cListArr = cList.map((data) => data);
+  // 점심메뉴 업로드
+  const onChangeLuImages = useCallback((e) => {
+    const formData = new FormData();
 
-      dispatch({
-        type: PROGRAM_IMAGE_RESET,
-      });
+    [].forEach.call(e.target.files, (file) => {
+      formData.append("image", file);
+    });
 
-      cForm.resetFields();
-      cListArr.push({ ...data, imagePath: programImagePath });
+    if (e.target.files.length < 1) {
+      return;
+    }
 
-      setCList(cListArr);
+    dispatch({
+      type: MENU_LU_IMG_UPLOAD_REQUEST,
+      data: formData,
+    });
+  });
 
-      return message.success("추가되었습니다.");
-    },
-    [cList, programImagePath]
-  );
+  const clickLuImageUpload = useCallback(() => {
+    luImageRef.current.click();
+  }, [luImageRef.current]);
 
-  // 내용 수정하기
-  const cUpdateHandler = useCallback(
-    (data) => {
-      dispatch({
-        type: PROGRAM_UPDATE_REQUEST,
-        data: {
-          id: uData.id,
-          title: data.title,
-          content: data.content,
-          imagePath: programImagePath,
-        },
-      });
-    },
-    [uData, programImagePath]
-  );
+  // 저녁메뉴 업로드
+  const onChangeDiImages = useCallback((e) => {
+    const formData = new FormData();
+
+    [].forEach.call(e.target.files, (file) => {
+      formData.append("image", file);
+    });
+
+    if (e.target.files.length < 1) {
+      return;
+    }
+
+    dispatch({
+      type: MENU_DI_IMG_UPLOAD_REQUEST,
+      data: formData,
+    });
+  });
+
+  const clickDiImageUpload = useCallback(() => {
+    diImageRef.current.click();
+  }, [diImageRef.current]);
+
+  // 오전간식 업로드
+  const onChangeAmImages = useCallback((e) => {
+    const formData = new FormData();
+
+    [].forEach.call(e.target.files, (file) => {
+      formData.append("image", file);
+    });
+
+    if (e.target.files.length < 1) {
+      return;
+    }
+
+    dispatch({
+      type: MENU_AM_IMG_UPLOAD_REQUEST,
+      data: formData,
+    });
+  });
+
+  const clickAmImageUpload = useCallback(() => {
+    amImageRef.current.click();
+  }, [amImageRef.current]);
+
+  // 오후간식 업로드
+  const onChangePmImages = useCallback((e) => {
+    const formData = new FormData();
+
+    [].forEach.call(e.target.files, (file) => {
+      formData.append("image", file);
+    });
+
+    if (e.target.files.length < 1) {
+      return;
+    }
+
+    dispatch({
+      type: MENU_PM_IMG_UPLOAD_REQUEST,
+      data: formData,
+    });
+  });
+
+  const clickPmImageUpload = useCallback(() => {
+    pmImageRef.current.click();
+  }, [pmImageRef.current]);
 
   // 생성 날짜 선택
   const dateChoiseHandler = useCallback(
@@ -374,27 +522,113 @@ const Type = ({ router }) => {
   );
 
   // 생성하기
-  const createHandler = useCallback(() => {
-    if (!cDate) {
-      return message.error("날짜를 선택해주세요.");
-    }
+  const createHandler = useCallback(
+    (data) => {
+      dispatch({
+        type: MENU_CREATE_REQUEST,
+        data: {
+          saveDate: moment(data.sDate).format("YYYY-MM-DD"),
+          breakfast1: data.breakfast1,
+          breakfast2: data.breakfast2,
+          breakfast3: data.breakfast3,
+          breakfast4: data.breakfast4,
+          breakfast5: data.breakfast5,
+          breakfast6: data.breakfast6,
+          breakfastCalorie: data.brCalorie,
+          breakfaseImage: menuBrImgPath,
+          lunch1: data.lunch1,
+          lunch2: data.lunch2,
+          lunch3: data.lunch3,
+          lunch4: data.lunch4,
+          lunch5: data.lunch5,
+          lunch6: data.lunch6,
+          lunchCalorie: data.luCalorie,
+          lunchImage: menuLuImgPath,
+          dinner1: data.dinner1,
+          dinner2: data.dinner2,
+          dinner3: data.dinner3,
+          dinner4: data.dinner4,
+          dinner5: data.dinner5,
+          dinner6: data.dinner6,
+          dinnerCalorie: data.diCalorie,
+          dinnerImage: menuDiImgPath,
+          morningSnack1: data.amSnack1,
+          morningSnack2: data.amSnack2,
+          morningSnackImage: menuAMImgPath,
+          afternoonSnack1: data.pmSnack1,
+          afternoonSnack2: data.pmSnack2,
+          afternoonSnackImage: menuPMImgPath,
+          functionDiet: data.fnDiet,
+          diabetes: data.diabetes,
+          scene: data.scene,
+          lowSalt: data.lowSalt,
+        },
+      });
+    },
+    [menuBrImgPath, menuLuImgPath, menuDiImgPath, menuAMImgPath, menuPMImgPath]
+  );
 
-    if (!cList || cList.length === 0) {
-      return message.error("생성 리스트를 추가해주세요.");
-    }
-
-    dispatch({
-      type: PROGRAM_CREATE_REQUEST,
-      data: {
-        insertPrograms: cList,
-        specificDate: cDate && cDate.format("YYYY-MM-DD"),
-      },
-    });
-  }, [cList, cDate]);
+  // 내용 수정하기
+  const cUpdateHandler = useCallback(
+    (data) => {
+      dispatch({
+        type: MENU_UPDATE_REQUEST,
+        data: {
+          id: uData.id,
+          breakfast1: data.breakfast1,
+          breakfast2: data.breakfast2,
+          breakfast3: data.breakfast3,
+          breakfast4: data.breakfast4,
+          breakfast5: data.breakfast5,
+          breakfast6: data.breakfast6,
+          breakfastCalorie: data.brCalorie,
+          breakfaseImage: menuBrImgPath ? menuBrImgPath : uData.breakfaseImage,
+          lunch1: data.lunch1,
+          lunch2: data.lunch2,
+          lunch3: data.lunch3,
+          lunch4: data.lunch4,
+          lunch5: data.lunch5,
+          lunch6: data.lunch6,
+          lunchCalorie: data.luCalorie,
+          lunchImage: menuLuImgPath ? menuLuImgPath : uData.lunchImage,
+          dinner1: data.dinner1,
+          dinner2: data.dinner2,
+          dinner3: data.dinner3,
+          dinner4: data.dinner4,
+          dinner5: data.dinner5,
+          dinner6: data.dinner6,
+          dinnerCalorie: data.diCalorie,
+          dinnerImage: menuDiImgPath ? menuDiImgPath : uData.dinnerImage,
+          morningSnack1: data.amSnack1,
+          morningSnack2: data.amSnack2,
+          morningSnackImage: menuAMImgPath
+            ? menuAMImgPath
+            : uData.morningSnackImage,
+          afternoonSnack1: data.pmSnack1,
+          afternoonSnack2: data.pmSnack2,
+          afternoonSnackImage: menuPMImgPath
+            ? menuPMImgPath
+            : uData.afternoonSnackImage,
+          functionDiet: data.fnDiet,
+          diabetes: data.diabetes,
+          scene: data.scene,
+          lowSalt: data.lowSalt,
+        },
+      });
+    },
+    [
+      uData,
+      menuBrImgPath,
+      menuLuImgPath,
+      menuDiImgPath,
+      menuAMImgPath,
+      menuPMImgPath,
+    ]
+  );
 
   const deleteHandler = useCallback(() => {
     dispatch({
-      type: PROGRAM_DELETE_REQUEST,
+      type: MENU_DELETE_REQUEST,
       data: {
         id: uData.id,
       },
@@ -424,22 +658,22 @@ const Type = ({ router }) => {
           </Wrapper>
 
           <Wrapper
-            height={`320px`}
+            height={`340px`}
             al={`flex-start`}
             ju={`flex-start`}
             overflow={`auto`}
           >
             <Wrapper height={`auto`}>
               {/* LIST START */}
-              {programList &&
-                programList
+              {adminMenuList &&
+                adminMenuList
                   .filter(
-                    (data) =>
-                      data.viewFrontSpecificDate === value.format("YYYY-MM-DD")
+                    (data) => data.viewSaveDate === value.format("YYYY-MM-DD")
                   )
                   .map((data) => {
                     return (
                       <HoverListWrapper
+                        key={data.id}
                         dr={`row`}
                         ju={`space-between`}
                         al={`flex-start`}
@@ -453,19 +687,156 @@ const Type = ({ router }) => {
                         />
                         <Wrapper width={`calc(100% - 20px)`} al={`flex-start`}>
                           <Text
-                            fontSize={`16px`}
-                            fontWeight={`bold`}
-                            margin={`0 0 6px`}
-                            lineHeight={`1.28`}
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
                           >
-                            {data.title}
+                            {data.breakfast1}
                           </Text>
                           <Text
                             fontSize={`14px`}
                             lineHeight={`1.2`}
                             textAlign={`start`}
                           >
-                            {data.content}
+                            {data.breakfast2}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.breakfast3}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.breakfast4}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.breakfast5}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.breakfast6}
+                          </Text>
+                        </Wrapper>
+                        <Image
+                          width={`16px`}
+                          height={`16px`}
+                          margin={`10px 0 0`}
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
+                          alt={`bookmark_icon`}
+                        />
+                        <Wrapper
+                          width={`calc(100% - 20px)`}
+                          margin={`10px 0 0`}
+                          al={`flex-start`}
+                        >
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.lunch1}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.lunch2}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.lunch3}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.lunch4}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.lunch5}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.lunch6}
+                          </Text>
+                        </Wrapper>
+                        <Image
+                          width={`16px`}
+                          height={`16px`}
+                          margin={`10px 0 0`}
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
+                          alt={`bookmark_icon`}
+                        />
+                        <Wrapper
+                          width={`calc(100% - 20px)`}
+                          margin={`10px 0 0`}
+                          al={`flex-start`}
+                        >
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.dinner1}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.dinner2}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.dinner3}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.dinner4}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.dinner5}
+                          </Text>
+                          <Text
+                            fontSize={`14px`}
+                            lineHeight={`1.2`}
+                            textAlign={`start`}
+                          >
+                            {data.dinner6}
                           </Text>
                         </Wrapper>
                       </HoverListWrapper>
@@ -478,7 +849,7 @@ const Type = ({ router }) => {
         </Wrapper>
       );
     },
-    [selectDate, programList]
+    [selectDate, adminMenuList]
   );
 
   ////// DATAVIEW //////
@@ -486,9 +857,9 @@ const Type = ({ router }) => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["시간표 관리", "월간시간표 관리"]}
-        title={`월간시간표 관리`}
-        subTitle={`홈페이지에 보여지는 월간 시간표를 관리할 수 있습니다.`}
+        breadcrumbs={["식단표 관리", "식단표 리스트"]}
+        title={`식단표 리스트`}
+        subTitle={`홈페이지에 보여지는 식단표를 관리할 수 있습니다.`}
       />
 
       <AdminContent>
@@ -505,7 +876,7 @@ const Type = ({ router }) => {
             icon={<PlusOutlined />}
             onClick={() => cModalToggle(null)}
           >
-            시간표 생성
+            식단표 생성
           </Button>
         </Wrapper>
 
@@ -541,124 +912,425 @@ const Type = ({ router }) => {
 
       {/* CREATE MODAL */}
       <Modal
-        title={`시간표 생성하기`}
+        title={`식단표 생성하기`}
         visible={cModal}
-        cancelText={`취소`}
         onCancel={() => cModalToggle(null)}
-        cancelButtonProps={{ size: `small` }}
-        okText={`생성`}
-        onOk={createHandler}
-        okButtonProps={{ size: `small`, type: "primary" }}
+        width={`1100px`}
+        footer={null}
       >
-        <Wrapper margin={`0 0 30px`}>
-          <Image
-            width={`150px`}
-            height={`150px`}
-            src={
-              programImagePath
-                ? programImagePath
-                : `https://via.placeholder.com/150`
-            }
-            alt={`image`}
-          />
-
-          <input
-            hidden
-            type={`file`}
-            ref={imageRef}
-            accept={`.jpg, .png`}
-            value={cImage}
-            onChange={onChangeImages}
-          />
-          <Button
-            loading={st_programImageUploadLoading}
-            style={{ width: `150px` }}
-            size="small"
-            type="primary"
-            onClick={clickImageUpload}
-          >
-            이미지 업로드
-          </Button>
-        </Wrapper>
-
-        <Form form={cForm} onFinish={cAddHandler}>
-          <Form.Item
-            label={`제목`}
-            name={`title`}
-            rules={[{ required: true, message: "제목을 입력해주세요." }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label={`내용`}
-            name={`content`}
-            rules={[{ required: true, message: "내용을 입력해주세요." }]}
-          >
-            <Input.TextArea />
-          </Form.Item>
-
-          <Wrapper al={`flex-end`}>
-            <Button
-              size="small"
-              type="primary"
-              htmlType="submit"
-              icon={<PlusOutlined />}
+        <Wrapper dr={`row`} ju={`space-between`} al={`flex-start`}>
+          <Wrapper width={`40%`}>
+            <Form
+              style={{ width: `100%` }}
+              form={createForm}
+              labelCol={{ span: 4 }}
+              wrapperCol={{ span: 20 }}
+              onFinish={createHandler}
             >
-              추가
-            </Button>
-          </Wrapper>
-        </Form>
+              <Form.Item label={`날짜`} name={`sDate`}>
+                <DatePicker
+                  style={{ width: 200 }}
+                  size="small"
+                  placeholder="날짜를 선택해주세요."
+                />
+              </Form.Item>
 
-        <Wrapper
-          padding={`5px 0`}
-          margin={`20px 0 0`}
-          bgColor={Theme.lightGrey2_C}
-        >
-          <Text>날짜를 선택해주세요.</Text>
-        </Wrapper>
-        <DatePicker
-          value={cDate}
-          onChange={dateChoiseHandler}
-          style={{ width: `100%` }}
-          placeholder={`추가하실 날짜를 선택해주세요.`}
-        />
-        <Wrapper>
-          {cList &&
-            (cList.length === 0 ? (
-              <Wrapper padding={`20px 0 0`}>
-                <Empty description={`시간표를 추가해주세요.`} />
+              <Form.Item label={`아침메뉴1`} name={`breakfast1`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴2`} name={`breakfast2`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴3`} name={`breakfast3`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴3을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴4`} name={`breakfast4`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴4을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴5`} name={`breakfast5`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴5을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴6`} name={`breakfast6`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴6을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침칼로리`} name={`brCalorie`}>
+                <Input
+                  size="small"
+                  placeholder="아침칼로리(Kcal)을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴1`} name={`lunch1`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴2`} name={`lunch2`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴3`} name={`lunch3`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴3을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴4`} name={`lunch4`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴4을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴5`} name={`lunch5`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴5을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴6`} name={`lunch6`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴6을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심칼로리`} name={`luCalorie`}>
+                <Input
+                  size="small"
+                  placeholder="점심칼로리(Kcal)을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴1`} name={`dinner1`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴2`} name={`dinner2`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴3`} name={`dinner3`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴3을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴4`} name={`dinner4`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴4을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴5`} name={`dinner5`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴5을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴6`} name={`dinner6`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴6을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁칼로리`} name={`diCalorie`}>
+                <Input
+                  size="small"
+                  placeholder="저녁칼로리(Kcal)을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오전간식1`} name={`amSnack1`}>
+                <Input
+                  size="small"
+                  placeholder="오전간식1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오전간식2`} name={`amSnack2`}>
+                <Input
+                  size="small"
+                  placeholder="오전간식2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오후간식1`} name={`pmSnack1`}>
+                <Input
+                  size="small"
+                  placeholder="오후간식1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오후간식2`} name={`pmSnack2`}>
+                <Input
+                  size="small"
+                  placeholder="오후간식2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`기능별식이`} name={`fnDiet`}>
+                <Input
+                  size="small"
+                  placeholder="기능별식이를 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`당뇨식단`} name={`diabetes`}>
+                <Input
+                  size="small"
+                  placeholder="당뇨식단를 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`경관식단`} name={`scene`}>
+                <Input
+                  size="small"
+                  placeholder="경관식단을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저염식단`} name={`lowSalt`}>
+                <Input
+                  size="small"
+                  placeholder="저염식단을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Wrapper al={`flex-end`}>
+                <Button
+                  size="small"
+                  type="primary"
+                  htmlType="submit"
+                  icon={<PlusOutlined />}
+                >
+                  추가
+                </Button>
               </Wrapper>
-            ) : (
-              cList.map((data) => {
-                return (
-                  <Wrapper
-                    dr={`row`}
-                    ju={`space-between`}
-                    al={`flex-start`}
-                    padding={`10px 0`}
-                    borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-                  >
-                    <Image
-                      width={`150px`}
-                      height={`150px`}
-                      src={
-                        data.imagePath
-                          ? data.imagePath
-                          : `https://via.placeholder.com/150`
-                      }
-                      alt={`image`}
-                    />
-                    <Wrapper width={`calc(100% - 150px - 20px)`}>
-                      <Wrapper al={`flex-start`} margin={`5px 0`}>
-                        제목 : {data.title}
-                      </Wrapper>
+            </Form>
+          </Wrapper>
 
-                      <Wrapper al={`flex-start`}>내용 : {data.content}</Wrapper>
-                    </Wrapper>
-                  </Wrapper>
-                );
-              })
-            ))}
+          <Wrapper width={`58%`} dr={`row`} ju={`space-between`}>
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuBrImgPath
+                    ? menuBrImgPath
+                    : `https://via.placeholder.com/300pxx300px`
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={brImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeBrImages}
+              />
+              <Button
+                loading={st_menuBrImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickBrImageUpload}
+              >
+                아침식단 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuLuImgPath
+                    ? menuLuImgPath
+                    : `https://via.placeholder.com/300pxx300px`
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={luImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeLuImages}
+              />
+              <Button
+                loading={st_menuLuImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickLuImageUpload}
+              >
+                점심식단 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuDiImgPath
+                    ? menuDiImgPath
+                    : `https://via.placeholder.com/300pxx300px`
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={diImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeDiImages}
+              />
+              <Button
+                loading={st_menuDiImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickDiImageUpload}
+              >
+                저녁식단 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuAMImgPath
+                    ? menuAMImgPath
+                    : `https://via.placeholder.com/300pxx300px`
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={amImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeAmImages}
+              />
+              <Button
+                loading={st_menuAMImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickAmImageUpload}
+              >
+                오전간식 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuPMImgPath
+                    ? menuPMImgPath
+                    : `https://via.placeholder.com/300pxx300px`
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={pmImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangePmImages}
+              />
+              <Button
+                loading={st_menuPMImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickPmImageUpload}
+              >
+                오후간식 업로드
+              </Button>
+            </Wrapper>
+          </Wrapper>
         </Wrapper>
       </Modal>
 
@@ -666,73 +1338,421 @@ const Type = ({ router }) => {
       <Modal
         title={`상세정보`}
         visible={uModal}
+        width={`1100px`}
         onCancel={() => uModalToggle(null)}
         footer={null}
       >
-        <Wrapper margin={`0 0 30px`}>
-          <Image
-            width={`150px`}
-            height={`150px`}
-            src={
-              programImagePath
-                ? programImagePath
-                : `https://via.placeholder.com/150`
-            }
-            alt={`image`}
-          />
-
-          <input
-            hidden
-            type={`file`}
-            ref={imageRef}
-            accept={`.jpg, .png`}
-            value={cImage}
-            onChange={onChangeImages}
-          />
-          <Button
-            loading={st_programImageUploadLoading}
-            style={{ width: `150px` }}
-            size="small"
-            type="primary"
-            onClick={clickImageUpload}
-          >
-            이미지 업로드
-          </Button>
-        </Wrapper>
-
-        <Form form={cForm} onFinish={cUpdateHandler}>
-          <Form.Item
-            label={`제목`}
-            name={`title`}
-            rules={[{ required: true, message: "제목을 입력해주세요." }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label={`내용`}
-            name={`content`}
-            rules={[{ required: true, message: "내용을 입력해주세요." }]}
-          >
-            <Input.TextArea />
-          </Form.Item>
-
-          <Wrapper dr={`row`} ju={`flex-end`}>
-            <Popconfirm
-              title={`삭제하시겠습니까?`}
-              cancelText="취소"
-              okText="삭제"
-              onConfirm={() => deleteHandler()}
+        <Wrapper dr={`row`} ju={`space-between`} al={`flex-start`}>
+          <Wrapper width={`40%`}>
+            <Form
+              style={{ width: `100%` }}
+              form={updateForm}
+              labelCol={{ span: 4 }}
+              wrapperCol={{ span: 20 }}
+              onFinish={cUpdateHandler}
             >
-              <Button size="small" type="danger">
-                삭제
-              </Button>
-            </Popconfirm>
+              <Form.Item label={`날짜`} name={`sDate`}>
+                <DatePicker
+                  style={{ width: 200 }}
+                  size="small"
+                  placeholder="날짜를 선택해주세요."
+                  disabled
+                />
+              </Form.Item>
 
-            <ModalBtn size="small" type="primary" htmlType="submit">
-              수정
-            </ModalBtn>
+              <Form.Item label={`아침메뉴1`} name={`breakfast1`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴2`} name={`breakfast2`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴3`} name={`breakfast3`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴3을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴4`} name={`breakfast4`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴4을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴5`} name={`breakfast5`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴5을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침메뉴6`} name={`breakfast6`}>
+                <Input
+                  size="small"
+                  placeholder="아침메뉴6을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`아침칼로리`} name={`brCalorie`}>
+                <Input
+                  size="small"
+                  placeholder="아침칼로리(Kcal)을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴1`} name={`lunch1`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴2`} name={`lunch2`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴3`} name={`lunch3`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴3을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴4`} name={`lunch4`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴4을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴5`} name={`lunch5`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴5을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심메뉴6`} name={`lunch6`}>
+                <Input
+                  size="small"
+                  placeholder="점심메뉴6을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`점심칼로리`} name={`luCalorie`}>
+                <Input
+                  size="small"
+                  placeholder="점심칼로리(Kcal)을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴1`} name={`dinner1`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴2`} name={`dinner2`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴3`} name={`dinner3`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴3을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴4`} name={`dinner4`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴4을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴5`} name={`dinner5`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴5을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁메뉴6`} name={`dinner6`}>
+                <Input
+                  size="small"
+                  placeholder="저녁메뉴6을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저녁칼로리`} name={`diCalorie`}>
+                <Input
+                  size="small"
+                  placeholder="저녁칼로리(Kcal)을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오전간식1`} name={`amSnack1`}>
+                <Input
+                  size="small"
+                  placeholder="오전간식1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오전간식2`} name={`amSnack2`}>
+                <Input
+                  size="small"
+                  placeholder="오전간식2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오후간식1`} name={`pmSnack1`}>
+                <Input
+                  size="small"
+                  placeholder="오후간식1을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`오후간식2`} name={`pmSnack2`}>
+                <Input
+                  size="small"
+                  placeholder="오후간식2을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`기능별식이`} name={`fnDiet`}>
+                <Input
+                  size="small"
+                  placeholder="기능별식이를 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`당뇨식단`} name={`diabetes`}>
+                <Input
+                  size="small"
+                  placeholder="당뇨식단를 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`경관식단`} name={`scene`}>
+                <Input
+                  size="small"
+                  placeholder="경관식단을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Form.Item label={`저염식단`} name={`lowSalt`}>
+                <Input
+                  size="small"
+                  placeholder="저염식단을 입력해주세요."
+                  allowClear
+                />
+              </Form.Item>
+
+              <Wrapper dr={`row`} ju={`flex-end`}>
+                <Popconfirm
+                  title={`삭제하시겠습니까?`}
+                  cancelText="취소"
+                  okText="삭제"
+                  onConfirm={() => deleteHandler()}
+                >
+                  <Button size="small" type="danger">
+                    삭제
+                  </Button>
+                </Popconfirm>
+
+                <ModalBtn size="small" type="primary" htmlType="submit">
+                  수정
+                </ModalBtn>
+              </Wrapper>
+            </Form>
           </Wrapper>
-        </Form>
+
+          <Wrapper width={`58%`} dr={`row`} ju={`space-between`}>
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuBrImgPath ? menuBrImgPath : uData && uData.breakfaseImage
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={brImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeBrImages}
+              />
+              <Button
+                loading={st_menuBrImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickBrImageUpload}
+              >
+                아침식단 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={menuLuImgPath ? menuLuImgPath : uData && uData.lunchImage}
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={luImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeLuImages}
+              />
+              <Button
+                loading={st_menuLuImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickLuImageUpload}
+              >
+                점심식단 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={menuDiImgPath ? menuDiImgPath : uData && uData.dinnerImage}
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={diImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeDiImages}
+              />
+              <Button
+                loading={st_menuDiImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickDiImageUpload}
+              >
+                저녁식단 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuAMImgPath
+                    ? menuAMImgPath
+                    : uData && uData.morningSnackImage
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={amImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangeAmImages}
+              />
+              <Button
+                loading={st_menuAMImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickAmImageUpload}
+              >
+                오전간식 업로드
+              </Button>
+            </Wrapper>
+
+            <Wrapper width={`auto`} margin={`0 0 30px`}>
+              <Image
+                width={`300px`}
+                height={`300px`}
+                src={
+                  menuPMImgPath
+                    ? menuPMImgPath
+                    : uData && uData.afternoonSnackImage
+                }
+                alt={`image`}
+              />
+
+              <input
+                hidden
+                type={`file`}
+                ref={pmImageRef}
+                accept={`.jpg, .png`}
+                onChange={onChangePmImages}
+              />
+              <Button
+                loading={st_menuPMImgUploadLoading}
+                style={{ width: `150px` }}
+                size="small"
+                type="primary"
+                onClick={clickPmImageUpload}
+              >
+                오후간식 업로드
+              </Button>
+            </Wrapper>
+          </Wrapper>
+        </Wrapper>
       </Modal>
     </AdminLayout>
   );
@@ -754,7 +1774,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: PROGRAM_LIST_REQUEST,
+      type: ADMIN_MENU_LIST_REQUEST,
       data: {
         searchMonth: moment().format("YYYY-MM"),
       },
@@ -767,4 +1787,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default withRouter(Type);
+export default withRouter(List);

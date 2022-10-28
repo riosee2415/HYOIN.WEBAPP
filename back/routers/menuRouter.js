@@ -412,7 +412,7 @@ router.post("/update", isAdminCheck, async (req, res, next) => {
               functionDiet = ${functionDiet ? `"${functionDiet}"` : null},
               diabetes = ${diabetes ? `"${diabetes}"` : null},
               scene = ${scene ? `"${scene}"` : null},
-              lowSalt = ${lowSalt ? `"${lowSalt}"` : null},
+              lowSalt = ${lowSalt ? `"${lowSalt}"` : null}
      WHERE    id = ${id}
   `;
 
