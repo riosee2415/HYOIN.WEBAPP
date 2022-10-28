@@ -49,38 +49,56 @@ router.post(
   }
 );
 
-router.post("/list", isAdminCheck, async (req, res, next) => {
-  const { searchSaveDate } = req.body;
+router.post("/admin/list", isAdminCheck, async (req, res, next) => {
+  // 기본값으로 오늘 날짜의 월을 보내주세요. (FORMAT = YYYY-MM)
+  // Ex) 2022-09
+  const { searchMonth } = req.body;
 
   const selectQuery = `
   SELECT	id,
-  			saveDate,
-  			DATE_FORMAT(saveDate, "%Y년 %m월 %d일")	AS viewSaveDate,
-  			breakfast,
-  			breakfastCalorie,
-  			breakfaseImage,
-  			lunch,
-  			lunchCalorie,
-  			lunchImage,
-  			dinner,
-  			dinnerCalorie,
-  			dinnerImage,
-  			morningSnack,
-  			morningSnackImage,
-  			afternoonSnack,
-  			afternoonSnackImage,
-  			functionDiet,
-  			diabetes,
-  			scene,
-  			lowSalt,
-  			createdAt,
-  			updatedAt,
-  			DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
-            DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+          saveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
     FROM	menus
    WHERE	isDelete = 0
-     AND    DATE_FORMAT(saveDate, "%Y-%m-%d") = "${searchSaveDate}"
-   ORDER    BY saveDate ASC
+     AND  DATE_FORMAT(saveDate, "%Y-%m") = DATE_FORMAT("${searchMonth}-01", "%Y-%m")
+   ORDER  BY saveDate ASC
     `;
 
   try {
@@ -93,21 +111,108 @@ router.post("/list", isAdminCheck, async (req, res, next) => {
   }
 });
 
+router.post("/list", async (req, res, next) => {
+  const { startDate, endDate } = req.body;
+
+  const selectQuery = `
+  SELECT	id,
+          saveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+    FROM	menus
+   WHERE	isDelete = 0
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") <= DATE_FORMAT("${startDate}", "%Y-%m-%d")		
+     AND	DATE_FORMAT(saveDate, "%Y-%m-%d") >= DATE_FORMAT("${endDate}", "%Y-%m-%d")
+   ORDER  BY saveDate ASC
+    `;
+
+  try {
+    const list = await models.sequelize.query(selectQuery);
+
+    return res.status(200).json(list[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("식단표 목록을 불러올 수 없습니다.");
+  }
+});
+
+router.post(
+  "/image",
+  isAdminCheck,
+  upload.single("image"),
+  async (req, res, next) => {
+    return res.json({ path: req.file.location });
+  }
+);
+
 router.post("/create", isAdminCheck, async (req, res, next) => {
   const {
     saveDate,
-    breakfast,
+    breakfast1,
+    breakfast2,
+    breakfast3,
+    breakfast4,
+    breakfast5,
+    breakfast6,
     breakfastCalorie,
     breakfaseImage,
-    lunch,
+    lunch1,
+    lunch2,
+    lunch3,
+    lunch4,
+    lunch5,
+    lunch6,
     lunchCalorie,
     lunchImage,
-    dinner,
+    dinner1,
+    dinner2,
+    dinner3,
+    dinner4,
+    dinner5,
+    dinner6,
     dinnerCalorie,
     dinnerImage,
-    morningSnack,
+    morningSnack1,
+    morningSnack2,
     morningSnackImage,
-    afternoonSnack,
+    afternoonSnack1,
+    afternoonSnack2,
     afternoonSnackImage,
     functionDiet,
     diabetes,
@@ -126,18 +231,35 @@ router.post("/create", isAdminCheck, async (req, res, next) => {
   INSERT    INTO    menus
   (
     saveDate,
-    breakfast,
+    breakfast1,
+    breakfast2,
+    breakfast3,
+    breakfast4,
+    breakfast5,
+    breakfast6,
     breakfastCalorie,
     breakfaseImage,
-    lunch,
+    lunch1,
+    lunch2,
+    lunch3,
+    lunch4,
+    lunch5,
+    lunch6,
     lunchCalorie,
     lunchImage,
-    dinner,
+    dinner1,
+    dinner2,
+    dinner3,
+    dinner4,
+    dinner5,
+    dinner6,
     dinnerCalorie,
     dinnerImage,
-    morningSnack,
+    morningSnack1,
+    morningSnack2,
     morningSnackImage,
-    afternoonSnack,
+    afternoonSnack1,
+    afternoonSnack2,
     afternoonSnackImage,
     functionDiet,
     diabetes,
@@ -149,23 +271,40 @@ router.post("/create", isAdminCheck, async (req, res, next) => {
   VALUES
   (
     "${saveDate}",
-    "${breakfast}",
+    "${breakfast1}",
+    "${breakfast2}",
+    "${breakfast3}",
+    "${breakfast4}",
+    "${breakfast5}",
+    "${breakfast6}",
     "${breakfastCalorie}",
     ${breakfaseImage ? `"${breakfaseImage}"` : null},
-    "${lunch}",
+    "${lunch1}",
+    "${lunch2}",
+    "${lunch3}",
+    "${lunch4}",
+    "${lunch5}",
+    "${lunch6}",
     "${lunchCalorie}",
     ${lunchImage ? `"${lunchImage}"` : null},
-    "${dinner}",
+    "${dinner1}",
+    "${dinner2}",
+    "${dinner3}",
+    "${dinner4}",
+    "${dinner5}",
+    "${dinner6}",
     "${dinnerCalorie}",
     ${dinnerImage ? `"${dinnerImage}"` : null},
-    "${morningSnack}",
+    "${morningSnack1}",
+    ${morningSnack2 ? `"${morningSnack2}"` : null},
     ${morningSnackImage ? `"${morningSnackImage}"` : null},
-    "${afternoonSnack}",
+    "${afternoonSnack1}",
+    ${afternoonSnack2 ? `"${afternoonSnack2}"` : null},
     ${afternoonSnackImage ? `"${afternoonSnackImage}"` : null},
-    "${functionDiet}",
-    "${diabetes}",
-    "${scene}",
-    "${lowSalt}",
+    ${functionDiet ? `"${functionDiet}"` : null},
+    ${diabetes ? `"${diabetes}"` : null},
+    ${scene ? `"${scene}"` : null},
+    ${lowSalt ? `"${lowSalt}"` : null},
     NOW(),
     NOW()
   )
@@ -191,18 +330,35 @@ router.post("/update", isAdminCheck, async (req, res, next) => {
   const {
     id,
     saveDate,
-    breakfast,
+    breakfast1,
+    breakfast2,
+    breakfast3,
+    breakfast4,
+    breakfast5,
+    breakfast6,
     breakfastCalorie,
     breakfaseImage,
-    lunch,
+    lunch1,
+    lunch2,
+    lunch3,
+    lunch4,
+    lunch5,
+    lunch6,
     lunchCalorie,
     lunchImage,
-    dinner,
+    dinner1,
+    dinner2,
+    dinner3,
+    dinner4,
+    dinner5,
+    dinner6,
     dinnerCalorie,
     dinnerImage,
-    morningSnack,
+    morningSnack1,
+    morningSnack2,
     morningSnackImage,
-    afternoonSnack,
+    afternoonSnack1,
+    afternoonSnack2,
     afternoonSnackImage,
     functionDiet,
     diabetes,
@@ -211,31 +367,49 @@ router.post("/update", isAdminCheck, async (req, res, next) => {
   } = req.body;
 
   const updateQuery = `
-  UPDATE    menus
-     SET    saveDate = "${saveDate}",
-            breakfast = "${breakfast}",
-            breakfastCalorie = "${breakfastCalorie}",
-            breakfaseImage = ${breakfaseImage ? `"${breakfaseImage}"` : null},
-            lunch = "${lunch}",
-            lunchCalorie = "${lunchCalorie}",
-            lunchImage =  ${lunchImage ? `"${lunchImage}"` : null},
-            dinner = "${dinner}",
-            dinnerCalorie =  "${dinnerCalorie}",
-            dinnerImage =  ${dinnerImage ? `"${dinnerImage}"` : null},
-            morningSnack = "${morningSnack}",
-            morningSnackImage = ${
-              morningSnackImage ? `"${morningSnackImage}"` : null
-            },
-            afternoonSnack = "${afternoonSnack}",
-            afternoonSnackImage = ${
-              afternoonSnackImage ? `"${afternoonSnackImage}"` : null
-            },
-            functionDiet = "${functionDiet}",
-            diabetes = "${diabetes}",
-            scene = "${scene}",
-            lowSalt = "${lowSalt}",
-            updatedAt = NOW()
-   WHERE    id = ${id}
+    UPDATE    menus
+       SET    saveDate = "${saveDate}",
+              breakfast1 = "${breakfast1}",
+              breakfast2 = "${breakfast2}",
+              breakfast3 = "${breakfast3}",
+              breakfast4 = "${breakfast4}",
+              breakfast5 = "${breakfast5}",
+              breakfast6 = "${breakfast6}",
+              breakfastCalorie = "${breakfastCalorie}",
+              breakfaseImage = ${breakfaseImage ? `"${breakfaseImage}"` : null},
+              lunch1 = "${lunch1}",
+              lunch2 = "${lunch2}",
+              lunch3 = "${lunch3}",
+              lunch4 = "${lunch4}",
+              lunch5 = "${lunch5}",
+              lunch6 = "${lunch6}",
+              lunchCalorie = "${lunchCalorie}",
+              lunchImage = ${lunchImage ? `"${lunchImage}"` : null},
+              dinner1 = "${dinner1}",
+              dinner2 = "${dinner2}",
+              dinner3 = "${dinner3}",
+              dinner4 = "${dinner4}",
+              dinner5 = "${dinner5}",
+              dinner6 = "${dinner6}",
+              dinnerCalorie = "${dinnerCalorie}",
+              dinnerImage = ${dinnerImage ? `"${dinnerImage}"` : null},
+              morningSnack1 = "${morningSnack1}",
+              morningSnack2 = ${morningSnack2 ? `"${morningSnack2}"` : null},
+              morningSnackImage = ${
+                morningSnackImage ? `"${morningSnackImage}"` : null
+              },
+              afternoonSnack1 = "${afternoonSnack1}",
+              afternoonSnack2 = ${
+                afternoonSnack2 ? `"${afternoonSnack2}"` : null
+              },
+              afternoonSnackImage = ${
+                afternoonSnackImage ? `"${afternoonSnackImage}"` : null
+              },
+              functionDiet = ${functionDiet ? `"${functionDiet}"` : null},
+              diabetes = ${diabetes ? `"${diabetes}"` : null},
+              scene = ${scene ? `"${scene}"` : null},
+              lowSalt = ${lowSalt ? `"${lowSalt}"` : null},
+     WHERE    id = ${id}
   `;
 
   try {

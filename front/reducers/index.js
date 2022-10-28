@@ -17,6 +17,7 @@ import wait from "./wait";
 import recruit from "./recruit";
 import program from "./program";
 import admission from "./admission";
+import menu from "./menu";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -42,6 +43,7 @@ const rootReducer = (state, action) => {
         recruit,
         program,
         admission,
+        menu,
       });
       return combinedReducer(state, action);
     }
