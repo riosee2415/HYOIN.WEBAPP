@@ -103,39 +103,42 @@ const Move = ({ router }) => {
         searchDate: searchData.format("YYYY-MM-DD"),
       },
     });
+    setResultDaum(null);
   }, [searchData]);
 
   useEffect(() => {
     let arr = [];
 
-    if (vData) {
-      if (vData.type === "오전") {
-        if (moveServiceList) {
-          moveServiceList.map((value) => {
-            resultDatum.map((result) => {
-              // 선택한 데이터와 같은 호차이면서 오전 값 데이터
-              if (
-                value.MoveServiceCarId === vData.carId &&
-                result.timeMorningId === value.MoveServiceTimeId
-              ) {
-                arr.push(value);
-              }
+    if (resultDatum) {
+      if (vData) {
+        if (vData.type === "오전") {
+          if (moveServiceList) {
+            moveServiceList.map((value) => {
+              resultDatum.map((result) => {
+                // 선택한 데이터와 같은 호차이면서 오전 값 데이터
+                if (
+                  value.MoveServiceCarId === vData.carId &&
+                  result.timeMorningId === value.MoveServiceTimeId
+                ) {
+                  arr.push(value);
+                }
+              });
             });
-          });
-        }
-      } else if (vData.type === "오후") {
-        if (moveServiceList) {
-          moveServiceList.map((value) => {
-            resultDatum.map((result) => {
-              // 선택한 데이터와 같은 호차이면서 오후 값 데이터
-              if (
-                value.MoveServiceCarId === vData.carId &&
-                result.timeDinnerId === value.MoveServiceTimeId
-              ) {
-                arr.push(value);
-              }
+          }
+        } else if (vData.type === "오후") {
+          if (moveServiceList) {
+            moveServiceList.map((value) => {
+              resultDatum.map((result) => {
+                // 선택한 데이터와 같은 호차이면서 오후 값 데이터
+                if (
+                  value.MoveServiceCarId === vData.carId &&
+                  result.timeDinnerId === value.MoveServiceTimeId
+                ) {
+                  arr.push(value);
+                }
+              });
             });
-          });
+          }
         }
       }
     }
@@ -148,7 +151,7 @@ const Move = ({ router }) => {
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
-          searchDate: searchData,
+          searchDate: searchData.format("YYYY-MM-DD"),
         },
       });
 
@@ -191,51 +194,53 @@ const Move = ({ router }) => {
   }, [timeList]);
 
   useEffect(() => {
-    let arr = resultDatum ? resultDatum.map((data) => data) : [];
+    if (resultDatum === null) {
+      let arr = resultDatum ? resultDatum.map((data) => data) : [];
 
-    if (carList) {
-      carList.map((data) => {
-        arr.push({
-          carId: data.id,
-          carCount: data.carCount,
-          carNum: data.carNum,
-          viewCarCreatedAt: data.viewCreatedAt,
-          viewMoveDate: data.viewMoveDate,
-          viewCarUpdatedAt: data.viewUpdatedAt,
+      if (carList) {
+        carList.map((data) => {
+          arr.push({
+            carId: data.id,
+            carCount: data.carCount,
+            carNum: data.carNum,
+            viewCarCreatedAt: data.viewCreatedAt,
+            viewMoveDate: data.viewMoveDate,
+            viewCarUpdatedAt: data.viewUpdatedAt,
+          });
         });
-      });
+      }
+
+      if (timeList) {
+        timeList.map((data) => {
+          const currentId = arr.findIndex(
+            (value) => value.carId === data.MoveServiceCarId
+          );
+
+          if (data.moveTime === "오전") {
+            arr[currentId] = {
+              timeMorningId: data.id,
+              moveMorningTime: data.moveTime,
+              moverMorningName: data.moverName,
+              viewTimeMorningCreateAt: data.viewCreatedAt,
+              viewTimeMorningUpdateAt: data.viewUpdatedAt,
+              ...arr[currentId],
+            };
+          } else {
+            arr[currentId] = {
+              timeDinnerId: data.id,
+              moveDinnerTime: data.moveTime,
+              moverDinnerName: data.moverName,
+              viewTimeDinnerCreateAt: data.viewCreatedAt,
+              viewTimeDinnerUpdateAt: data.viewUpdatedAt,
+              ...arr[currentId],
+            };
+          }
+        });
+      }
+
+      setResultDaum(arr);
     }
-
-    if (timeList) {
-      timeList.map((data) => {
-        const currentId = arr.findIndex(
-          (value) => value.carId === data.MoveServiceCarId
-        );
-
-        if (data.moveTime === "오전") {
-          arr[currentId] = {
-            timeMorningId: data.id,
-            moveMorningTime: data.moveTime,
-            moverMorningName: data.moverName,
-            viewTimeMorningCreateAt: data.viewCreatedAt,
-            viewTimeMorningUpdateAt: data.viewUpdatedAt,
-            ...arr[currentId],
-          };
-        } else {
-          arr[currentId] = {
-            timeDinnerId: data.id,
-            moveDinnerTime: data.moveTime,
-            moverDinnerName: data.moverName,
-            viewTimeDinnerCreateAt: data.viewCreatedAt,
-            viewTimeDinnerUpdateAt: data.viewUpdatedAt,
-            ...arr[currentId],
-          };
-        }
-      });
-    }
-
-    setResultDaum(arr);
-  }, [timeList, carList]);
+  }, [carList]);
 
   // DONE
 
@@ -246,7 +251,7 @@ const Move = ({ router }) => {
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
-          searchDate: searchData,
+          searchDate: searchData.format("YYYY-MM-DD"),
         },
       });
       return message.success("시간표가 생성되었습니다.");
@@ -258,7 +263,7 @@ const Move = ({ router }) => {
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
-          searchDate: searchData,
+          searchDate: searchData.format("YYYY-MM-DD"),
         },
       });
 
@@ -271,7 +276,7 @@ const Move = ({ router }) => {
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
-          searchDate: searchData,
+          searchDate: searchData.format("YYYY-MM-DD"),
         },
       });
 
@@ -284,7 +289,7 @@ const Move = ({ router }) => {
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
-          searchDate: searchData,
+          searchDate: searchData.format("YYYY-MM-DD"),
         },
       });
 
@@ -297,7 +302,7 @@ const Move = ({ router }) => {
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
-          searchDate: searchData,
+          searchDate: searchData.format("YYYY-MM-DD"),
         },
       });
 
@@ -310,7 +315,7 @@ const Move = ({ router }) => {
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
-          searchDate: searchData,
+          searchDate: searchData.format("YYYY-MM-DD"),
         },
       });
 
@@ -400,6 +405,8 @@ const Move = ({ router }) => {
   // 검색하기
   const dateHandler = useCallback((data) => {
     setSearchData(moment(data));
+
+    setResultDaum(null);
 
     dispatch({
       type: MOVE_SERVICE_LIST_REQUEST,
