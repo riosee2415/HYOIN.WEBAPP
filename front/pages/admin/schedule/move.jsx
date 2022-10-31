@@ -100,7 +100,7 @@ const Move = ({ router }) => {
     dispatch({
       type: MOVE_SERVICE_LIST_REQUEST,
       data: {
-        searchDate: searchData.format("YYYY-MM-DD"),
+        searchDate: searchData,
       },
     });
     setResultDaum(null);
@@ -168,24 +168,26 @@ const Move = ({ router }) => {
           (value) => value.carId === data.MoveServiceCarId
         );
 
-        if (data.moveTime === "오전") {
-          arr[currentId] = {
-            timeMorningId: data.id,
-            moveMorningTime: data.moveTime,
-            moverMorningName: data.moverName,
-            viewTimeMorningCreateAt: data.viewCreatedAt,
-            viewTimeMorningUpdateAt: data.viewUpdatedAt,
-            ...arr[currentId],
-          };
-        } else {
-          arr[currentId] = {
-            timeDinnerId: data.id,
-            moveDinnerTime: data.moveTime,
-            moverDinnerName: data.moverName,
-            viewTimeDinnerCreateAt: data.viewCreatedAt,
-            viewTimeDinnerUpdateAt: data.viewUpdatedAt,
-            ...arr[currentId],
-          };
+        if (currentId !== -1) {
+          if (data.moveTime === "오전") {
+            arr[currentId] = {
+              timeMorningId: data.id,
+              moveMorningTime: data.moveTime,
+              moverMorningName: data.moverName,
+              viewTimeMorningCreateAt: data.viewCreatedAt,
+              viewTimeMorningUpdateAt: data.viewUpdatedAt,
+              ...arr[currentId],
+            };
+          } else {
+            arr[currentId] = {
+              timeDinnerId: data.id,
+              moveDinnerTime: data.moveTime,
+              moverDinnerName: data.moverName,
+              viewTimeDinnerCreateAt: data.viewCreatedAt,
+              viewTimeDinnerUpdateAt: data.viewUpdatedAt,
+              ...arr[currentId],
+            };
+          }
         }
       });
 
@@ -216,24 +218,26 @@ const Move = ({ router }) => {
             (value) => value.carId === data.MoveServiceCarId
           );
 
-          if (data.moveTime === "오전") {
-            arr[currentId] = {
-              timeMorningId: data.id,
-              moveMorningTime: data.moveTime,
-              moverMorningName: data.moverName,
-              viewTimeMorningCreateAt: data.viewCreatedAt,
-              viewTimeMorningUpdateAt: data.viewUpdatedAt,
-              ...arr[currentId],
-            };
-          } else {
-            arr[currentId] = {
-              timeDinnerId: data.id,
-              moveDinnerTime: data.moveTime,
-              moverDinnerName: data.moverName,
-              viewTimeDinnerCreateAt: data.viewCreatedAt,
-              viewTimeDinnerUpdateAt: data.viewUpdatedAt,
-              ...arr[currentId],
-            };
+          if (currentId !== -1) {
+            if (data.moveTime === "오전") {
+              arr[currentId] = {
+                timeMorningId: data.id,
+                moveMorningTime: data.moveTime,
+                moverMorningName: data.moverName,
+                viewTimeMorningCreateAt: data.viewCreatedAt,
+                viewTimeMorningUpdateAt: data.viewUpdatedAt,
+                ...arr[currentId],
+              };
+            } else {
+              arr[currentId] = {
+                timeDinnerId: data.id,
+                moveDinnerTime: data.moveTime,
+                moverDinnerName: data.moverName,
+                viewTimeDinnerCreateAt: data.viewCreatedAt,
+                viewTimeDinnerUpdateAt: data.viewUpdatedAt,
+                ...arr[currentId],
+              };
+            }
           }
         });
       }
@@ -242,6 +246,7 @@ const Move = ({ router }) => {
     }
   }, [carList]);
 
+  console.log(resultDatum);
   // DONE
 
   useEffect(() => {
