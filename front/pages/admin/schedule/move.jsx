@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import AdminLayout from "../../../components/AdminLayout";
 import PageHeader from "../../../components/admin/PageHeader";
 import styled from "styled-components";
-import { DatePicker, Table } from "antd";
+import { Button, DatePicker, Table } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -72,8 +72,16 @@ const Move = ({ router }) => {
   ////// DATAVIEW //////
   const columns = [
     {
+      title: "날짜",
+      dataIndex: "viewMoveDate",
+    },
+    {
       title: "호차",
       dataIndex: "carCount",
+    },
+    {
+      title: "차번호",
+      dataIndex: "carNum",
     },
     {
       title: "기사님",
@@ -82,19 +90,27 @@ const Move = ({ router }) => {
           title: "오전",
           dataIndex: "id",
           key: "building",
-          width: 100,
+          width: 150,
         },
         {
           title: "오후",
           dataIndex: "id",
           key: "number",
-          width: 100,
+          width: 150,
         },
       ],
     },
     {
-      title: "조회수",
-      dataIndex: "id",
+      title: "차수",
+      render: () => (
+        <Button size="small" type="primary">
+          차수 수정하기
+        </Button>
+      ),
+    },
+    {
+      title: "생성일",
+      dataIndex: "viewCreatedAt",
     },
   ];
 
