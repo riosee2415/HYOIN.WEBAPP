@@ -457,7 +457,6 @@ const Move = ({ router }) => {
     {
       title: "명수",
       render: (data) => {
-        console.log(data);
         return (
           <UseAdminInput
             init={data.count}
