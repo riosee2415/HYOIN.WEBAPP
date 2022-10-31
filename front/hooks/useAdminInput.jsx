@@ -34,7 +34,7 @@ const UseAdminInput = ({
         ...DATA_TARGET,
       },
     });
-  }, [value]);
+  }, [value, REQUEST_TARGET, DATA_TARGET, init]);
 
   return (
     <Wrapper dr={`row`} ju={`space-between`}>
@@ -45,6 +45,7 @@ const UseAdminInput = ({
         onChange={changeHandler}
         value={value}
         type={isNum && `number`}
+        onKeyDown={(e) => e.keyCode === 13 && updateHandler()}
       />
 
       <Button size="small" type="primary" onClick={updateHandler}>

@@ -2,7 +2,16 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import AdminLayout from "../../../components/AdminLayout";
 import PageHeader from "../../../components/admin/PageHeader";
 import styled from "styled-components";
-import { Button, DatePicker, Input, message, Modal, Table } from "antd";
+import {
+  Button,
+  DatePicker,
+  Input,
+  message,
+  Modal,
+  Popconfirm,
+  Select,
+  Table,
+} from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,6 +33,7 @@ import {
   MOVE_SERVICE_CAR_UPDATE_REQUEST,
   MOVE_SERVICE_CREATE_REQUEST,
   MOVE_SERVICE_LIST_REQUEST,
+  MOVE_SERVICE_TIME_CREATE_REQUEST,
   MOVE_SERVICE_TIME_UPDATE_REQUEST,
 } from "../../../reducers/moveService";
 import UseAdminInput from "../../../hooks/useAdminInput";
@@ -39,21 +49,21 @@ const Move = ({ router }) => {
     moveServiceList,
     carList,
     timeList,
-
     //
-
     st_moveServiceCarCreateError,
     st_moveServiceCarUpdateDone,
     //
     st_moveServiceTimeUpdateDone,
+    st_moveServiceTimeCreateDone,
+    //
+    st_moveServiceCreateDone,
   } = useSelector((state) => state.moveService);
-
-  console.log(moveServiceList, carList, timeList);
 
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
   }, []);
 
+  console.log(moveServiceList);
   useEffect(() => {
     if (st_loadMyInfoDone) {
       if (!me || parseInt(me.level) < 3) {
@@ -64,14 +74,128 @@ const Move = ({ router }) => {
   /////////////////////////////////////////////////////////////////////////
 
   ////// HOOKS //////
-  const [vModal, setVModal] = useState(false); // 차수 수정하기 모달
+  const [vData, setVData] = useState(null); // 오전 차수 모달 눌렀을 때 데이터
+  const [dData, setDData] = useState(null); // 오후 차수 모달 눌렀을 때 데이터
+  const [dModal, setDModal] = useState(false); // 오후 차수 모달
+  const [vModal, setVModal] = useState(false); // 오전 차수 모달
+  const [resultDatum, setResultDaum] = useState(null); // 기사님, 차번호 모든 데이터 합쳐놓기
+  const [resultMoveList, setResultMoveList] = useState(null); // 오전, 오후 차수 데이터
+
+  console.log(resultMoveList);
 
   ////// REDUX //////
   const dispatch = useDispatch();
 
   ////// USEEFFECT //////
 
+  useEffect(() => {
+    let arr = [];
+
+    if (vData) {
+      if (vData.type === "오전") {
+        if (moveServiceList) {
+          moveServiceList.map((value) => {
+            // 선택한 데이터와 같은 호차이면서 오전 값 데이터
+            if (
+              value.MoveServiceCarId === vData.carId &&
+              vData.type === "오전"
+            ) {
+              arr.push(value);
+            }
+          });
+        }
+      } else if (vData.type === "오후") {
+        if (moveServiceList) {
+          moveServiceList.map((value) => {
+            // 선택한 데이터와 같은 호차이면서 오전 값 데이터
+            if (
+              value.MoveServiceCarId === vData.carId &&
+              vData.type === "오후"
+            ) {
+              arr.push(value);
+            }
+          });
+        }
+      }
+    }
+
+    setResultMoveList(arr);
+  }, [vData, moveServiceList]);
+
+  useEffect(() => {
+    if (st_moveServiceCreateDone) {
+      dispatch({
+        type: MOVE_SERVICE_LIST_REQUEST,
+        data: {
+          searchDate: "2022-10-29",
+        },
+      });
+
+      return message.success("차수가 생성되었습니다.");
+    }
+  }, [st_moveServiceCreateDone]);
+
+  useEffect(() => {
+    let arr = resultDatum ? resultDatum.map((data) => data) : [];
+
+    if (arr.length === 0 && carList) {
+      carList.map((data) => {
+        arr.push({
+          carId: data.id,
+          carCount: data.carCount,
+          carNum: data.carNum,
+          viewCarCreatedAt: data.viewCreatedAt,
+          viewMoveDate: data.viewMoveDate,
+          viewCarUpdatedAt: data.viewUpdatedAt,
+        });
+      });
+    }
+
+    if (timeList) {
+      timeList.map((data) => {
+        const currentId = arr.findIndex(
+          (value) => value.carId === data.MoveServiceCarId
+        );
+
+        if (data.moveTime === "오전") {
+          arr[currentId] = {
+            timeMorningId: data.id,
+            moveMorningTime: data.moveTime,
+            moverMorningName: data.moverName,
+            viewTimeMorningCreateAt: data.viewCreatedAt,
+            viewTimeMorningUpdateAt: data.viewUpdatedAt,
+            ...arr[currentId],
+          };
+        } else {
+          arr[currentId] = {
+            timeDinnerId: data.id,
+            moveDinnerTime: data.moveTime,
+            moverDinnerName: data.moverName,
+            viewTimeDinnerCreateAt: data.viewCreatedAt,
+            viewTimeDinnerUpdateAt: data.viewUpdatedAt,
+            ...arr[currentId],
+          };
+        }
+      });
+    }
+
+    setResultDaum(arr);
+  }, [timeList]);
+
   // DONE
+  useEffect(() => {
+    if (st_moveServiceTimeCreateDone) {
+      dispatch({
+        type: MOVE_SERVICE_LIST_REQUEST,
+        data: {
+          searchDate: "2022-10-29",
+        },
+      });
+
+      return message.success("기사님 정보를 등록하였습니다.");
+    }
+  }, [st_moveServiceTimeCreateDone]);
+
   useEffect(() => {
     if (st_moveServiceTimeUpdateDone) {
       dispatch({
@@ -108,25 +232,49 @@ const Move = ({ router }) => {
   ////// TOGGLE ///////
 
   // 차수 수정하기 모달 토글
-  const vModalToggle = useCallback(() => {
-    setVModal(!vModal);
-  }, [vModal]);
+  const vModalToggle = useCallback(
+    (data, type) => {
+      if (data) {
+        //  type오전 값 넣어주기
+        setVData({
+          type,
+          ...data,
+        });
+      }
+      setVModal(!vModal);
+    },
+    [vModal]
+  );
 
   ////// HANDLER ///////
 
-  // 차수 생성하기
-  //   const serviceCreateHandler = useCallback(() => {
-  //     dispatch({
-  //       type : MOVE_SERVICE_CREATE_REQUEST,
-  //       data : {
-  //         degree
-  // passenger
-  // count
-  // carId
-  // timeId
-  //       }
-  //     })
-  //   } ,[])
+  // 오후 차수 생성하기
+  const dinnerServiceCreateHandler = useCallback(() => {
+    dispatch({
+      type: MOVE_SERVICE_CREATE_REQUEST,
+      data: {
+        degree: "1차",
+        passenger: "임시내용입니다.",
+        count: "1명",
+        carId: vData.carId,
+        timeId: vData.timeDinnerId,
+      },
+    });
+  }, []);
+
+  // 오전 차수 생성하기
+  const serviceCreateHandler = useCallback(() => {
+    dispatch({
+      type: MOVE_SERVICE_CREATE_REQUEST,
+      data: {
+        degree: "1차",
+        passenger: "임시내용입니다.",
+        count: "1명",
+        carId: vData.carId,
+        timeId: vData.timeMorningId,
+      },
+    });
+  }, [vData]);
 
   // 검색하기
   const dateHandler = useCallback((data) => {
@@ -139,6 +287,43 @@ const Move = ({ router }) => {
   }, []);
 
   ////// DATAVIEW //////
+
+  const numColnums = [
+    {
+      title: "차수",
+      render: (data) => {
+        return <UseAdminInput init={data.degree} />;
+      },
+      width: 150,
+    },
+    {
+      title: "내용",
+      render: (data) => {
+        return <UseAdminInput init={data.passenger} />;
+      },
+    },
+    {
+      title: "명수",
+      render: (data) => {
+        return <UseAdminInput init={data.count} />;
+      },
+      width: 150,
+    },
+    {
+      title: "삭제",
+      render: () => {
+        return (
+          <Popconfirm title="삭제하시겠습니까?" okText="삭제" cancelText="취소">
+            <Button type="danger" size="small">
+              삭제
+            </Button>
+          </Popconfirm>
+        );
+      },
+      width: 70,
+    },
+  ];
+
   const columns = [
     {
       title: "날짜",
@@ -154,11 +339,10 @@ const Move = ({ router }) => {
         return (
           <UseAdminInput
             isNum={true}
-            data={data}
             init={data.carNum}
             REQUEST_TARGET={MOVE_SERVICE_CAR_UPDATE_REQUEST}
             DATA_TARGET={{
-              id: data.id,
+              id: data.carId,
               carNum: data.carNum,
             }}
           />
@@ -172,18 +356,30 @@ const Move = ({ router }) => {
         {
           title: "오전",
           render: (data) => {
-            console.log(data);
             return (
               <UseAdminInput
                 placeholder={"오전 기사님 성함"}
-                data={data}
-                init={"33"}
-                REQUEST_TARGET={MOVE_SERVICE_TIME_UPDATE_REQUEST}
-                DATA_TARGET={{
-                  id: data.id,
-                  moveTime: "오전",
-                  moveName: "33",
-                }}
+                init={data.timeMorningId ? data.moverMorningName : ""}
+                REQUEST_TARGET={
+                  data.timeMorningId
+                    ? MOVE_SERVICE_TIME_UPDATE_REQUEST
+                    : MOVE_SERVICE_TIME_CREATE_REQUEST
+                }
+                DATA_TARGET={
+                  data.timeMorningId
+                    ? {
+                        id: data.timeMorningId,
+                        moveTime: "오전",
+                        moverName: data.timeMorningId
+                          ? data.moverMorningName
+                          : "",
+                      }
+                    : {
+                        carId: data.carId,
+                        moveTime: "오전",
+                        moverName: "",
+                      }
+                }
               />
             );
           },
@@ -192,19 +388,32 @@ const Move = ({ router }) => {
         },
         {
           title: "오후",
-          render: () => {
+          render: (data) => {
             return (
-              <Wrapper dr={`row`} ju={`space-between`}>
-                <Input
-                  size="small"
-                  style={{ width: `calc(100% - 45px)` }}
-                  placeholder="오후 기사님 성함"
-                />
-
-                <Button size="small" type="primary">
-                  수정
-                </Button>
-              </Wrapper>
+              <UseAdminInput
+                placeholder={"오후 기사님 성함"}
+                init={data.timeDinnerId ? data.moverDinnerName : ""}
+                REQUEST_TARGET={
+                  data.timeDinnerId
+                    ? MOVE_SERVICE_TIME_UPDATE_REQUEST
+                    : MOVE_SERVICE_TIME_CREATE_REQUEST
+                }
+                DATA_TARGET={
+                  data.timeDinnerId
+                    ? {
+                        id: data.timeDinnerId,
+                        moveTime: "오후",
+                        moverName: data.timeDinnerId
+                          ? data.moverDinnerName
+                          : "",
+                      }
+                    : {
+                        carId: data.carId,
+                        moveTime: "오후",
+                        moverName: "",
+                      }
+                }
+              />
             );
           },
           width: 200,
@@ -212,16 +421,34 @@ const Move = ({ router }) => {
       ],
     },
     {
-      title: "차수",
-      render: () => (
-        <Button size="small" type="primary" onClick={vModalToggle}>
+      title: "오전 차수",
+      render: (data) => (
+        <Button
+          size="small"
+          type="primary"
+          onClick={() => vModalToggle(data, "오전")}
+        >
           차수 수정하기
         </Button>
       ),
+      width: 120,
+    },
+    {
+      title: "오후 차수",
+      render: (data) => (
+        <Button
+          size="small"
+          type="primary"
+          onClick={() => vModalToggle(data, "오후")}
+        >
+          차수 수정하기
+        </Button>
+      ),
+      width: 120,
     },
     {
       title: "생성일",
-      dataIndex: "viewCreatedAt",
+      dataIndex: "viewCarCreatedAt",
     },
   ];
 
@@ -274,7 +501,12 @@ const Move = ({ router }) => {
           <GuideDiv isImpo={true}>삭제된 데이터는 복구할 수 없습니다.</GuideDiv>
         </Wrapper>
 
-        <Table columns={columns} dataSource={carList} bordered size="small" />
+        <Table
+          columns={columns}
+          dataSource={resultDatum}
+          bordered
+          size="small"
+        />
       </AdminContent>
 
       <Modal
@@ -285,12 +517,13 @@ const Move = ({ router }) => {
         width="900px"
       >
         <Wrapper
-          al={`flex-end`}
+          dr={`row`}
+          ju={`flex-end`}
           padding={`0 0 5px`}
           margin={`0 0 5px`}
           borderBottom={`1px dashed ${Theme.adminLightGrey_C}`}
         >
-          <ModalBtn type="primary" size="small">
+          <ModalBtn type="primary" size="small" onClick={serviceCreateHandler}>
             차수 생성하기
           </ModalBtn>
         </Wrapper>
@@ -311,6 +544,8 @@ const Move = ({ router }) => {
           </GuideDiv>
           <GuideDiv isImpo={true}>삭제된 데이터는 복구할 수 없습니다.</GuideDiv>
         </Wrapper>
+
+        <Table size="small" columns={numColnums} dataSource={moveServiceList} />
       </Modal>
     </AdminLayout>
   );

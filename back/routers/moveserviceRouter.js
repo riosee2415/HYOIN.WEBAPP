@@ -267,11 +267,11 @@ router.post("/service/create", isAdminCheck, async (req, res, next) => {
   `;
 
   try {
-    const findResult = await models.sequelize.query(findQuery);
+    // const findResult = await models.sequelize.query(findQuery);
 
-    if (findResult[0].length !== 0) {
-      return res.status(401).send("이미 해당 차수 데이터가 존재합니다.");
-    }
+    // if (findResult[0].length !== 0) {
+    //   return res.status(401).send("이미 해당 차수 데이터가 존재합니다.");
+    // }
 
     const insertResult = await models.sequelize.query(insertQuery);
 

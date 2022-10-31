@@ -151,7 +151,7 @@ function* moveServiceTimeUpdate(action) {
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 async function moveServiceCreateAPI(data) {
-  return await axios.post(`/api/move/create`, data);
+  return await axios.post(`/api/move/service/create`, data);
 }
 
 function* moveServiceCreate(action) {
