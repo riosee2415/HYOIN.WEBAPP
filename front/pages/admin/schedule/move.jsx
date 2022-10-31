@@ -57,7 +57,8 @@ const Move = ({ router }) => {
     st_moveServiceCarCreateDone,
     st_moveServiceCarCreateError,
     st_moveServiceCarUpdateDone,
-
+    //
+    st_moveServiceListDone,
     //
     st_moveServiceTimeCreateDone,
     st_moveServiceTimeUpdateDone,
@@ -99,10 +100,10 @@ const Move = ({ router }) => {
     dispatch({
       type: MOVE_SERVICE_LIST_REQUEST,
       data: {
-        searchData: searchData,
+        searchDate: searchData.format("YYYY-MM-DD"),
       },
     });
-  }, []);
+  }, [searchData]);
 
   useEffect(() => {
     let arr = [];
@@ -156,58 +157,84 @@ const Move = ({ router }) => {
   }, [st_moveServiceCreateDone]);
 
   useEffect(() => {
-    const currentData = carList.findIndex(
-      (value) =>
-        String(value.viewMoveDate) ===
-        String(resultDatum && resultDatum[0].viewMoveDate)
-    );
-
-    if (currentData === -1) {
+    if (timeList) {
       let arr = resultDatum ? resultDatum.map((data) => data) : [];
 
-      if (carList) {
-        carList.map((data) => {
-          arr.push({
-            carId: data.id,
-            carCount: data.carCount,
-            carNum: data.carNum,
-            viewCarCreatedAt: data.viewCreatedAt,
-            viewMoveDate: data.viewMoveDate,
-            viewCarUpdatedAt: data.viewUpdatedAt,
-          });
-        });
-      }
+      timeList.map((data) => {
+        const currentId = arr.findIndex(
+          (value) => value.carId === data.MoveServiceCarId
+        );
 
-      if (timeList) {
-        timeList.map((data) => {
-          const currentId = arr.findIndex(
-            (value) => value.carId === data.MoveServiceCarId
-          );
-
-          if (data.moveTime === "오전") {
-            arr[currentId] = {
-              timeMorningId: data.id,
-              moveMorningTime: data.moveTime,
-              moverMorningName: data.moverName,
-              viewTimeMorningCreateAt: data.viewCreatedAt,
-              viewTimeMorningUpdateAt: data.viewUpdatedAt,
-              ...arr[currentId],
-            };
-          } else {
-            arr[currentId] = {
-              timeDinnerId: data.id,
-              moveDinnerTime: data.moveTime,
-              moverDinnerName: data.moverName,
-              viewTimeDinnerCreateAt: data.viewCreatedAt,
-              viewTimeDinnerUpdateAt: data.viewUpdatedAt,
-              ...arr[currentId],
-            };
-          }
-        });
-      }
+        if (data.moveTime === "오전") {
+          arr[currentId] = {
+            timeMorningId: data.id,
+            moveMorningTime: data.moveTime,
+            moverMorningName: data.moverName,
+            viewTimeMorningCreateAt: data.viewCreatedAt,
+            viewTimeMorningUpdateAt: data.viewUpdatedAt,
+            ...arr[currentId],
+          };
+        } else {
+          arr[currentId] = {
+            timeDinnerId: data.id,
+            moveDinnerTime: data.moveTime,
+            moverDinnerName: data.moverName,
+            viewTimeDinnerCreateAt: data.viewCreatedAt,
+            viewTimeDinnerUpdateAt: data.viewUpdatedAt,
+            ...arr[currentId],
+          };
+        }
+      });
 
       setResultDaum(arr);
     }
+  }, [timeList]);
+
+  useEffect(() => {
+    let arr = resultDatum ? resultDatum.map((data) => data) : [];
+
+    if (carList) {
+      carList.map((data) => {
+        arr.push({
+          carId: data.id,
+          carCount: data.carCount,
+          carNum: data.carNum,
+          viewCarCreatedAt: data.viewCreatedAt,
+          viewMoveDate: data.viewMoveDate,
+          viewCarUpdatedAt: data.viewUpdatedAt,
+        });
+      });
+    }
+
+    if (timeList) {
+      timeList.map((data) => {
+        const currentId = arr.findIndex(
+          (value) => value.carId === data.MoveServiceCarId
+        );
+
+        if (data.moveTime === "오전") {
+          arr[currentId] = {
+            timeMorningId: data.id,
+            moveMorningTime: data.moveTime,
+            moverMorningName: data.moverName,
+            viewTimeMorningCreateAt: data.viewCreatedAt,
+            viewTimeMorningUpdateAt: data.viewUpdatedAt,
+            ...arr[currentId],
+          };
+        } else {
+          arr[currentId] = {
+            timeDinnerId: data.id,
+            moveDinnerTime: data.moveTime,
+            moverDinnerName: data.moverName,
+            viewTimeDinnerCreateAt: data.viewCreatedAt,
+            viewTimeDinnerUpdateAt: data.viewUpdatedAt,
+            ...arr[currentId],
+          };
+        }
+      });
+    }
+
+    setResultDaum(arr);
   }, [timeList, carList]);
 
   // DONE
@@ -308,16 +335,24 @@ const Move = ({ router }) => {
   // 차수 수정하기 모달 토글
   const vModalToggle = useCallback(
     (data, type) => {
-      if (data) {
-        //  type오전 값 넣어주기
-        setVData({
-          type,
-          ...data,
-        });
-      } else {
-        setVData(null);
-        setResultDaum(null);
+      if (!vModal) {
+        if (data) {
+          if (!data.timeMorningId || !data.timeDinnerId) {
+            return message.error(
+              "오전/오후 기사님을 등록해야 차수를 등록할 수 있습니다."
+            );
+          }
+          //  type오전 값 넣어주기
+          setVData({
+            type,
+            ...data,
+          });
+        } else {
+          setVData(null);
+          setResultDaum(null);
+        }
       }
+
       setVModal(!vModal);
     },
     [vModal]
@@ -369,11 +404,9 @@ const Move = ({ router }) => {
     dispatch({
       type: MOVE_SERVICE_LIST_REQUEST,
       data: {
-        searchDate: moment(data).format("YYYY-MM-DD"),
+        searchDate: data.format("YYYY-MM-DD"),
       },
     });
-
-    setResultDaum(null);
   }, []);
 
   ////// DATAVIEW //////
@@ -709,7 +742,11 @@ const Move = ({ router }) => {
           </GuideDiv>
         </Wrapper>
 
-        <Calendar fullscreen={false} onChange={calenderHandler} />
+        <Calendar
+          fullscreen={false}
+          onChange={calenderHandler}
+          defaultValue={null}
+        />
       </Modal>
     </AdminLayout>
   );
