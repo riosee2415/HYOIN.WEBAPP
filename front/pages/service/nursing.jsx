@@ -20,6 +20,7 @@ import Unit from "../../components/nursing/unit";
 import Monthly from "../../components/nursing/Monthly";
 import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
 import { useRouter } from "next/router";
+import Diet from "../../components/nursing/Diet";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -122,7 +123,7 @@ const Nursing = () => {
             ) : router.query.type === "3" ? (
               <Monthly />
             ) : (
-              <Unit />
+              <Diet />
             )}
           </RsWrapper>
         </WholeWrapper>

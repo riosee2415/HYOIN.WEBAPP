@@ -1,7 +1,14 @@
 import produce from "../util/produce";
 
 export const initailState = {
-  menuList: [],
+  sundayData: null,
+  mondayData: null,
+  tuesdayData: null,
+  wednesdayData: null,
+  thursdayData: null,
+  fridayData: null,
+  saturdayData: null,
+
   adminMenuList: [],
 
   menuBrImgPath: null, // 아침메뉴 이미지
@@ -108,7 +115,13 @@ const reducer = (state = initailState, action) =>
         draft.st_menuListLoading = false;
         draft.st_menuListDone = true;
         draft.st_menuListError = null;
-        draft.menuList = action.data;
+        draft.sundayData = action.data.sundayData;
+        draft.mondayData = action.data.mondayData;
+        draft.tuesdayData = action.data.tuesdayData;
+        draft.wednesdayData = action.data.wednesdayData;
+        draft.thursdayData = action.data.thursdayData;
+        draft.fridayData = action.data.fridayData;
+        draft.saturdayData = action.data.saturdayData;
         break;
       }
       case MENU_LIST_FAILURE: {
