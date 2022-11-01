@@ -88,7 +88,7 @@ const Move = ({ router }) => {
   const [vModal, setVModal] = useState(false); // 오전 차수 모달
   const [dModal, setDModal] = useState(null); // 이동서비스 생성 모달
   const [searchData, setSearchData] = useState(moment()); // 검색 날짜
-  const [resultDatum, setResultDaum] = useState(null); // 기사님, 차번호 모든 데이터 합쳐놓기
+  const [resultDatum, setResultDaum] = useState([]); // 기사님, 차번호 모든 데이터 합쳐놓기
   const [resultMoveList, setResultMoveList] = useState(null); // 오전, 오후 차수 데이터
 
   ////// REDUX //////
@@ -103,8 +103,7 @@ const Move = ({ router }) => {
         searchDate: searchData,
       },
     });
-    setResultDaum(null);
-  }, [searchData]);
+  }, []);
 
   useEffect(() => {
     let arr = [];
@@ -196,7 +195,7 @@ const Move = ({ router }) => {
   }, [timeList]);
 
   useEffect(() => {
-    if (resultDatum === null) {
+    if (resultDatum.length === 0) {
       let arr = resultDatum ? resultDatum.map((data) => data) : [];
 
       if (carList) {
@@ -246,13 +245,12 @@ const Move = ({ router }) => {
     }
   }, [carList]);
 
-  console.log(resultDatum);
   // DONE
 
   useEffect(() => {
     if (st_moveServiceCarCreateDone) {
       setDModal(false);
-      setResultDaum(null);
+      setResultDaum([]);
       dispatch({
         type: MOVE_SERVICE_LIST_REQUEST,
         data: {
@@ -359,7 +357,7 @@ const Move = ({ router }) => {
           });
         } else {
           setVData(null);
-          setResultDaum(null);
+          setResultDaum([]);
         }
       }
 
@@ -411,7 +409,7 @@ const Move = ({ router }) => {
   const dateHandler = useCallback((data) => {
     setSearchData(moment(data));
 
-    setResultDaum(null);
+    setResultDaum([]);
 
     dispatch({
       type: MOVE_SERVICE_LIST_REQUEST,
