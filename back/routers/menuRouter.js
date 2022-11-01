@@ -159,8 +159,8 @@ router.post("/list", async (req, res, next) => {
           DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
     FROM	menus
    WHERE	isDelete = 0
-     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") <= DATE_FORMAT("${startDate}", "%Y-%m-%d")		
-     AND	DATE_FORMAT(saveDate, "%Y-%m-%d") >= DATE_FORMAT("${endDate}", "%Y-%m-%d")
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") >= DATE_FORMAT("${startDate}", "%Y-%m-%d")		
+     AND	DATE_FORMAT(saveDate, "%Y-%m-%d") <= DATE_FORMAT("${endDate}", "%Y-%m-%d")
    ORDER  BY saveDate ASC
     `;
 
