@@ -113,9 +113,10 @@ router.post("/admin/list", isAdminCheck, async (req, res, next) => {
 });
 
 router.post("/list", async (req, res, next) => {
-  const { startDate, endDate } = req.body;
+  const { sunday, monday, tuesday, wednesday, thursday, friday, saturday } =
+    req.body;
 
-  const selectQuery = `
+  const sundayQuery = `
   SELECT	id,
           saveDate,
           DATE_FORMAT(saveDate, "%Y-%m-%d")  AS viewSaveDate,
@@ -159,15 +160,315 @@ router.post("/list", async (req, res, next) => {
           DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
     FROM	menus
    WHERE	isDelete = 0
-     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") >= DATE_FORMAT("${startDate}", "%Y-%m-%d")		
-     AND	DATE_FORMAT(saveDate, "%Y-%m-%d") <= DATE_FORMAT("${endDate}", "%Y-%m-%d")
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") = DATE_FORMAT("${sunday}", "%Y-%m-%d")
+   ORDER  BY saveDate ASC
+    `;
+
+  const mondayQuery = `
+  SELECT	id,
+          saveDate,
+          DATE_FORMAT(saveDate, "%Y-%m-%d")  AS viewSaveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+    FROM	menus
+   WHERE	isDelete = 0
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") = DATE_FORMAT("${monday}", "%Y-%m-%d")
+   ORDER  BY saveDate ASC
+    `;
+
+  const tuesdayQuery = `
+  SELECT	id,
+          saveDate,
+          DATE_FORMAT(saveDate, "%Y-%m-%d")  AS viewSaveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+    FROM	menus
+   WHERE	isDelete = 0
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") = DATE_FORMAT("${tuesday}", "%Y-%m-%d")
+   ORDER  BY saveDate ASC
+    `;
+
+  const wednesdayQuery = `
+  SELECT	id,
+          saveDate,
+          DATE_FORMAT(saveDate, "%Y-%m-%d")  AS viewSaveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+    FROM	menus
+   WHERE	isDelete = 0
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") = DATE_FORMAT("${wednesday}", "%Y-%m-%d")
+   ORDER  BY saveDate ASC
+    `;
+
+  const thursdayQuery = `
+  SELECT	id,
+          saveDate,
+          DATE_FORMAT(saveDate, "%Y-%m-%d")  AS viewSaveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+    FROM	menus
+   WHERE	isDelete = 0
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") = DATE_FORMAT("${thursday}", "%Y-%m-%d")
+   ORDER  BY saveDate ASC
+    `;
+
+  const fridayQuery = `
+  SELECT	id,
+          saveDate,
+          DATE_FORMAT(saveDate, "%Y-%m-%d")  AS viewSaveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+    FROM	menus
+   WHERE	isDelete = 0
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") = DATE_FORMAT("${friday}", "%Y-%m-%d")
+   ORDER  BY saveDate ASC
+    `;
+  const saturdayQuery = `
+  SELECT	id,
+          saveDate,
+          DATE_FORMAT(saveDate, "%Y-%m-%d")  AS viewSaveDate,
+          breakfast1,
+          breakfast2,
+          breakfast3,
+          breakfast4,
+          breakfast5,
+          breakfast6,
+          breakfastCalorie,
+          breakfaseImage,
+          lunch1,
+          lunch2,
+          lunch3,
+          lunch4,
+          lunch5,
+          lunch6,
+          lunchCalorie,
+          lunchImage,
+          dinner1,
+          dinner2,
+          dinner3,
+          dinner4,
+          dinner5,
+          dinner6,
+          dinnerCalorie,
+          dinnerImage,
+          morningSnack1,
+          morningSnack2,
+          morningSnackImage,
+          afternoonSnack1,
+          afternoonSnack2,
+          afternoonSnackImage,
+          functionDiet,
+          diabetes,
+          scene,
+          lowSalt,
+          createdAt,
+          updatedAt,
+          DATE_FORMAT(createdAt, "%Y년 %m월 %d일")  AS viewCreatedAt,
+          DATE_FORMAT(updatedAt, "%Y년 %m월 %d일")  AS viewUpdatedAt
+    FROM	menus
+   WHERE	isDelete = 0
+     AND  DATE_FORMAT(saveDate, "%Y-%m-%d") = DATE_FORMAT("${saturday}", "%Y-%m-%d")
    ORDER  BY saveDate ASC
     `;
 
   try {
-    const list = await models.sequelize.query(selectQuery);
+    const sundayData = await models.sequelize.query(sundayQuery);
+    const mondayData = await models.sequelize.query(mondayQuery);
+    const tuesdayData = await models.sequelize.query(tuesdayQuery);
+    const wednesdayData = await models.sequelize.query(wednesdayQuery);
+    const thursdayData = await models.sequelize.query(thursdayQuery);
+    const fridayData = await models.sequelize.query(fridayQuery);
+    const saturdayData = await models.sequelize.query(saturdayQuery);
 
-    return res.status(200).json(list[0]);
+    return res.status(200).json({
+      sundayData: sundayData[0].length !== 0 ? sundayData[0][0] : {},
+      mondayData: mondayData[0].length !== 0 ? mondayData[0][0] : {},
+      tuesdayData: tuesdayData[0].length !== 0 ? tuesdayData[0][0] : {},
+      wednesdayData: wednesdayData[0].length !== 0 ? wednesdayData[0][0] : {},
+      thursdayData: thursdayData[0].length !== 0 ? thursdayData[0][0] : {},
+      fridayData: fridayData[0].length !== 0 ? fridayData[0][0] : {},
+      saturdayData: saturdayData[0].length !== 0 ? saturdayData[0][0] : {},
+    });
   } catch (error) {
     console.error(error);
     return res.status(401).send("식단표 목록을 불러올 수 없습니다.");
