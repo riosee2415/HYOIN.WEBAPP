@@ -396,7 +396,7 @@ const Diet = () => {
             <Wrapper
               cursor={`pointer`}
               onClick={() =>
-                menuModalToggle("화요일아침식단", tuesdayData.breakfaseImage)
+                menuModalToggle("화요일 아침식단", tuesdayData.breakfaseImage)
               }
             >
               <DietRiceTable>{tuesdayData.breakfast1}</DietRiceTable>
