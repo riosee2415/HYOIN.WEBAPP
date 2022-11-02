@@ -38,6 +38,7 @@ const Dementia = () => {
   //
   useEffect(() => {
     let arr = [];
+    let result = [];
     carList.map((data) => {
       timeList.map((value) => {
         moveServiceList.map((re) => {
@@ -50,6 +51,8 @@ const Dementia = () => {
         });
       });
     });
+
+    arr.map((data) => {});
   }, [carList, timeList, moveServiceList]);
 
   useEffect(() => {
