@@ -66,9 +66,7 @@ const Tab = styled(Wrapper)`
 
 const Protection = () => {
   ////// GLOBAL STATE //////
-  const { moveServiceList, carList, timeList } = useSelector(
-    (state) => state.moveService
-  );
+
   ////// HOOKS //////
   const width = useWidth();
   const router = useRouter();
@@ -129,9 +127,7 @@ const Protection = () => {
               <Monthly />
             ) : router.query.type === "4" ? (
               <Dementia
-                moveServiceList={moveServiceList}
-                carList={carList}
-                timeList={timeList}
+           
               />
             ) : (
               <Normal />
@@ -162,12 +158,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       type: PROGRAM_WEEK_LIST_REQUEST,
     });
 
-    context.store.dispatch({
-      type: MOVE_SERVICE_LIST_REQUEST,
-      data: {
-        searchData: moment(),
-      },
-    });
+
 
     // 구현부 종료
     context.store.dispatch(END);
