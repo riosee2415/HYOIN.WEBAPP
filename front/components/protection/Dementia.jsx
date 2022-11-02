@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { ATag, Text, Wrapper, Image, CommonButton } from "../commonComponents";
 import styled from "styled-components";
 import Theme from "../Theme";
 import useWidth from "../../hooks/useWidth";
 import Fade from "react-reveal/Fade";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
+import moment from "moment";
 
 const ArrowBtn = styled(Wrapper)`
   width: 36px;
@@ -22,7 +26,40 @@ const ArrowBtn = styled(Wrapper)`
 `;
 
 const Dementia = () => {
+  const { moveServiceList, carList, timeList } = useSelector(
+    (state) => state.moveService
+  );
+
+  //
   const width = useWidth();
+  const dispatch = useDispatch();
+  //
+  const [resultLen, setResultLen] = useState([]);
+  //
+  useEffect(() => {
+    let arr = [];
+    carList.map((data) => {
+      timeList.map((value) => {
+        moveServiceList.map((re) => {
+          if (
+            re.MoveServiceCarId === data.id &&
+            value.id === re.MoveServiceTimeId
+          ) {
+            arr.push(re);
+          }
+        });
+      });
+    });
+  }, [carList, timeList, moveServiceList]);
+
+  useEffect(() => {
+    dispatch({
+      type: MOVE_SERVICE_LIST_REQUEST,
+      data: {
+        searchDate: moment().format("YYYY-MM-DD"),
+      },
+    });
+  }, []);
 
   return (
     <Wrapper padding={`60px 0 120px`}>
@@ -70,14 +107,26 @@ const Dementia = () => {
           </Text>
 
           <Wrapper dr={`row`} width={`auto`} margin={`5px 0`}>
-            <Image alt="icon" width={`12px`} margin={`0 6px 0 0`} />
-            <Text fontSize={`18px`} fontWeight={`600`}>
-              042-522-5555
-            </Text>
+            <ATag href="tel:042-522-5555">
+              <Image
+                alt="icon"
+                width={`12px`}
+                margin={`0 6px 0 0`}
+                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_call.png"
+              />
+              <Text fontSize={`18px`} fontWeight={`600`}>
+                042-522-5555
+              </Text>
+            </ATag>
           </Wrapper>
 
           <Wrapper dr={`row`} width={`auto`}>
-            <Image alt="icon" width={`12px`} margin={`0 6px 0 0`} />
+            <Image
+              alt="icon"
+              width={`12px`}
+              margin={`0 6px 0 0`}
+              src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_fax.png"
+            />
             <Text fontSize={`18px`} fontWeight={`600`}>
               042-523-7118
             </Text>
@@ -87,1445 +136,123 @@ const Dementia = () => {
 
       <Wrapper wrpa={`nowrap`} overflowX={`auto`}>
         <Wrapper minWidth={`900px`}>
-          <Wrapper
-            borderTop={`1px solid ${Theme.subTheme2_C}`}
-            border={`1px solid ${Theme.lightGrey2_C}`}
-            borderBottom={`none`}
-            dr={`row`}
-            margin={`0 0 40px`}
-          >
-            <Wrapper
-              width={`10%`}
-              height={width < 700 ? `250px` : `400px`}
-              bgColor={Theme.subTheme9_C}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Text fontSize={width < 700 ? `18px` : `22px`} fontWeight={`600`}>
-                1호차
-              </Text>
-              <Text
-                margin={`5px 0 0`}
-                fontSize={width < 700 ? `18px` : `22px`}
-                fontWeight={`700`}
-                color={Theme.subTheme2_C}
+          {carList.map((data) => {
+            return (
+              <Wrapper
+                borderTop={`1px solid ${Theme.subTheme2_C}`}
+                border={`1px solid ${Theme.lightGrey2_C}`}
+                borderBottom={`none`}
+                dr={`row`}
+                margin={`0 0 40px`}
               >
-                3680
-              </Text>
-            </Wrapper>
+                <Wrapper
+                  width={`10%`}
+                  height={width < 700 ? `250px` : `400px`}
+                  bgColor={Theme.subTheme9_C}
+                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                >
+                  <Text
+                    fontSize={width < 700 ? `18px` : `22px`}
+                    fontWeight={`600`}
+                  >
+                    {data.carCount}
+                  </Text>
+                  <Text
+                    margin={`5px 0 0`}
+                    fontSize={width < 700 ? `18px` : `22px`}
+                    fontWeight={`700`}
+                    color={Theme.subTheme2_C}
+                  >
+                    {data.carNum}
+                  </Text>
+                </Wrapper>
 
-            <Wrapper
-              width={`10%`}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `150px` : `240px`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
+                <Wrapper
+                  width={`10%`}
+                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
+                  borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                 >
-                  오전
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `100px` : `160px`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오후
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-            </Wrapper>
+                  {timeList.map((value) => {
+                    if (value.MoveServiceCarId === data.id) {
+                      return (
+                        <Wrapper
+                          bgColor={Theme.lightGrey4_C}
+                          height={moveServiceList.map((re) => {
+                            if (re.MoveServiceTimeId === value.id) {
+                              return `${resultLen.length * 80}px`;
+                            }
+                          })}
+                          borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                        >
+                          <Text
+                            fontSize={width < 700 ? `18px` : `22px`}
+                            color={Theme.grey2_C}
+                            margin={`0 0 5px`}
+                          >
+                            {value.moveTime}
+                          </Text>
+                          <Text
+                            fontSize={width < 700 ? `18px` : `22px`}
+                            fontWeight={`700`}
+                          >
+                            {value.moverName}
+                          </Text>
+                        </Wrapper>
+                      );
+                    }
+                  })}
+                </Wrapper>
 
-            <Wrapper width={`80%`}>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
+                <Wrapper width={`80%`}>
+                  {timeList.map((value) => {
+                    return moveServiceList.map((result) => {
+                      if (
+                        value.id === result.MoveServiceTimeId &&
+                        data.id === result.MoveServiceCarId
+                      ) {
+                        return (
+                          <Wrapper
+                            height={width < 700 ? `50px` : `80px`}
+                            dr={`row`}
+                            borderBottom={`1px solid ${Theme.lightGrey2_C}`}
+                          >
+                            <Wrapper
+                              width={`20%`}
+                              bgColor={Theme.lightGrey4_C}
+                              borderRight={`1px solid ${Theme.lightGrey2_C}`}
+                              height={`100%`}
+                              fontSize={width < 700 ? `18px` : `22px`}
+                            >
+                              {result.degree}
+                            </Wrapper>
+                            <Wrapper
+                              width={`65%`}
+                              borderRight={`1px solid ${Theme.lightGrey2_C}`}
+                              height={`100%`}
+                              fontSize={`20px`}
+                            >
+                              {result.passenger}
+                            </Wrapper>
+                            <Wrapper
+                              width={`15%`}
+                              bgColor={Theme.lightGrey4_C}
+                              borderRight={`1px solid ${Theme.lightGrey2_C}`}
+                              height={`100%`}
+                              fontSize={width < 700 ? `18px` : `22px`}
+                              fontWeight={`700`}
+                            >
+                              {result.count}
+                            </Wrapper>
+                          </Wrapper>
+                        );
+                      }
+                    });
+                  })}
                 </Wrapper>
               </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-            </Wrapper>
-          </Wrapper>
-
-          <Wrapper
-            borderTop={`1px solid ${Theme.subTheme2_C}`}
-            border={`1px solid ${Theme.lightGrey2_C}`}
-            borderBottom={`none`}
-            dr={`row`}
-            margin={`0 0 40px`}
-          >
-            <Wrapper
-              width={`10%`}
-              height={width < 700 ? `250px` : `400px`}
-              bgColor={Theme.subTheme9_C}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Text fontSize={width < 700 ? `18px` : `22px`} fontWeight={`600`}>
-                2호차
-              </Text>
-              <Text
-                margin={`5px 0 0`}
-                fontSize={width < 700 ? `18px` : `22px`}
-                fontWeight={`700`}
-                color={Theme.subTheme2_C}
-              >
-                3680
-              </Text>
-            </Wrapper>
-
-            <Wrapper
-              width={`10%`}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `150px` : `240px`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오전
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `100px` : `160px`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오후
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper width={`80%`}>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-            </Wrapper>
-          </Wrapper>
-
-          <Wrapper
-            borderTop={`1px solid ${Theme.subTheme2_C}`}
-            border={`1px solid ${Theme.lightGrey2_C}`}
-            borderBottom={`none`}
-            dr={`row`}
-            margin={`0 0 40px`}
-          >
-            <Wrapper
-              width={`10%`}
-              height={width < 700 ? `250px` : `400px`}
-              bgColor={Theme.subTheme9_C}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Text fontSize={width < 700 ? `18px` : `22px`} fontWeight={`600`}>
-                3호차
-              </Text>
-              <Text
-                margin={`5px 0 0`}
-                fontSize={width < 700 ? `18px` : `22px`}
-                fontWeight={`700`}
-                color={Theme.subTheme2_C}
-              >
-                3680
-              </Text>
-            </Wrapper>
-
-            <Wrapper
-              width={`10%`}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `150px` : `240px`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오전
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `100px` : `160px`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오후
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper width={`80%`}>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-            </Wrapper>
-          </Wrapper>
-
-          <Wrapper
-            borderTop={`1px solid ${Theme.subTheme2_C}`}
-            border={`1px solid ${Theme.lightGrey2_C}`}
-            borderBottom={`none`}
-            dr={`row`}
-            margin={`0 0 40px`}
-          >
-            <Wrapper
-              width={`10%`}
-              height={width < 700 ? `250px` : `400px`}
-              bgColor={Theme.subTheme9_C}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Text fontSize={width < 700 ? `18px` : `22px`} fontWeight={`600`}>
-                4호차
-              </Text>
-              <Text
-                margin={`5px 0 0`}
-                fontSize={width < 700 ? `18px` : `22px`}
-                fontWeight={`700`}
-                color={Theme.subTheme2_C}
-              >
-                3680
-              </Text>
-            </Wrapper>
-
-            <Wrapper
-              width={`10%`}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `150px` : `240px`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오전
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `100px` : `160px`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오후
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper width={`80%`}>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-            </Wrapper>
-          </Wrapper>
-
-          <Wrapper
-            borderTop={`1px solid ${Theme.subTheme2_C}`}
-            border={`1px solid ${Theme.lightGrey2_C}`}
-            borderBottom={`none`}
-            dr={`row`}
-            margin={`0 0 40px`}
-          >
-            <Wrapper
-              width={`10%`}
-              height={width < 700 ? `250px` : `400px`}
-              bgColor={Theme.subTheme9_C}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Text fontSize={width < 700 ? `18px` : `22px`} fontWeight={`600`}>
-                5호차
-              </Text>
-              <Text
-                margin={`5px 0 0`}
-                fontSize={width < 700 ? `18px` : `22px`}
-                fontWeight={`700`}
-                color={Theme.subTheme2_C}
-              >
-                3680
-              </Text>
-            </Wrapper>
-
-            <Wrapper
-              width={`10%`}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `150px` : `240px`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오전
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `100px` : `160px`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오후
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper width={`80%`}>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-            </Wrapper>
-          </Wrapper>
-
-          <Wrapper
-            borderTop={`1px solid ${Theme.subTheme2_C}`}
-            border={`1px solid ${Theme.lightGrey2_C}`}
-            borderBottom={`none`}
-            dr={`row`}
-            margin={`0 0 40px`}
-          >
-            <Wrapper
-              width={`10%`}
-              height={width < 700 ? `250px` : `400px`}
-              bgColor={Theme.subTheme9_C}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Text fontSize={width < 700 ? `18px` : `22px`} fontWeight={`600`}>
-                6호차
-              </Text>
-              <Text
-                margin={`5px 0 0`}
-                fontSize={width < 700 ? `18px` : `22px`}
-                fontWeight={`700`}
-                color={Theme.subTheme2_C}
-              >
-                3680
-              </Text>
-            </Wrapper>
-
-            <Wrapper
-              width={`10%`}
-              borderRight={`1px solid ${Theme.lightGrey2_C}`}
-              borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-            >
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `150px` : `240px`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오전
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-              <Wrapper
-                bgColor={Theme.lightGrey4_C}
-                height={width < 700 ? `100px` : `160px`}
-              >
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  color={Theme.grey2_C}
-                  margin={`0 0 5px`}
-                >
-                  오후
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  홍길동
-                </Text>
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper width={`80%`}>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                height={width < 700 ? `50px` : `80px`}
-                dr={`row`}
-                borderBottom={`1px solid ${Theme.lightGrey2_C}`}
-              >
-                <Wrapper
-                  width={`20%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                >
-                  1차
-                </Wrapper>
-                <Wrapper
-                  width={`65%`}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={`20px`}
-                >
-                  내용
-                </Wrapper>
-                <Wrapper
-                  width={`15%`}
-                  bgColor={Theme.lightGrey4_C}
-                  borderRight={`1px solid ${Theme.lightGrey2_C}`}
-                  height={`100%`}
-                  fontSize={width < 700 ? `18px` : `22px`}
-                  fontWeight={`700`}
-                >
-                  2명
-                </Wrapper>
-              </Wrapper>
-            </Wrapper>
-          </Wrapper>
+            );
+          })}
         </Wrapper>
       </Wrapper>
     </Wrapper>

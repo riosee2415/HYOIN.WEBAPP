@@ -89,7 +89,7 @@ const Move = ({ router }) => {
   const [dModal, setDModal] = useState(null); // 이동서비스 생성 모달
   const [searchData, setSearchData] = useState(moment()); // 검색 날짜
   const [resultDatum, setResultDaum] = useState([]); // 기사님, 차번호 모든 데이터 합쳐놓기
-  const [resultMoveList, setResultMoveList] = useState(null); // 오전, 오후 차수 데이터
+  const [resultMoveList, setResultMoveList] = useState([]); // 오전, 오후 차수 데이터
 
   ////// REDUX //////
   const dispatch = useDispatch();
@@ -159,17 +159,21 @@ const Move = ({ router }) => {
   }, [st_moveServiceCreateDone]);
 
   useEffect(() => {
+    // 차수를 수정했을 때 데이터값 바로 수정되도록 진행하는 useEffect값
     if (timeList) {
       let arr = resultDatum ? resultDatum.map((data) => data) : [];
 
       timeList.map((data) => {
+        // 차 번호 id랑 차수 id값 매칭
         const currentId = arr.findIndex(
           (value) => value.carId === data.MoveServiceCarId
         );
 
+        // 이게 없으면 정확하게 쌓이지 않음
         if (currentId !== -1) {
           if (data.moveTime === "오전") {
             arr[currentId] = {
+              // arr에 오전 기사님 값 추가
               timeMorningId: data.id,
               moveMorningTime: data.moveTime,
               moverMorningName: data.moverName,
@@ -179,6 +183,7 @@ const Move = ({ router }) => {
             };
           } else {
             arr[currentId] = {
+              // arr에 오후 기사님 값 추가
               timeDinnerId: data.id,
               moveDinnerTime: data.moveTime,
               moverDinnerName: data.moverName,
@@ -195,11 +200,13 @@ const Move = ({ router }) => {
   }, [timeList]);
 
   useEffect(() => {
+    // 이게 없으면 carList가 있을때에 반복적으로 쌓이는 현상을 막을 수 없음
     if (resultDatum.length === 0) {
       let arr = resultDatum ? resultDatum.map((data) => data) : [];
 
       if (carList) {
         carList.map((data) => {
+          // arr에 몇호차에 차번호가 몇번인지 넣어두기
           arr.push({
             carId: data.id,
             carCount: data.carCount,
@@ -213,11 +220,14 @@ const Move = ({ router }) => {
 
       if (timeList) {
         timeList.map((data) => {
+          // 차번호 id랑 오전/오후 기사님 id값 매칭하기
           const currentId = arr.findIndex(
             (value) => value.carId === data.MoveServiceCarId
           );
 
+          // 이게 없으면 정확하게 쌓이지 않음
           if (currentId !== -1) {
+            // arr에 오전 기사님 값 추가
             if (data.moveTime === "오전") {
               arr[currentId] = {
                 timeMorningId: data.id,
@@ -228,6 +238,7 @@ const Move = ({ router }) => {
                 ...arr[currentId],
               };
             } else {
+              // arr에 오후 기사님 값 추가
               arr[currentId] = {
                 timeDinnerId: data.id,
                 moveDinnerTime: data.moveTime,
@@ -350,15 +361,23 @@ const Move = ({ router }) => {
               "오전/오후 기사님을 등록해야 차수를 등록할 수 있습니다."
             );
           }
-          //  type오전 값 넣어주기
+          // type오전 값 넣어주기
+          // type값이 없으면 오전인지 오후인지 알 방법이 없음
+          // DB에 저장되지 않고 FRONT에서만 쓰이는 값
           setVData({
             type,
             ...data,
           });
         } else {
+          // 리셋시켜야만 데이터가 정상적으로 쌓임
+          // 리셋 안시키면 새로고침할때마다 반복적으로 계속 쌓임
           setVData(null);
           setResultDaum([]);
         }
+      } else {
+        // 모달 껏을때 데이터 리셋 해야 useEffect에 있는 데이터 세팅이 됨
+        // 이게 없으면 데이터 세팅이 한박자 느림
+        setResultMoveList([]);
       }
 
       setVModal(!vModal);

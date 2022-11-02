@@ -20,6 +20,9 @@ import { useRouter } from "next/router";
 import Monthly from "../../components/nursing/Monthly";
 import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
 import Normal from "../../components/protection/Normal";
+import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -63,6 +66,9 @@ const Tab = styled(Wrapper)`
 
 const Protection = () => {
   ////// GLOBAL STATE //////
+  const { moveServiceList, carList, timeList } = useSelector(
+    (state) => state.moveService
+  );
   ////// HOOKS //////
   const width = useWidth();
   const router = useRouter();
@@ -122,7 +128,11 @@ const Protection = () => {
             ) : router.query.type === "3" ? (
               <Monthly />
             ) : router.query.type === "4" ? (
-              <Dementia />
+              <Dementia
+                moveServiceList={moveServiceList}
+                carList={carList}
+                timeList={timeList}
+              />
             ) : (
               <Normal />
             )}
@@ -150,6 +160,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: PROGRAM_WEEK_LIST_REQUEST,
+    });
+
+    context.store.dispatch({
+      type: MOVE_SERVICE_LIST_REQUEST,
+      data: {
+        searchData: moment(),
+      },
     });
 
     // 구현부 종료
