@@ -30,7 +30,6 @@
     "moment": "2.29.4",
     "next": "^9.5.5",
     "next-redux-wrapper": "^6.0.2",
-    "pannellum-react": "^1.2.4",
     "passport-kakao": "^1.0.1",
     "pm2": "^5.1.0",
     "prop-types": "^15.7.2",
