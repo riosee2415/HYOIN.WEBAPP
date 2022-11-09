@@ -9,10 +9,10 @@ import useWidth from "../../hooks/useWidth";
 import { WholeWrapper, Wrapper } from "../../components/commonComponents";
 
 import Theme from "../../components/Theme";
+import ClientLayout from "../../components/ClientLayout";
 
 const Vr = () => {
   ////// GLOBAL STATE //////
-  const [view, setView] = useState(false);
 
   ////// HOOKS //////
   const width = useWidth();
@@ -21,34 +21,29 @@ const Vr = () => {
   ////// TOGGLE //////
   ////// HANDLER //////
   ////// DATAVIEW //////
-  // https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/vr/3d+img.jpeg
-
-  useEffect(() => {
-    setTimeout(() => {
-      setView(true);
-    }, 3000);
-  }, []);
 
   return (
     <>
       <Head>
         <title>효인주야간노인복지센터 | 시설 3D 안내</title>
       </Head>
-      <WholeWrapper>
-        <Wrapper height={`100vh`}>
-          <iframe
-            width={`100%`}
-            height={`100%`}
-            style={{ border: `none` }}
-            src={"http://localhost:3030/"}
-            allowfullscreen="allowfullscreen"
-            mozallowfullscreen="mozallowfullscreen"
-            msallowfullscreen="msallowfullscreen"
-            oallowfullscreen="oallowfullscreen"
-            webkitallowfullscreen="webkitallowfullscreen"
-          />
-        </Wrapper>
-      </WholeWrapper>
+      <ClientLayout>
+        <WholeWrapper>
+          <Wrapper height={`100vh`}>
+            <iframe
+              width={`100%`}
+              height={`100%`}
+              style={{ border: `none` }}
+              src={"http://localhost:3030/"}
+              allowfullscreen="allowfullscreen"
+              mozallowfullscreen="mozallowfullscreen"
+              msallowfullscreen="msallowfullscreen"
+              oallowfullscreen="oallowfullscreen"
+              webkitallowfullscreen="webkitallowfullscreen"
+            />
+          </Wrapper>
+        </WholeWrapper>
+      </ClientLayout>
     </>
   );
 };
