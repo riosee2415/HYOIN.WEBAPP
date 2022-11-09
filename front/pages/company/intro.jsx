@@ -45,7 +45,7 @@ const Intro = () => {
               <Wrapper dr={`row`} ju={`space-between`}>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_purpose.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro1.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
@@ -108,7 +108,7 @@ const Intro = () => {
                 </Wrapper>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_purpose.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro2.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
@@ -123,7 +123,7 @@ const Intro = () => {
               <Wrapper dr={`row`} ju={`space-between`}>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_purpose.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro3.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
@@ -180,7 +180,7 @@ const Intro = () => {
                 </Wrapper>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_purpose.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro4.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
