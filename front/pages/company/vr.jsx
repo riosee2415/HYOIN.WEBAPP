@@ -6,10 +6,8 @@ import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
 import axios from "axios";
 import { END } from "redux-saga";
 import useWidth from "../../hooks/useWidth";
-import { WholeWrapper } from "../../components/commonComponents";
-import "@georgedrpg/pannellum-react-next/es/css/video-js.css";
-import "@georgedrpg/pannellum-react-next/es/css/pannellum.css";
-import "@georgedrpg/pannellum-react-next/es/css/style-textInfo.css";
+import { WholeWrapper, Wrapper } from "../../components/commonComponents";
+
 import Theme from "../../components/Theme";
 
 const Vr = () => {
@@ -37,7 +35,19 @@ const Vr = () => {
         <title>효인주야간노인복지센터 | 시설 3D 안내</title>
       </Head>
       <WholeWrapper>
-        <div>Hello</div>
+        <Wrapper height={`100vh`}>
+          <iframe
+            width={`100%`}
+            height={`100%`}
+            style={{ border: `none` }}
+            src={"http://localhost:3030/"}
+            allowfullscreen="allowfullscreen"
+            mozallowfullscreen="mozallowfullscreen"
+            msallowfullscreen="msallowfullscreen"
+            oallowfullscreen="oallowfullscreen"
+            webkitallowfullscreen="webkitallowfullscreen"
+          />
+        </Wrapper>
       </WholeWrapper>
     </>
   );
