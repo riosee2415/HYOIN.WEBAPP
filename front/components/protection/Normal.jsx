@@ -45,7 +45,11 @@ const Normal = () => {
       <Wrapper
         radius={`10px`}
         overflow={`hidden`}
-        bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban.png")`}
+        bgImg={
+          width < 800
+            ? `url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_day-ban_m.png")`
+            : `url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_day-ban.png")`
+        }
       >
         <Wrapper
           bgColor={`rgba(0, 0, 0, 0.5)`}

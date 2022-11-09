@@ -501,7 +501,7 @@ const Home = ({}) => {
               </Wrapper>
               <Image
                 alt="image"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section5.png`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section1-building.png`}
                 width={width < 1280 ? (width < 900 ? `100%` : `50%`) : `60%`}
                 margin={width < 900 && `15px 0 0`}
               />
