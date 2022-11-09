@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import wrapper from "../../store/configureStore";
 import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
@@ -6,15 +7,15 @@ import axios from "axios";
 import { END } from "redux-saga";
 import useWidth from "../../hooks/useWidth";
 import { WholeWrapper } from "../../components/commonComponents";
-// import { Pannellum } from "@georgedrpg/pannellum-react-next";
 import "@georgedrpg/pannellum-react-next/es/css/video-js.css";
 import "@georgedrpg/pannellum-react-next/es/css/pannellum.css";
 import "@georgedrpg/pannellum-react-next/es/css/style-textInfo.css";
-const Pannellum = React.lazy(() => import("@georgedrpg/pannellum-react-next"));
 import Theme from "../../components/Theme";
 
 const Vr = () => {
   ////// GLOBAL STATE //////
+  const [view, setView] = useState(false);
+
   ////// HOOKS //////
   const width = useWidth();
   ////// REDUX //////
@@ -24,22 +25,19 @@ const Vr = () => {
   ////// DATAVIEW //////
   // https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/vr/3d+img.jpeg
 
+  useEffect(() => {
+    setTimeout(() => {
+      setView(true);
+    }, 3000);
+  }, []);
+
   return (
     <>
       <Head>
         <title>효인주야간노인복지센터 | 시설 3D 안내</title>
       </Head>
       <WholeWrapper>
-        <Pannellum
-          width="100%"
-          height="500px"
-          image="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/vr/3d+img.jpeg"
-          pitch={10}
-          yaw={180}
-          hfov={110}
-          autoLoad
-          showZoomCtrl={false}
-        ></Pannellum>
+        <div>Hello</div>
       </WholeWrapper>
     </>
   );
