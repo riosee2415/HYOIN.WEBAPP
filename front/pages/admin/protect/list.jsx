@@ -47,17 +47,17 @@ import {
 import Theme from "../../../components/Theme";
 import moment from "moment";
 import {
-  ADMIN_MENU_LIST_REQUEST,
-  MENU_AM_IMG_UPLOAD_REQUEST,
-  MENU_BR_IMG_UPLOAD_REQUEST,
-  MENU_CREATE_REQUEST,
-  MENU_DELETE_REQUEST,
-  MENU_DI_IMG_UPLOAD_REQUEST,
-  MENU_IMAGE_RESET,
-  MENU_LU_IMG_UPLOAD_REQUEST,
-  MENU_PM_IMG_UPLOAD_REQUEST,
-  MENU_UPDATE_REQUEST,
-} from "../../../reducers/menu";
+  ADMIN_WEEK_MENU_LIST_REQUEST,
+  WEEK_MENU_AM_IMG_UPLOAD_REQUEST,
+  WEEK_MENU_BR_IMG_UPLOAD_REQUEST,
+  WEEK_MENU_CREATE_REQUEST,
+  WEEK_MENU_DELETE_REQUEST,
+  WEEK_MENU_DI_IMG_UPLOAD_REQUEST,
+  WEEK_MENU_IMAGE_RESET,
+  WEEK_MENU_LU_IMG_UPLOAD_REQUEST,
+  WEEK_MENU_PM_IMG_UPLOAD_REQUEST,
+  WEEK_MENU_UPDATE_REQUEST,
+} from "../../../reducers/weekMenu";
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -107,45 +107,45 @@ const List = ({ router }) => {
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
 
   const {
-    adminMenuList,
+    adminWeekMenuList,
 
-    menuBrImgPath,
-    menuLuImgPath,
-    menuDiImgPath,
-    menuAMImgPath,
-    menuPMImgPath,
+    weekMenuBrImgPath,
+    weekMenuLuImgPath,
+    weekMenuDiImgPath,
+    weekMenuAMImgPath,
+    weekMenuPMImgPath,
     //
-    st_adminMenuListError,
+    st_adminWeekMenuListError,
 
-    st_menuBrImgUploadLoading,
-    st_menuBrImgUploadDone,
-    st_menuBrImgUploadError,
+    st_weekMenuBrImgUploadLoading,
+    st_weekMenuBrImgUploadDone,
+    st_weekMenuBrImgUploadError,
 
-    st_menuLuImgUploadLoading,
-    st_menuLuImgUploadDone,
-    st_menuLuImgUploadError,
+    st_weekMenuLuImgUploadLoading,
+    st_weekMenuLuImgUploadDone,
+    st_weekMenuLuImgUploadError,
 
-    st_menuDiImgUploadLoading,
-    st_menuDiImgUploadDone,
-    st_menuDiImgUploadError,
+    st_weekMenuDiImgUploadLoading,
+    st_weekMenuDiImgUploadDone,
+    st_weekMenuDiImgUploadError,
 
-    st_menuAMImgUploadLoading,
-    st_menuAMImgUploadDone,
-    st_menuAMImgUploadError,
+    st_weekMenuAMImgUploadLoading,
+    st_weekMenuAMImgUploadDone,
+    st_weekMenuAMImgUploadError,
 
-    st_menuPMImgUploadLoading,
-    st_menuPMImgUploadDone,
-    st_menuPMImgUploadError,
+    st_weekMenuPMImgUploadLoading,
+    st_weekMenuPMImgUploadDone,
+    st_weekMenuPMImgUploadError,
 
-    st_menuCreateDone,
-    st_menuCreateError,
+    st_weekMenuCreateDone,
+    st_weekMenuCreateError,
 
-    st_menuUpdateDone,
-    st_menuUpdateError,
+    st_weekMenuUpdateDone,
+    st_weekMenuUpdateError,
 
-    st_menuDeleteDone,
-    st_menuDeleteError,
-  } = useSelector((state) => state.menu);
+    st_weekMenuDeleteDone,
+    st_weekMenuDeleteError,
+  } = useSelector((state) => state.weekMenu);
 
   ////// HOOKS //////
   const dispatch = useDispatch();
@@ -156,7 +156,6 @@ const List = ({ router }) => {
   const amImageRef = useRef();
   const pmImageRef = useRef();
 
-  const [cForm] = Form.useForm();
   const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
 
@@ -164,11 +163,7 @@ const List = ({ router }) => {
   const [selectDate, setSelectDate] = useState(moment());
 
   // 모달
-  const [cList, setCList] = useState([]);
-  const [cDate, setCDate] = useState(null);
-  const [cData, setCData] = useState(false);
   const [cModal, setCModal] = useState(false);
-  const [cImage, setCImage] = useState(null);
 
   const [uData, setUData] = useState(null);
   const [uModal, setUModal] = useState(false);
@@ -186,7 +181,7 @@ const List = ({ router }) => {
 
   useEffect(() => {
     dispatch({
-      type: ADMIN_MENU_LIST_REQUEST,
+      type: ADMIN_WEEK_MENU_LIST_REQUEST,
       data: {
         searchMonth: moment().format("YYYY-MM"),
       },
@@ -194,88 +189,88 @@ const List = ({ router }) => {
   }, []);
 
   useEffect(() => {
-    if (st_adminMenuListError) {
-      return message.error(st_adminMenuListError);
+    if (st_adminWeekMenuListError) {
+      return message.error(st_adminWeekMenuListError);
     }
-  }, [st_adminMenuListError]);
+  }, [st_adminWeekMenuListError]);
 
   // 아침메뉴 업로드
   useEffect(() => {
-    if (st_menuBrImgUploadDone) {
+    if (st_weekMenuBrImgUploadDone) {
       return message.success("아침메뉴가 업로드 되었습니다.");
     }
-  }, [st_menuBrImgUploadDone]);
+  }, [st_weekMenuBrImgUploadDone]);
 
   useEffect(() => {
-    if (st_menuBrImgUploadError) {
-      return message.error(st_menuBrImgUploadError);
+    if (st_weekMenuBrImgUploadError) {
+      return message.error(st_weekMenuBrImgUploadError);
     }
-  }, [st_menuBrImgUploadError]);
+  }, [st_weekMenuBrImgUploadError]);
 
   // 점심메뉴 업로드
   useEffect(() => {
-    if (st_menuLuImgUploadDone) {
+    if (st_weekMenuLuImgUploadDone) {
       return message.success("점심메뉴가 업로드 되었습니다.");
     }
-  }, [st_menuLuImgUploadDone]);
+  }, [st_weekMenuLuImgUploadDone]);
 
   useEffect(() => {
-    if (st_menuLuImgUploadError) {
-      return message.error(st_menuLuImgUploadError);
+    if (st_weekMenuLuImgUploadError) {
+      return message.error(st_weekMenuLuImgUploadError);
     }
-  }, [st_menuLuImgUploadError]);
+  }, [st_weekMenuLuImgUploadError]);
 
   // 저녁메뉴 업로드
   useEffect(() => {
-    if (st_menuDiImgUploadDone) {
+    if (st_weekMenuDiImgUploadDone) {
       return message.success("저녁메뉴가 업로드 되었습니다.");
     }
-  }, [st_menuDiImgUploadDone]);
+  }, [st_weekMenuDiImgUploadDone]);
 
   useEffect(() => {
-    if (st_menuDiImgUploadError) {
-      return message.error(st_menuDiImgUploadError);
+    if (st_weekMenuDiImgUploadError) {
+      return message.error(st_weekMenuDiImgUploadError);
     }
-  }, [st_menuDiImgUploadError]);
+  }, [st_weekMenuDiImgUploadError]);
 
   // 오전간식 업로드
   useEffect(() => {
-    if (st_menuAMImgUploadDone) {
+    if (st_weekMenuAMImgUploadDone) {
       return message.success("오전간식이 업로드 되었습니다.");
     }
-  }, [st_menuAMImgUploadDone]);
+  }, [st_weekMenuAMImgUploadDone]);
 
   useEffect(() => {
-    if (st_menuAMImgUploadError) {
-      return message.error(st_menuAMImgUploadError);
+    if (st_weekMenuAMImgUploadError) {
+      return message.error(st_weekMenuAMImgUploadError);
     }
-  }, [st_menuAMImgUploadError]);
+  }, [st_weekMenuAMImgUploadError]);
 
   // 오후간식 업로드
   useEffect(() => {
-    if (st_menuPMImgUploadDone) {
+    if (st_weekMenuPMImgUploadDone) {
       return message.success("오후간식이 업로드 되었습니다.");
     }
-  }, [st_menuPMImgUploadDone]);
+  }, [st_weekMenuPMImgUploadDone]);
 
   useEffect(() => {
-    if (st_menuPMImgUploadError) {
-      return message.error(st_menuPMImgUploadError);
+    if (st_weekMenuPMImgUploadError) {
+      return message.error(st_weekMenuPMImgUploadError);
     }
-  }, [st_menuPMImgUploadError]);
+  }, [st_weekMenuPMImgUploadError]);
 
   // 생성하기
   useEffect(() => {
-    if (st_menuCreateDone) {
+    if (st_weekMenuCreateDone) {
       dispatch({
-        type: ADMIN_MENU_LIST_REQUEST,
+        type: ADMIN_WEEK_MENU_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
       });
 
       dispatch({
-        type: MENU_IMAGE_RESET,
+        type: WEEK_MENU_IMAGE_RESET,
       });
 
       cModalToggle(null);
@@ -283,44 +278,44 @@ const List = ({ router }) => {
 
       return message.success("식단표가 생성되었습니다.");
     }
-  }, [st_menuCreateDone]);
+  }, [st_weekMenuCreateDone]);
 
   useEffect(() => {
-    if (st_menuCreateError) {
-      return message.error(st_menuCreateError);
+    if (st_weekMenuCreateError) {
+      return message.error(st_weekMenuCreateError);
     }
-  }, [st_menuCreateError]);
+  }, [st_weekMenuCreateError]);
 
   // 수정하기
   useEffect(() => {
-    if (st_menuUpdateDone) {
+    if (st_weekMenuUpdateDone) {
       dispatch({
-        type: ADMIN_MENU_LIST_REQUEST,
+        type: ADMIN_WEEK_MENU_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
       });
 
       dispatch({
-        type: MENU_IMAGE_RESET,
+        type: WEEK_MENU_IMAGE_RESET,
       });
 
       uModalToggle(null);
       return message.success("식단표가 수정되었습니다.");
     }
-  }, [st_menuUpdateDone]);
+  }, [st_weekMenuUpdateDone]);
 
   useEffect(() => {
-    if (st_menuUpdateError) {
-      return message.error(st_menuUpdateError);
+    if (st_weekMenuUpdateError) {
+      return message.error(st_weekMenuUpdateError);
     }
-  }, [st_menuUpdateError]);
+  }, [st_weekMenuUpdateError]);
 
   // 삭제하기
   useEffect(() => {
-    if (st_menuDeleteDone) {
+    if (st_weekMenuDeleteDone) {
       dispatch({
-        type: ADMIN_MENU_LIST_REQUEST,
+        type: ADMIN_WEEK_MENU_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
@@ -329,13 +324,13 @@ const List = ({ router }) => {
       uModalToggle(null);
       return message.success("식단표가 삭제되었습니다.");
     }
-  }, [st_menuDeleteDone]);
+  }, [st_weekMenuDeleteDone]);
 
   useEffect(() => {
-    if (st_menuDeleteError) {
-      return message.error(st_menuDeleteError);
+    if (st_weekMenuDeleteError) {
+      return message.error(st_weekMenuDeleteError);
     }
-  }, [st_menuDeleteError]);
+  }, [st_weekMenuDeleteError]);
 
   ////// TOGGLE ///////
 
@@ -388,8 +383,6 @@ const List = ({ router }) => {
     [uData, uModal]
   );
 
-  console.log(uData);
-
   ////// HANDLER //////
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
@@ -416,7 +409,7 @@ const List = ({ router }) => {
     }
 
     dispatch({
-      type: MENU_BR_IMG_UPLOAD_REQUEST,
+      type: WEEK_MENU_BR_IMG_UPLOAD_REQUEST,
       data: formData,
     });
   });
@@ -438,7 +431,7 @@ const List = ({ router }) => {
     }
 
     dispatch({
-      type: MENU_LU_IMG_UPLOAD_REQUEST,
+      type: WEEK_MENU_LU_IMG_UPLOAD_REQUEST,
       data: formData,
     });
   });
@@ -460,7 +453,7 @@ const List = ({ router }) => {
     }
 
     dispatch({
-      type: MENU_DI_IMG_UPLOAD_REQUEST,
+      type: WEEK_MENU_DI_IMG_UPLOAD_REQUEST,
       data: formData,
     });
   });
@@ -482,7 +475,7 @@ const List = ({ router }) => {
     }
 
     dispatch({
-      type: MENU_AM_IMG_UPLOAD_REQUEST,
+      type: WEEK_MENU_AM_IMG_UPLOAD_REQUEST,
       data: formData,
     });
   });
@@ -504,7 +497,7 @@ const List = ({ router }) => {
     }
 
     dispatch({
-      type: MENU_PM_IMG_UPLOAD_REQUEST,
+      type: WEEK_MENU_PM_IMG_UPLOAD_REQUEST,
       data: formData,
     });
   });
@@ -513,19 +506,11 @@ const List = ({ router }) => {
     pmImageRef.current.click();
   }, [pmImageRef.current]);
 
-  // 생성 날짜 선택
-  const dateChoiseHandler = useCallback(
-    (data) => {
-      setCDate(data);
-    },
-    [cDate]
-  );
-
   // 생성하기
   const createHandler = useCallback(
     (data) => {
       dispatch({
-        type: MENU_CREATE_REQUEST,
+        type: WEEK_MENU_CREATE_REQUEST,
         data: {
           saveDate: moment(data.sDate).format("YYYY-MM-DD"),
           breakfast1: data.breakfast1,
@@ -535,7 +520,7 @@ const List = ({ router }) => {
           breakfast5: data.breakfast5,
           breakfast6: data.breakfast6,
           breakfastCalorie: data.brCalorie,
-          breakfaseImage: menuBrImgPath,
+          breakfaseImage: weekMenuBrImgPath,
           lunch1: data.lunch1,
           lunch2: data.lunch2,
           lunch3: data.lunch3,
@@ -543,7 +528,7 @@ const List = ({ router }) => {
           lunch5: data.lunch5,
           lunch6: data.lunch6,
           lunchCalorie: data.luCalorie,
-          lunchImage: menuLuImgPath,
+          lunchImage: weekMenuLuImgPath,
           dinner1: data.dinner1,
           dinner2: data.dinner2,
           dinner3: data.dinner3,
@@ -551,13 +536,13 @@ const List = ({ router }) => {
           dinner5: data.dinner5,
           dinner6: data.dinner6,
           dinnerCalorie: data.diCalorie,
-          dinnerImage: menuDiImgPath,
+          dinnerImage: weekMenuDiImgPath,
           morningSnack1: data.amSnack1,
           morningSnack2: data.amSnack2,
-          morningSnackImage: menuAMImgPath,
+          morningSnackImage: weekMenuAMImgPath,
           afternoonSnack1: data.pmSnack1,
           afternoonSnack2: data.pmSnack2,
-          afternoonSnackImage: menuPMImgPath,
+          afternoonSnackImage: weekMenuPMImgPath,
           functionDiet: data.fnDiet,
           diabetes: data.diabetes,
           scene: data.scene,
@@ -565,14 +550,20 @@ const List = ({ router }) => {
         },
       });
     },
-    [menuBrImgPath, menuLuImgPath, menuDiImgPath, menuAMImgPath, menuPMImgPath]
+    [
+      weekMenuBrImgPath,
+      weekMenuLuImgPath,
+      weekMenuDiImgPath,
+      weekMenuAMImgPath,
+      weekMenuPMImgPath,
+    ]
   );
 
   // 내용 수정하기
   const cUpdateHandler = useCallback(
     (data) => {
       dispatch({
-        type: MENU_UPDATE_REQUEST,
+        type: WEEK_MENU_UPDATE_REQUEST,
         data: {
           id: uData.id,
           breakfast1: data.breakfast1,
@@ -582,7 +573,9 @@ const List = ({ router }) => {
           breakfast5: data.breakfast5,
           breakfast6: data.breakfast6,
           breakfastCalorie: data.brCalorie,
-          breakfaseImage: menuBrImgPath ? menuBrImgPath : uData.breakfaseImage,
+          breakfaseImage: weekMenuBrImgPath
+            ? weekMenuBrImgPath
+            : uData.breakfaseImage,
           lunch1: data.lunch1,
           lunch2: data.lunch2,
           lunch3: data.lunch3,
@@ -590,7 +583,7 @@ const List = ({ router }) => {
           lunch5: data.lunch5,
           lunch6: data.lunch6,
           lunchCalorie: data.luCalorie,
-          lunchImage: menuLuImgPath ? menuLuImgPath : uData.lunchImage,
+          lunchImage: weekMenuLuImgPath ? weekMenuLuImgPath : uData.lunchImage,
           dinner1: data.dinner1,
           dinner2: data.dinner2,
           dinner3: data.dinner3,
@@ -598,16 +591,18 @@ const List = ({ router }) => {
           dinner5: data.dinner5,
           dinner6: data.dinner6,
           dinnerCalorie: data.diCalorie,
-          dinnerImage: menuDiImgPath ? menuDiImgPath : uData.dinnerImage,
+          dinnerImage: weekMenuDiImgPath
+            ? weekMenuDiImgPath
+            : uData.dinnerImage,
           morningSnack1: data.amSnack1,
           morningSnack2: data.amSnack2,
-          morningSnackImage: menuAMImgPath
-            ? menuAMImgPath
+          morningSnackImage: weekMenuAMImgPath
+            ? weekMenuAMImgPath
             : uData.morningSnackImage,
           afternoonSnack1: data.pmSnack1,
           afternoonSnack2: data.pmSnack2,
-          afternoonSnackImage: menuPMImgPath
-            ? menuPMImgPath
+          afternoonSnackImage: weekMenuPMImgPath
+            ? weekMenuPMImgPath
             : uData.afternoonSnackImage,
           functionDiet: data.fnDiet,
           diabetes: data.diabetes,
@@ -618,17 +613,17 @@ const List = ({ router }) => {
     },
     [
       uData,
-      menuBrImgPath,
-      menuLuImgPath,
-      menuDiImgPath,
-      menuAMImgPath,
-      menuPMImgPath,
+      weekMenuBrImgPath,
+      weekMenuLuImgPath,
+      weekMenuDiImgPath,
+      weekMenuAMImgPath,
+      weekMenuPMImgPath,
     ]
   );
 
   const deleteHandler = useCallback(() => {
     dispatch({
-      type: MENU_DELETE_REQUEST,
+      type: WEEK_MENU_DELETE_REQUEST,
       data: {
         id: uData.id,
       },
@@ -665,8 +660,8 @@ const List = ({ router }) => {
           >
             <Wrapper height={`auto`}>
               {/* LIST START */}
-              {adminMenuList &&
-                adminMenuList
+              {adminWeekMenuList &&
+                adminWeekMenuList
                   .filter(
                     (data) => data.viewSaveDate === value.format("YYYY-MM-DD")
                   )
@@ -849,7 +844,7 @@ const List = ({ router }) => {
         </Wrapper>
       );
     },
-    [selectDate, adminMenuList]
+    [selectDate, adminWeekMenuList]
   );
 
   ////// DATAVIEW //////
@@ -1186,8 +1181,8 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuBrImgPath
-                    ? menuBrImgPath
+                  weekMenuBrImgPath
+                    ? weekMenuBrImgPath
                     : `https://via.placeholder.com/300pxx300px`
                 }
                 alt={`image`}
@@ -1201,7 +1196,7 @@ const List = ({ router }) => {
                 onChange={onChangeBrImages}
               />
               <Button
-                loading={st_menuBrImgUploadLoading}
+                loading={st_weekMenuBrImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1216,8 +1211,8 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuLuImgPath
-                    ? menuLuImgPath
+                  weekMenuLuImgPath
+                    ? weekMenuLuImgPath
                     : `https://via.placeholder.com/300pxx300px`
                 }
                 alt={`image`}
@@ -1231,7 +1226,7 @@ const List = ({ router }) => {
                 onChange={onChangeLuImages}
               />
               <Button
-                loading={st_menuLuImgUploadLoading}
+                loading={st_weekMenuLuImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1246,8 +1241,8 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuDiImgPath
-                    ? menuDiImgPath
+                  weekMenuDiImgPath
+                    ? weekMenuDiImgPath
                     : `https://via.placeholder.com/300pxx300px`
                 }
                 alt={`image`}
@@ -1261,7 +1256,7 @@ const List = ({ router }) => {
                 onChange={onChangeDiImages}
               />
               <Button
-                loading={st_menuDiImgUploadLoading}
+                loading={st_weekMenuDiImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1276,8 +1271,8 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuAMImgPath
-                    ? menuAMImgPath
+                  weekMenuAMImgPath
+                    ? weekMenuAMImgPath
                     : `https://via.placeholder.com/300pxx300px`
                 }
                 alt={`image`}
@@ -1291,7 +1286,7 @@ const List = ({ router }) => {
                 onChange={onChangeAmImages}
               />
               <Button
-                loading={st_menuAMImgUploadLoading}
+                loading={st_weekMenuAMImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1306,8 +1301,8 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuPMImgPath
-                    ? menuPMImgPath
+                  weekMenuPMImgPath
+                    ? weekMenuPMImgPath
                     : `https://via.placeholder.com/300pxx300px`
                 }
                 alt={`image`}
@@ -1321,7 +1316,7 @@ const List = ({ router }) => {
                 onChange={onChangePmImages}
               />
               <Button
-                loading={st_menuPMImgUploadLoading}
+                loading={st_weekMenuPMImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1617,7 +1612,9 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuBrImgPath ? menuBrImgPath : uData && uData.breakfaseImage
+                  weekMenuBrImgPath
+                    ? weekMenuBrImgPath
+                    : uData && uData.breakfaseImage
                 }
                 alt={`image`}
               />
@@ -1630,7 +1627,7 @@ const List = ({ router }) => {
                 onChange={onChangeBrImages}
               />
               <Button
-                loading={st_menuBrImgUploadLoading}
+                loading={st_weekMenuBrImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1644,7 +1641,11 @@ const List = ({ router }) => {
               <Image
                 width={`300px`}
                 height={`300px`}
-                src={menuLuImgPath ? menuLuImgPath : uData && uData.lunchImage}
+                src={
+                  weekMenuLuImgPath
+                    ? weekMenuLuImgPath
+                    : uData && uData.lunchImage
+                }
                 alt={`image`}
               />
 
@@ -1656,7 +1657,7 @@ const List = ({ router }) => {
                 onChange={onChangeLuImages}
               />
               <Button
-                loading={st_menuLuImgUploadLoading}
+                loading={st_weekMenuLuImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1670,7 +1671,11 @@ const List = ({ router }) => {
               <Image
                 width={`300px`}
                 height={`300px`}
-                src={menuDiImgPath ? menuDiImgPath : uData && uData.dinnerImage}
+                src={
+                  weekMenuDiImgPath
+                    ? weekMenuDiImgPath
+                    : uData && uData.dinnerImage
+                }
                 alt={`image`}
               />
 
@@ -1682,7 +1687,7 @@ const List = ({ router }) => {
                 onChange={onChangeDiImages}
               />
               <Button
-                loading={st_menuDiImgUploadLoading}
+                loading={st_weekMenuDiImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1697,8 +1702,8 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuAMImgPath
-                    ? menuAMImgPath
+                  weekMenuAMImgPath
+                    ? weekMenuAMImgPath
                     : uData && uData.morningSnackImage
                 }
                 alt={`image`}
@@ -1712,7 +1717,7 @@ const List = ({ router }) => {
                 onChange={onChangeAmImages}
               />
               <Button
-                loading={st_menuAMImgUploadLoading}
+                loading={st_weekMenuAMImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1727,8 +1732,8 @@ const List = ({ router }) => {
                 width={`300px`}
                 height={`300px`}
                 src={
-                  menuPMImgPath
-                    ? menuPMImgPath
+                  weekMenuPMImgPath
+                    ? weekMenuPMImgPath
                     : uData && uData.afternoonSnackImage
                 }
                 alt={`image`}
@@ -1742,7 +1747,7 @@ const List = ({ router }) => {
                 onChange={onChangePmImages}
               />
               <Button
-                loading={st_menuPMImgUploadLoading}
+                loading={st_weekMenuPMImgUploadLoading}
                 style={{ width: `150px` }}
                 size="small"
                 type="primary"
@@ -1774,7 +1779,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: ADMIN_MENU_LIST_REQUEST,
+      type: ADMIN_WEEK_MENU_LIST_REQUEST,
       data: {
         searchMonth: moment().format("YYYY-MM"),
       },

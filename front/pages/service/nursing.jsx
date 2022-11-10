@@ -92,7 +92,10 @@ const Nursing = () => {
             <Wrapper dr={`row`}>
               <Tab
                 onClick={() => pageChangeToggle(1)}
-                isActive={router && router.query.type === "1"}
+                isActive={
+                  (router && router.query.type === "1") ||
+                  router.query.type === undefined
+                }
               >
                 맞춤 서비스(Unit Care)
               </Tab>
@@ -122,8 +125,10 @@ const Nursing = () => {
               <Daily />
             ) : router.query.type === "3" ? (
               <Monthly />
-            ) : (
+            ) : router.query.type === "4" ? (
               <Diet />
+            ) : (
+              <Unit />
             )}
           </RsWrapper>
         </WholeWrapper>

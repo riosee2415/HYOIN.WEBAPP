@@ -18,23 +18,23 @@ export const initailState = {
   weekMenuPMImgPath: null, // 오후간식 이미지
 
   //
-  st_weekMenuListLoading: false, // menu 가져오기
+  st_weekMenuListLoading: false, // week menu 가져오기
   st_weekMenuListDone: false,
   st_weekMenuListError: null,
   //
-  st_adminWeekMenuListLoading: false, // 관리자 menu 가져오기
+  st_adminWeekMenuListLoading: false, // 관리자 week menu 가져오기
   st_adminWeekMenuListDone: false,
   st_adminWeekMenuListError: null,
   //
-  st_weekMenuCreateLoading: false, // menu 생성
+  st_weekMenuCreateLoading: false, // week menu 생성
   st_weekMenuCreateDone: false,
   st_weekMenuCreateError: null,
   //
-  st_weekMenuUpdateLoading: false, // menu 수정
+  st_weekMenuUpdateLoading: false, // week menu 수정
   st_weekMenuUpdateDone: false,
   st_weekMenuUpdateError: null,
   //
-  st_weekMenuDeleteLoading: false, // menu 삭제
+  st_weekMenuDeleteLoading: false, // week menu 삭제
   st_weekMenuDeleteDone: false,
   st_weekMenuDeleteError: null,
   //

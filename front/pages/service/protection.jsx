@@ -23,6 +23,7 @@ import Normal from "../../components/protection/Normal";
 import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import WeekMenu from "../../components/nursing/WeekMenu";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -95,7 +96,10 @@ const Protection = () => {
             <Wrapper dr={`row`}>
               <Tab
                 onClick={() => pageChangeToggle(1)}
-                isActive={router && router.query.type === "1"}
+                isActive={
+                  (router && router.query.type === "1") ||
+                  router.query.type === undefined
+                }
               >
                 일반형
               </Tab>
@@ -117,6 +121,12 @@ const Protection = () => {
               >
                 이동서비스 시간표
               </Tab>
+              <Tab
+                onClick={() => pageChangeToggle(5)}
+                isActive={router && router.query.type === "5"}
+              >
+                주간보호 식단표
+              </Tab>
             </Wrapper>
 
             {router && router.query.type === "1" ? (
@@ -127,6 +137,8 @@ const Protection = () => {
               <Monthly />
             ) : router.query.type === "4" ? (
               <Dementia />
+            ) : router.query.type === "5" ? (
+              <WeekMenu />
             ) : (
               <Normal />
             )}

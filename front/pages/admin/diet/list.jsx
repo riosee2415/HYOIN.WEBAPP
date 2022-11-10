@@ -156,7 +156,6 @@ const List = ({ router }) => {
   const amImageRef = useRef();
   const pmImageRef = useRef();
 
-  const [cForm] = Form.useForm();
   const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
 
@@ -164,11 +163,7 @@ const List = ({ router }) => {
   const [selectDate, setSelectDate] = useState(moment());
 
   // 모달
-  const [cList, setCList] = useState([]);
-  const [cDate, setCDate] = useState(null);
-  const [cData, setCData] = useState(false);
   const [cModal, setCModal] = useState(false);
-  const [cImage, setCImage] = useState(null);
 
   const [uData, setUData] = useState(null);
   const [uModal, setUModal] = useState(false);
@@ -388,8 +383,6 @@ const List = ({ router }) => {
     [uData, uModal]
   );
 
-  console.log(uData);
-
   ////// HANDLER //////
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
@@ -512,14 +505,6 @@ const List = ({ router }) => {
   const clickPmImageUpload = useCallback(() => {
     pmImageRef.current.click();
   }, [pmImageRef.current]);
-
-  // 생성 날짜 선택
-  const dateChoiseHandler = useCallback(
-    (data) => {
-      setCDate(data);
-    },
-    [cDate]
-  );
 
   // 생성하기
   const createHandler = useCallback(
