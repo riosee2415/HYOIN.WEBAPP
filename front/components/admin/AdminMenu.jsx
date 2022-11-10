@@ -183,7 +183,10 @@ const AdminMenu = () => {
           onTitleClick={titleClickHandler("sub8")}
         >
           <Menu.Item key="/admin/schedule/month">
-            <MenuName>월간시간표 관리</MenuName>
+            <MenuName>요양원 시간표 관리</MenuName>
+          </Menu.Item>
+          <Menu.Item key="/admin/schedule/week">
+            <MenuName>주간보호 시간표 관리</MenuName>
           </Menu.Item>
           <Menu.Item key="/admin/schedule/move">
             <MenuName>이동서비스 시간표 관리</MenuName>

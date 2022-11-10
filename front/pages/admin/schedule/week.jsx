@@ -47,13 +47,13 @@ import {
 import Theme from "../../../components/Theme";
 import moment from "moment";
 import {
-  PROGRAM_CREATE_REQUEST,
-  PROGRAM_DELETE_REQUEST,
-  PROGRAM_IMAGE_RESET,
-  PROGRAM_IMAGE_UPLOAD_REQUEST,
-  PROGRAM_LIST_REQUEST,
-  PROGRAM_UPDATE_REQUEST,
-} from "../../../reducers/program";
+  WEEK_PROGRAM_CREATE_REQUEST,
+  WEEK_PROGRAM_DELETE_REQUEST,
+  WEEK_PROGRAM_IMAGE_RESET,
+  WEEK_PROGRAM_IMAGE_UPLOAD_REQUEST,
+  WEEK_PROGRAM_LIST_REQUEST,
+  WEEK_PROGRAM_UPDATE_REQUEST,
+} from "../../../reducers/weekProgram";
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -117,23 +117,23 @@ const Type = ({ router }) => {
 
   ////// GOLBAL STATE //////
   const {
-    programList,
-    programImagePath,
-    st_programListError,
+    weekProgramList,
+    weekProgramImagePath,
+    st_weekProgramListError,
     //
-    st_programImageUploadLoading,
-    st_programImageUploadDone,
-    st_programImageUploadError,
+    st_weekProgramImageUploadLoading,
+    st_weekProgramImageUploadDone,
+    st_weekProgramImageUploadError,
     //
-    st_programCreateDone,
-    st_programCreateError,
+    st_weekProgramCreateDone,
+    st_weekProgramCreateError,
     //
-    st_programUpdateDone,
-    st_programUpdateError,
+    st_weekProgramUpdateDone,
+    st_weekProgramUpdateError,
     //
-    st_programDeleteDone,
-    st_programDeleteError,
-  } = useSelector((state) => state.program);
+    st_weekProgramDeleteDone,
+    st_weekProgramDeleteError,
+  } = useSelector((state) => state.weekProgram);
 
   ////// HOOKS //////
 
@@ -161,7 +161,7 @@ const Type = ({ router }) => {
 
   useEffect(() => {
     dispatch({
-      type: PROGRAM_LIST_REQUEST,
+      type: WEEK_PROGRAM_LIST_REQUEST,
       data: {
         searchMonth: moment().format("YYYY-MM"),
       },
@@ -169,30 +169,30 @@ const Type = ({ router }) => {
   }, []);
 
   useEffect(() => {
-    if (st_programListError) {
-      return message.error(st_programListError);
+    if (st_weekProgramListError) {
+      return message.error(st_weekProgramListError);
     }
-  }, [st_programListError]);
+  }, [st_weekProgramListError]);
 
   // 이미지 업로드
   useEffect(() => {
-    if (st_programImageUploadDone) {
+    if (st_weekProgramImageUploadDone) {
       setCImage(null);
       return message.success("이미지가 업로드 되었습니다.");
     }
-  }, [st_programImageUploadDone]);
+  }, [st_weekProgramImageUploadDone]);
 
   useEffect(() => {
-    if (st_programImageUploadError) {
-      return message.error(st_programImageUploadError);
+    if (st_weekProgramImageUploadError) {
+      return message.error(st_weekProgramImageUploadError);
     }
-  }, [st_programImageUploadError]);
+  }, [st_weekProgramImageUploadError]);
 
   // 생성하기
   useEffect(() => {
-    if (st_programCreateDone) {
+    if (st_weekProgramCreateDone) {
       dispatch({
-        type: PROGRAM_LIST_REQUEST,
+        type: WEEK_PROGRAM_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
@@ -201,19 +201,19 @@ const Type = ({ router }) => {
       cModalToggle(null);
       return message.success("시간표가 생성되었습니다.");
     }
-  }, [st_programCreateDone]);
+  }, [st_weekProgramCreateDone]);
 
   useEffect(() => {
-    if (st_programCreateError) {
-      return message.error(st_programCreateError);
+    if (st_weekProgramCreateError) {
+      return message.error(st_weekProgramCreateError);
     }
-  }, [st_programCreateError]);
+  }, [st_weekProgramCreateError]);
 
   // 수정하기
   useEffect(() => {
-    if (st_programUpdateDone) {
+    if (st_weekProgramUpdateDone) {
       dispatch({
-        type: PROGRAM_LIST_REQUEST,
+        type: WEEK_PROGRAM_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
@@ -222,19 +222,19 @@ const Type = ({ router }) => {
       uModalToggle(null);
       return message.success("시간표가 수정되었습니다.");
     }
-  }, [st_programUpdateDone]);
+  }, [st_weekProgramUpdateDone]);
 
   useEffect(() => {
-    if (st_programUpdateError) {
-      return message.error(st_programUpdateError);
+    if (st_weekProgramUpdateError) {
+      return message.error(st_weekProgramUpdateError);
     }
-  }, [st_programUpdateError]);
+  }, [st_weekProgramUpdateError]);
 
   // 삭제하기
   useEffect(() => {
-    if (st_programDeleteDone) {
+    if (st_weekProgramDeleteDone) {
       dispatch({
-        type: PROGRAM_LIST_REQUEST,
+        type: WEEK_PROGRAM_LIST_REQUEST,
         data: {
           searchMonth: moment().format("YYYY-MM"),
         },
@@ -243,13 +243,13 @@ const Type = ({ router }) => {
       uModalToggle(null);
       return message.success("시간표가 삭제되었습니다.");
     }
-  }, [st_programDeleteDone]);
+  }, [st_weekProgramDeleteDone]);
 
   useEffect(() => {
-    if (st_programDeleteError) {
-      return message.error(st_programDeleteError);
+    if (st_weekProgramDeleteError) {
+      return message.error(st_weekProgramDeleteError);
     }
-  }, [st_programDeleteError]);
+  }, [st_weekProgramDeleteError]);
 
   ////// TOGGLE ///////
 
@@ -263,7 +263,7 @@ const Type = ({ router }) => {
         setCData(null);
         setCList([]);
         dispatch({
-          type: PROGRAM_IMAGE_RESET,
+          type: WEEK_PROGRAM_IMAGE_RESET,
           data: null,
         });
       }
@@ -277,7 +277,7 @@ const Type = ({ router }) => {
     (data) => {
       if (data) {
         dispatch({
-          type: PROGRAM_IMAGE_RESET,
+          type: WEEK_PROGRAM_IMAGE_RESET,
           data: data.imagePath,
         });
 
@@ -289,7 +289,7 @@ const Type = ({ router }) => {
         setUData(data);
       } else {
         dispatch({
-          type: PROGRAM_IMAGE_RESET,
+          type: WEEK_PROGRAM_IMAGE_RESET,
           data: null,
         });
 
@@ -321,7 +321,7 @@ const Type = ({ router }) => {
     });
 
     dispatch({
-      type: PROGRAM_IMAGE_UPLOAD_REQUEST,
+      type: WEEK_PROGRAM_IMAGE_UPLOAD_REQUEST,
       data: formData,
     });
   });
@@ -336,33 +336,33 @@ const Type = ({ router }) => {
       let cListArr = cList.map((data) => data);
 
       dispatch({
-        type: PROGRAM_IMAGE_RESET,
+        type: WEEK_PROGRAM_IMAGE_RESET,
       });
 
       cForm.resetFields();
-      cListArr.push({ ...data, imagePath: programImagePath });
+      cListArr.push({ ...data, imagePath: weekProgramImagePath });
 
       setCList(cListArr);
 
       return message.success("추가되었습니다.");
     },
-    [cList, programImagePath]
+    [cList, weekProgramImagePath]
   );
 
   // 내용 수정하기
   const cUpdateHandler = useCallback(
     (data) => {
       dispatch({
-        type: PROGRAM_UPDATE_REQUEST,
+        type: WEEK_PROGRAM_UPDATE_REQUEST,
         data: {
           id: uData.id,
           title: data.title,
           content: data.content,
-          imagePath: programImagePath,
+          imagePath: weekProgramImagePath,
         },
       });
     },
-    [uData, programImagePath]
+    [uData, weekProgramImagePath]
   );
 
   // 생성 날짜 선택
@@ -384,7 +384,7 @@ const Type = ({ router }) => {
     }
 
     dispatch({
-      type: PROGRAM_CREATE_REQUEST,
+      type: WEEK_PROGRAM_CREATE_REQUEST,
       data: {
         insertPrograms: cList,
         specificDate: cDate && cDate.format("YYYY-MM-DD"),
@@ -394,7 +394,7 @@ const Type = ({ router }) => {
 
   const deleteHandler = useCallback(() => {
     dispatch({
-      type: PROGRAM_DELETE_REQUEST,
+      type: WEEK_PROGRAM_DELETE_REQUEST,
       data: {
         id: uData.id,
       },
@@ -431,8 +431,8 @@ const Type = ({ router }) => {
           >
             <Wrapper height={`auto`}>
               {/* LIST START */}
-              {programList &&
-                programList
+              {weekProgramList &&
+                weekProgramList
                   .filter(
                     (data) =>
                       data.viewFrontSpecificDate === value.format("YYYY-MM-DD")
@@ -478,7 +478,7 @@ const Type = ({ router }) => {
         </Wrapper>
       );
     },
-    [selectDate, programList]
+    [selectDate, weekProgramList]
   );
 
   ////// DATAVIEW //////
@@ -486,9 +486,9 @@ const Type = ({ router }) => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["시간표 관리", "요양원 시간표 관리"]}
-        title={`요양원 시간표 관리`}
-        subTitle={`홈페이지에 보여지는 요양원 시간표를 관리할 수 있습니다.`}
+        breadcrumbs={["시간표 관리", "주간보호 시간표 관리"]}
+        title={`주간보호 시간표 관리`}
+        subTitle={`홈페이지에 보여지는 주간보호 시간표를 관리할 수 있습니다.`}
       />
 
       <AdminContent>
@@ -555,8 +555,8 @@ const Type = ({ router }) => {
             width={`150px`}
             height={`150px`}
             src={
-              programImagePath
-                ? programImagePath
+              weekProgramImagePath
+                ? weekProgramImagePath
                 : `https://via.placeholder.com/150`
             }
             alt={`image`}
@@ -571,7 +571,7 @@ const Type = ({ router }) => {
             onChange={onChangeImages}
           />
           <Button
-            loading={st_programImageUploadLoading}
+            loading={st_weekProgramImageUploadLoading}
             style={{ width: `150px` }}
             size="small"
             type="primary"
@@ -674,8 +674,8 @@ const Type = ({ router }) => {
             width={`150px`}
             height={`150px`}
             src={
-              programImagePath
-                ? programImagePath
+              weekProgramImagePath
+                ? weekProgramImagePath
                 : `https://via.placeholder.com/150`
             }
             alt={`image`}
@@ -690,7 +690,7 @@ const Type = ({ router }) => {
             onChange={onChangeImages}
           />
           <Button
-            loading={st_programImageUploadLoading}
+            loading={st_weekProgramImageUploadLoading}
             style={{ width: `150px` }}
             size="small"
             type="primary"
@@ -754,7 +754,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: PROGRAM_LIST_REQUEST,
+      type: WEEK_PROGRAM_LIST_REQUEST,
       data: {
         searchMonth: moment().format("YYYY-MM"),
       },

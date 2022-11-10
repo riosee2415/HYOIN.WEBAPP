@@ -18,7 +18,7 @@ import Theme from "../../components/Theme";
 import Dementia from "../../components/protection/Dementia";
 import { useRouter } from "next/router";
 import Monthly from "../../components/nursing/Monthly";
-import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
+import { WEEK_PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/weekProgram";
 import Normal from "../../components/protection/Normal";
 import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
 import { useSelector } from "react-redux";
@@ -126,9 +126,7 @@ const Protection = () => {
             ) : router.query.type === "3" ? (
               <Monthly />
             ) : router.query.type === "4" ? (
-              <Dementia
-           
-              />
+              <Dementia />
             ) : (
               <Normal />
             )}
@@ -155,10 +153,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: PROGRAM_WEEK_LIST_REQUEST,
+      type: WEEK_PROGRAM_WEEK_LIST_REQUEST,
     });
-
-
 
     // 구현부 종료
     context.store.dispatch(END);
