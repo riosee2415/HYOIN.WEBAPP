@@ -24,6 +24,9 @@ const alladmission = require("./alladmission");
 const dementiaadmission = require("./dementiaadmission");
 const normaladmission = require("./normaladmission");
 const weekadmission = require("./weekadmission");
+const weekmenu = require("./weekmenu");
+const weekprogramdate = require("./weekprogramdate");
+const weekprogram = require("./weekprogram");
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -61,6 +64,9 @@ db.AllAdmission = alladmission;
 db.DementiaAdmission = dementiaadmission;
 db.NormalAdmission = normaladmission;
 db.WeekAdmission = weekadmission;
+db.WeekMenu = weekmenu;
+db.WeekProgramDate = weekprogramdate;
+db.WeekProgram = weekprogram;
 
 Object.keys(db).forEach((modelName) => {
   db[modelName].init(sequelize);
