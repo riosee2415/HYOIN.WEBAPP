@@ -19,6 +19,7 @@ import program from "./program";
 import admission from "./admission";
 import menu from "./menu";
 import moveService from "./moveService";
+import weekMenu from "./weekMenu";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -46,6 +47,7 @@ const rootReducer = (state, action) => {
         admission,
         menu,
         moveService,
+        weekMenu,
       });
       return combinedReducer(state, action);
     }

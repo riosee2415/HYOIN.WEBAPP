@@ -857,9 +857,9 @@ const List = ({ router }) => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["식단표 관리", "요양원식단표 리스트"]}
-        title={`요양원식단표 리스트`}
-        subTitle={`홈페이지에 보여지는 요양원식단표를 관리할 수 있습니다.`}
+        breadcrumbs={["식단표 관리", "주간보호식단표 리스트"]}
+        title={`주간보호식단표 리스트`}
+        subTitle={`홈페이지에 보여지는 주간보호식단표를 관리할 수 있습니다.`}
       />
 
       <AdminContent>

@@ -150,7 +150,10 @@ const AdminMenu = () => {
           onTitleClick={titleClickHandler("sub5")}
         >
           <Menu.Item key="/admin/diet/list">
-            <MenuName>식단표 리스트</MenuName>
+            <MenuName>요양원식단표 리스트</MenuName>
+          </Menu.Item>
+          <Menu.Item key="/admin/protect/list">
+            <MenuName>주간보호식단표 리스트</MenuName>
           </Menu.Item>
         </SubMenu>
         <SubMenu
