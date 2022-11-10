@@ -290,10 +290,17 @@ const Facility = () => {
                 </ListText>
                 <ListText>
                   <Text>
-                    <SpanText fontWeight={`bold`}>정원 :</SpanText>&nbsp;입소
-                    00명(*수시로 변경),
+                    <SpanText fontWeight={`bold`}>요양원 입소 인원 :</SpanText>
+                    &nbsp;정원 99인, 현인원 53인
                   </Text>
-                  <Text>주간보호 61명(일반형 00명, 치매전담형 00명)</Text>
+                </ListText>
+                <ListText>
+                  <Text>
+                    <SpanText fontWeight={`bold`}>
+                      주간보호 입소 인원 :
+                    </SpanText>
+                    &nbsp;정원 61인
+                  </Text>
                 </ListText>
                 <ListText>
                   <SpanText fontWeight={`bold`}>규모 :</SpanText>
