@@ -159,18 +159,23 @@ const Location = () => {
                       </ATag>
                     </Wrapper>
                     <Wrapper dr={`row`} ju={`flex-start`} margin={`30px 0 0`}>
-                      <Wrapper
-                        width={`51px`}
-                        height={`51px`}
-                        radius={`5px`}
-                        bgColor={Theme.subTheme6_C}
+                      <a
+                        href={`https://blog.naver.com/neowb1130`}
+                        target={`_blank`}
                       >
-                        <Image
-                          alt="band"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
-                          width={`27px`}
-                        />
-                      </Wrapper>
+                        <Wrapper
+                          width={`51px`}
+                          height={`51px`}
+                          radius={`5px`}
+                          bgColor={Theme.subTheme6_C}
+                        >
+                          <Image
+                            alt="band"
+                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
+                            width={`27px`}
+                          />
+                        </Wrapper>
+                      </a>
                       <Wrapper
                         width={`51px`}
                         height={`51px`}
@@ -265,18 +270,23 @@ const Location = () => {
                     </ATag>
                   </Wrapper>
                   <Wrapper dr={`row`} ju={`flex-start`} margin={`30px 0 0`}>
-                    <Wrapper
-                      width={`51px`}
-                      height={`51px`}
-                      radius={`5px`}
-                      bgColor={Theme.subTheme6_C}
+                    <a
+                      href={`https://blog.naver.com/neowb1130`}
+                      target={`_blank`}
                     >
-                      <Image
-                        alt="band"
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
-                        width={`27px`}
-                      />
-                    </Wrapper>
+                      <Wrapper
+                        width={`51px`}
+                        height={`51px`}
+                        radius={`5px`}
+                        bgColor={Theme.subTheme6_C}
+                      >
+                        <Image
+                          alt="band"
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
+                          width={`27px`}
+                        />
+                      </Wrapper>
+                    </a>
                     <Wrapper
                       width={`51px`}
                       height={`51px`}

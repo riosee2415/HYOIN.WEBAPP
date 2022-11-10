@@ -81,18 +81,20 @@ const AppFooter = () => {
             width={width < 900 ? `100%` : `auto`}
             margin={width < 900 && `15px 0 0`}
           >
-            <Wrapper
-              width={`27px`}
-              height={`27px`}
-              radius={`5px`}
-              bgColor={Theme.darkGrey_C}
-            >
-              <Image
-                width={`14px`}
-                alt="band"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
-              />
-            </Wrapper>
+            <a href={`https://blog.naver.com/neowb1130`} target={`_blank`}>
+              <Wrapper
+                width={`27px`}
+                height={`27px`}
+                radius={`5px`}
+                bgColor={Theme.darkGrey_C}
+              >
+                <Image
+                  width={`14px`}
+                  alt="blog"
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
+                />
+              </Wrapper>
+            </a>
             <Wrapper
               width={`27px`}
               height={`27px`}
@@ -104,6 +106,19 @@ const AppFooter = () => {
                 width={`17px`}
                 alt="kakao"
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_kakao.png`}
+              />
+            </Wrapper>
+            <Wrapper
+              width={`27px`}
+              height={`27px`}
+              radius={`5px`}
+              margin={`0 13px 0 0`}
+              bgColor={Theme.darkGrey_C}
+            >
+              <Image
+                width={`17px`}
+                alt="insta"
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_insta.png`}
               />
             </Wrapper>
             <Wrapper
