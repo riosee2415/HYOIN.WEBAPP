@@ -986,16 +986,21 @@ const Home = ({}) => {
                       ju={`space-between`}
                       margin={`35px 0 0`}
                     >
-                      <Wrapper width={`auto`}>
-                        <Image
-                          alt="band"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_band.png`}
-                          width={`74px`}
-                        />
-                        <Text margin={`10px 0 0`} fontSize={`18px`}>
-                          밴드
-                        </Text>
-                      </Wrapper>
+                      <a
+                        href={`https://blog.naver.com/neowb1130`}
+                        target={`_blank`}
+                      >
+                        <Wrapper width={`auto`}>
+                          <Image
+                            alt="band"
+                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_band.png`}
+                            width={`74px`}
+                          />
+                          <Text margin={`10px 0 0`} fontSize={`18px`}>
+                            블로그
+                          </Text>
+                        </Wrapper>
+                      </a>
                       <Wrapper width={`auto`}>
                         <Image
                           alt="kakao"
