@@ -542,7 +542,7 @@ const AppHeader = () => {
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
-                    <Link href={`/`}>
+                    <Link href={`/company/vr`}>
                       <a>시설 3D 안내</a>
                     </Link>
                   </Wrapper>
@@ -616,7 +616,7 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/use/certification`}>
+                    <Link href={`/use`}>
                       <a>이용안내</a>
                     </Link>
                   </Wrapper>
