@@ -56,12 +56,12 @@ const Fourleaf = ({ Component }) => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="효인주야간노인복지센터" />
         <meta property="og:site_name" content="효인주야간노인복지센터" />
-        <meta property="og:url" content="https://www.sample.com/" />
+        <meta property="og:url" content="https://www.hyoinnursinghome.co.kr/" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="400" />
         <meta property="og:image" content="./og_img.png" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://www.sample.com" />
+        <link rel="canonical" href="https://www.hyoinnursinghome.co.kr" />
 
         <meta
           name="keywords"
