@@ -16,7 +16,7 @@ import SubBanner from "../../components/SubBanner";
 import styled from "styled-components";
 import Theme from "../../components/Theme";
 import Daily from "../../components/nursing/Daily";
-import Unit from "../../components/nursing/unit";
+import Unit from "../../components/nursing/Unit";
 import Monthly from "../../components/nursing/Monthly";
 import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
 import { useRouter } from "next/router";
