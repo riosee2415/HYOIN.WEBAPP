@@ -51,6 +51,7 @@ const Text = styled.div`
 
 const BackBox = styled.div`
   width: 100px;
+  min-width: 100px;
   height: 80px;
   margin: 0 10px;
   cursor: pointer;
@@ -62,12 +63,26 @@ const BackBox = styled.div`
   & img {
     width: 50px;
   }
-`;
 
-console.log("dd");
+  @media (max-width: 800px) {
+    min-width: 50px;
+  }
+`;
 
 const ScrollBox = styled.div`
   width: calc(100% - 100px);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: auto;
+
+  @media (max-width: 800px) {
+    width: calc(100% - 50px);
+  }
+`;
+
+const MainBox = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -320,18 +335,21 @@ const App = () => {
       ></Pannellum>
 
       <BottomBox>
-        {isView === 0 &&
-          imgArr.map((data, idx) => {
-            return (
-              <ImgBox
-                key={idx}
-                bgImg={`url("${data.thumb}")`}
-                onClick={() => imgChoiceHandler(data.vrSource)}
-              >
-                <Text>{data.title}</Text>
-              </ImgBox>
-            );
-          })}
+        {isView === 0 && (
+          <MainBox>
+            {imgArr.map((data, idx) => {
+              return (
+                <ImgBox
+                  key={idx}
+                  bgImg={`url("${data.thumb}")`}
+                  onClick={() => imgChoiceHandler(data.vrSource)}
+                >
+                  <Text>{data.title}</Text>
+                </ImgBox>
+              );
+            })}
+          </MainBox>
+        )}
 
         {isView === 1 && (
           <>
@@ -344,20 +362,21 @@ const App = () => {
               <Text>뒤로가기</Text>
             </BackBox>
 
-            {imgArr2.map((data, idx) => {
-              return (
-                <ImgBox
-                  key={idx}
-                  bgImg={`url("${data.thumb}")`}
-                  onClick={() => setImages(data.imgValue)}
-                >
-                  <Text>{data.title}</Text>
-                </ImgBox>
-              );
-            })}
+            <ScrollBox>
+              {imgArr2.map((data, idx) => {
+                return (
+                  <ImgBox
+                    key={idx}
+                    bgImg={`url("${data.thumb}")`}
+                    onClick={() => setImages(data.imgValue)}
+                  >
+                    <Text>{data.title}</Text>
+                  </ImgBox>
+                );
+              })}
+            </ScrollBox>
           </>
         )}
-
         {isView === 2 && (
           <>
             <BackBox onClick={() => imgChoiceHandler(0)}>
@@ -368,21 +387,21 @@ const App = () => {
               />
               <Text>뒤로가기</Text>
             </BackBox>
-
-            {imgArr3.map((data, idx) => {
-              return (
-                <ImgBox
-                  key={idx}
-                  bgImg={`url("${data.thumb}")`}
-                  onClick={() => setImages(data.imgValue)}
-                >
-                  <Text>{data.title}</Text>
-                </ImgBox>
-              );
-            })}
+            <ScrollBox>
+              {imgArr3.map((data, idx) => {
+                return (
+                  <ImgBox
+                    key={idx}
+                    bgImg={`url("${data.thumb}")`}
+                    onClick={() => setImages(data.imgValue)}
+                  >
+                    <Text>{data.title}</Text>
+                  </ImgBox>
+                );
+              })}
+            </ScrollBox>
           </>
         )}
-
         {isView === 3 && (
           <>
             <BackBox onClick={() => imgChoiceHandler(0)}>
@@ -409,7 +428,6 @@ const App = () => {
             </ScrollBox>
           </>
         )}
-
         {isView === 4 && (
           <>
             <BackBox onClick={() => imgChoiceHandler(0)}>
@@ -420,18 +438,19 @@ const App = () => {
               />
               <Text>뒤로가기</Text>
             </BackBox>
-
-            {imgArr5.map((data, idx) => {
-              return (
-                <ImgBox
-                  key={idx}
-                  bgImg={`url("${data.thumb}")`}
-                  onClick={() => setImages(data.imgValue)}
-                >
-                  <Text>{data.title}</Text>
-                </ImgBox>
-              );
-            })}
+            <ScrollBox>
+              {imgArr5.map((data, idx) => {
+                return (
+                  <ImgBox
+                    key={idx}
+                    bgImg={`url("${data.thumb}")`}
+                    onClick={() => setImages(data.imgValue)}
+                  >
+                    <Text>{data.title}</Text>
+                  </ImgBox>
+                );
+              })}
+            </ScrollBox>
           </>
         )}
       </BottomBox>
