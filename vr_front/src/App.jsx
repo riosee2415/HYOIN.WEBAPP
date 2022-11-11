@@ -5,6 +5,13 @@ import styled from "styled-components";
 
 const Box = styled.div`
   position: relative;
+
+  padding: 0;
+  margin: 0;
+
+  & body {
+    margin: 0 !important;
+  }
 `;
 
 const BottomBox = styled.div`
@@ -24,6 +31,7 @@ const BottomBox = styled.div`
 
 const ImgBox = styled.div`
   width: 120px;
+  min-width: 120px;
   height: 80px;
   margin: 0 10px;
   cursor: pointer;
@@ -39,6 +47,29 @@ const ImgBox = styled.div`
 
 const Text = styled.div`
   font-size: 14px;
+`;
+
+const BackBox = styled.div`
+  width: 100px;
+  height: 80px;
+  margin: 0 10px;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & img {
+    width: 50px;
+  }
+`;
+
+const ScrollBox = styled.div`
+  width: calc(100% - 100px);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: auto;
 `;
 
 const App = () => {
@@ -302,12 +333,14 @@ const App = () => {
 
         {isView === 1 && (
           <>
-            <ImgBox
-              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro1.png")`}
-              onClick={() => imgChoiceHandler(0)}
-            >
+            <BackBox onClick={() => imgChoiceHandler(0)}>
+              <img
+                src={
+                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                }
+              />
               <Text>뒤로가기</Text>
-            </ImgBox>
+            </BackBox>
 
             {imgArr2.map((data, idx) => {
               return (
@@ -325,12 +358,14 @@ const App = () => {
 
         {isView === 2 && (
           <>
-            <ImgBox
-              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro1.png")`}
-              onClick={() => imgChoiceHandler(0)}
-            >
+            <BackBox onClick={() => imgChoiceHandler(0)}>
+              <img
+                src={
+                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                }
+              />
               <Text>뒤로가기</Text>
-            </ImgBox>
+            </BackBox>
 
             {imgArr3.map((data, idx) => {
               return (
@@ -348,35 +383,41 @@ const App = () => {
 
         {isView === 3 && (
           <>
-            <ImgBox
-              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro1.png")`}
-              onClick={() => imgChoiceHandler(0)}
-            >
+            <BackBox onClick={() => imgChoiceHandler(0)}>
+              <img
+                src={
+                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                }
+              />
               <Text>뒤로가기</Text>
-            </ImgBox>
+            </BackBox>
 
-            {imgArr4.map((data, idx) => {
-              return (
-                <ImgBox
-                  key={idx}
-                  bgImg={`url("${data.thumb}")`}
-                  onClick={() => setImages(data.imgValue)}
-                >
-                  <Text>{data.title}</Text>
-                </ImgBox>
-              );
-            })}
+            <ScrollBox>
+              {imgArr4.map((data, idx) => {
+                return (
+                  <ImgBox
+                    key={idx}
+                    bgImg={`url("${data.thumb}")`}
+                    onClick={() => setImages(data.imgValue)}
+                  >
+                    <Text>{data.title}</Text>
+                  </ImgBox>
+                );
+              })}
+            </ScrollBox>
           </>
         )}
 
         {isView === 4 && (
           <>
-            <ImgBox
-              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro1.png")`}
-              onClick={() => imgChoiceHandler(0)}
-            >
+            <BackBox onClick={() => imgChoiceHandler(0)}>
+              <img
+                src={
+                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                }
+              />
               <Text>뒤로가기</Text>
-            </ImgBox>
+            </BackBox>
 
             {imgArr5.map((data, idx) => {
               return (
