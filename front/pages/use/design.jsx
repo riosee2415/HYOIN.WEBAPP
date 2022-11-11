@@ -181,41 +181,16 @@ const Design = () => {
                 효인요양원 급여비용 &#60;2022년 기준&#62;
               </Text>
 
-              <ATag width={`auto`} href="" download={true}>
+              <ATag
+                width={`auto`}
+                href="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EC%9A%94%EC%96%91%EC%9B%90%EA%B8%89%EC%97%AC%EB%B9%84%EC%9A%A9.pdf"
+                download={true}
+              >
                 <DownloadBtn>
                   <Image
                     width={`14px`}
                     margin={`0 4px 0 0`}
                     src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
-                    alt="icon"
-                  />
-                  <Text>다운로드</Text>
-                </DownloadBtn>
-              </ATag>
-            </Wrapper>
-
-            <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 20px`}>
-              <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
-                alt="icon"
-                width={`16px`}
-                margin={`0 16px 0 0`}
-              />
-
-              <Text fontSize={width < 700 ? `16px` : `22px`} fontWeight={`600`}>
-                효인요양원 급여비용[치매전담] &#60;2022년 기준&#62;
-              </Text>
-
-              <ATag width={`auto`} href="" download={true}>
-                <DownloadBtn
-                  bgColor={Theme.subTheme2_C}
-                  color={Theme.white_C}
-                  hoverBgColor={Theme.basicTheme_C}
-                >
-                  <Image
-                    width={`14px`}
-                    margin={`0 4px 0 0`}
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download.png"
                     alt="icon"
                   />
                   <Text>다운로드</Text>
@@ -261,32 +236,11 @@ const Design = () => {
                 효인주간보호 급여비용[일반] &#60;2022년 기준&#62;
               </Text>
 
-              <ATag width={`auto`} href="" download={true}>
-                <DownloadBtn>
-                  <Image
-                    width={`14px`}
-                    margin={`0 4px 0 0`}
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
-                    alt="icon"
-                  />
-                  <Text>다운로드</Text>
-                </DownloadBtn>
-              </ATag>
-            </Wrapper>
-
-            <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 20px`}>
-              <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
-                alt="icon"
-                width={`16px`}
-                margin={`0 16px 0 0`}
-              />
-
-              <Text fontSize={width < 700 ? `16px` : `22px`} fontWeight={`600`}>
-                효인주간보호 급여비용[치매전담실] &#60;2022년 기준&#62;
-              </Text>
-
-              <ATag width={`auto`} href="" download={true}>
+              <ATag
+                width={`auto`}
+                href="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EC%A3%BC%EA%B0%84%EB%B3%B4%ED%98%B8%2C+%EB%8B%A8%EA%B8%B0%EB%B3%B4%ED%98%B8+%EA%B8%89%EC%97%AC%EB%B9%84%EC%9A%A901.pdf"
+                download={true}
+              >
                 <DownloadBtn>
                   <Image
                     width={`14px`}
@@ -337,7 +291,11 @@ const Design = () => {
                 효인방문요양원 급여비용(방문당) &#60;2022년 기준&#62;
               </Text>
 
-              <ATag width={`auto`} href="" download={true}>
+              <ATag
+                width={`auto`}
+                href="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EB%B0%A9%EB%AC%B8%EC%9A%94%EC%96%91.pdf"
+                download={true}
+              >
                 <DownloadBtn>
                   <Image
                     width={`14px`}
