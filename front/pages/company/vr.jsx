@@ -29,12 +29,12 @@ const Vr = () => {
       </Head>
       <ClientLayout>
         <WholeWrapper>
-          <Wrapper height={`100vh`}>
+          <Wrapper height={width < 900 ? `500px` : `100vh`}>
             <iframe
               width={`100%`}
               height={`100%`}
               style={{ border: `none` }}
-              src={"http://localhost:3030/"}
+              src={"https://vr.hyoinnursinghome.co.kr/"}
               allowfullscreen="allowfullscreen"
               mozallowfullscreen="mozallowfullscreen"
               msallowfullscreen="msallowfullscreen"
