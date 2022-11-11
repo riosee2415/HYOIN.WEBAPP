@@ -197,7 +197,7 @@ const DetailWait = () => {
                   src={waitDetail && waitDetail.imagePath}
                 />
 
-                {waitDetail && waitDetail.content}
+                <Text>{waitDetail && waitDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 

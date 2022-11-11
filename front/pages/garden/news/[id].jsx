@@ -197,7 +197,7 @@ const DetailNews = () => {
                   src={newsDetail && newsDetail.imagePath}
                 />
 
-                {newsDetail && newsDetail.content}
+                <Text>{newsDetail && newsDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 

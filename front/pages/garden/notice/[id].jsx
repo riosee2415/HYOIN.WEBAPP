@@ -196,7 +196,7 @@ const DetailNotice = () => {
                   src={noticeDetail && noticeDetail.imagePath}
                 />
 
-                {noticeDetail && noticeDetail.content}
+                <Text>{noticeDetail && noticeDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 

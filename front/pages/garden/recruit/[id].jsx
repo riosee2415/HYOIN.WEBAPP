@@ -229,7 +229,7 @@ const DetailRecruit = () => {
                   src={recruitDetail && recruitDetail.imagePath}
                 />
 
-                {recruitDetail && recruitDetail.content}
+                <Text>{recruitDetail && recruitDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 

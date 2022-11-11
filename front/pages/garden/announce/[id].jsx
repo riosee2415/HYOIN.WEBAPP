@@ -196,7 +196,7 @@ const DetailAnnounce = () => {
                   src={announceDetail && announceDetail.imagePath}
                 />
 
-                {announceDetail && announceDetail.content}
+                <Text>{announceDetail && announceDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 
