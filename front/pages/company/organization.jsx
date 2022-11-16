@@ -28,7 +28,7 @@ const Organization = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 조직도</title>
+        <title>효인요양원 | 조직도</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

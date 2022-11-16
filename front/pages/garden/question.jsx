@@ -106,7 +106,7 @@ const Question = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 1:1 문의</title>
+        <title>효인요양원 | 1:1 문의</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

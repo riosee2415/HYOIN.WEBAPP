@@ -55,7 +55,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 노인장기요양보험제도</title>
+        <title>효인요양원 | 노인장기요양보험제도</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

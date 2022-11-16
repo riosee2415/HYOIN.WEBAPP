@@ -92,7 +92,7 @@ const Facility = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 시설 개요</title>
+        <title>효인요양원 | 시설 개요</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

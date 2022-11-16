@@ -52,7 +52,7 @@ const Support = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 후원안내</title>
+        <title>효인요양원 | 후원안내</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

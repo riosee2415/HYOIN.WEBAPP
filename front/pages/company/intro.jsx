@@ -31,7 +31,7 @@ const Intro = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 요양원 소개</title>
+        <title>효인요양원 | 요양원 소개</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

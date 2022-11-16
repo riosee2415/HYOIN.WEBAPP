@@ -52,7 +52,7 @@ const Nursing = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 방문요양</title>
+        <title>효인요양원 | 방문요양</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
