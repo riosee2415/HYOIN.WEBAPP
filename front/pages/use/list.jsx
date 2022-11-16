@@ -153,7 +153,7 @@ const List = () => {
               </Wrapper>
             </Wrapper>
 
-            <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 40px`}>
+            {/* <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 40px`}>
               <Wrapper
                 width={`8px`}
                 height={`8px`}
@@ -367,7 +367,7 @@ const List = () => {
                   {normalList && normalList.waitingPeople}
                 </Wrapper>
               </Wrapper>
-            </Wrapper>
+            </Wrapper> */}
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`100px 0 40px`}>
               <Wrapper

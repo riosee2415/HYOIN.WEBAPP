@@ -424,7 +424,7 @@ const Index = () => {
                 borderLeft={`1px solid ${Theme.lightGrey2_C}`}
                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
               >
-                본인부담금
+                내용
               </Wrapper>
             </Wrapper>
             <Wrapper dr={`row`}>
@@ -634,7 +634,7 @@ const Index = () => {
                 borderLeft={`1px solid ${Theme.lightGrey2_C}`}
                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
               >
-                본인부담금
+                내용
               </Wrapper>
             </Wrapper>
             <Wrapper dr={`row`}>

@@ -339,8 +339,8 @@ const Home = ({}) => {
                 </Text>
                 {width < 1100 ? null : (
                   <>
-                    <Text fontSize={`16px`}>효인은</Text>
-                    <Text fontSize={`16px`}>주간, 방문 또한 가능합니다.</Text>
+                    <Text fontSize={`16px`}>효인은 주간, 방문</Text>
+                    <Text fontSize={`16px`}>또한 가능합니다.</Text>
                   </>
                 )}
               </QuickWrapper>
@@ -365,8 +365,8 @@ const Home = ({}) => {
                 </Text>
                 {width < 1100 ? null : (
                   <>
-                    <Text fontSize={`16px`}>효인의</Text>
-                    <Text fontSize={`16px`}>식단표 열람이 가능합니다.</Text>
+                    <Text fontSize={`16px`}>효인의 식단표</Text>
+                    <Text fontSize={`16px`}>열람이 가능합니다.</Text>
                   </>
                 )}
               </QuickWrapper>
@@ -419,8 +419,8 @@ const Home = ({}) => {
                 </Text>
                 {width < 1100 ? null : (
                   <>
-                    <Text fontSize={`16px`}>효인의</Text>
-                    <Text fontSize={`16px`}>공지사항을 확인해보세요.</Text>
+                    <Text fontSize={`16px`}>효인의 공지사항을</Text>
+                    <Text fontSize={`16px`}>확인해보세요.</Text>
                   </>
                 )}
               </QuickWrapper>
@@ -447,8 +447,10 @@ const Home = ({}) => {
                 </Text>
                 {width < 1100 ? null : (
                   <>
-                    <Text fontSize={`16px`}>기관방문을 원하시는 분은</Text>
-                    <Text fontSize={`16px`}>약도를 참고해주시기 바랍니다.</Text>
+                    <Text fontSize={`16px`}>
+                      기관방문을 원하시는 분은 약도를
+                    </Text>
+                    <Text fontSize={`16px`}>참고해주시기 바랍니다.</Text>
                   </>
                 )}
               </QuickWrapper>
@@ -538,9 +540,9 @@ const Home = ({}) => {
                   최상의 서비스를 만나보세요.
                 </Text>
               </Fade>
-              <Wrapper dr={`row`} ju={`space-between`}>
+              <Wrapper dr={`row`} ju={`space-around`}>
                 <Wrapper
-                  width={width < 900 ? `49%` : `calc(100% / 4.2)`}
+                  width={width < 900 ? `49%` : `calc(100% / 3.7)`}
                   margin={width < 900 && `0 0 15px`}
                   onClick={() => moveLinkHandler(`/service/nursing?type=1`)}
                 >
@@ -574,7 +576,7 @@ const Home = ({}) => {
                 </Wrapper>
 
                 <Wrapper
-                  width={width < 900 ? `49%` : `calc(100% / 4.2)`}
+                  width={width < 900 ? `49%` : `calc(100% / 3.7)`}
                   margin={width < 900 && `0 0 15px`}
                   onClick={() => moveLinkHandler(`/service/protection?type=1`)}
                 >
@@ -602,12 +604,12 @@ const Home = ({}) => {
                       height={`90px`}
                       bgColor={Theme.white_C}
                     >
-                      일반형
+                      주간보호 서비스
                     </Wrapper>
                   </ShadowWrapper>
                 </Wrapper>
-                <Wrapper
-                  width={width < 900 ? `49%` : `calc(100% / 4.2)`}
+                {/* <Wrapper
+                  width={width < 900 ? `49%` : `calc(100% / 3.7)`}
                   margin={width < 900 && `0 0 15px`}
                   onClick={() => moveLinkHandler(`/service/protection?type=2`)}
                 >
@@ -638,9 +640,9 @@ const Home = ({}) => {
                       치매 특화형
                     </Wrapper>
                   </ShadowWrapper>
-                </Wrapper>
+                </Wrapper> */}
                 <Wrapper
-                  width={width < 900 ? `49%` : `calc(100% / 4.2)`}
+                  width={width < 900 ? `49%` : `calc(100% / 3.7)`}
                   margin={width < 900 && `0 0 15px`}
                 >
                   <Link href={`/service/visit`}>
@@ -669,7 +671,7 @@ const Home = ({}) => {
                           height={`90px`}
                           bgColor={Theme.white_C}
                         >
-                          방문 요양 서비스
+                          방문요양 서비스
                         </Wrapper>
                       </ShadowWrapper>
                     </ATag>
@@ -992,8 +994,8 @@ const Home = ({}) => {
                       >
                         <Wrapper width={`auto`}>
                           <Image
-                            alt="band"
-                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_band.png`}
+                            alt="blog"
+                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_blog.png`}
                             width={`74px`}
                           />
                           <Text margin={`10px 0 0`} fontSize={`18px`}>
@@ -1013,12 +1015,12 @@ const Home = ({}) => {
                       </Wrapper>
                       <Wrapper width={`auto`}>
                         <Image
-                          alt="facebook"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_face-book.png`}
+                          alt="band"
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_band.png`}
                           width={`74px`}
                         />
                         <Text margin={`10px 0 0`} fontSize={`18px`}>
-                          페이스북
+                          밴드
                         </Text>
                       </Wrapper>
                     </Wrapper>

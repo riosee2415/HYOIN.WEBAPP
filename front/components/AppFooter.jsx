@@ -73,7 +73,7 @@ const AppFooter = () => {
             <SpanText fontSize={`10px`} margin={`0 10px`}>
               |
             </SpanText>
-            <Text fontSize={`15px`}>서비스 급여 종류 : 주야간보호센터</Text>
+            <Text fontSize={`15px`}>서비스 급여 종류 : 요양원</Text>
           </Wrapper>
 
           <Wrapper
@@ -117,20 +117,8 @@ const AppFooter = () => {
             >
               <Image
                 width={`17px`}
-                alt="insta"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_insta.png`}
-              />
-            </Wrapper>
-            <Wrapper
-              width={`27px`}
-              height={`27px`}
-              radius={`5px`}
-              bgColor={Theme.darkGrey_C}
-            >
-              <Image
-                width={`14px`}
-                alt="face"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_face-book.png`}
+                alt="band"
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
               />
             </Wrapper>
           </Wrapper>
@@ -186,7 +174,12 @@ const AppFooter = () => {
                   <Text
                     fontSize={width < 800 && `12px`}
                     lineHeight={width < 900 && `2`}
-                  >{`${companys[2].name} : ${companys[2].value}`}</Text>
+                    isHover
+                  >
+                    <a
+                      href={`tel:0425227118`}
+                    >{`${companys[2].name} : ${companys[2].value}`}</a>
+                  </Text>
                 )}
                 <SpanText fontSize={`10px`} margin={`0 10px`}>
                   |
@@ -195,7 +188,9 @@ const AppFooter = () => {
                   <Text
                     fontSize={width < 800 && `12px`}
                     lineHeight={width < 900 && `2`}
-                  >{`${companys[3].name} : ${companys[3].value}`}</Text>
+                  >
+                    {`${companys[3].name} : ${companys[3].value}`}
+                  </Text>
                 )}
               </Wrapper>
               <Text
@@ -209,13 +204,13 @@ const AppFooter = () => {
               <Image
                 alt="logo"
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
-                width={`62px`}
+                width={`120px`}
                 margin={`0 30px 0 0`}
               />
               <Image
                 alt="logo"
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_neo.png`}
-                width={`190px`}
+                width={`60px`}
               />
             </Wrapper>
           </Wrapper>

@@ -10,6 +10,7 @@ import {
   CommonTitle,
   Image,
   RsWrapper,
+  SpanText,
   Text,
   WholeWrapper,
   Wrapper,
@@ -51,30 +52,60 @@ const Intro = () => {
                 />
                 <Wrapper width={width < 700 ? `100%` : `48%`} al={`flex-start`}>
                   <Fade bottom>
-                    <Text
-                      fontSize={width < 700 ? `25px` : `32px`}
-                      fontWeight={`bold`}
-                      color={Theme.subTheme3_C}
+                    <Wrapper
+                      dr={`row`}
+                      ju={`flex-start`}
+                      al={`flex-end`}
                       margin={`0 0 30px`}
                     >
-                      孝를 실천하는 아름다운 사람들
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      안녕하세요?
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      오늘날 우리사회는 고령화 시대에 접어들면서
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      孝의 가치관이 변하고 맞벌이 부부의 증가, 핵가족화로 인해
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `18px` : `20px`}
-                      fontWeight={`bold`}
-                      color={Theme.subTheme10_C}
-                    >
-                      어르신들을 보살필때 어려움을 겪는 가정이 많아졌습니다.
-                    </Text>
+                      <Image
+                        alt="logo"
+                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/logo_symbol.png`}
+                        width={`60px`}
+                      />
+                      <Text
+                        fontSize={width < 700 ? `25px` : `32px`}
+                        fontWeight={`bold`}
+                        color={Theme.subTheme3_C}
+                        margin={`0 6px`}
+                        lineHeight={`1`}
+                      >
+                        를 실천하는 아름다운 사람들
+                      </Text>
+                      <Image
+                        width={`180px`}
+                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                      />
+                    </Wrapper>
+
+                    {width < 1100 ? (
+                      <Text fontSize={width < 700 ? `18px` : `20px`}>
+                        오늘날 우리사회는 고령화 시대에 접어들면서 孝의 가치관이
+                        변화했으며 맞벌이 부부의 증가 및 핵가족화로 인하여&nbsp;
+                        <SpanText
+                          fontSize={width < 700 ? `18px` : `20px`}
+                          fontWeight={`bold`}
+                          color={Theme.subTheme10_C}
+                        >
+                          어르신들을 보살필때 어려움을 겪는 가정이 많아졌습니다.
+                        </SpanText>
+                      </Text>
+                    ) : (
+                      <>
+                        <Text fontSize={width < 700 ? `18px` : `20px`}>
+                          오늘날 우리사회는 고령화 시대에 접어들면서 孝의
+                          가치관이 변화했으며 맞벌이 부부의 증가 및 핵가족화로
+                          인하여
+                        </Text>
+                        <Text
+                          fontSize={width < 700 ? `18px` : `20px`}
+                          fontWeight={`bold`}
+                          color={Theme.subTheme10_C}
+                        >
+                          어르신들을 보살필때 어려움을 겪는 가정이 많아졌습니다.
+                        </Text>
+                      </>
+                    )}
                   </Fade>
                 </Wrapper>
               </Wrapper>
@@ -85,25 +116,51 @@ const Intro = () => {
               >
                 <Wrapper width={width < 700 ? `100%` : `48%`} al={`flex-start`}>
                   <Fade bottom>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      효인요양원은 노인성질환 및 만성질환으로 인하여 일상생활에
-                      불편하거나
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      가족부양을 받을 수 없는 어르신들에게 필요한 서비스를
-                      제공하여
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      부양가족의 부담을 경감시키고, 심신기능강화 및 전신회복을
-                      위하여
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `18px` : `20px`}
-                      fontWeight={`bold`}
-                      color={Theme.subTheme10_C}
-                    >
-                      삶의 질을 향상시키는 전문 노인의료복지시설입니다.
-                    </Text>
+                    {width < 1100 ? (
+                      <Text fontSize={width < 700 ? `18px` : `20px`}>
+                        효인요양원은 노인성질환 및 만성질환으로 인하여
+                        일상생활에 불편하거나 가족부양을 받을 수 없는
+                        어르신들에게 필요한 서비스를 제공하여 부양가족의 부담을
+                        경감시키고, 심신기능강화 및 전신회복을 위하여
+                        전문노인의료복지시설
+                        <Text
+                          fontSize={width < 700 ? `18px` : `20px`}
+                          margin={`5px 0 0`}
+                        >
+                          <Image
+                            width={`180px`}
+                            margin={`0 10px`}
+                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                          />
+                          입니다.
+                        </Text>
+                      </Text>
+                    ) : (
+                      <>
+                        <Text fontSize={width < 700 ? `18px` : `20px`}>
+                          본원은 고령이나 노인성 질병 등으로 일상생활을 혼자서
+                          수행하기 어려운 분들에게 신체활동 및 일상생활 지원
+                          등의 서비스를 제공하여 노후 생활의 안정과 그 가족의
+                          부담을 덜어줌으로써 국민의&nbsp;
+                          <SpanText fontWeight={`bold`}>
+                            삶의 질을 향상하도록 서비스를 제공
+                          </SpanText>
+                          하는
+                        </Text>
+                        <Text
+                          fontSize={width < 700 ? `18px` : `20px`}
+                          margin={`5px 0 0`}
+                        >
+                          전문노인의료복지시설
+                          <Image
+                            width={`180px`}
+                            margin={`0 10px`}
+                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                          />
+                          입니다.
+                        </Text>
+                      </>
+                    )}
                   </Fade>
                 </Wrapper>
                 <Image
@@ -130,22 +187,15 @@ const Intro = () => {
                 <Wrapper width={width < 700 ? `100%` : `48%`} al={`flex-start`}>
                   <Fade bottom>
                     <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      1500평에 달하는 넓은 부지, 도심 속에서 산으로 둘러쌓인
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      공기 좋은 전원적인 공간, 밝고 따뜻한 최적의 공간을 갖추고
-                      있으며,
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      재활운동기구를 활용한 재활운동과 산책을 통해
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `18px` : `20px`}
-                      fontWeight={`bold`}
-                      color={Theme.subTheme10_C}
-                    >
-                      신체적, 정신적 자존감을 회복시킬 수 있는 최적의
-                      장소입니다.
+                      본원은 월평동에 위치하고 월평공원과 도솔산으로 둘러쌓인
+                      전원적인 공간으로 어르신들이 내 집처럼 따뜻하고 편안한
+                      생활을 할 수 있도록&nbsp;
+                      <SpanText fontWeight={`bold`} color={Theme.subTheme10_C}>
+                        쾌적한 환경
+                      </SpanText>
+                      을 마련하고 신체적 정신적으로 안정된 생활를 유지할 수
+                      있도록 , 공기 좋고 포근한 공간을 갖추고 있는 최적의
+                      본원입니다.
                     </Text>
                   </Fade>
                 </Wrapper>
@@ -157,25 +207,46 @@ const Intro = () => {
               >
                 <Wrapper width={width < 700 ? `100%` : `48%`} al={`flex-start`}>
                   <Fade bottom>
-                    <Text
-                      fontSize={width < 700 ? `18px` : `20px`}
-                      fontWeight={`bold`}
-                      color={Theme.subTheme10_C}
-                    >
-                      정식 '간호사'와 '영양사'가 어르신들을 위해 맞춤
-                      의료서비스와
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `18px` : `20px`}
-                      fontWeight={`bold`}
-                      color={Theme.subTheme10_C}
-                    >
-                      영양가 높고 따뜻한 급식서비스를 제공하고 있으며
-                    </Text>
-                    <Text fontSize={width < 700 ? `18px` : `20px`}>
-                      프로그램을 일반형, 치매특화형 프로그램으로 분리하여
-                      운영하고 있습니다.
-                    </Text>
+                    {width < 1100 ? (
+                      <Text
+                        fontSize={width < 700 ? `18px` : `20px`}
+                        fontWeight={`bold`}
+                        color={Theme.subTheme10_C}
+                      >
+                        정식 '간호사'와 '영양사'가 어르신들을 위해 맞춤
+                        의료서비스와 영양가 높고 따뜻한 급식서비스를 제공하고
+                        있으며 &nbsp;
+                        <SpanText
+                          fontSize={width < 700 ? `18px` : `20px`}
+                          color={Theme.black_C}
+                        >
+                          프로그램을 일반형, 치매특화형 프로그램으로 분리하여
+                          운영하고 있습니다.
+                        </SpanText>
+                      </Text>
+                    ) : (
+                      <>
+                        <Text
+                          fontSize={width < 700 ? `18px` : `20px`}
+                          fontWeight={`bold`}
+                          color={Theme.subTheme10_C}
+                        >
+                          정식 '간호사'와 '영양사'가 어르신들을 위해 맞춤
+                          의료서비스와
+                        </Text>
+                        <Text
+                          fontSize={width < 700 ? `18px` : `20px`}
+                          fontWeight={`bold`}
+                          color={Theme.subTheme10_C}
+                        >
+                          영양가 높고 따뜻한 급식서비스를 제공하고 있으며
+                        </Text>
+                        <Text fontSize={width < 700 ? `18px` : `20px`}>
+                          프로그램을 일반형, 치매특화형 프로그램으로 분리하여
+                          운영하고 있습니다.
+                        </Text>
+                      </>
+                    )}
                   </Fade>
                 </Wrapper>
                 <Image
@@ -209,15 +280,11 @@ const Intro = () => {
                   <Fade bottom>
                     <Text>
                       “孝를 실천하는 아름다운 사람들”이라는 원훈에 따라
-                      어르신들께 가족같은 마음으로 서비스를 제공하고,
-                    </Text>
-                    <Text>
+                      어르신들께 가족 같은 마음으로 질 높은 서비스를 제공하며,
                       대덕대학교 사회복지학과 겸임교수로 재직하고 있는 전문성을
-                      갖춘 사회복지 실천가로서 어르신과
-                    </Text>
-                    <Text>
-                      보호자 욕구에 맞는 최고의 서비스를 제공해 심리.사회적
-                      안정을 지원하겠습니다.
+                      갖춘 사회복지 실천가로서 어르신과 보호자 욕구에 맞는
+                      최고의 서비스를 제공해 심리적 사회적 안정을
+                      지원하겠습니다.
                     </Text>
                   </Fade>
                   <Wrapper

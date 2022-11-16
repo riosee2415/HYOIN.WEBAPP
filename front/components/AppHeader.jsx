@@ -33,7 +33,7 @@ const HeaderRs = styled(Wrapper)`
 
 const HoverWrapper = styled(Wrapper)`
   position: absolute;
-  top: 104px;
+  top: 91px;
   left: 0;
   background: ${Theme.white_C};
   padding: 30px 0;
@@ -184,7 +184,7 @@ const AppHeader = () => {
           {/* web */}
           <ATag href="/" width={`15%`} ju={`flex-start`}>
             <Image
-              width={`120px`}
+              width={`200px`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
             />
           </ATag>
@@ -216,7 +216,7 @@ const AppHeader = () => {
                 <Menu
                   color={router.pathname.includes(`/use`) && Theme.subTheme2_C}
                 >
-                  이용 안내
+                  이용안내
                 </Menu>
               </a>
             </Link>
@@ -286,25 +286,25 @@ const AppHeader = () => {
                   </Link>
                 </Text>
                 <Text margin={`0 0 10px`}>
-                  <Link href={`/company/facility`}>
-                    <a>시설 개요</a>
-                  </Link>
-                </Text>
-                <Text margin={`0 0 10px`}>
                   <Link href={`/company/organization`}>
                     <a>조직도</a>
                   </Link>
                 </Text>
                 <Text margin={`0 0 10px`}>
-                  <Link href={`/company/location`}>
-                    <a>찾아오시는 길</a>
+                  <Link href={`/company/facility`}>
+                    <a>시설 개요</a>
                   </Link>
                 </Text>
                 <Link href={`/company/vr`}>
                   <a>
-                    <Text>시설 3D 안내</Text>
+                    <Text margin={`0 0 10px`}>시설 3D 안내</Text>
                   </a>
                 </Link>
+                <Text>
+                  <Link href={`/company/location`}>
+                    <a>찾아오시는 길</a>
+                  </Link>
+                </Text>
               </Wrapper>
             </SubMenu>
             <SubMenu>
@@ -319,24 +319,29 @@ const AppHeader = () => {
                 </Text>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/service/protection?type=1`}>
-                    <a>주간 보호</a>
+                    <a>주간보호</a>
                   </Link>
                 </Text>
                 <Text>
                   <Link href={`/service/visit`}>
-                    <a>방문 요양</a>
+                    <a>방문요양</a>
                   </Link>
                 </Text>
               </Wrapper>
             </SubMenu>
             <SubMenu>
               <Text className="menu" margin={`0 0 25px`}>
-                이용 안내
+                이용안내
               </Text>
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/use`}>
-                    <a>이용 안내</a>
+                    <a>이용안내</a>
+                  </Link>
+                </Text>
+                <Text margin={`0 0 10px`}>
+                  <Link href={`/use/design`}>
+                    <a>비용안내</a>
                   </Link>
                 </Text>
                 <Text margin={`0 0 10px`}>
@@ -344,11 +349,7 @@ const AppHeader = () => {
                     <a>입소 절차</a>
                   </Link>
                 </Text>
-                <Text margin={`0 0 10px`}>
-                  <Link href={`/use/design`}>
-                    <a>비용 안내</a>
-                  </Link>
-                </Text>
+
                 <Text margin={`0 0 10px`}>
                   <Link href={`/use/list`}>
                     <a>이용 현황</a>
@@ -448,7 +449,7 @@ const AppHeader = () => {
             </ATag>
             <ATag width={`auto`} href="/">
               <Image
-                width={`80px`}
+                width={`110px`}
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
               />
             </ATag>
@@ -518,16 +519,6 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/company/facility`}>
-                      <a>시설 개요</a>
-                    </Link>
-                  </Wrapper>
-
-                  <Wrapper
-                    al={`flex-start`}
-                    margin={`0 0 10px`}
-                    onClick={drawarToggle}
-                  >
                     <Link href={`/company/organization`}>
                       <a>조직도</a>
                     </Link>
@@ -537,13 +528,22 @@ const AppHeader = () => {
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
                   >
-                    <Link href={`/company/location`}>
-                      <a>찾아오시는 길</a>
+                    <Link href={`/company/facility`}>
+                      <a>시설 개요</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`0 0 10px`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/company/vr`}>
+                      <a>시설 3D 안내</a>
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
-                    <Link href={`/company/vr`}>
-                      <a>시설 3D 안내</a>
+                    <Link href={`/company/location`}>
+                      <a>찾아오시는 길</a>
                     </Link>
                   </Wrapper>
                 </Wrapper>
@@ -582,12 +582,12 @@ const AppHeader = () => {
                     onClick={drawarToggle}
                   >
                     <Link href={`/service/protection?type=1`}>
-                      <a>주간 보호</a>
+                      <a>주간보호</a>
                     </Link>
                   </Wrapper>
                   <Wrapper al={`flex-start`} onClick={drawarToggle}>
                     <Link href={`/service/visit`}>
-                      <a>방문 요양</a>
+                      <a>방문요양</a>
                     </Link>
                   </Wrapper>
                 </Wrapper>
@@ -621,6 +621,15 @@ const AppHeader = () => {
                     </Link>
                   </Wrapper>
                   <Wrapper
+                    margin={`0 0 10px`}
+                    al={`flex-start`}
+                    onClick={drawarToggle}
+                  >
+                    <Link href={`/use/design`}>
+                      <a>비용안내</a>
+                    </Link>
+                  </Wrapper>
+                  <Wrapper
                     al={`flex-start`}
                     margin={`0 0 10px`}
                     onClick={drawarToggle}
@@ -629,15 +638,7 @@ const AppHeader = () => {
                       <a>입소 절차</a>
                     </Link>
                   </Wrapper>
-                  <Wrapper
-                    margin={`0 0 10px`}
-                    al={`flex-start`}
-                    onClick={drawarToggle}
-                  >
-                    <Link href={`/use/design`}>
-                      <a>비용 안내</a>
-                    </Link>
-                  </Wrapper>
+
                   <Wrapper
                     margin={`0 0 10px`}
                     al={`flex-start`}

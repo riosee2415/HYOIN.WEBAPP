@@ -308,7 +308,7 @@ const Index = () => {
                 }
                 fontWeight={`600`}
               >
-                주간보호 이용대상 어르신
+                방문요양 이용대상 어르신
               </Text>
             </Wrapper>
 

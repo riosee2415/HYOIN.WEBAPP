@@ -582,9 +582,9 @@ const Info = () => {
                   />
                 </Box>
                 <Text margin={`15px 0 10px`}>이메일</Text>
-                <a href={`mailto:nuwb1130@naver.com`}>
+                <a href={`mailto:neowb1130@naver.com`}>
                   <Text fontSize={width < 700 ? `14px` : `18px`}>
-                    nuwb1130@naver.com
+                    neowb1130@naver.com
                   </Text>
                 </a>
               </Wrapper>

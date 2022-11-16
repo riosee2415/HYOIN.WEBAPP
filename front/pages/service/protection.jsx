@@ -24,6 +24,7 @@ import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import WeekMenu from "../../components/nursing/WeekMenu";
+import DementiaSpecial from "../../components/protection/DementiaSpecial";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -85,13 +86,13 @@ const Protection = () => {
   return (
     <>
       <Head>
-        <title>효인요양원 | 주간 보호</title>
+        <title>효인요양원 | 주간보호</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
           <RsWrapper>
-            <CommonTitle>주간 보호</CommonTitle>
+            <CommonTitle>주간보호</CommonTitle>
 
             <Wrapper dr={`row`}>
               <Tab
@@ -103,12 +104,12 @@ const Protection = () => {
               >
                 일반형
               </Tab>
-              <Tab
+              {/* <Tab
                 onClick={() => pageChangeToggle(2)}
                 isActive={router && router.query.type === "2"}
               >
                 치매 특화형
-              </Tab>
+              </Tab> */}
               <Tab
                 onClick={() => pageChangeToggle(3)}
                 isActive={router && router.query.type === "3"}
@@ -131,9 +132,9 @@ const Protection = () => {
 
             {router && router.query.type === "1" ? (
               <Normal />
-            ) : router.query.type === "2" ? (
-              <Dementia />
-            ) : router.query.type === "3" ? (
+            ) : // ) : router.query.type === "2" ? (
+            //   <DementiaSpecial />
+            router.query.type === "3" ? (
               <Monthly />
             ) : router.query.type === "4" ? (
               <Dementia />

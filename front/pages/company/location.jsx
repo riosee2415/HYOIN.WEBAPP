@@ -307,8 +307,8 @@ const Location = () => {
                       bgColor={Theme.subTheme6_C}
                     >
                       <Image
-                        alt="face"
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_face-book.png`}
+                        alt="band"
+                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
                         width={`27px`}
                       />
                     </Wrapper>
@@ -318,103 +318,99 @@ const Location = () => {
             </Wrapper>
           )}
 
-          <RsWrapper padding={`80px 0`} al={`flex-start`}>
-            <Text
-              fontWeight={`bold`}
-              fontSize={width < 700 ? `15px` : `18px`}
-              color={Theme.basicTheme_C}
-            >
-              교통편
-            </Text>
-            <Wrapper dr={`row`} al={`flex-start`} margin={`40px 0 0`}>
-              <Wrapper
-                width={width < 900 ? `100%` : `calc(100% / 2)`}
-                al={`flex-start`}
+          <Wrapper bgColor={Theme.subTheme14_C}>
+            <RsWrapper padding={`80px 0`} al={`flex-start`}>
+              <Text
+                fontWeight={`bold`}
+                fontSize={width < 700 ? `18px` : `30px`}
+                bgColor={Theme.subTheme3_C}
+                color={Theme.white_C}
+                padding={`0 20px`}
               >
-                <Image
-                  alt="bus icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_bus.png`}
-                  width={`32px`}
-                />
-                <Text
-                  fontSize={width < 700 ? `18px` : `24px`}
-                  fontWeight={`bold`}
-                  margin={`18px 0 28px`}
+                교통편
+              </Text>
+              <Wrapper dr={`row`} al={`flex-start`} margin={`40px 0 0`}>
+                <Wrapper
+                  width={width < 900 ? `100%` : `calc(100% / 2)`}
+                  al={`flex-start`}
                 >
-                  버스 이용시
-                </Text>
-                <Wrapper dr={`row`} ju={`space-between`}>
-                  <Wrapper width={`auto`} al={`flex-start`}>
-                    <Text
-                      fontSize={`20px`}
-                      fontWeight={`bold`}
-                      color={Theme.basicTheme_C}
-                    >
-                      대전일보사 (32750) 129m
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `15px` : `18px`}
-                      margin={`16px 0 10px`}
-                    >
-                      일반 101, 103, 105, 107, 116, 119, 312
-                    </Text>
-                    <Text fontSize={width < 700 ? `15px` : `18px`}>
-                      급행 3(급, 원내동 - 정부청사)
-                    </Text>
-                  </Wrapper>
-                  <Wrapper
-                    width={`auto`}
-                    al={`flex-start`}
-                    margin={width < 900 && `15px 0 0`}
+                  <Image
+                    alt="bus icon"
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_bus.png`}
+                    width={`32px`}
+                  />
+                  <Text
+                    fontSize={width < 700 ? `18px` : `24px`}
+                    fontWeight={`bold`}
+                    margin={`18px 0 28px`}
                   >
-                    <Text
-                      fontSize={`20px`}
-                      fontWeight={`bold`}
-                      color={Theme.basicTheme_C}
+                    버스 이용시
+                  </Text>
+                  <Wrapper dr={`row`} ju={`space-between`}>
+                    <Wrapper width={`auto`} al={`flex-start`}>
+                      <Text fontSize={`20px`} fontWeight={`bold`}>
+                        대전일보사 (32750) 129m
+                      </Text>
+                      <Text
+                        fontSize={width < 700 ? `15px` : `18px`}
+                        margin={`16px 0 10px`}
+                      >
+                        일반 101, 103, 105, 107, 116, 119, 312
+                      </Text>
+                      <Text fontSize={width < 700 ? `15px` : `18px`}>
+                        급행 3(급, 원내동 - 정부청사)
+                      </Text>
+                    </Wrapper>
+                    <Wrapper
+                      width={`auto`}
+                      al={`flex-start`}
+                      margin={width < 900 && `15px 0 0`}
                     >
-                      대전일보사 (32760) 215m
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `15px` : `18px`}
-                      margin={`16px 0 10px`}
-                    >
-                      일반 101, 103, 105, 107, 116, 119, 312
-                    </Text>
-                    <Text fontSize={width < 700 ? `15px` : `18px`}>
-                      급행 3(급, 원내동 - 정부청사)
-                    </Text>
+                      <Text fontSize={`20px`} fontWeight={`bold`}>
+                        대전일보사 (32760) 215m
+                      </Text>
+                      <Text
+                        fontSize={width < 700 ? `15px` : `18px`}
+                        margin={`16px 0 10px`}
+                      >
+                        일반 101, 103, 105, 107, 116, 119, 312
+                      </Text>
+                      <Text fontSize={width < 700 ? `15px` : `18px`}>
+                        급행 3(급, 원내동 - 정부청사)
+                      </Text>
+                    </Wrapper>
                   </Wrapper>
                 </Wrapper>
-              </Wrapper>
-              <Wrapper
-                width={width < 900 ? `100%` : `calc(100% / 2)`}
-                al={`flex-start`}
-                padding={width < 900 ? `30px 0 0` : `0 0 0 110px`}
-              >
-                <Image
-                  alt="bus icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_subway.png`}
-                  width={`32px`}
-                />
-                <Text
-                  fontSize={width < 700 ? `18px` : `24px`}
-                  fontWeight={`bold`}
-                  margin={`18px 0 28px`}
+                <Wrapper
+                  width={width < 900 ? `100%` : `calc(100% / 2)`}
+                  al={`flex-start`}
+                  padding={width < 900 ? `30px 0 0` : `0 0 0 110px`}
                 >
-                  지하철 이용시
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `15px` : `18px`}
-                  margin={width < 900 ? `15px 0` : `30px 0 14px`}
-                >
-                  갑천역 ①번 출구 도보 12분
-                </Text>
-                <Text fontSize={width < 700 ? `15px` : `18px`}>
-                  월평역 ②번 출구 도보 15분
-                </Text>
+                  <Image
+                    alt="bus icon"
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_subway.png`}
+                    width={`32px`}
+                  />
+                  <Text
+                    fontSize={width < 700 ? `18px` : `24px`}
+                    fontWeight={`bold`}
+                    margin={`18px 0 28px`}
+                  >
+                    지하철 이용시
+                  </Text>
+                  <Text
+                    fontSize={width < 700 ? `15px` : `18px`}
+                    margin={width < 900 ? `15px 0` : `30px 0 14px`}
+                  >
+                    갑천역 ①번 출구 도보 12분
+                  </Text>
+                  <Text fontSize={width < 700 ? `15px` : `18px`}>
+                    월평역 ②번 출구 도보 15분
+                  </Text>
+                </Wrapper>
               </Wrapper>
-            </Wrapper>
-          </RsWrapper>
+            </RsWrapper>
+          </Wrapper>
         </WholeWrapper>
       </ClientLayout>
     </>
