@@ -249,7 +249,7 @@ const Dementia = () => {
                               borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                             >
                               <Wrapper
-                                width={`20%`}
+                                width={`30%`}
                                 bgColor={Theme.lightGrey4_C}
                                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
                                 height={`100%`}
@@ -258,14 +258,14 @@ const Dementia = () => {
                                 {result.degree}
                               </Wrapper>
                               <Wrapper
-                                width={`65%`}
+                                width={`70%`}
                                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
                                 height={`100%`}
                                 fontSize={`20px`}
                               >
                                 {result.passenger}
                               </Wrapper>
-                              <Wrapper
+                              {/* <Wrapper
                                 width={`15%`}
                                 bgColor={Theme.lightGrey4_C}
                                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
@@ -274,7 +274,7 @@ const Dementia = () => {
                                 fontWeight={`700`}
                               >
                                 {result.count}
-                              </Wrapper>
+                              </Wrapper> */}
                             </Wrapper>
                           );
                         }
