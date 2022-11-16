@@ -81,7 +81,7 @@ const Nursing = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 요양원</title>
+        <title>효인요양원 | 요양원</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

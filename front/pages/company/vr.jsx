@@ -25,7 +25,7 @@ const Vr = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 시설 3D 안내</title>
+        <title>효인요양원 | 시설 3D 안내</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

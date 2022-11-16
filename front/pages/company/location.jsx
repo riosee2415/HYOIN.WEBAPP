@@ -82,7 +82,7 @@ const Location = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 찾아오시는 길</title>
+        <title>효인요양원 | 찾아오시는 길</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
@@ -118,7 +118,7 @@ const Location = () => {
                       fontSize={width < 900 ? `25px` : `36px`}
                       fontWeight={`bold`}
                     >
-                      효인주야간노인복지센터
+                      효인요양원
                     </Text>
                     <Wrapper
                       dr={`row`}
@@ -229,7 +229,7 @@ const Location = () => {
                     fontSize={width < 900 ? `25px` : `36px`}
                     fontWeight={`bold`}
                   >
-                    효인주야간노인복지센터
+                    효인요양원
                   </Text>
                   <Wrapper
                     dr={`row`}

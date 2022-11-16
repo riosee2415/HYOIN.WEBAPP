@@ -133,7 +133,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 채용공고</title>
+        <title>효인요양원 | 채용공고</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

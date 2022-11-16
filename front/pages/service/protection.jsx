@@ -85,7 +85,7 @@ const Protection = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 주간 보호</title>
+        <title>효인요양원 | 주간 보호</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

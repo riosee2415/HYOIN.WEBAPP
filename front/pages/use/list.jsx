@@ -35,7 +35,7 @@ const List = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 이용현황</title>
+        <title>효인요양원 | 이용현황</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
