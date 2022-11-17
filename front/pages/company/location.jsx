@@ -24,53 +24,63 @@ const Location = () => {
   ////// HOOKS //////
   ////// REDUX //////
   ////// USEEFFECT //////
+
   useEffect(() => {
     const mapScript = document.createElement("script");
     mapScript.async = true;
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=b729b6cfc92f3b4f6b54eb2b918028d6&autoload=false`;
+    mapScript.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6j4egi6qtj`;
     document.head.appendChild(mapScript);
 
     mapScript.onload = () => {
-      kakao.maps.load(() => {
-        const mapContainer = document.getElementById("map");
-        const mapOption = {
-          center: new kakao.maps.LatLng(36.352492, 127.360686), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
-        };
-        const map = new kakao.maps.Map(mapContainer, mapOption);
+      const map = new naver.maps.Map("map", {
+        center: new naver.maps.LatLng(36.352492, 127.360686), // 지도 중심 좌표
+        scaleControl: true,
+        mapTypeControl: true,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: naver.maps.MapTypeControlStyle.BUTTON,
+          position: naver.maps.Position.TOP_LEFT,
+        },
+        zoomControl: true,
+        zoomControlOptions: {
+          style: naver.maps.ZoomControlStyle.SMALL,
+          position: naver.maps.Position.TOP_RIGHT,
+        },
+        zoom: 18,
+      });
 
-        // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
-        map.setZoomable(false);
+      // 마커가 표시될 위치입니다
+      let markerPosition = new naver.maps.LatLng(
+        36.35243456315784,
+        127.36069960393321
+      );
 
-        // 마커가 표시될 위치입니다
-        let markerPosition = new kakao.maps.LatLng(36.352492, 127.360686);
+      // 마커를 생성합니다
+      let marker = new naver.maps.Marker({
+        position: markerPosition,
+      });
 
-        // 마커를 생성합니다
-        let marker = new kakao.maps.Marker({
-          position: markerPosition,
-        });
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
+      // 커스텀 오버레이가 표시될 위치입니다 마커표시 위도 경도랑 다름 살짝 바꿔줘야함
+      let position = new naver.maps.LatLng(
+        36.35257408182409,
+        127.36000674059729
+      );
 
-        // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        let content =
-          '<div class="customoverlay">' +
-          '  <a href="http://kko.to/KTdw7pvqR" target="_blank">' +
-          '    <span class="title">대전광역시 서구 계룡로264번길 52</span>' +
-          "  </a>" +
-          "</div>";
-
-        // 커스텀 오버레이가 표시될 위치입니다
-        let position = new kakao.maps.LatLng(36.352492, 127.360686);
-
-        // 커스텀 오버레이를 생성합니다
-        let customOverlay = new kakao.maps.CustomOverlay({
-          map: map,
-          position: position,
-          content: content,
-          yAnchor: 1,
-        });
+      // 커스텀 오버레이를 생성합니다
+      let customOverlay = new naver.maps.Marker({
+        map: map,
+        position: position,
+        icon: {
+          content:
+            '<div class="customoverlay">' +
+            '  <a href="http://kko.to/KTdw7pvqR" target="_blank">' +
+            '    <span class="title">대전광역시 서구 계룡로264번길 52</span>' +
+            "  </a>" +
+            "</div>",
+        },
       });
     };
   }, []);
