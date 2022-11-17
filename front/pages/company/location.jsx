@@ -33,7 +33,7 @@ const Location = () => {
 
     mapScript.onload = () => {
       const map = new naver.maps.Map("map", {
-        center: new naver.maps.LatLng(36.352492, 127.360686), // 지도 중심 좌표
+        center: new naver.maps.LatLng(36.35243456315784, 127.36069960393321), // 지도 중심 좌표
         scaleControl: true,
         mapTypeControl: true,
         mapTypeControl: true,
