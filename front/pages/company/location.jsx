@@ -24,53 +24,63 @@ const Location = () => {
   ////// HOOKS //////
   ////// REDUX //////
   ////// USEEFFECT //////
+
   useEffect(() => {
     const mapScript = document.createElement("script");
     mapScript.async = true;
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=b729b6cfc92f3b4f6b54eb2b918028d6&autoload=false`;
+    mapScript.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6j4egi6qtj`;
     document.head.appendChild(mapScript);
 
     mapScript.onload = () => {
-      kakao.maps.load(() => {
-        const mapContainer = document.getElementById("map");
-        const mapOption = {
-          center: new kakao.maps.LatLng(36.352492, 127.360686), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
-        };
-        const map = new kakao.maps.Map(mapContainer, mapOption);
+      const map = new naver.maps.Map("map", {
+        center: new naver.maps.LatLng(36.35243456315784, 127.36069960393321), // 지도 중심 좌표
+        scaleControl: true,
+        mapTypeControl: true,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: naver.maps.MapTypeControlStyle.BUTTON,
+          position: naver.maps.Position.TOP_LEFT,
+        },
+        zoomControl: true,
+        zoomControlOptions: {
+          style: naver.maps.ZoomControlStyle.SMALL,
+          position: naver.maps.Position.TOP_RIGHT,
+        },
+        zoom: 18,
+      });
 
-        // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
-        map.setZoomable(false);
+      // 마커가 표시될 위치입니다
+      let markerPosition = new naver.maps.LatLng(
+        36.35243456315784,
+        127.36069960393321
+      );
 
-        // 마커가 표시될 위치입니다
-        let markerPosition = new kakao.maps.LatLng(36.352492, 127.360686);
+      // 마커를 생성합니다
+      let marker = new naver.maps.Marker({
+        position: markerPosition,
+      });
 
-        // 마커를 생성합니다
-        let marker = new kakao.maps.Marker({
-          position: markerPosition,
-        });
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
+      // 커스텀 오버레이가 표시될 위치입니다 마커표시 위도 경도랑 다름 살짝 바꿔줘야함
+      let position = new naver.maps.LatLng(
+        36.35257408182409,
+        127.36000674059729
+      );
 
-        // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        let content =
-          '<div class="customoverlay">' +
-          '  <a href="http://kko.to/KTdw7pvqR" target="_blank">' +
-          '    <span class="title">대전광역시 서구 계룡로264번길 52</span>' +
-          "  </a>" +
-          "</div>";
-
-        // 커스텀 오버레이가 표시될 위치입니다
-        let position = new kakao.maps.LatLng(36.352492, 127.360686);
-
-        // 커스텀 오버레이를 생성합니다
-        let customOverlay = new kakao.maps.CustomOverlay({
-          map: map,
-          position: position,
-          content: content,
-          yAnchor: 1,
-        });
+      // 커스텀 오버레이를 생성합니다
+      let customOverlay = new naver.maps.Marker({
+        map: map,
+        position: position,
+        icon: {
+          content:
+            '<div class="customoverlay">' +
+            '  <a href="http://kko.to/KTdw7pvqR" target="_blank">' +
+            '    <span class="title">대전광역시 서구 계룡로264번길 52</span>' +
+            "  </a>" +
+            "</div>",
+        },
       });
     };
   }, []);
@@ -82,7 +92,7 @@ const Location = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 찾아오시는 길</title>
+        <title>효인요양원 | 찾아오시는 길</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
@@ -118,7 +128,7 @@ const Location = () => {
                       fontSize={width < 900 ? `25px` : `36px`}
                       fontWeight={`bold`}
                     >
-                      효인주야간노인복지센터
+                      효인요양원
                     </Text>
                     <Wrapper
                       dr={`row`}
@@ -159,18 +169,23 @@ const Location = () => {
                       </ATag>
                     </Wrapper>
                     <Wrapper dr={`row`} ju={`flex-start`} margin={`30px 0 0`}>
-                      <Wrapper
-                        width={`51px`}
-                        height={`51px`}
-                        radius={`5px`}
-                        bgColor={Theme.subTheme6_C}
+                      <a
+                        href={`https://blog.naver.com/neowb1130`}
+                        target={`_blank`}
                       >
-                        <Image
-                          alt="band"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
-                          width={`27px`}
-                        />
-                      </Wrapper>
+                        <Wrapper
+                          width={`51px`}
+                          height={`51px`}
+                          radius={`5px`}
+                          bgColor={Theme.subTheme6_C}
+                        >
+                          <Image
+                            alt="band"
+                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
+                            width={`27px`}
+                          />
+                        </Wrapper>
+                      </a>
                       <Wrapper
                         width={`51px`}
                         height={`51px`}
@@ -224,7 +239,7 @@ const Location = () => {
                     fontSize={width < 900 ? `25px` : `36px`}
                     fontWeight={`bold`}
                   >
-                    효인주야간노인복지센터
+                    효인요양원
                   </Text>
                   <Wrapper
                     dr={`row`}
@@ -265,18 +280,23 @@ const Location = () => {
                     </ATag>
                   </Wrapper>
                   <Wrapper dr={`row`} ju={`flex-start`} margin={`30px 0 0`}>
-                    <Wrapper
-                      width={`51px`}
-                      height={`51px`}
-                      radius={`5px`}
-                      bgColor={Theme.subTheme6_C}
+                    <a
+                      href={`https://blog.naver.com/neowb1130`}
+                      target={`_blank`}
                     >
-                      <Image
-                        alt="band"
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
-                        width={`27px`}
-                      />
-                    </Wrapper>
+                      <Wrapper
+                        width={`51px`}
+                        height={`51px`}
+                        radius={`5px`}
+                        bgColor={Theme.subTheme6_C}
+                      >
+                        <Image
+                          alt="band"
+                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
+                          width={`27px`}
+                        />
+                      </Wrapper>
+                    </a>
                     <Wrapper
                       width={`51px`}
                       height={`51px`}
@@ -297,8 +317,8 @@ const Location = () => {
                       bgColor={Theme.subTheme6_C}
                     >
                       <Image
-                        alt="face"
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_face-book.png`}
+                        alt="band"
+                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
                         width={`27px`}
                       />
                     </Wrapper>
@@ -308,103 +328,99 @@ const Location = () => {
             </Wrapper>
           )}
 
-          <RsWrapper padding={`80px 0`} al={`flex-start`}>
-            <Text
-              fontWeight={`bold`}
-              fontSize={width < 700 ? `15px` : `18px`}
-              color={Theme.basicTheme_C}
-            >
-              교통편
-            </Text>
-            <Wrapper dr={`row`} al={`flex-start`} margin={`40px 0 0`}>
-              <Wrapper
-                width={width < 900 ? `100%` : `calc(100% / 2)`}
-                al={`flex-start`}
+          <Wrapper bgColor={Theme.subTheme14_C}>
+            <RsWrapper padding={`80px 0`} al={`flex-start`}>
+              <Text
+                fontWeight={`bold`}
+                fontSize={width < 700 ? `18px` : `30px`}
+                bgColor={Theme.subTheme3_C}
+                color={Theme.white_C}
+                padding={`0 20px`}
               >
-                <Image
-                  alt="bus icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_bus.png`}
-                  width={`32px`}
-                />
-                <Text
-                  fontSize={width < 700 ? `18px` : `24px`}
-                  fontWeight={`bold`}
-                  margin={`18px 0 28px`}
+                교통편
+              </Text>
+              <Wrapper dr={`row`} al={`flex-start`} margin={`40px 0 0`}>
+                <Wrapper
+                  width={width < 900 ? `100%` : `calc(100% / 2)`}
+                  al={`flex-start`}
                 >
-                  버스 이용시
-                </Text>
-                <Wrapper dr={`row`} ju={`space-between`}>
-                  <Wrapper width={`auto`} al={`flex-start`}>
-                    <Text
-                      fontSize={`20px`}
-                      fontWeight={`bold`}
-                      color={Theme.basicTheme_C}
-                    >
-                      대전일보사 (32750) 129m
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `15px` : `18px`}
-                      margin={`16px 0 10px`}
-                    >
-                      일반 101, 103, 105, 107, 116, 119, 312
-                    </Text>
-                    <Text fontSize={width < 700 ? `15px` : `18px`}>
-                      급행 3(급, 원내동 - 정부청사)
-                    </Text>
-                  </Wrapper>
-                  <Wrapper
-                    width={`auto`}
-                    al={`flex-start`}
-                    margin={width < 900 && `15px 0 0`}
+                  <Image
+                    alt="bus icon"
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_bus.png`}
+                    width={`32px`}
+                  />
+                  <Text
+                    fontSize={width < 700 ? `18px` : `24px`}
+                    fontWeight={`bold`}
+                    margin={`18px 0 28px`}
                   >
-                    <Text
-                      fontSize={`20px`}
-                      fontWeight={`bold`}
-                      color={Theme.basicTheme_C}
+                    버스 이용시
+                  </Text>
+                  <Wrapper dr={`row`} ju={`space-between`}>
+                    <Wrapper width={`auto`} al={`flex-start`}>
+                      <Text fontSize={`20px`} fontWeight={`bold`}>
+                        대전일보사 (32750) 129m
+                      </Text>
+                      <Text
+                        fontSize={width < 700 ? `15px` : `18px`}
+                        margin={`16px 0 10px`}
+                      >
+                        일반 101, 103, 105, 107, 116, 119, 312
+                      </Text>
+                      <Text fontSize={width < 700 ? `15px` : `18px`}>
+                        급행 3(급, 원내동 - 정부청사)
+                      </Text>
+                    </Wrapper>
+                    <Wrapper
+                      width={`auto`}
+                      al={`flex-start`}
+                      margin={width < 900 && `15px 0 0`}
                     >
-                      대전일보사 (32760) 215m
-                    </Text>
-                    <Text
-                      fontSize={width < 700 ? `15px` : `18px`}
-                      margin={`16px 0 10px`}
-                    >
-                      일반 101, 103, 105, 107, 116, 119, 312
-                    </Text>
-                    <Text fontSize={width < 700 ? `15px` : `18px`}>
-                      급행 3(급, 원내동 - 정부청사)
-                    </Text>
+                      <Text fontSize={`20px`} fontWeight={`bold`}>
+                        대전일보사 (32760) 215m
+                      </Text>
+                      <Text
+                        fontSize={width < 700 ? `15px` : `18px`}
+                        margin={`16px 0 10px`}
+                      >
+                        일반 101, 103, 105, 107, 116, 119, 312
+                      </Text>
+                      <Text fontSize={width < 700 ? `15px` : `18px`}>
+                        급행 3(급, 원내동 - 정부청사)
+                      </Text>
+                    </Wrapper>
                   </Wrapper>
                 </Wrapper>
-              </Wrapper>
-              <Wrapper
-                width={width < 900 ? `100%` : `calc(100% / 2)`}
-                al={`flex-start`}
-                padding={width < 900 ? `30px 0 0` : `0 0 0 110px`}
-              >
-                <Image
-                  alt="bus icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_subway.png`}
-                  width={`32px`}
-                />
-                <Text
-                  fontSize={width < 700 ? `18px` : `24px`}
-                  fontWeight={`bold`}
-                  margin={`18px 0 28px`}
+                <Wrapper
+                  width={width < 900 ? `100%` : `calc(100% / 2)`}
+                  al={`flex-start`}
+                  padding={width < 900 ? `30px 0 0` : `0 0 0 110px`}
                 >
-                  지하철 이용시
-                </Text>
-                <Text
-                  fontSize={width < 700 ? `15px` : `18px`}
-                  margin={width < 900 ? `15px 0` : `30px 0 14px`}
-                >
-                  갑천역 ①번 출구 도보 12분
-                </Text>
-                <Text fontSize={width < 700 ? `15px` : `18px`}>
-                  월평역 ②번 출구 도보 15분
-                </Text>
+                  <Image
+                    alt="bus icon"
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_subway.png`}
+                    width={`32px`}
+                  />
+                  <Text
+                    fontSize={width < 700 ? `18px` : `24px`}
+                    fontWeight={`bold`}
+                    margin={`18px 0 28px`}
+                  >
+                    지하철 이용시
+                  </Text>
+                  <Text
+                    fontSize={width < 700 ? `15px` : `18px`}
+                    margin={width < 900 ? `15px 0` : `30px 0 14px`}
+                  >
+                    갑천역 ①번 출구 도보 12분
+                  </Text>
+                  <Text fontSize={width < 700 ? `15px` : `18px`}>
+                    월평역 ②번 출구 도보 15분
+                  </Text>
+                </Wrapper>
               </Wrapper>
-            </Wrapper>
-          </RsWrapper>
+            </RsWrapper>
+          </Wrapper>
         </WholeWrapper>
       </ClientLayout>
     </>

@@ -100,7 +100,7 @@ const DetailRecruit = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 채용공고</title>
+        <title>효인요양원 | 채용공고</title>
       </Head>
 
       <ClientLayout>
@@ -229,7 +229,7 @@ const DetailRecruit = () => {
                   src={recruitDetail && recruitDetail.imagePath}
                 />
 
-                {recruitDetail && recruitDetail.content}
+                <Text>{recruitDetail && recruitDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 

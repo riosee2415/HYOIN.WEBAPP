@@ -547,7 +547,7 @@ const List = ({ router }) => {
           </Wrapper>
         </Wrapper>
 
-        <Wrapper dr={`row`} margin={`0 0 20px`}>
+        {/* <Wrapper dr={`row`} margin={`0 0 20px`}>
           <Wrapper
             borderTop={`1px solid ${Theme.grey2_C}`}
             border={`1px solid ${Theme.lightGrey2_C}`}
@@ -877,7 +877,7 @@ const List = ({ router }) => {
               </Button>
             </Wrapper>
           </Wrapper>
-        </Wrapper>
+        </Wrapper> */}
 
         <Wrapper dr={`row`} margin={`0 0 20px`}>
           <Wrapper

@@ -94,7 +94,7 @@ const DetailWait = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 대기자명단</title>
+        <title>효인요양원 | 대기자명단</title>
       </Head>
 
       <ClientLayout>
@@ -197,7 +197,7 @@ const DetailWait = () => {
                   src={waitDetail && waitDetail.imagePath}
                 />
 
-                {waitDetail && waitDetail.content}
+                <Text>{waitDetail && waitDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 

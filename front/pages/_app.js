@@ -49,25 +49,41 @@ const Fourleaf = ({ Component }) => {
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
       <Head>
-        <title>효인주야간노인복지센터 | administrator</title>
+        <title>효인요양원 | administrator</title>
 
         <meta name="author" content="4LEAF SOFTWARE <4leaf.ysh@gmail.com>" />
         {/* <!-- OG tag  --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="[[**4LEAF GEAR SAMPLE**]]" />
-        <meta property="og:site_name" content="[[**4LEAF GEAR SAMPLE**]]" />
-        <meta property="og:url" content="https://www.sample.com/" />
+        <meta property="og:title" content="효인요양원" />
+        <meta property="og:site_name" content="효인요양원" />
+        <meta property="og:url" content="https://www.hyoinnursinghome.co.kr/" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="400" />
         <meta property="og:image" content="./og_img.png" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://www.sample.com" />
+        <link rel="canonical" href="https://www.hyoinnursinghome.co.kr" />
 
-        <meta name="keywords" content="[[**4LEAF GEAR SAMPLE**]]" />
-        <meta property="og:keywords" content="[[**4LEAF GEAR SAMPLE**]]" />
+        <meta
+          name="keywords"
+          content="효인요양원, 효인주간보호, 효인방문요양,, 대전요양원, 대전주간보호, 대전방문요양, 서구요양원, 유성구요양원, 충남요양원, 세종요양원, 계룡요양원, 신축요양원, 신축주간보호, 신축방문요양, 대전효인요양원, 대전효인주간보호, 대전효인방문요양, 효인요양원"
+        />
+        <meta
+          property="og:keywords"
+          content="효인요양원, 효인주간보호, 효인방문요양,, 대전요양원, 대전주간보호, 대전방문요양, 서구요양원, 유성구요양원, 충남요양원, 세종요양원, 계룡요양원, 신축요양원, 신축주간보호, 신축방문요양, 대전효인요양원, 대전효인주간보호, 대전효인방문요양, 효인요양원"
+        />
 
-        <meta name="description" content={"[[**4LEAF GEAR SAMPLE**]]"} />
-        <meta property="og:description" content={"[[**4LEAF GEAR SAMPLE**]]"} />
+        <meta
+          name="description"
+          content={
+            "효를 실천하는 사람들, 효인요양원/주간보호/방문요양, 1500평 신축 단독건물, 전문인력 24시간 상주, 대전 시내권, 도심 속 자연과 함께하는 노후생활"
+          }
+        />
+        <meta
+          property="og:description"
+          content={
+            "효를 실천하는 사람들, 효인요양원/주간보호/방문요양, 1500평 신축 단독건물, 전문인력 24시간 상주, 대전 시내권, 도심 속 자연과 함께하는 노후생활"
+          }
+        />
 
         {/* 프리텐다드 폰트 */}
         <link

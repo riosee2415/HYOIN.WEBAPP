@@ -18,6 +18,8 @@ import programSaga from "./program";
 import admissionSaga from "./admission";
 import menuSaga from "./menu";
 import moveServiceSaga from "./moveService";
+import weekMenuSaga from "./weekMenu";
+import weekProgramSaga from "./weekProgram";
 //
 import axios from "axios";
 import backURL from "../config/config";
@@ -46,5 +48,7 @@ export default function* rootSaga() {
     fork(admissionSaga),
     fork(menuSaga),
     fork(moveServiceSaga),
+    fork(weekMenuSaga),
+    fork(weekProgramSaga),
   ]);
 }

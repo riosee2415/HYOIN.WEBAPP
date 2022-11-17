@@ -25,16 +25,16 @@ const Vr = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 시설 3D 안내</title>
+        <title>효인요양원 | 시설 3D 안내</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
-          <Wrapper height={`100vh`}>
+          <Wrapper height={width < 900 ? `500px` : `100vh`}>
             <iframe
               width={`100%`}
               height={`100%`}
               style={{ border: `none` }}
-              src={"http://localhost:3030/"}
+              src={"https://vr.hyoinnursinghome.co.kr/"}
               allowfullscreen="allowfullscreen"
               mozallowfullscreen="mozallowfullscreen"
               msallowfullscreen="msallowfullscreen"

@@ -93,7 +93,7 @@ const DetailNotice = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 공지사항</title>
+        <title>효인요양원 | 공지사항</title>
       </Head>
 
       <ClientLayout>
@@ -196,7 +196,7 @@ const DetailNotice = () => {
                   src={noticeDetail && noticeDetail.imagePath}
                 />
 
-                {noticeDetail && noticeDetail.content}
+                <Text>{noticeDetail && noticeDetail.content}</Text>
               </Wrapper>
             </Wrapper>
 

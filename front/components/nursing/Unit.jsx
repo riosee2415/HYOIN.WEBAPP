@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  ATag,
-  Text,
-  Wrapper,
-  Image,
-  RsWrapper,
-  SpanText,
-} from "../commonComponents";
+import { Text, Wrapper, Image, SpanText } from "../commonComponents";
 import styled from "styled-components";
 import Theme from "../Theme";
 import useWidth from "../../hooks/useWidth";

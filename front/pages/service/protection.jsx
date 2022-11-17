@@ -18,11 +18,13 @@ import Theme from "../../components/Theme";
 import Dementia from "../../components/protection/Dementia";
 import { useRouter } from "next/router";
 import Monthly from "../../components/nursing/Monthly";
-import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
+import { WEEK_PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/weekProgram";
 import Normal from "../../components/protection/Normal";
 import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import WeekMenu from "../../components/nursing/WeekMenu";
+import DementiaSpecial from "../../components/protection/DementiaSpecial";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -84,27 +86,30 @@ const Protection = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 주간 보호</title>
+        <title>효인요양원 | 주간보호</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
           <SubBanner />
           <RsWrapper>
-            <CommonTitle>주간 보호</CommonTitle>
+            <CommonTitle>주간보호</CommonTitle>
 
             <Wrapper dr={`row`}>
               <Tab
                 onClick={() => pageChangeToggle(1)}
-                isActive={router && router.query.type === "1"}
+                isActive={
+                  (router && router.query.type === "1") ||
+                  router.query.type === undefined
+                }
               >
                 일반형
               </Tab>
-              <Tab
+              {/* <Tab
                 onClick={() => pageChangeToggle(2)}
                 isActive={router && router.query.type === "2"}
               >
                 치매 특화형
-              </Tab>
+              </Tab> */}
               <Tab
                 onClick={() => pageChangeToggle(3)}
                 isActive={router && router.query.type === "3"}
@@ -117,18 +122,24 @@ const Protection = () => {
               >
                 이동서비스 시간표
               </Tab>
+              <Tab
+                onClick={() => pageChangeToggle(5)}
+                isActive={router && router.query.type === "5"}
+              >
+                주간보호 식단표
+              </Tab>
             </Wrapper>
 
             {router && router.query.type === "1" ? (
               <Normal />
-            ) : router.query.type === "2" ? (
-              <Dementia />
-            ) : router.query.type === "3" ? (
+            ) : // ) : router.query.type === "2" ? (
+            //   <DementiaSpecial />
+            router.query.type === "3" ? (
               <Monthly />
             ) : router.query.type === "4" ? (
-              <Dementia
-           
-              />
+              <Dementia />
+            ) : router.query.type === "5" ? (
+              <WeekMenu />
             ) : (
               <Normal />
             )}
@@ -155,10 +166,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     context.store.dispatch({
-      type: PROGRAM_WEEK_LIST_REQUEST,
+      type: WEEK_PROGRAM_WEEK_LIST_REQUEST,
     });
-
-
 
     // 구현부 종료
     context.store.dispatch(END);

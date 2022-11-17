@@ -92,7 +92,7 @@ const Facility = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 시설 개요</title>
+        <title>효인요양원 | 시설 개요</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
@@ -120,6 +120,44 @@ const Facility = () => {
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`space-between`}>
+              <Wrapper
+                width={width < 1280 ? `100%` : `50%`}
+                padding={width < 1280 ? `0 0 20px` : `0 60px 0 0`}
+                al={`flex-start`}
+              >
+                <Image
+                  alt="image"
+                  radius={`10px`}
+                  margin={`0 0 20px`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_topview.png`}
+                />
+                <ListText>
+                  <SpanText fontWeight={`bold`}>위치 :</SpanText>
+                  &nbsp;대전광역시 서구 계룡로264번길 52(월평동, 효인요양원)
+                </ListText>
+                <ListText>
+                  <SpanText fontWeight={`bold`}>제공서비스 :</SpanText>
+                  &nbsp;입소시설(요양원) 및 재가시설(주간보호, 방문요양)
+                </ListText>
+                <ListText>
+                  <Text>
+                    <SpanText fontWeight={`bold`}>요양원 입소 인원 :</SpanText>
+                    &nbsp;정원 99인, 현인원 53인
+                  </Text>
+                </ListText>
+                <ListText>
+                  <Text>
+                    <SpanText fontWeight={`bold`}>
+                      주간보호 입소 인원 :
+                    </SpanText>
+                    &nbsp;정원 61인
+                  </Text>
+                </ListText>
+                <ListText>
+                  <SpanText fontWeight={`bold`}>규모 :</SpanText>
+                  &nbsp;지상 5층(대지 2,467m^2 / 건물면적 5,023,62m^2)
+                </ListText>
+              </Wrapper>
               <Wrapper width={width < 1280 ? `100%` : `50%`}>
                 <Wrapper
                   dr={`row`}
@@ -269,44 +307,6 @@ const Facility = () => {
                   </Wrapper>
                 </Wrapper>
               </Wrapper>
-              <Wrapper
-                width={width < 1280 ? `100%` : `50%`}
-                padding={width < 1280 ? `20px 0 0` : `0 0 0 60px`}
-                al={`flex-start`}
-              >
-                <Image
-                  alt="image"
-                  radius={`10px`}
-                  margin={`0 0 20px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_topview.png`}
-                />
-                <ListText>
-                  <SpanText fontWeight={`bold`}>위치 :</SpanText>
-                  &nbsp;대전광역시 서구 계룡로264번길 52(월평동, 효인요양원)
-                </ListText>
-                <ListText>
-                  <SpanText fontWeight={`bold`}>제공서비스 :</SpanText>
-                  &nbsp;입소시설(요양원) 및 재가시설(주간보호, 방문요양)
-                </ListText>
-                <ListText>
-                  <Text>
-                    <SpanText fontWeight={`bold`}>요양원 입소 인원 :</SpanText>
-                    &nbsp;정원 99인, 현인원 53인
-                  </Text>
-                </ListText>
-                <ListText>
-                  <Text>
-                    <SpanText fontWeight={`bold`}>
-                      주간보호 입소 인원 :
-                    </SpanText>
-                    &nbsp;정원 61인
-                  </Text>
-                </ListText>
-                <ListText>
-                  <SpanText fontWeight={`bold`}>규모 :</SpanText>
-                  &nbsp;지상 5층(대지 2,467m^2 / 건물면적 5,023,62m^2)
-                </ListText>
-              </Wrapper>
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`100px 0 40px`}>
@@ -332,19 +332,19 @@ const Facility = () => {
               <Btn onClick={() => setCurrentTab(0)} isActive={currentTab === 0}>
                 1F
               </Btn>
+              <Btn onClick={() => setCurrentTab(4)} isActive={currentTab === 4}>
+                주간보호
+              </Btn>
               <Btn onClick={() => setCurrentTab(1)} isActive={currentTab === 1}>
-                2F 로비
+                2F
               </Btn>
 
               <Btn onClick={() => setCurrentTab(2)} isActive={currentTab === 2}>
-                4F 로비
+                4F
               </Btn>
 
               <Btn onClick={() => setCurrentTab(3)} isActive={currentTab === 3}>
                 야외시설
-              </Btn>
-              <Btn onClick={() => setCurrentTab(4)} isActive={currentTab === 4}>
-                주간보호
               </Btn>
             </Wrapper>
 
@@ -457,162 +457,6 @@ const Facility = () => {
                   fontSize={`22px`}
                 >
                   효인 요양원 주차장
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                radius={`10px`}
-                border={`1px solid ${Theme.lightGrey2_C}`}
-                width={
-                  width < 900
-                    ? width < 700
-                      ? `100%`
-                      : `calc(100% / 2.1)`
-                    : `calc(100% / 3.1)`
-                }
-                margin={`0 0 40px`}
-              >
-                <Image
-                  alt="image"
-                  height={`215px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/%E1%84%85%E1%85%A9%E1%84%87%E1%85%B5.png`}
-                  radius={`10px`}
-                />
-                <Wrapper
-                  padding={`35px 16px`}
-                  al={`flex-start`}
-                  fontSize={`22px`}
-                >
-                  효인 요양원 로비
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                radius={`10px`}
-                border={`1px solid ${Theme.lightGrey2_C}`}
-                width={
-                  width < 900
-                    ? width < 700
-                      ? `100%`
-                      : `calc(100% / 2.1)`
-                    : `calc(100% / 3.1)`
-                }
-                margin={`0 0 40px`}
-              >
-                <Image
-                  alt="image"
-                  height={`215px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/%E1%84%8F%E1%85%A1%E1%84%91%E1%85%A61.png`}
-                  radius={`10px`}
-                />
-                <Wrapper
-                  padding={`35px 16px`}
-                  al={`flex-start`}
-                  fontSize={`22px`}
-                >
-                  효인 요양원 카페1
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                radius={`10px`}
-                border={`1px solid ${Theme.lightGrey2_C}`}
-                width={
-                  width < 900
-                    ? width < 700
-                      ? `100%`
-                      : `calc(100% / 2.1)`
-                    : `calc(100% / 3.1)`
-                }
-                margin={`0 0 40px`}
-              >
-                <Image
-                  alt="image"
-                  height={`215px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/%E1%84%8F%E1%85%A1%E1%84%91%E1%85%A62.png`}
-                  radius={`10px`}
-                />
-                <Wrapper
-                  padding={`35px 16px`}
-                  al={`flex-start`}
-                  fontSize={`22px`}
-                >
-                  효인 요양원 카페2
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                radius={`10px`}
-                border={`1px solid ${Theme.lightGrey2_C}`}
-                margin={`0 0 40px`}
-                width={
-                  width < 900
-                    ? width < 700
-                      ? `100%`
-                      : `calc(100% / 2.1)`
-                    : `calc(100% / 3.1)`
-                }
-              >
-                <Image
-                  alt="image"
-                  height={`210px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/%E1%84%80%E1%85%A1%E1%86%BC%E1%84%83%E1%85%A1%E1%86%BC.png`}
-                  radius={`10px`}
-                />
-                <Wrapper
-                  padding={`35px 16px`}
-                  al={`flex-start`}
-                  fontSize={`22px`}
-                >
-                  효인 요양원 강당
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                radius={`10px`}
-                border={`1px solid ${Theme.lightGrey2_C}`}
-                margin={`0 0 40px`}
-                width={
-                  width < 900
-                    ? width < 700
-                      ? `100%`
-                      : `calc(100% / 2.1)`
-                    : `calc(100% / 3.1)`
-                }
-              >
-                <Image
-                  alt="image"
-                  height={`210px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/%E1%84%8C%E1%85%AE%E1%84%80%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A9%E1%84%92%E1%85%A9+%E1%84%80%E1%85%A1%E1%86%BC%E1%84%83%E1%85%A1%E1%86%BC.png`}
-                  radius={`10px`}
-                />
-                <Wrapper
-                  padding={`35px 16px`}
-                  al={`flex-start`}
-                  fontSize={`22px`}
-                >
-                  효인 주간보호 강당
-                </Wrapper>
-              </Wrapper>
-              <Wrapper
-                radius={`10px`}
-                border={`1px solid ${Theme.lightGrey2_C}`}
-                margin={`0 0 40px`}
-                width={
-                  width < 900
-                    ? width < 700
-                      ? `100%`
-                      : `calc(100% / 2.1)`
-                    : `calc(100% / 3.1)`
-                }
-              >
-                <Image
-                  alt="image"
-                  height={`210px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/%E1%84%8C%E1%85%AE%E1%84%80%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A9%E1%84%92%E1%85%A9+102%E1%84%92%E1%85%A9.png`}
-                  radius={`10px`}
-                />
-                <Wrapper
-                  padding={`35px 16px`}
-                  al={`flex-start`}
-                  fontSize={`22px`}
-                >
-                  효인 주간보호
                 </Wrapper>
               </Wrapper>
             </Wrapper>

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PROGRAM_LIST_REQUEST } from "../../reducers/program";
+import { WEEK_PROGRAM_LIST_REQUEST } from "../../reducers/weekProgram";
 import { Wrapper, Text, Image, CommonButton } from "../commonComponents";
 import moment from "moment";
 import { Calendar, Empty, Modal } from "antd";
@@ -62,7 +62,7 @@ const WordBreakText = styled(Text)`
 
 const Monthly = () => {
   ////// GOLBAL STATE //////
-  const { programList, week } = useSelector((state) => state.program);
+  const { weekProgramList, week } = useSelector((state) => state.weekProgram);
 
   ////// HOOKS //////
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ const Monthly = () => {
 
   useEffect(() => {
     dispatch({
-      type: PROGRAM_LIST_REQUEST,
+      type: WEEK_PROGRAM_LIST_REQUEST,
       data: {
         searchMonth: moment().format("YYYY-MM"),
       },
@@ -146,8 +146,8 @@ const Monthly = () => {
           >
             <Wrapper height={`auto`}>
               {/* LIST START */}
-              {programList &&
-                programList
+              {weekProgramList &&
+                weekProgramList
                   .filter(
                     (data) =>
                       data.viewFrontSpecificDate === value.format("YYYY-MM-DD")
@@ -195,7 +195,7 @@ const Monthly = () => {
         </Wrapper>
       );
     },
-    [programList]
+    [weekProgramList]
   );
 
   return (
@@ -321,8 +321,8 @@ const Monthly = () => {
                     >
                       <Wrapper height={`auto`}>
                         {/* LIST START */}
-                        {programList &&
-                        programList.filter(
+                        {weekProgramList &&
+                        weekProgramList.filter(
                           (data) =>
                             data.viewFrontSpecificDate ===
                             moment(value[1]).format("YYYY-MM-DD")
@@ -334,7 +334,7 @@ const Monthly = () => {
                             />
                           </Wrapper>
                         ) : (
-                          programList
+                          weekProgramList
                             .filter(
                               (data) =>
                                 data.viewFrontSpecificDate ===

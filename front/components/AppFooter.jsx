@@ -73,7 +73,7 @@ const AppFooter = () => {
             <SpanText fontSize={`10px`} margin={`0 10px`}>
               |
             </SpanText>
-            <Text fontSize={`15px`}>서비스 급여 종류 : 주야간보호센터</Text>
+            <Text fontSize={`15px`}>서비스 급여 종류 : 요양원</Text>
           </Wrapper>
 
           <Wrapper
@@ -81,18 +81,20 @@ const AppFooter = () => {
             width={width < 900 ? `100%` : `auto`}
             margin={width < 900 && `15px 0 0`}
           >
-            <Wrapper
-              width={`27px`}
-              height={`27px`}
-              radius={`5px`}
-              bgColor={Theme.darkGrey_C}
-            >
-              <Image
-                width={`14px`}
-                alt="band"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
-              />
-            </Wrapper>
+            <a href={`https://blog.naver.com/neowb1130`} target={`_blank`}>
+              <Wrapper
+                width={`27px`}
+                height={`27px`}
+                radius={`5px`}
+                bgColor={Theme.darkGrey_C}
+              >
+                <Image
+                  width={`14px`}
+                  alt="blog"
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
+                />
+              </Wrapper>
+            </a>
             <Wrapper
               width={`27px`}
               height={`27px`}
@@ -110,12 +112,13 @@ const AppFooter = () => {
               width={`27px`}
               height={`27px`}
               radius={`5px`}
+              margin={`0 13px 0 0`}
               bgColor={Theme.darkGrey_C}
             >
               <Image
-                width={`14px`}
-                alt="face"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_face-book.png`}
+                width={`17px`}
+                alt="band"
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
               />
             </Wrapper>
           </Wrapper>
@@ -171,7 +174,12 @@ const AppFooter = () => {
                   <Text
                     fontSize={width < 800 && `12px`}
                     lineHeight={width < 900 && `2`}
-                  >{`${companys[2].name} : ${companys[2].value}`}</Text>
+                    isHover
+                  >
+                    <a
+                      href={`tel:0425227118`}
+                    >{`${companys[2].name} : ${companys[2].value}`}</a>
+                  </Text>
                 )}
                 <SpanText fontSize={`10px`} margin={`0 10px`}>
                   |
@@ -180,27 +188,29 @@ const AppFooter = () => {
                   <Text
                     fontSize={width < 800 && `12px`}
                     lineHeight={width < 900 && `2`}
-                  >{`${companys[3].name} : ${companys[3].value}`}</Text>
+                  >
+                    {`${companys[3].name} : ${companys[3].value}`}
+                  </Text>
                 )}
               </Wrapper>
               <Text
                 margin={width < 900 ? `10px 0 30px` : `10px 0 0`}
                 fontSize={width < 800 && `14px`}
               >
-                Copyright © 효인주야간노인복지센터 All rights reserved.
+                Copyright © 효인요양원 All rights reserved.
               </Text>
             </Wrapper>
             <Wrapper width={`auto`} dr={`row`}>
               <Image
                 alt="logo"
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
-                width={`62px`}
+                width={`120px`}
                 margin={`0 30px 0 0`}
               />
               <Image
                 alt="logo"
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_neo.png`}
-                width={`190px`}
+                width={`60px`}
               />
             </Wrapper>
           </Wrapper>
@@ -216,7 +226,7 @@ const AppFooter = () => {
       >
         <Wrapper>
           <pre>
-            {`효인주야간노인복지센터는 (이하 "기관") 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
+            {`효인요양원는 (이하 "기관") 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
 기관는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
 기관는 개인정보처리방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.
 
@@ -336,10 +346,10 @@ const AppFooter = () => {
 기관는 해킹이나 컴퓨터 바이러스 등에 의해 회원의 개인정보가 유출되거나 훼손되는 것을 막기 위해 최선을 다하고 있습니다. 개인정보의 훼손에 대비해서 자료를 수시로 백업하고 있고, 최신 백신프로그램을 이용하여 이용자들의 개인정보나 자료가 누출되거나 손상되지 않도록 방지하고 있으며, 암호화통신 등을 통하여 네트워크상에서 개인정보를 안전하게 전송할 수 있도록 하고 있습니다. 그리고 침입차단시스템을 이용하여 외부로부터의 무단 접근을 통제하고 있으며, 기타 시스템적으로 보안성을 확보하기 위한 가능한 모든 기술적 장치를 갖추려 노력하고 있습니다.
 
 다. 취급 직원의 최소화 및 교육
-기관의 개인정보관련 취급 직원은 담당자에 한정시키고 있고 이를 위한 별도의 비밀번호를 부여하여 정기적으로 갱신하고 있으며, 담당자에 대한 수시 교육을 통하여 효인주야간노인복지센터 의 개인정보처리방침의 준수를 항상 강조하고 있습니다.
+기관의 개인정보관련 취급 직원은 담당자에 한정시키고 있고 이를 위한 별도의 비밀번호를 부여하여 정기적으로 갱신하고 있으며, 담당자에 대한 수시 교육을 통하여 효인요양원 의 개인정보처리방침의 준수를 항상 강조하고 있습니다.
 
 라. 개인정보보호전담기구의 운영
-그리고 사내 개인정보보호전담기구 등을 통하여 효인주야간노인복지센터 의 개인정보처리방침의 이행사항 및 담당자의 준수여부를 확인하여 문제가 발견될 경우 즉시 수정하고 바로 잡을 수 있도록 노력하고 있습니다.
+그리고 사내 개인정보보호전담기구 등을 통하여 효인요양원 의 개인정보처리방침의 이행사항 및 담당자의 준수여부를 확인하여 문제가 발견될 경우 즉시 수정하고 바로 잡을 수 있도록 노력하고 있습니다.
 단, 이용자 본인의 부주의나 인터넷상의 문제로 ID, 비밀번호, 생년월일 등 개인정보가 유출되어 발생한 문제에 대해 기관는 일체의 책임을 지지 않습니다.
 
 마. 정기적인 자체 감사 실시
@@ -360,7 +370,7 @@ const AppFooter = () => {
 - 전화 : 042-522-7118
 - 이메일 : neowb1130@naver.com
 
-- 고객서비스 담당부서 : 효인주야간노인복지센터
+- 고객서비스 담당부서 : 효인요양원
 - 전화 : 042-522-7118
 - 이메일 : neowb1130@naver.com
 

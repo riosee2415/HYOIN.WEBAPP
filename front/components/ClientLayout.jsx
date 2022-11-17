@@ -1,14 +1,17 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Row, Col, Drawer } from "antd";
 import Link from "next/link";
-import { withResizeDetector } from "react-resize-detector";
-import { AlignRightOutlined } from "@ant-design/icons";
 import AppHeader from "./AppHeader";
 import AppFooter from "./AppFooter";
+import { Image, Text, Wrapper } from "./commonComponents";
+import Theme from "./Theme";
+import useWidth from "../hooks/useWidth";
 
-const ClientLayout = ({ children, width }) => {
+const ClientLayout = ({ children }) => {
+  const width = useWidth();
+
   return (
     <section>
       {/* HEADER */}
@@ -33,7 +36,61 @@ const ClientLayout = ({ children, width }) => {
       {/* content */}
       <Row>
         <Col span={0}>LEFT</Col>
-        <Col span={24}>{children}</Col>
+        <Col span={24}>
+          {children}
+          <Wrapper
+            width={`auto`}
+            position={`fixed`}
+            bottom={width < 900 ? `20px` : `50px`}
+            right={width < 1100 ? `20px` : `100px`}
+            zIndex={`100`}
+          >
+            <a href={`tel:0425227118`}>
+              <Wrapper
+                width={width < 900 ? `70px` : `100px`}
+                height={width < 900 ? `70px` : `100px`}
+                radius={`100%`}
+                shadow={`3px 5px 5px rgba(0, 0, 0, 0.3)`}
+                margin={`0 0 16px`}
+                bgColor={Theme.white_C}
+                color={Theme.subTheme3_C}
+              >
+                <Image
+                  alt="phone icon"
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_quick_call.png`}
+                  width={width < 900 ? `16px` : `20px`}
+                />
+                <Text
+                  margin={`6px 0 0`}
+                  fontSize={width < 900 ? `14px` : `20px`}
+                  fontWeight={`bold`}
+                >
+                  전화하기
+                </Text>
+              </Wrapper>
+            </a>
+            <Wrapper
+              width={width < 900 ? `70px` : `100px`}
+              height={width < 900 ? `70px` : `100px`}
+              radius={`100%`}
+              shadow={`3px 5px 5px rgba(0, 0, 0, 0.3)`}
+              bgColor={Theme.kakao_C}
+            >
+              <Image
+                alt="kakao icon"
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_quick_kakao.png`}
+                width={width < 900 ? `16px` : `22px`}
+              />
+              <Text
+                margin={`6px 0 0`}
+                fontSize={width < 900 ? `14px` : `20px`}
+                fontWeight={`bold`}
+              >
+                상담하기
+              </Text>
+            </Wrapper>
+          </Wrapper>
+        </Col>
         <Col span={0}>RIGHT</Col>
       </Row>
 
@@ -48,4 +105,4 @@ ClientLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default withResizeDetector(ClientLayout);
+export default ClientLayout;

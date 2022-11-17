@@ -55,7 +55,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 노인장기요양보험제도</title>
+        <title>효인요양원 | 노인장기요양보험제도</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
@@ -424,7 +424,7 @@ const Index = () => {
                 borderLeft={`1px solid ${Theme.lightGrey2_C}`}
                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
               >
-                본인부담금
+                내용
               </Wrapper>
             </Wrapper>
             <Wrapper dr={`row`}>
@@ -634,7 +634,7 @@ const Index = () => {
                 borderLeft={`1px solid ${Theme.lightGrey2_C}`}
                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
               >
-                본인부담금
+                내용
               </Wrapper>
             </Wrapper>
             <Wrapper dr={`row`}>

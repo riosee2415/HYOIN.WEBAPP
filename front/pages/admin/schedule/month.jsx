@@ -486,9 +486,9 @@ const Type = ({ router }) => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["시간표 관리", "월간시간표 관리"]}
-        title={`월간시간표 관리`}
-        subTitle={`홈페이지에 보여지는 월간 시간표를 관리할 수 있습니다.`}
+        breadcrumbs={["시간표 관리", "요양원 시간표 관리"]}
+        title={`요양원 시간표 관리`}
+        subTitle={`홈페이지에 보여지는 요양원 시간표를 관리할 수 있습니다.`}
       />
 
       <AdminContent>

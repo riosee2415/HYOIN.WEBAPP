@@ -10,7 +10,8 @@ import { useEffect } from "react";
 import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
 import moment from "moment";
 import { useCallback } from "react";
-import { Empty } from "antd";
+import { Empty, message } from "antd";
+import { useRouter } from "next/router";
 
 const ArrowBtn = styled(Wrapper)`
   width: 36px;
@@ -31,13 +32,27 @@ const Dementia = () => {
   const { moveServiceList, carList, timeList } = useSelector(
     (state) => state.moveService
   );
+
+  const { me } = useSelector((state) => state.user);
+
   //
+
   const width = useWidth();
   const dispatch = useDispatch();
+  const router = useRouter();
   //
   const [resultLen, setResultLen] = useState([]); // 오전 오후 높이값
   const [currentDate, setCurrentDate] = useState(moment());
   //
+
+  useEffect(() => {
+    if (!me) {
+      router.push(`/`);
+
+      return message.info("관리자만 이용가능한 페이지 입니다.");
+    }
+  }, [me]);
+
   useEffect(() => {
     let arr = [];
     carList.map((data) => {
@@ -249,7 +264,7 @@ const Dementia = () => {
                               borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                             >
                               <Wrapper
-                                width={`20%`}
+                                width={`30%`}
                                 bgColor={Theme.lightGrey4_C}
                                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
                                 height={`100%`}
@@ -258,14 +273,14 @@ const Dementia = () => {
                                 {result.degree}
                               </Wrapper>
                               <Wrapper
-                                width={`65%`}
+                                width={`70%`}
                                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
                                 height={`100%`}
                                 fontSize={`20px`}
                               >
                                 {result.passenger}
                               </Wrapper>
-                              <Wrapper
+                              {/* <Wrapper
                                 width={`15%`}
                                 bgColor={Theme.lightGrey4_C}
                                 borderRight={`1px solid ${Theme.lightGrey2_C}`}
@@ -274,7 +289,7 @@ const Dementia = () => {
                                 fontWeight={`700`}
                               >
                                 {result.count}
-                              </Wrapper>
+                              </Wrapper> */}
                             </Wrapper>
                           );
                         }

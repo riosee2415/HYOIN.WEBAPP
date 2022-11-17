@@ -452,7 +452,7 @@ const Move = ({ router }) => {
               id: data.id,
               degree: data.degree,
               passenger: data.passenger,
-              count: data.count,
+              count: "-",
             }}
           />
         );
@@ -470,30 +470,13 @@ const Move = ({ router }) => {
               id: data.id,
               degree: data.degree,
               passenger: data.passenger,
-              count: data.count,
+              count: "-",
             }}
           />
         );
       },
     },
-    {
-      title: "명수",
-      render: (data) => {
-        return (
-          <UseAdminInput
-            init={data.count}
-            REQUEST_TARGET={MOVE_SERVICE_UPDATE_REQUEST}
-            DATA_TARGET={{
-              id: data.id,
-              degree: data.degree,
-              passenger: data.passenger,
-              count: data.count,
-            }}
-          />
-        );
-      },
-      width: 150,
-    },
+
     {
       title: "삭제",
       render: (data) => {

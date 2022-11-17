@@ -33,7 +33,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 이용안내</title>
+        <title>효인요양원 | 이용안내</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
@@ -308,7 +308,7 @@ const Index = () => {
                 }
                 fontWeight={`600`}
               >
-                주간보호 이용대상 어르신
+                방문요양 이용대상 어르신
               </Text>
             </Wrapper>
 

@@ -16,7 +16,7 @@ import SubBanner from "../../components/SubBanner";
 import styled from "styled-components";
 import Theme from "../../components/Theme";
 import Daily from "../../components/nursing/Daily";
-import Unit from "../../components/nursing/unit";
+import Unit from "../../components/nursing/Unit";
 import Monthly from "../../components/nursing/Monthly";
 import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
 import { useRouter } from "next/router";
@@ -81,7 +81,7 @@ const Nursing = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 요양원</title>
+        <title>효인요양원 | 요양원</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>
@@ -92,7 +92,10 @@ const Nursing = () => {
             <Wrapper dr={`row`}>
               <Tab
                 onClick={() => pageChangeToggle(1)}
-                isActive={router && router.query.type === "1"}
+                isActive={
+                  (router && router.query.type === "1") ||
+                  router.query.type === undefined
+                }
               >
                 맞춤 서비스(Unit Care)
               </Tab>
@@ -122,8 +125,10 @@ const Nursing = () => {
               <Daily />
             ) : router.query.type === "3" ? (
               <Monthly />
-            ) : (
+            ) : router.query.type === "4" ? (
               <Diet />
+            ) : (
+              <Unit />
             )}
           </RsWrapper>
         </WholeWrapper>

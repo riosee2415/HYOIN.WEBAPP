@@ -150,7 +150,10 @@ const AdminMenu = () => {
           onTitleClick={titleClickHandler("sub5")}
         >
           <Menu.Item key="/admin/diet/list">
-            <MenuName>식단표 리스트</MenuName>
+            <MenuName>요양원식단표 리스트</MenuName>
+          </Menu.Item>
+          <Menu.Item key="/admin/protect/list">
+            <MenuName>주간보호식단표 리스트</MenuName>
           </Menu.Item>
         </SubMenu>
         <SubMenu
@@ -183,7 +186,10 @@ const AdminMenu = () => {
           onTitleClick={titleClickHandler("sub8")}
         >
           <Menu.Item key="/admin/schedule/month">
-            <MenuName>월간시간표 관리</MenuName>
+            <MenuName>요양원 시간표 관리</MenuName>
+          </Menu.Item>
+          <Menu.Item key="/admin/schedule/week">
+            <MenuName>주간보호 시간표 관리</MenuName>
           </Menu.Item>
           <Menu.Item key="/admin/schedule/move">
             <MenuName>이동서비스 시간표 관리</MenuName>

@@ -118,7 +118,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>효인주야간노인복지센터 | 새소식</title>
+        <title>효인요양원 | 새소식</title>
       </Head>
       <ClientLayout>
         <WholeWrapper>

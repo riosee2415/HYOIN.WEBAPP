@@ -156,7 +156,6 @@ const List = ({ router }) => {
   const amImageRef = useRef();
   const pmImageRef = useRef();
 
-  const [cForm] = Form.useForm();
   const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
 
@@ -164,11 +163,7 @@ const List = ({ router }) => {
   const [selectDate, setSelectDate] = useState(moment());
 
   // 모달
-  const [cList, setCList] = useState([]);
-  const [cDate, setCDate] = useState(null);
-  const [cData, setCData] = useState(false);
   const [cModal, setCModal] = useState(false);
-  const [cImage, setCImage] = useState(null);
 
   const [uData, setUData] = useState(null);
   const [uModal, setUModal] = useState(false);
@@ -388,8 +383,6 @@ const List = ({ router }) => {
     [uData, uModal]
   );
 
-  console.log(uData);
-
   ////// HANDLER //////
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
@@ -512,14 +505,6 @@ const List = ({ router }) => {
   const clickPmImageUpload = useCallback(() => {
     pmImageRef.current.click();
   }, [pmImageRef.current]);
-
-  // 생성 날짜 선택
-  const dateChoiseHandler = useCallback(
-    (data) => {
-      setCDate(data);
-    },
-    [cDate]
-  );
 
   // 생성하기
   const createHandler = useCallback(
@@ -857,9 +842,9 @@ const List = ({ router }) => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["식단표 관리", "식단표 리스트"]}
-        title={`식단표 리스트`}
-        subTitle={`홈페이지에 보여지는 식단표를 관리할 수 있습니다.`}
+        breadcrumbs={["식단표 관리", "요양원식단표 리스트"]}
+        title={`요양원식단표 리스트`}
+        subTitle={`홈페이지에 보여지는 요양원식단표를 관리할 수 있습니다.`}
       />
 
       <AdminContent>
