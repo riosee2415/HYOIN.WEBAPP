@@ -40,14 +40,21 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
 });
 
-router.post(
-  "/image",
-  isAdminCheck,
-  upload.single("image"),
-  async (req, res, next) => {
-    return res.json({ path: req.file.location });
-  }
-);
+router.post("/image", async (req, res, next) => {
+  const uploadImage = upload.single("image");
+
+  await uploadImage(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(401).send("첨부 가능한 용량을 초과했습니다.");
+    } else if (err) {
+      return res.status(401).send("업로드 중 문제가 발생했습니다.");
+    }
+
+    return res.json({
+      path: req.file.location,
+    });
+  });
+});
 
 router.post("/admin/list", isAdminCheck, async (req, res, next) => {
   // 기본값으로 오늘 날짜의 월을 보내주세요. (FORMAT = YYYY-MM)
