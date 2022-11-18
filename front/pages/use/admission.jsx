@@ -293,24 +293,26 @@ const Admission = () => {
             </Wrapper>
             <Wrapper margin={`40px 0 30px`} al={`flex-start`}>
               <ListText margin={`0 0 28px 24px`}>
-                1. 장기요양인정서 (장기요양급여의 종류 및 내용 - 시설급여 확인
-                필수)
+                1. 장기요양인정서 (재가 또는 시설급여)
               </ListText>
               <ListText margin={`0 0 28px 24px`}>
-                2. 개인별 장기요양이용계획서 (급여종류 - 노인요양시설 월 31회
-                확인 필수)
+                2. 장기요양이용계획서 (급여종류- 노인요양시설 월 31회 확인 필수)
               </ListText>
               <ListText margin={`0 0 28px 24px`}>
                 3. 요양원 입소 건강 진단서&nbsp;
-                <SpanText fontWeight={`bold`}>
+                <SpanText>
                   (결핵검진 포함한 건강검진만 유효, 입소 당일 꼭 지참해야 입소
                   가능)
                 </SpanText>
+                <Text color={Theme.grey2_C} margin={`5px 0 0`}>
+                  다만, 부득이한 사정으로 입소 시 본원 촉탁병원에서 실시하며
+                  비용 발생
+                </Text>
               </ListText>
               <ListText margin={`0 0 28px 24px`}>4. 처방전 (복용약)</ListText>
               <ListText margin={`0 0 28px 24px`}>5. 의사소견서</ListText>
               <ListText margin={`0 0 28px 24px`}>
-                6. 주민등록본 (어르신, 보호자 각 1통)
+                6. 주민등록등본 (어르신, 보호자 각 1통)
               </ListText>
               <ListText margin={`0 0 28px 24px`}>
                 7. 가족관계증명서 (어르신 기준으로 1통)
@@ -323,42 +325,46 @@ const Admission = () => {
               </ListText>
               <ListText margin={`0 0 14px 24px`}>
                 10. PCR 음성확인서 (입소 전날, 당일 검사만 유효)
+                <Text color={Theme.grey2_C} margin={`5px 0`}>
+                  다만, 부득이한 사정으로 입소 시 본원 촉탁병원에서 실시하며
+                  비용 발생
+                </Text>
+                <Text fontSize={width < 900 ? `16px` : `22px`}>
+                  ※ 보건소에서 PCR 검사 시 65세이상 무료 보호자가 직접 함
+                </Text>
               </ListText>
-              <Text
-                fontSize={width < 900 ? `16px` : `22px`}
-                fontWeight={`bold`}
-                margin={`0 0 28px 24px`}
-              >
-                - 당일 검사 후 당일 음성 확인이 안 될 경우, 음성확인시까지 격리
-                비용
-              </Text>
-              <ListText margin={`0 0 28px 24px`}>11. 옷, 속옷 등 의류</ListText>
+
+              <ListText margin={`0 0 14px 24px`}>
+                11. 옷, 속옷 등 의류 (면 옷 준비 요망. 다만, 입소 전 옷에 자수로
+                이름 표기 필수)
+              </ListText>
               <ListText margin={`0 0 14px 24px`}>
                 12. 애착 물건(현금, 귀중품 제외)
               </ListText>
-              <Text
-                fontSize={width < 900 ? `16px` : `22px`}
-                fontWeight={`bold`}
-                margin={`0 0 28px 24px`}
-              >
-                ※ 의료급여수급권자 요양원 전입신고 필요 (입소 당일 계약 후)
-              </Text>
+
               <ListText margin={`0 0 14px 24px`}>
-                12. 애착 물건(현금, 귀중품 제외)
+                13. 연계기록지 (직전 타기관 이용시)
               </ListText>
+              <ListText margin={`0 0 14px 24px`}>
+                <Text
+                  fontSize={width < 900 ? `16px` : `22px`}
+                  fontWeight={`bold`}
+                >
+                  ※ 의료급여수급권자 요양원 전입신고 필요 (입소 당일 계약 후)
+                </Text>
+              </ListText>
+
               <Text
                 fontSize={width < 900 ? `16px` : `22px`}
-                fontWeight={`bold`}
                 margin={`0 0 0 24px`}
               >
-                &#60;직계가족이 가는 경우 준비물&#62;
+                -어르신 신분증, 어르신 도장, 보호자 신분증
               </Text>
               <Text
                 fontSize={width < 900 ? `16px` : `22px`}
-                fontWeight={`bold`}
                 margin={`0 0 0 24px`}
               >
-                어르신 신분증, 어르신 도장, 보호자 신분증, 요양원 입소 확인서물
+                -요양원 입소확인서(당일 요양원에서 발급)
               </Text>
             </Wrapper>
 

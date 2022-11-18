@@ -19,7 +19,6 @@ import {
 import SubBanner from "../../components/SubBanner";
 import Theme from "../../components/Theme";
 import styled from "styled-components";
-import { VerticalAlignBottomOutlined } from "@ant-design/icons";
 
 const DownloadBtn = styled(Wrapper)`
   background: ${(props) => props.bgColor || Theme.lightGrey4_C};

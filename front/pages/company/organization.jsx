@@ -37,14 +37,14 @@ const Organization = () => {
             <Wrapper bgColor={Theme.lightGrey4_C} padding={`20px 0`} dr={`row`}>
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
-                width={`95px`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_intro_neo.png`}
+                width={`140px`}
                 margin={`0 40px 0 0`}
               />
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_intro_neo.png`}
-                width={`160px`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                width={`120px`}
               />
             </Wrapper>
 

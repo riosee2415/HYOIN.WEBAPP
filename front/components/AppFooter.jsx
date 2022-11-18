@@ -7,6 +7,7 @@ import {
   RsWrapper,
   ATag,
   SpanText,
+  CommonButton,
 } from "./commonComponents";
 import Theme from "./Theme";
 import useWidth from "../hooks/useWidth";
@@ -73,7 +74,7 @@ const AppFooter = () => {
             <SpanText fontSize={`10px`} margin={`0 10px`}>
               |
             </SpanText>
-            <Text fontSize={`15px`}>서비스 급여 종류 : 요양원</Text>
+            <Text fontSize={`15px`}>서비스 급여 종류 : 시설급여, 재가급여</Text>
           </Wrapper>
 
           <Wrapper
@@ -83,44 +84,52 @@ const AppFooter = () => {
           >
             <a href={`https://blog.naver.com/neowb1130`} target={`_blank`}>
               <Wrapper
-                width={`27px`}
-                height={`27px`}
+                width={`42px`}
+                height={`42px`}
                 radius={`5px`}
                 bgColor={Theme.darkGrey_C}
               >
                 <Image
-                  width={`14px`}
+                  width={`25px`}
                   alt="blog"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_blog.png`}
                 />
               </Wrapper>
             </a>
             <Wrapper
-              width={`27px`}
-              height={`27px`}
+              width={`42px`}
+              height={`42px`}
               radius={`5px`}
               margin={`0 13px`}
               bgColor={Theme.darkGrey_C}
             >
               <Image
-                width={`17px`}
+                width={`21px`}
                 alt="kakao"
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_kakao.png`}
               />
             </Wrapper>
             <Wrapper
-              width={`27px`}
-              height={`27px`}
+              width={`42px`}
+              height={`42px`}
               radius={`5px`}
               margin={`0 13px 0 0`}
               bgColor={Theme.darkGrey_C}
             >
               <Image
-                width={`17px`}
+                width={`21px`}
                 alt="band"
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
               />
             </Wrapper>
+            <a
+              href={`https://www.longtermcare.or.kr/npbs/indexr.jsp`}
+              target={`_blank`}
+            >
+              <CommonButton kindOf={`grey`} width={`177px`} height={`42px`}>
+                국민건강보험 바로가기
+              </CommonButton>
+            </a>
           </Wrapper>
         </Wrapper>
         {companys && (
@@ -203,14 +212,14 @@ const AppFooter = () => {
             <Wrapper width={`auto`} dr={`row`}>
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
-                width={`120px`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_neo.png`}
+                width={`60px`}
                 margin={`0 30px 0 0`}
               />
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_neo.png`}
-                width={`60px`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
+                width={`120px`}
               />
             </Wrapper>
           </Wrapper>

@@ -33,7 +33,7 @@ const HeaderRs = styled(Wrapper)`
 
 const HoverWrapper = styled(Wrapper)`
   position: absolute;
-  top: 91px;
+  top: 88px;
   left: 0;
   background: ${Theme.white_C};
   padding: 30px 0;
@@ -282,7 +282,7 @@ const AppHeader = () => {
               <Wrapper width={`auto`} color={Theme.grey3_C} fontSize={`19px`}>
                 <Text margin={`0 0 10px`}>
                   <Link href={`/company/intro`}>
-                    <a>요양원 소개</a>
+                    <a>인사말</a>
                   </Link>
                 </Text>
                 <Text margin={`0 0 10px`}>
@@ -511,7 +511,7 @@ const AppHeader = () => {
                     onClick={drawarToggle}
                   >
                     <Link href={`/company/intro`}>
-                      <a>요양원 소개</a>
+                      <a>인사말</a>
                     </Link>
                   </Wrapper>
                   <Wrapper

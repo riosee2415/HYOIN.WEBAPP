@@ -115,21 +115,22 @@ const Location = () => {
                     bgColor={Theme.basicTheme_C}
                     color={Theme.white_C}
                     padding={width < 900 ? `100px 25px 50px` : `140px 90px`}
+                    position={`relative`}
+                    al={`flex-start`}
                   >
                     <Image
                       alt="logo"
-                      width={`120px`}
+                      width={`150px`}
                       position={`absolute`}
                       top={`20px`}
                       left={`10px`}
                       src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_map_hoyin.png`}
                     />
-                    <Text
-                      fontSize={width < 900 ? `25px` : `36px`}
-                      fontWeight={`bold`}
-                    >
-                      효인요양원
-                    </Text>
+
+                    <Image
+                      width={`170px`}
+                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
+                    />
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
@@ -226,21 +227,21 @@ const Location = () => {
                   bgColor={Theme.basicTheme_C}
                   color={Theme.white_C}
                   padding={width < 900 ? `100px 25px 50px` : `140px 90px`}
+                  position={`relative`}
+                  al={`flex-start`}
                 >
                   <Image
                     alt="logo"
                     width={`120px`}
                     position={`absolute`}
-                    top={`20px`}
-                    left={`10px`}
+                    top={`0px`}
+                    left={`0px`}
                     src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_map_hoyin.png`}
                   />
-                  <Text
-                    fontSize={width < 900 ? `25px` : `36px`}
-                    fontWeight={`bold`}
-                  >
-                    효인요양원
-                  </Text>
+                  <Image
+                    width={`170px`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
+                  />
                   <Wrapper
                     dr={`row`}
                     ju={`flex-start`}

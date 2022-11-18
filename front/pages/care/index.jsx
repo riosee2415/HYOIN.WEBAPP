@@ -14,6 +14,7 @@ import {
   Text,
   SpanText,
   Image,
+  CommonButton,
 } from "../../components/commonComponents";
 import SubBanner from "../../components/SubBanner";
 import styled from "styled-components";
@@ -70,6 +71,20 @@ const Index = () => {
               fontWeight={`bold`}
             >
               <Circle /> 노인장기요양보험제도란?
+              <a
+                href={`https://www.longtermcare.or.kr/npbs/e/b/101/npeb101m01.web?menuId=npe0000000030&zoomSize=`}
+                target={`_blank`}
+              >
+                <CommonButton
+                  margin={`0 0 10px 10px`}
+                  fontSize={`16px`}
+                  width={`95px`}
+                  height={`34px`}
+                  kindOf={`subTheme2`}
+                >
+                  알아보기
+                </CommonButton>
+              </a>
             </Wrapper>
             <Wrapper margin={`40px 0 100px`} al={`flex-start`}>
               <ListText width={width < 900 ? `90%` : `80%`}>
@@ -174,6 +189,20 @@ const Index = () => {
               margin={`100px 0 40px`}
             >
               <Circle /> 신청절차
+              <a
+                href={`https://www.longtermcare.or.kr/npbs/e/b/202/npeb202m01.web?menuId=npe0000000120&prevPath=/npbs/e/b/101/npeb101m01.web`}
+                target={`_blank`}
+              >
+                <CommonButton
+                  margin={`0 0 10px 10px`}
+                  fontSize={`16px`}
+                  width={`95px`}
+                  height={`34px`}
+                  kindOf={`subTheme2`}
+                >
+                  자세히
+                </CommonButton>
+              </a>
             </Wrapper>
 
             <Wrapper dr={`row`}>

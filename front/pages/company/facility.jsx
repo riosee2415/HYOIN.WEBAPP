@@ -22,6 +22,7 @@ import { useState } from "react";
 import Facility1Slider from "../../components/slide/Facility1Slider";
 import Facility2Slider from "../../components/slide/Facility2Slider";
 import Facility3Slider from "../../components/slide/Facility3Slider";
+import Facility4Slider from "../../components/slide/Facility4Slider";
 
 const ListText = styled(Text)`
   display: list-item;
@@ -38,7 +39,7 @@ const ListText = styled(Text)`
 `;
 
 const Btn = styled(Wrapper)`
-  width: calc(100% / 5);
+  width: calc(100% / 4);
   height: 80px;
   background: ${Theme.lightGrey4_C};
   border: 1px solid ${Theme.lightGrey2_C};
@@ -142,7 +143,7 @@ const Facility = () => {
                 <ListText>
                   <Text>
                     <SpanText fontWeight={`bold`}>요양원 입소 인원 :</SpanText>
-                    &nbsp;정원 99인, 현인원 53인
+                    &nbsp;정원 200명
                   </Text>
                 </ListText>
                 <ListText>
@@ -150,12 +151,12 @@ const Facility = () => {
                     <SpanText fontWeight={`bold`}>
                       주간보호 입소 인원 :
                     </SpanText>
-                    &nbsp;정원 61인
+                    &nbsp;정원 61명
                   </Text>
                 </ListText>
                 <ListText>
                   <SpanText fontWeight={`bold`}>규모 :</SpanText>
-                  &nbsp;지상 5층(대지 2,467m^2 / 건물면적 5,023,62m^2)
+                  &nbsp;지상 5층(대지 2,467m² / 건물면적 5,023,62m²)
                 </ListText>
               </Wrapper>
               <Wrapper width={width < 1280 ? `100%` : `50%`}>
@@ -330,17 +331,13 @@ const Facility = () => {
 
             <Wrapper dr={`row`}>
               <Btn onClick={() => setCurrentTab(0)} isActive={currentTab === 0}>
-                1F
-              </Btn>
-              <Btn onClick={() => setCurrentTab(4)} isActive={currentTab === 4}>
-                주간보호
+                공동
               </Btn>
               <Btn onClick={() => setCurrentTab(1)} isActive={currentTab === 1}>
-                2F
+                요양원
               </Btn>
-
               <Btn onClick={() => setCurrentTab(2)} isActive={currentTab === 2}>
-                4F
+                주간보호
               </Btn>
 
               <Btn onClick={() => setCurrentTab(3)} isActive={currentTab === 3}>
@@ -349,20 +346,9 @@ const Facility = () => {
             </Wrapper>
 
             {currentTab === 0 && <Facility1Slider />}
-            {currentTab === 1 && (
-              <Image
-                alt="2층 로비"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/2%E1%84%8E%E1%85%B3%E1%86%BC+%E1%84%85%E1%85%A9%E1%84%87%E1%85%B5.png`}
-              />
-            )}
-            {currentTab === 2 && (
-              <Image
-                alt="4층 로비"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/4%E1%84%8E%E1%85%B3%E1%86%BC+%E1%84%85%E1%85%A9%E1%84%87%E1%85%B5.png`}
-              />
-            )}
+            {currentTab === 1 && <Facility4Slider />}
+            {currentTab === 2 && <Facility3Slider />}
             {currentTab === 3 && <Facility2Slider />}
-            {currentTab === 4 && <Facility3Slider />}
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`100px 0 40px`}>
               <Wrapper
