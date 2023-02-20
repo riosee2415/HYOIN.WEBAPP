@@ -145,7 +145,7 @@ const Dementia = () => {
           </Text>
 
           <Wrapper dr={`row`} width={`auto`} margin={`5px 0`}>
-            <ATag href="tel:042-522-5555">
+            <ATag href="tel:042-522-7118">
               <Image
                 alt="icon"
                 width={`12px`}
@@ -153,7 +153,7 @@ const Dementia = () => {
                 src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_call.png"
               />
               <Text fontSize={`18px`} fontWeight={`600`}>
-                042-522-5555
+                042-522-7118
               </Text>
             </ATag>
           </Wrapper>
@@ -166,7 +166,7 @@ const Dementia = () => {
               src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_fax.png"
             />
             <Text fontSize={`18px`} fontWeight={`600`}>
-              042-523-7118
+              042-522-7119
             </Text>
           </Wrapper>
         </Wrapper>

@@ -1,6 +1,6 @@
 import { Carousel, Empty } from "antd";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Wrapper, Text, Image, CommonTitle } from "../commonComponents";
+import { Wrapper, Text, CommonTitle, Image } from "../commonComponents";
 import Theme from "../Theme";
 import styled from "styled-components";
 import useWidth from "../../hooks/useWidth";
@@ -280,9 +280,10 @@ const NursingSlider = ({
                   position={`relative`}
                   padding={`0 20px`}
                   display={`flex !important`}
-                  onClick={() => {
-                    router.push(`/service?type=1&detail=${data[0].id}`);
-                  }}
+                  overflow={`hidden`}
+                  // onClick={() => {
+                  //   router.push(`/service?type=1&detail=${data[0].id}`);
+                  // }}
                 >
                   <Image
                     alt="thumnail"
