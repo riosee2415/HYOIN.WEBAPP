@@ -143,6 +143,7 @@ router.post("/slide/list", async (req, res, next) => {
           imagePath
     FROM  programs
    WHERE  imagePath IS NOT NULL
+     AND  isDelete = 0
    ORDER  BY createdAt DESC
    LIMIT  10
   `;
