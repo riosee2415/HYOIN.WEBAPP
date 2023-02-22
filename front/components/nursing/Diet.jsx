@@ -49,7 +49,7 @@ const DietSnackTable = styled(Wrapper)`
 
 const DietRiceTable = styled(Wrapper)`
   height: 70px;
-  font-size: 22px;
+  font-size: 20px;
   border: 1px solid ${Theme.lightGrey2_C};
 `;
 
