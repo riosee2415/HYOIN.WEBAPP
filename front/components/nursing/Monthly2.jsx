@@ -63,7 +63,7 @@ const WordBreakText = styled(Text)`
 
 const Monthly2 = () => {
   ////// GOLBAL STATE //////
-  const { programWeekList, week } = useSelector((state) => state.program);
+  const { programList, week } = useSelector((state) => state.program);
 
   ////// HOOKS //////
   const dispatch = useDispatch();
@@ -147,8 +147,8 @@ const Monthly2 = () => {
           >
             <Wrapper height={`auto`}>
               {/* LIST START */}
-              {programWeekList &&
-                programWeekList
+              {programList &&
+                programList
                   .filter(
                     (data) =>
                       data.viewFrontSpecificDate === value.format("YYYY-MM-DD")
@@ -196,7 +196,7 @@ const Monthly2 = () => {
         </Wrapper>
       );
     },
-    [programWeekList]
+    [programList]
   );
 
   return (
@@ -322,8 +322,8 @@ const Monthly2 = () => {
                     >
                       <Wrapper height={`auto`}>
                         {/* LIST START */}
-                        {programWeekList &&
-                        programWeekList.filter(
+                        {programList &&
+                        programList.filter(
                           (data) =>
                             data.viewFrontSpecificDate ===
                             moment(value[1]).format("YYYY-MM-DD")
@@ -335,7 +335,7 @@ const Monthly2 = () => {
                             />
                           </Wrapper>
                         ) : (
-                          programWeekList
+                          programList
                             .filter(
                               (data) =>
                                 data.viewFrontSpecificDate ===

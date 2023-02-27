@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ClientLayout from "../../components/ClientLayout";
 import Head from "next/head";
 import wrapper from "../../store/configureStore";
@@ -21,7 +21,7 @@ import Monthly from "../../components/nursing/Monthly";
 import { WEEK_PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/weekProgram";
 import Normal from "../../components/protection/Normal";
 import { MOVE_SERVICE_LIST_REQUEST } from "../../reducers/moveService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import WeekMenu from "../../components/nursing/WeekMenu";
 import DementiaSpecial from "../../components/protection/DementiaSpecial";
@@ -72,9 +72,20 @@ const Protection = () => {
   ////// HOOKS //////
   const width = useWidth();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   ////// REDUX //////
   ////// USEEFFECT //////
+
+  useEffect(() => {
+    dispatch({
+      type: WEEK_PROGRAM_WEEK_LIST_REQUEST,
+      date: {
+        searchMonth: moment().format("YYYY-mm"),
+      },
+    });
+  }, [router.query]);
+
   ////// TOGGLE //////
   const pageChangeToggle = useCallback((type) => {
     router.replace(`/service/protection?type=${type}`);
@@ -163,10 +174,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
-    });
-
-    context.store.dispatch({
-      type: WEEK_PROGRAM_WEEK_LIST_REQUEST,
     });
 
     // 구현부 종료

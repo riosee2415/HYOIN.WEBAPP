@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import ClientLayout from "../../components/ClientLayout";
 import Head from "next/head";
 import wrapper from "../../store/configureStore";
@@ -18,10 +18,15 @@ import Theme from "../../components/Theme";
 import Daily from "../../components/nursing/Daily";
 import Unit from "../../components/nursing/Unit";
 import Monthly from "../../components/nursing/Monthly";
-import { PROGRAM_WEEK_LIST_REQUEST } from "../../reducers/program";
+import {
+  PROGRAM_LIST_REQUEST,
+  PROGRAM_WEEK_LIST_REQUEST,
+} from "../../reducers/program";
 import { useRouter } from "next/router";
 import Diet from "../../components/nursing/Diet";
 import Monthly2 from "../../components/nursing/Monthly2";
+import moment from "moment";
+import { useDispatch } from "react-redux";
 
 const Tab = styled(Wrapper)`
   width: auto;
@@ -68,9 +73,20 @@ const Nursing = () => {
   ////// HOOKS //////
   const width = useWidth();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   ////// REDUX //////
   ////// USEEFFECT //////
+
+  useEffect(() => {
+    dispatch({
+      type: PROGRAM_LIST_REQUEST,
+      data: {
+        searchMonth: moment().format("YYYY-MM"),
+      },
+    });
+  }, [router.query]);
+
   ////// TOGGLE //////
   const pageChangeToggle = useCallback((type) => {
     router.replace(`/service/nursing?type=${type}`);
@@ -151,10 +167,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
-    });
-
-    context.store.dispatch({
-      type: PROGRAM_WEEK_LIST_REQUEST,
     });
 
     // 구현부 종료
