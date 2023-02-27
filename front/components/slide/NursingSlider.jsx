@@ -253,48 +253,53 @@ const NursingSlider = ({
         padding={width < 900 ? `50px 0` : `150px 0`}
         bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_bg2.png")`}
       >
-        {slideDatum.length === 0 ? (
-          <Wrapper height={`400px`} display={`flex !important`}>
-            <Empty description="조회된 사진이 없습니다." />
-          </Wrapper>
-        ) : (
-          <SliderWrapper
-            effect={effect}
-            dots={false}
-            infinite={true}
-            slidesToShow={width < 1200 ? 1 : 2} // 한 화면에 몇개의 슬라이드가 보여지는지 결정
-            ref={slideRef}
-            autoplay={autoplay}
-            centerMode={true} // 양쪽에 겹쳐서 보이는 디자인
-            centerPadding={width < 1000 ? `30px` : `100px`} // 얼만큼 겹쳐 보일건지 결정
-            slide={true} // fade or slide
-            variableWidth={false} // 각각 다른 크기를 지정할 수 있음
-            initialSlide={0} // 초기에 몇번째 슬라이드를 보여줄 것인지 결정
-            draggable={true}
-          >
-            {slideDatum.map((data, idx) => {
-              return (
-                <Wrapper
-                  key={idx}
-                  height={width < 1000 ? `220px` : `400px`}
-                  position={`relative`}
-                  padding={`0 20px`}
-                  display={`flex !important`}
-                  overflow={`hidden`}
-                  // onClick={() => {
-                  //   router.push(`/service?type=1&detail=${data[0].id}`);
-                  // }}
-                >
-                  <Image
-                    alt="thumnail"
-                    src={data[0].imagePath}
-                    height={`100%`}
-                  />
-                </Wrapper>
-              );
-            })}
-          </SliderWrapper>
-        )}
+        <Wrapper
+          height={width < 1000 ? `220px` : `400px`}
+          overflow={slideDatum && slideDatum.length < 1 && `hidden`}
+        >
+          {slideDatum.length === 0 ? (
+            <Wrapper height={`400px`} display={`flex !important`}>
+              <Empty description="조회된 사진이 없습니다." />
+            </Wrapper>
+          ) : (
+            <SliderWrapper
+              effect={effect}
+              dots={false}
+              infinite={true}
+              slidesToShow={width < 1200 ? 1 : 2} // 한 화면에 몇개의 슬라이드가 보여지는지 결정
+              ref={slideRef}
+              autoplay={autoplay}
+              centerMode={true} // 양쪽에 겹쳐서 보이는 디자인
+              centerPadding={width < 1000 ? `30px` : `100px`} // 얼만큼 겹쳐 보일건지 결정
+              slide={true} // fade or slide
+              variableWidth={false} // 각각 다른 크기를 지정할 수 있음
+              initialSlide={0} // 초기에 몇번째 슬라이드를 보여줄 것인지 결정
+              draggable={true}
+            >
+              {slideDatum.map((data, idx) => {
+                return (
+                  <Wrapper
+                    key={idx}
+                    height={width < 1000 ? `220px` : `400px`}
+                    position={`relative`}
+                    padding={`0 20px`}
+                    display={`flex !important`}
+                    overflow={`hidden`}
+                    // onClick={() => {
+                    //   router.push(`/service?type=1&detail=${data[0].id}`);
+                    // }}
+                  >
+                    <Image
+                      alt="thumnail"
+                      src={data[0].imagePath}
+                      height={`100%`}
+                    />
+                  </Wrapper>
+                );
+              })}
+            </SliderWrapper>
+          )}
+        </Wrapper>
       </Wrapper>
     </NursingSliderWrapper>
   );
