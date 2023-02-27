@@ -735,7 +735,7 @@ const List = () => {
               <input
                 type="file"
                 name="image"
-                accept=".png, .jpg, .xlxs, .pdf, .pptx"
+                accept=".png, .jpg, .xlxs, .pdf, .pptx, .xlsx"
                 // multiple
                 hidden
                 ref={fileRef}

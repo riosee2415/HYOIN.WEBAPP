@@ -132,7 +132,7 @@ const Nursing = () => {
                 onClick={() => pageChangeToggle(4)}
                 isActive={router && router.query.type === "4"}
               >
-                주간 식단표
+                요양원 식단표
               </Tab>
             </Wrapper>
 

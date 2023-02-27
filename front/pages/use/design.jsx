@@ -177,7 +177,7 @@ const Design = () => {
                 margin={`0 16px 0 0`}
               />
               <Text fontSize={width < 700 ? `16px` : `22px`} fontWeight={`600`}>
-                효인요양원 급여비용 &#60;2022년 기준&#62;
+                효인요양원 급여비용 &#60;2023년 기준&#62;
               </Text>
 
               <ATag
@@ -232,12 +232,12 @@ const Design = () => {
               />
 
               <Text fontSize={width < 700 ? `16px` : `22px`} fontWeight={`600`}>
-                효인주간보호 급여비용[일반] &#60;2022년 기준&#62;
+                효인주간보호 급여비용[일반] &#60;2023년 기준&#62;
               </Text>
 
               <ATag
                 width={`auto`}
-                href="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EC%A3%BC%EA%B0%84%EB%B3%B4%ED%98%B8%2C+%EB%8B%A8%EA%B8%B0%EB%B3%B4%ED%98%B8+%EA%B8%89%EC%97%AC%EB%B9%84%EC%9A%A901.pdf"
+                href="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/original/1677462043240_2023%E1%84%82%E1%85%A7%E1%86%AB%20%E1%84%92%E1%85%AD%E1%84%8B%E1%85%B5%E1%86%AB%20%E1%84%8B%E1%85%AD%E1%84%8B%E1%85%A3%E1%86%BC%E1%84%8B%E1%85%AF%E1%86%AB%20%E1%84%8C%E1%85%AE%E1%84%80%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A9%E1%84%92%E1%85%A9%20%E1%84%87%E1%85%A1%E1%86%BC%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8B%E1%85%AD%E1%84%8B%E1%85%A3%E1%86%BC%20%E1%84%80%E1%85%B3%E1%86%B8%E1%84%8B%E1%85%A7%E1%84%87%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC.xlsx"
                 download={true}
               >
                 <DownloadBtn>
@@ -287,7 +287,7 @@ const Design = () => {
               />
 
               <Text fontSize={width < 700 ? `16px` : `22px`} fontWeight={`600`}>
-                효인방문요양원 급여비용(방문당) &#60;2022년 기준&#62;
+                효인방문요양원 급여비용(방문당) &#60;2023년 기준&#62;
               </Text>
 
               <ATag

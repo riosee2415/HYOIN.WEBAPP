@@ -344,7 +344,9 @@ const Home = ({}) => {
                   </>
                 )}
               </QuickWrapper>
-              <QuickWrapper>
+              <QuickWrapper
+                onClick={() => moveLinkHandler(`/service/nursing?type=4`)}
+              >
                 <Image
                   alt="icon"
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_home_meal.png`}

@@ -297,13 +297,13 @@ const App = () => {
   ]);
 
   const [imgArr5, setImgArr5] = useState([
+    // {
+    //   title: "탈의실",
+    //   thumb: myImage["img_1_1"],
+    //   imgValue: "img_1_1",
+    // },
     {
       title: "탈의실",
-      thumb: myImage["img_1_1"],
-      imgValue: "img_1_1",
-    },
-    {
-      title: "샤워실",
       thumb: myImage["img_60_1"],
       imgValue: "img_60_1",
     },
