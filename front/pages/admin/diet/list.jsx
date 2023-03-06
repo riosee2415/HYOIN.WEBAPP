@@ -183,10 +183,12 @@ const List = ({ router }) => {
     dispatch({
       type: ADMIN_MENU_LIST_REQUEST,
       data: {
-        searchMonth: moment().format("YYYY-MM"),
+        searchMonth: selectDate
+          ? selectDate.format("YYYY-MM")
+          : moment().format("YYYY-MM"),
       },
     });
-  }, []);
+  }, [selectDate]);
 
   useEffect(() => {
     if (st_adminMenuListError) {
@@ -265,7 +267,9 @@ const List = ({ router }) => {
       dispatch({
         type: ADMIN_MENU_LIST_REQUEST,
         data: {
-          searchMonth: moment().format("YYYY-MM"),
+          searchMonth: selectDate
+            ? selectDate.format("YYYY-MM")
+            : moment().format("YYYY-MM"),
         },
       });
 
@@ -292,7 +296,9 @@ const List = ({ router }) => {
       dispatch({
         type: ADMIN_MENU_LIST_REQUEST,
         data: {
-          searchMonth: moment().format("YYYY-MM"),
+          searchMonth: selectDate
+            ? selectDate.format("YYYY-MM")
+            : moment().format("YYYY-MM"),
         },
       });
 
@@ -317,7 +323,9 @@ const List = ({ router }) => {
       dispatch({
         type: ADMIN_MENU_LIST_REQUEST,
         data: {
-          searchMonth: moment().format("YYYY-MM"),
+          searchMonth: selectDate
+            ? selectDate.format("YYYY-MM")
+            : moment().format("YYYY-MM"),
         },
       });
 

@@ -183,10 +183,12 @@ const List = ({ router }) => {
     dispatch({
       type: ADMIN_WEEK_MENU_LIST_REQUEST,
       data: {
-        searchMonth: moment().format("YYYY-MM"),
+        searchMonth: selectDate
+          ? selectDate.format("YYYY-MM-DD")
+          : moment().format("YYYY-MM"),
       },
     });
-  }, []);
+  }, [selectDate]);
 
   useEffect(() => {
     if (st_adminWeekMenuListError) {
@@ -265,7 +267,9 @@ const List = ({ router }) => {
       dispatch({
         type: ADMIN_WEEK_MENU_LIST_REQUEST,
         data: {
-          searchMonth: moment().format("YYYY-MM"),
+          searchMonth: selectDate
+            ? selectDate.format("YYYY-MM-DD")
+            : moment().format("YYYY-MM"),
         },
       });
 
@@ -292,7 +296,9 @@ const List = ({ router }) => {
       dispatch({
         type: ADMIN_WEEK_MENU_LIST_REQUEST,
         data: {
-          searchMonth: moment().format("YYYY-MM"),
+          searchMonth: selectDate
+            ? selectDate.format("YYYY-MM-DD")
+            : moment().format("YYYY-MM"),
         },
       });
 
@@ -317,7 +323,9 @@ const List = ({ router }) => {
       dispatch({
         type: ADMIN_WEEK_MENU_LIST_REQUEST,
         data: {
-          searchMonth: moment().format("YYYY-MM"),
+          searchMonth: selectDate
+            ? selectDate.format("YYYY-MM-DD")
+            : moment().format("YYYY-MM"),
         },
       });
 
@@ -331,6 +339,15 @@ const List = ({ router }) => {
       return message.error(st_weekMenuDeleteError);
     }
   }, [st_weekMenuDeleteError]);
+
+  useEffect(() => {
+    dispatch({
+      type: ADMIN_WEEK_MENU_LIST_REQUEST,
+      data: {
+        searchMonth: selectDate.format("YYYY-MM"),
+      },
+    });
+  }, [selectDate]);
 
   ////// TOGGLE ///////
 
