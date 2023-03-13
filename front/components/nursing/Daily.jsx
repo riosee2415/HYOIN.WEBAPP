@@ -53,19 +53,8 @@ const Daily = () => {
       </Wrapper>
 
       <Wrapper al={`flex-start`} fontSize={width < 700 ? `15px` : `18px`}>
-        ※ 특별활동으로는 음악활동, 꽃꽂이, 뜨개질, 보훈시네마, 오카리나,
-        요리교실 등이 있습니다.
-      </Wrapper>
-      <Wrapper
-        al={`flex-start`}
-        fontSize={width < 700 ? `15px` : `18px`}
-        margin={`10px 0`}
-      >
-        ※ 간호생활서비스 및 재활치료서비스(개인별 물리치료 주2회, 작업치료 주1회
-        이상)는 대상자별로 상이하게 제공됩니다.
-      </Wrapper>
-      <Wrapper al={`flex-start`} fontSize={width < 700 ? `15px` : `18px`}>
-        ※ 상기 일정은 요양원 사정 및 기타 요인 등으로 인하여 변경될 수 있습니다.
+        * 물리치료는 월 ~ 금요일 09:00~17:00 사이에 어르신별 급여제공계획에 맞춰
+        제공
       </Wrapper>
     </Wrapper>
   );
