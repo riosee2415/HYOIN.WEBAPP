@@ -95,6 +95,11 @@ const Fourleaf = ({ Component }) => {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
         />
+
+        <meta
+          name="naver-site-verification"
+          content="a98d70e86ac0bd0850e861e7b29b5d5812432641"
+        />
       </Head>
       <Component />
     </ThemeProvider>
