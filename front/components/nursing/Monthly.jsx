@@ -317,7 +317,7 @@ const Monthly = () => {
                       al={`flex-start`}
                       ju={`flex-start`}
                       overflow={`auto`}
-                      padding={`30px 0`}
+                      padding={`30px 5px`}
                     >
                       <Wrapper height={`auto`}>
                         {/* LIST START */}
@@ -356,7 +356,7 @@ const Monthly = () => {
                                       fontSize={`16px`}
                                       fontWeight={`bold`}
                                       lineHeight={`1.28`}
-                                      textAlign={`start`}
+                                      textAlign={`center`}
                                     >
                                       {data.title}
                                     </Text>
