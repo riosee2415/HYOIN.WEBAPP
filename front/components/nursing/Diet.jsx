@@ -21,6 +21,11 @@ const DietDateTable = styled(Wrapper)`
   font-weight: 600;
   border: 1px solid ${Theme.lightGrey2_C};
   background-color: ${Theme.subTheme9_C};
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+    height: 50px;
+  }
 `;
 
 const DietMenuTable = styled(Wrapper)`
@@ -29,6 +34,11 @@ const DietMenuTable = styled(Wrapper)`
   font-weight: 600;
   border: 1px solid ${Theme.lightGrey2_C};
   background-color: ${Theme.lightGrey4_C};
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+    height: 300px;
+  }
 `;
 
 const DietKcalTable = styled(Wrapper)`
@@ -37,6 +47,12 @@ const DietKcalTable = styled(Wrapper)`
   font-weight: 600;
   border: 1px solid ${Theme.lightGrey2_C};
   background-color: ${Theme.lightGrey4_C};
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+    height: 50px;
+    text-align: center;
+  }
 `;
 
 const DietSnackTable = styled(Wrapper)`
@@ -45,12 +61,22 @@ const DietSnackTable = styled(Wrapper)`
   font-weight: 600;
   border: 1px solid ${Theme.lightGrey2_C};
   background-color: ${Theme.lightGrey4_C};
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+    height: 100px;
+  }
 `;
 
 const DietRiceTable = styled(Wrapper)`
   height: 70px;
   font-size: 20px;
   border: 1px solid ${Theme.lightGrey2_C};
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+    height: 50px;
+  }
 `;
 
 const Diet = () => {
@@ -132,36 +158,64 @@ const Diet = () => {
       <Wrapper margin={`60px 0 0`} dr={`row`}>
         <CommonButton
           radius={`100%`}
-          width={`36px`}
-          height={`36px`}
+          width={width < 900 ? `30px` : `36px`}
+          height={width < 900 ? `30px` : `36px`}
           padding={`0`}
           onClick={() => selectWeekHandler(-7)}
         >
           <LeftOutlined />
         </CommonButton>
 
-        <Text
-          margin={`0 24px`}
-          fontSize={`32px`}
-          fontWeight={`600`}
-          color={Theme.subTheme2_C}
-        >
-          {sunday.format("YYYY년 MM월 DD일")}&nbsp;~&nbsp;
-          {saturday.format("YYYY년 MM월 DD일")}
-        </Text>
-
-        <CommonButton
-          radius={`100%`}
-          width={`36px`}
-          height={`36px`}
-          padding={`0`}
-          onClick={() => selectWeekHandler(7)}
-        >
-          <RightOutlined />
-        </CommonButton>
+        {width < 900 ? (
+          <>
+            <CommonButton
+              radius={`100%`}
+              width={width < 900 ? `30px` : `36px`}
+              height={width < 900 ? `30px` : `36px`}
+              padding={`0`}
+              onClick={() => selectWeekHandler(7)}
+            >
+              <RightOutlined />
+            </CommonButton>
+            <Text
+              margin={width < 900 ? `0 15px` : `0 24px`}
+              fontSize={width < 900 ? `18px` : `32px`}
+              fontWeight={`600`}
+              color={Theme.subTheme2_C}
+            >
+              {sunday.format("YYYY년 MM월 DD일")}&nbsp;~&nbsp;
+              {saturday.format("YYYY년 MM월 DD일")}
+            </Text>
+          </>
+        ) : (
+          <>
+            <Text
+              margin={width < 900 ? `0 15px` : `0 24px`}
+              fontSize={width < 900 ? `18px` : `32px`}
+              fontWeight={`600`}
+              color={Theme.subTheme2_C}
+            >
+              {sunday.format("YYYY년 MM월 DD일")}&nbsp;~&nbsp;
+              {saturday.format("YYYY년 MM월 DD일")}
+            </Text>
+            <CommonButton
+              radius={`100%`}
+              width={width < 900 ? `30px` : `36px`}
+              height={width < 900 ? `30px` : `36px`}
+              padding={`0`}
+              onClick={() => selectWeekHandler(7)}
+            >
+              <RightOutlined />
+            </CommonButton>
+          </>
+        )}
       </Wrapper>
 
-      <Wrapper dr={`row`} ju={`flex-end`} margin={`0 0 20px`}>
+      <Wrapper
+        dr={`row`}
+        ju={`flex-end`}
+        margin={width < 900 ? `20px 0` : `0 0 20px`}
+      >
         <CommonButton
           width={width < 700 ? `130px` : `160px`}
           height={width < 700 ? `35px` : `50px`}
@@ -218,8 +272,11 @@ const Diet = () => {
         ref={pdfRef}
         dr={`row`}
         borderTop={`1px solid ${Theme.subTheme2_C}`}
+        overflow={`auto`}
+        wrap={`nowrap`}
+        ju={`flex-start`}
       >
-        <Wrapper width={`calc(100% / 8)`}>
+        <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
           <DietDateTable>일자/요일</DietDateTable>
           <DietMenuTable>아침</DietMenuTable>
           <DietKcalTable>아침칼로리 (Kcal)</DietKcalTable>
@@ -237,7 +294,7 @@ const Diet = () => {
 
         {/* 일 */}
         {sundayData && (
-          <Wrapper width={`calc(100% / 8)`}>
+          <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
             <DietDateTable color={Theme.red_C}>
               {sunday.locale("ko").format("DD (dd)")}
             </DietDateTable>
@@ -313,7 +370,7 @@ const Diet = () => {
 
         {/* 월 */}
         {mondayData && (
-          <Wrapper width={`calc(100% / 8)`}>
+          <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
             <DietDateTable>
               {monday.locale("ko").format("DD (dd)")}
             </DietDateTable>
@@ -389,7 +446,7 @@ const Diet = () => {
 
         {/* 화 */}
         {tuesdayData && (
-          <Wrapper width={`calc(100% / 8)`}>
+          <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
             <DietDateTable>
               {tuesday.locale("ko").format("DD (dd)")}
             </DietDateTable>
@@ -468,7 +525,7 @@ const Diet = () => {
 
         {/* 수 */}
         {wednesdayData && (
-          <Wrapper width={`calc(100% / 8)`}>
+          <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
             <DietDateTable>
               {wednesday.locale("ko").format("DD (dd)")}
             </DietDateTable>
@@ -546,7 +603,7 @@ const Diet = () => {
         )}
         {/* 목 */}
         {thursdayData && (
-          <Wrapper width={`calc(100% / 8)`}>
+          <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
             <DietDateTable>
               {thursday.locale("ko").format("DD (dd)")}
             </DietDateTable>
@@ -625,7 +682,7 @@ const Diet = () => {
 
         {/* 금 */}
         {fridayData && (
-          <Wrapper width={`calc(100% / 8)`}>
+          <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
             <DietDateTable>
               {friday.locale("ko").format("DD (dd)")}
             </DietDateTable>
@@ -701,7 +758,7 @@ const Diet = () => {
 
         {/* 토 */}
         {saturdayData && (
-          <Wrapper width={`calc(100% / 8)`}>
+          <Wrapper width={`calc(100% / 8)`} minWidth={`100px`}>
             <DietDateTable color={Theme.blue_C}>
               {saturday.locale("ko").format("DD (dd)")}
             </DietDateTable>

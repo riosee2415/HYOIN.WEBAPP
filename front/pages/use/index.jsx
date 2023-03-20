@@ -132,7 +132,7 @@ const Index = () => {
                   }
                 >
                   <SpanText fontWeight={`600`}>전염성 질환</SpanText>(감염,
-                  결핵, 피부염 *옴 포함)이 있는 노인
+                  결핵등 포함)이 있는 노인
                 </Text>
               </Wrapper>
 
@@ -177,13 +177,6 @@ const Index = () => {
                   fontWeight={`600`}
                 >
                   의료적 처치가 많이 요구되는 노인
-                </Text>
-                <Text
-                  fontSize={
-                    width < 1100 ? (width < 700 ? `14px` : `16px`) : `20px`
-                  }
-                >
-                  (정맥주사, 투석, 경관영양투입, 징루상태, 유치도뇨관 상태)
                 </Text>
               </Wrapper>
 
