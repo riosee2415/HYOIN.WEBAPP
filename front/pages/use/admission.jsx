@@ -102,7 +102,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-1.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-1.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -144,7 +144,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-2.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-2.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -183,7 +183,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-3.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-3.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -224,7 +224,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-4.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-4.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -265,7 +265,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-5.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-5.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -408,7 +408,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-4.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-4.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -448,7 +448,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-3.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-3.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -486,7 +486,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-6.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-6.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -523,7 +523,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-7.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-7.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -576,7 +576,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-4.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-4.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -616,7 +616,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-3.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-3.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -654,7 +654,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-6.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-6.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -691,7 +691,7 @@ const Admission = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-7.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_ad_process-7.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>

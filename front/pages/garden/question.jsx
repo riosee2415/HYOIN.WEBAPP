@@ -205,7 +205,7 @@ const Question = () => {
               <Wrapper width={`50%`}>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/notice-page/img_inquiry.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/notice-page/img_inquiry.png`}
                 />
               </Wrapper>
             </Wrapper>

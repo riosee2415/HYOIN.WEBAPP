@@ -29,7 +29,7 @@ const Daily = () => {
         <ATag
           width={`auto`}
           download="일일생활시간표"
-          href={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/daily_download.pdf`}
+          href={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/daily_download.pdf`}
         >
           <CommonButton
             width={width < 700 ? `130px` : `160px`}
@@ -48,7 +48,7 @@ const Daily = () => {
           minWidth={`800px`}
           alt="시간표"
           margin={`0 0 20px`}
-          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/daily.png`}
+          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/daily.png`}
         />
       </Wrapper>
 

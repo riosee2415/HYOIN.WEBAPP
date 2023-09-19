@@ -176,7 +176,7 @@ const NursingSlider = ({
         bgColor={Theme.basicTheme_C}
       >
         <NursingWrapper
-          bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_bg.png")`}
+          bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_bg.png")`}
           position={`relative`}
           padding={width < 900 ? `80px 0` : `150px 0`}
         >
@@ -185,7 +185,7 @@ const NursingSlider = ({
             top={`0`}
             left={`0`}
             alt="logo"
-            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_title.png`}
+            src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_title.png`}
             width={`70%`}
           />
           <Wrapper
@@ -251,7 +251,7 @@ const NursingSlider = ({
             : `calc(100% - 630px)`
         }
         padding={width < 900 ? `50px 0` : `150px 0`}
-        bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_bg2.png")`}
+        bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section2_bg2.png")`}
       >
         <Wrapper
           height={width < 1000 ? `220px` : `400px`}

@@ -150,7 +150,7 @@ const Dementia = () => {
                 alt="icon"
                 width={`12px`}
                 margin={`0 6px 0 0`}
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_call.png"
+                src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_call.png"
               />
               <Text fontSize={`18px`} fontWeight={`600`}>
                 042-522-7118
@@ -163,7 +163,7 @@ const Dementia = () => {
               alt="icon"
               width={`12px`}
               margin={`0 6px 0 0`}
-              src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_fax.png"
+              src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/icon_timetable_fax.png"
             />
             <Text fontSize={`18px`} fontWeight={`600`}>
               042-522-7119

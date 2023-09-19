@@ -171,7 +171,7 @@ const Design = () => {
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 20px`}>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
+                src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
                 alt="icon"
                 width={`16px`}
                 margin={`0 16px 0 0`}
@@ -182,14 +182,14 @@ const Design = () => {
 
               <ATag
                 width={`auto`}
-                href="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EC%9A%94%EC%96%91%EC%9B%90%EA%B8%89%EC%97%AC%EB%B9%84%EC%9A%A9.pdf"
+                href="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EC%9A%94%EC%96%91%EC%9B%90%EA%B8%89%EC%97%AC%EB%B9%84%EC%9A%A9.pdf"
                 download={true}
               >
                 <DownloadBtn>
                   <Image
                     width={`14px`}
                     margin={`0 4px 0 0`}
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
                     alt="icon"
                   />
                   <Text>다운로드</Text>
@@ -225,7 +225,7 @@ const Design = () => {
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 20px`}>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
+                src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
                 alt="icon"
                 width={`16px`}
                 margin={`0 16px 0 0`}
@@ -244,7 +244,7 @@ const Design = () => {
                   <Image
                     width={`14px`}
                     margin={`0 4px 0 0`}
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
                     alt="icon"
                   />
                   <Text>다운로드</Text>
@@ -280,7 +280,7 @@ const Design = () => {
 
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 20px`}>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
+                src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file_blue.png"
                 alt="icon"
                 width={`16px`}
                 margin={`0 16px 0 0`}
@@ -292,14 +292,14 @@ const Design = () => {
 
               <ATag
                 width={`auto`}
-                href="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EB%B0%A9%EB%AC%B8%EC%9A%94%EC%96%91.pdf"
+                href="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/%ED%9A%A8%EC%9D%B8%EB%B0%A9%EB%AC%B8%EC%9A%94%EC%96%91.pdf"
                 download={true}
               >
                 <DownloadBtn>
                   <Image
                     width={`14px`}
                     margin={`0 4px 0 0`}
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_download_blue.png"
                     alt="icon"
                   />
                   <Text>다운로드</Text>
@@ -335,7 +335,7 @@ const Design = () => {
 
             <Wrapper overflow={`auto`} margin={`0 0 100px`}>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/img_table_month1.png"
+                src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/img_table_month1.png"
                 alt="map"
                 width={`100%`}
                 minWidth={`800px`}
@@ -385,7 +385,7 @@ const Design = () => {
                   padding={`25px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_cost_process-1.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_cost_process-1.png"
                     alt="icon"
                   />
                 </Wrapper>
@@ -439,7 +439,7 @@ const Design = () => {
                   padding={`25px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_cost_process-2.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_cost_process-2.png"
                     alt="icon"
                   />
                 </Wrapper>
@@ -493,7 +493,7 @@ const Design = () => {
                   padding={`25px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_cost_process-3.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/icon_cost_process-3.png"
                     alt="icon"
                   />
                 </Wrapper>
@@ -529,7 +529,7 @@ const Design = () => {
 
             <Wrapper overflow={`auto`} margin={`0 0 100px`}>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/img_table_month2.png"
+                src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/img_table_month2.png"
                 alt="map"
                 width={`100%`}
                 minWidth={`800px`}
@@ -557,7 +557,7 @@ const Design = () => {
 
             <Wrapper overflow={`auto`} margin={`0 0 100px`}>
               <Image
-                src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/img_table_cost.png"
+                src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/information-page/img_table_cost.png"
                 alt="map"
                 width={`100%`}
                 minWidth={`800px`}

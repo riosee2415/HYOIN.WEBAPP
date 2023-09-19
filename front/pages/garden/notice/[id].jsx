@@ -100,7 +100,7 @@ const DetailNotice = () => {
         <WholeWrapper>
           <SubBanner
             menuName={`공지사항`}
-            bgImg={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png`}
+            bgImg={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png`}
           />
 
           <RsWrapper>
@@ -168,7 +168,7 @@ const DetailNotice = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file.png"
                     width={`16px`}
                     alt="icon"
                   />

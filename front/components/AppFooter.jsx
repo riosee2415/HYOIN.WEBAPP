@@ -92,7 +92,7 @@ const AppFooter = () => {
                 <Image
                   width={`25px`}
                   alt="blog"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_blog.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_blog.png`}
                 />
               </Wrapper>
             </a>
@@ -106,7 +106,7 @@ const AppFooter = () => {
               <Image
                 width={`21px`}
                 alt="kakao"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_kakao.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_kakao.png`}
               />
             </Wrapper>
             <Wrapper
@@ -119,7 +119,7 @@ const AppFooter = () => {
               <Image
                 width={`21px`}
                 alt="band"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_footer_band.png`}
               />
             </Wrapper>
             <a
@@ -212,13 +212,13 @@ const AppFooter = () => {
             <Wrapper width={`auto`} dr={`row`}>
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_neo.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_neo.png`}
                 width={`60px`}
                 margin={`0 30px 0 0`}
               />
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
                 width={`120px`}
               />
             </Wrapper>

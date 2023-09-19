@@ -57,7 +57,7 @@ const ClientLayout = ({ children }) => {
               >
                 <Image
                   alt="phone icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_quick_call.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_quick_call.png`}
                   width={width < 900 ? `16px` : `20px`}
                 />
                 <Text
@@ -78,7 +78,7 @@ const ClientLayout = ({ children }) => {
             >
               <Image
                 alt="kakao icon"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_quick_kakao.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_quick_kakao.png`}
                 width={width < 900 ? `16px` : `22px`}
               />
               <Text

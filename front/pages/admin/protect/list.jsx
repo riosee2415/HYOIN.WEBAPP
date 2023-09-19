@@ -694,7 +694,7 @@ const List = ({ router }) => {
                         <Image
                           width={`16px`}
                           height={`16px`}
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
                           alt={`bookmark_icon`}
                         />
                         <Wrapper width={`calc(100% - 20px)`} al={`flex-start`}>
@@ -745,7 +745,7 @@ const List = ({ router }) => {
                           width={`16px`}
                           height={`16px`}
                           margin={`10px 0 0`}
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
                           alt={`bookmark_icon`}
                         />
                         <Wrapper
@@ -800,7 +800,7 @@ const List = ({ router }) => {
                           width={`16px`}
                           height={`16px`}
                           margin={`10px 0 0`}
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_bookmark.png`}
                           alt={`bookmark_icon`}
                         />
                         <Wrapper

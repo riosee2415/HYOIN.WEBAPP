@@ -107,8 +107,8 @@ const Info = () => {
               <Image
                 src={
                   width < 700
-                    ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban1_m.png`
-                    : "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban1.png"
+                    ? `https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban1_m.png`
+                    : "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban1.png"
                 }
                 alt="bgImg"
               />
@@ -121,7 +121,7 @@ const Info = () => {
                 overflow={`hidden`}
               >
                 <Image
-                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_purpose.png"
+                  src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_purpose.png"
                   alt="bgImg"
                 />
               </Wrapper>
@@ -213,7 +213,7 @@ const Info = () => {
                     </Text>
                   </Wrapper>
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_voluntarism.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_voluntarism.png"
                     alt="bgImg"
                   />
                 </Wrapper>
@@ -245,7 +245,7 @@ const Info = () => {
                   자원봉사 지원자격
                 </Text>
                 <Image
-                  src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_illust.png"
+                  src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_illust.png"
                   alt="img"
                   width={`200px`}
                 />
@@ -410,7 +410,7 @@ const Info = () => {
                   margin={`0 0 15px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process1.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process1.png"
                     alt="icon"
                     width={`auto`}
                   />
@@ -438,7 +438,7 @@ const Info = () => {
                   margin={`0 0 15px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process2.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process2.png"
                     alt="icon"
                     width={`auto`}
                   />
@@ -466,7 +466,7 @@ const Info = () => {
                   margin={`0 0 15px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process3.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process3.png"
                     alt="icon"
                     width={`auto`}
                   />
@@ -495,7 +495,7 @@ const Info = () => {
                   margin={`0 0 15px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process4.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process4.png"
                     alt="icon"
                     width={`auto`}
                   />
@@ -523,7 +523,7 @@ const Info = () => {
                   margin={`0 0 15px`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process5.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_process5.png"
                     alt="icon"
                     width={`auto`}
                   />
@@ -559,7 +559,7 @@ const Info = () => {
               >
                 <Box>
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_volunteer_call.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_volunteer_call.png"
                     alt="icon"
                   />
                 </Box>
@@ -577,7 +577,7 @@ const Info = () => {
               >
                 <Box>
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_volunteer_email.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_volunteer_email.png"
                     alt="icon"
                   />
                 </Box>

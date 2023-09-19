@@ -20,10 +20,10 @@ const Facility4Slider = () => {
 
   const data = [
     {
-      src: "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/2%E1%84%8E%E1%85%B3%E1%86%BC+%E1%84%85%E1%85%A9%E1%84%87%E1%85%B5.png",
+      src: "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/2%E1%84%8E%E1%85%B3%E1%86%BC+%E1%84%85%E1%85%A9%E1%84%87%E1%85%B5.png",
     },
     {
-      src: "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/4%E1%84%8E%E1%85%B3%E1%86%BC+%E1%84%85%E1%85%A9%E1%84%87%E1%85%B5.png",
+      src: "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/facility/4%E1%84%8E%E1%85%B3%E1%86%BC+%E1%84%85%E1%85%A9%E1%84%87%E1%85%B5.png",
     },
   ];
   return (

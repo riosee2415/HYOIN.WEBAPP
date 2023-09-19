@@ -37,13 +37,13 @@ const Organization = () => {
             <Wrapper bgColor={Theme.lightGrey4_C} padding={`20px 0`} dr={`row`}>
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_intro_neo.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_intro_neo.png`}
                 width={`140px`}
                 margin={`0 40px 0 0`}
               />
               <Image
                 alt="logo"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
                 width={`120px`}
               />
             </Wrapper>
@@ -53,8 +53,8 @@ const Organization = () => {
               alt="organization"
               src={
                 width < 900
-                  ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_org-chart_m.png`
-                  : `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_org-chart.png`
+                  ? `https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_org-chart_m.png`
+                  : `https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_org-chart.png`
               }
             />
           </RsWrapper>

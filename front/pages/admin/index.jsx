@@ -81,7 +81,7 @@ const AdminHome = () => {
           <Wrapper height={`100%`} padding={`30px`}>
             <Image
               alt="logo"
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+              src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
               width={`150px`}
             />
             <Wrapper width={`80%`}>

@@ -47,8 +47,8 @@ const Normal = () => {
         overflow={`hidden`}
         bgImg={
           width < 800
-            ? `url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_day-ban_m.png")`
-            : `url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_day-ban.png")`
+            ? `url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_day-ban_m.png")`
+            : `url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/img_day-ban.png")`
         }
       >
         <Wrapper
@@ -387,8 +387,8 @@ const Normal = () => {
         alt="시간표"
         src={
           width < 900
-            ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/protection-schedule_m.png`
-            : `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/protection-schedule.png`
+            ? `https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/protection-schedule_m.png`
+            : `https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/service-page/protection-schedule.png`
         }
       />
     </Wrapper>

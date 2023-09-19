@@ -124,12 +124,12 @@ const Location = () => {
                       position={`absolute`}
                       top={`20px`}
                       left={`10px`}
-                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_map_hoyin.png`}
+                      src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_map_hoyin.png`}
                     />
 
                     <Image
                       width={`170px`}
-                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
+                      src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
                     />
                     <Wrapper
                       dr={`row`}
@@ -182,7 +182,7 @@ const Location = () => {
                         >
                           <Image
                             alt="band"
-                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
+                            src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
                             width={`27px`}
                           />
                         </Wrapper>
@@ -196,7 +196,7 @@ const Location = () => {
                       >
                         <Image
                           alt="kakao"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_kakao.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_kakao.png`}
                           width={`27px`}
                         />
                       </Wrapper>
@@ -208,7 +208,7 @@ const Location = () => {
                       >
                         <Image
                           alt="face"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_face-book.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_face-book.png`}
                           width={`27px`}
                         />
                       </Wrapper>
@@ -236,11 +236,11 @@ const Location = () => {
                     position={`absolute`}
                     top={`0px`}
                     left={`0px`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_map_hoyin.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_map_hoyin.png`}
                   />
                   <Image
                     width={`170px`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
                   />
                   <Wrapper
                     dr={`row`}
@@ -293,7 +293,7 @@ const Location = () => {
                       >
                         <Image
                           alt="band"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
                           width={`27px`}
                         />
                       </Wrapper>
@@ -307,7 +307,7 @@ const Location = () => {
                     >
                       <Image
                         alt="kakao"
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_kakao.png`}
+                        src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_kakao.png`}
                         width={`27px`}
                       />
                     </Wrapper>
@@ -319,7 +319,7 @@ const Location = () => {
                     >
                       <Image
                         alt="band"
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
+                        src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_band.png`}
                         width={`27px`}
                       />
                     </Wrapper>
@@ -347,7 +347,7 @@ const Location = () => {
                 >
                   <Image
                     alt="bus icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_bus.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_bus.png`}
                     width={`32px`}
                   />
                   <Text
@@ -399,7 +399,7 @@ const Location = () => {
                 >
                   <Image
                     alt="bus icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_subway.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/icon_map_subway.png`}
                     width={`32px`}
                   />
                   <Text

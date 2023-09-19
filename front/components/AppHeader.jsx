@@ -185,7 +185,7 @@ const AppHeader = () => {
           <ATag href="/" width={`15%`} ju={`flex-start`}>
             <Image
               width={`200px`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+              src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
             />
           </ATag>
           <Wrapper dr={`row`} width={`auto`}>
@@ -262,7 +262,7 @@ const AppHeader = () => {
               <Image
                 alt="call icon"
                 width={`28px`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_menu-bar_call.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_menu-bar_call.png`}
               />
             </Wrapper>
             <ATag width={`auto`} href={`tel:0425227118`}>
@@ -444,13 +444,13 @@ const AppHeader = () => {
               <Image
                 alt="call icon"
                 width={`28px`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_menu-bar_call.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_menu-bar_call.png`}
               />
             </ATag>
             <ATag width={`auto`} href="/">
               <Image
                 width={`110px`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
               />
             </ATag>
             <Wrapper width={`20px`} al={`flex-end`} fontSize={`1.3rem`}>

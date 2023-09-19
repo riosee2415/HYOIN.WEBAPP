@@ -101,7 +101,7 @@ const DetailWait = () => {
         <WholeWrapper>
           <SubBanner
             menuName={`대기자명단`}
-            bgImg={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png`}
+            bgImg={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png`}
           />
 
           <RsWrapper>
@@ -169,7 +169,7 @@ const DetailWait = () => {
                   borderBottom={`1px solid ${Theme.lightGrey2_C}`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_file.png"
                     width={`16px`}
                     alt="icon"
                   />

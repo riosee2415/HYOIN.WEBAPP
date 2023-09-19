@@ -8,21 +8,21 @@ export const menus = [
         subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
         subMenuLink: "/company/intro",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
       {
         subMenuName: "조직도",
         subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
         subMenuLink: "/company/organization",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
       {
         subMenuName: "시설 개요",
         subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
         subMenuLink: "/company/facility",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
 
       {
@@ -30,14 +30,14 @@ export const menus = [
         subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
         subMenuLink: "/company/vr",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
       {
         subMenuName: "찾아오시는 길",
         subMenuContent: "삶의 질을 향상시키는 전문 노인의료복지시설입니다.",
         subMenuLink: "/company/location",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/intro.png",
       },
     ],
   },
@@ -50,21 +50,21 @@ export const menus = [
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/service/nursing",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
       },
       {
         subMenuName: "주간보호",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/service/protection",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
       },
       {
         subMenuName: "방문요양",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/service/visit",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/service.png",
       },
     ],
   },
@@ -77,21 +77,21 @@ export const menus = [
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/use",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
         subMenuName: "비용안내",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/use/design",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
         subMenuName: "입소 절차",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/use/admission",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
 
       {
@@ -99,14 +99,14 @@ export const menus = [
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/use/list",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
       {
         subMenuName: "대기자명단",
         subMenuContent: "효인에서 제공하는 최상의 서비스를 만나보세요.",
         subMenuLink: "/use/wait",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/Inform.png",
       },
     ],
   },
@@ -119,14 +119,14 @@ export const menus = [
         subMenuContent: "사랑이 모여 따뜻한 세상을 만들어 가고 있습니다.",
         subMenuLink: "/happiness/info",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/volunteer.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/volunteer.png",
       },
       {
         subMenuName: "후원안내",
         subMenuContent: "사랑이 모여 따뜻한 세상을 만들어 가고 있습니다.",
         subMenuLink: "/happiness/support",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/volunteer.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/volunteer.png",
       },
     ],
   },
@@ -139,42 +139,42 @@ export const menus = [
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
         subMenuLink: "/garden/notice",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
       {
         subMenuName: "새소식",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
         subMenuLink: "/garden/news",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
       {
         subMenuName: "FAQ",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
         subMenuLink: "/garden/faq",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
       {
         subMenuName: "채용공고",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
         subMenuLink: "/garden/recruit",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
       {
         subMenuName: "공고(입찰)",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
         subMenuLink: "/garden/announce",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
       {
         subMenuName: "1:1 문의",
         subMenuContent: "효인 요양원의 새로운 소식을 만나보세요.",
         subMenuLink: "/garden/question",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/notice.png",
       },
     ],
   },
@@ -186,7 +186,7 @@ export const menus = [
         subMenuName: "노인장기요양보험제도",
         subMenuLink: "/care",
         subBannerImagePath:
-          "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/insurance.png",
+          "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/sub-banner/insurance.png",
       },
     ],
   },

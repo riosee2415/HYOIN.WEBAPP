@@ -90,8 +90,8 @@ const Support = () => {
               <Image
                 src={
                   width < 700
-                    ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban2_m.png`
-                    : "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban2.png"
+                    ? `https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban2_m.png`
+                    : "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/img_long-ban2.png"
                 }
                 alt="bgImg"
               />
@@ -126,7 +126,7 @@ const Support = () => {
                   radius={`100%`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_donate-gift.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_donate-gift.png"
                     alt="icon"
                     width={`auto`}
                   />
@@ -160,7 +160,7 @@ const Support = () => {
                   radius={`100%`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_donate-special.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_donate-special.png"
                     alt="icon"
                     width={`auto`}
                   />
@@ -193,7 +193,7 @@ const Support = () => {
                   radius={`100%`}
                 >
                   <Image
-                    src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_donate-product.png"
+                    src="https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/volunteer-page/icon_donate-product.png"
                     alt="icon"
                     width={`auto`}
                   />

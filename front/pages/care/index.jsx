@@ -228,7 +228,7 @@ const Index = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process1.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process1.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -283,7 +283,7 @@ const Index = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process2.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process2.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -330,7 +330,7 @@ const Index = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process3.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process3.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>
@@ -382,7 +382,7 @@ const Index = () => {
                 >
                   <Image
                     alt="icon"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process3.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/insurance-page/icon_process3.png`}
                     width={width < 900 ? `40px` : `60px`}
                   />
                 </Wrapper>

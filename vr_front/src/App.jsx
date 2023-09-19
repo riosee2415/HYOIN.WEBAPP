@@ -356,7 +356,7 @@ const App = () => {
             <BackBox onClick={() => imgChoiceHandler(0)}>
               <img
                 src={
-                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                  "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
                 }
               />
               <Text>뒤로가기</Text>
@@ -382,7 +382,7 @@ const App = () => {
             <BackBox onClick={() => imgChoiceHandler(0)}>
               <img
                 src={
-                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                  "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
                 }
               />
               <Text>뒤로가기</Text>
@@ -407,7 +407,7 @@ const App = () => {
             <BackBox onClick={() => imgChoiceHandler(0)}>
               <img
                 src={
-                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                  "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
                 }
               />
               <Text>뒤로가기</Text>
@@ -433,7 +433,7 @@ const App = () => {
             <BackBox onClick={() => imgChoiceHandler(0)}>
               <img
                 src={
-                  "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
+                  "https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/common/icon_back.png"
                 }
               />
               <Text>뒤로가기</Text>

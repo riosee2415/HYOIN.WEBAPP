@@ -321,12 +321,12 @@ const Home = ({}) => {
               <QuickWrapper onClick={() => moveLinkHandler(`/company/intro`)}>
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_intro.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_intro.png`}
                   width={`35px`}
                 />
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_intro_h.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_intro_h.png`}
                   width={`35px`}
                   className={`hover`}
                 />
@@ -349,12 +349,12 @@ const Home = ({}) => {
               >
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_home_meal.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_home_meal.png`}
                   width={`35px`}
                 />
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_home_meal_h.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_home_meal_h.png`}
                   width={`35px`}
                   className={`hover`}
                 />
@@ -377,12 +377,12 @@ const Home = ({}) => {
               >
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_timetable.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_timetable.png`}
                   width={`35px`}
                 />
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_timetable_h.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_timetable_h.png`}
                   width={`35px`}
                   className={`hover`}
                 />
@@ -403,12 +403,12 @@ const Home = ({}) => {
               <QuickWrapper onClick={() => moveLinkHandler(`/garden/notice`)}>
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_notice.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_notice.png`}
                   width={`35px`}
                 />
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_notice_h.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_notice_h.png`}
                   width={`35px`}
                   className={`hover`}
                 />
@@ -431,12 +431,12 @@ const Home = ({}) => {
               >
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_map.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_map.png`}
                   width={`35px`}
                 />
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_map_h.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_menu_map_h.png`}
                   width={`35px`}
                   className={`hover`}
                 />
@@ -460,7 +460,7 @@ const Home = ({}) => {
           </RsWrapper>
 
           <Wrapper
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section1.png")`}
+            bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section1.png")`}
             padding={`130px 0`}
           >
             <MainWrapper dr={`row`} al={`flex-start`}>
@@ -472,7 +472,7 @@ const Home = ({}) => {
                   <Image
                     width={width < 900 ? `200px` : `330px`}
                     alt="logo"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_neo.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_neo.png`}
                   />
                 </Fade>
                 <Fade bottom>
@@ -505,7 +505,7 @@ const Home = ({}) => {
               </Wrapper>
               <Image
                 alt="image"
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section1-building.png`}
+                src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section1-building.png`}
                 width={width < 1280 ? (width < 900 ? `100%` : `50%`) : `60%`}
                 margin={width < 900 && `15px 0 0`}
               />
@@ -515,7 +515,7 @@ const Home = ({}) => {
           <NursingSlider datum={programSlideList} />
 
           <Wrapper
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-bg.png")`}
+            bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-bg.png")`}
             padding={width < 900 ? `80px 0` : `120px 0`}
           >
             <RsWrapper>
@@ -564,7 +564,7 @@ const Home = ({}) => {
                   <ShadowWrapper>
                     <Image
                       alt="image"
-                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum1.png`}
+                      src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum1.png`}
                     />
                     <Wrapper
                       fontSize={width < 900 ? `18px` : `24px`}
@@ -598,7 +598,7 @@ const Home = ({}) => {
                   <ShadowWrapper>
                     <Image
                       alt="image"
-                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum2.png`}
+                      src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum2.png`}
                     />
                     <Wrapper
                       fontSize={width < 900 ? `18px` : `24px`}
@@ -631,7 +631,7 @@ const Home = ({}) => {
                   <ShadowWrapper>
                     <Image
                       alt="image"
-                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum3.png`}
+                      src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum3.png`}
                     />
                     <Wrapper
                       fontSize={width < 900 ? `18px` : `24px`}
@@ -665,7 +665,7 @@ const Home = ({}) => {
                       <ShadowWrapper>
                         <Image
                           alt="image"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum4.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section3-thum4.png`}
                         />
                         <Wrapper
                           fontSize={width < 900 ? `18px` : `24px`}
@@ -684,12 +684,12 @@ const Home = ({}) => {
           </Wrapper>
           <Wrapper dr={`row`} wrap={width < 900 ? `wrap` : `nowrap`}>
             <InfoWrapper
-              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left.png")`}
+              bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left.png")`}
             >
               <InfoBtn right={`0`}>
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_prev_black.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_prev_black.png`}
                   width={`16px`}
                   margin={`0 30px 8px 0`}
                 />
@@ -697,12 +697,12 @@ const Home = ({}) => {
               </InfoBtn>
               <InfoHover1
                 al={`flex-start`}
-                bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left-bg.png")`}
+                bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left-bg.png")`}
               >
                 <Wrapper dr={`row`} ju={`flex-start`} al={`flex-end`}>
                   <Image
                     alt="thum"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left-thum.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_left-thum.png`}
                     width={width < 900 ? `350px` : `400px`}
                   />
                   <Link href={`/happiness/support`}>
@@ -738,13 +738,13 @@ const Home = ({}) => {
               </InfoHover1>
             </InfoWrapper>
             <InfoWrapper
-              bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right.png")`}
+              bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right.png")`}
             >
               <InfoBtn left={`0`}>
                 자원봉사 안내
                 <Image
                   alt="icon"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_next_black.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_next_black.png`}
                   width={`16px`}
                   margin={`0 0 8px 30px`}
                 />
@@ -752,7 +752,7 @@ const Home = ({}) => {
 
               <InfoHover2
                 al={`flex-end`}
-                bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right-bg.png")`}
+                bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right-bg.png")`}
               >
                 <Wrapper dr={`row`} ju={`flex-end`} al={`flex-end`}>
                   <Link href={`/happiness/info`}>
@@ -762,7 +762,7 @@ const Home = ({}) => {
                   </Link>
                   <Image
                     alt="thum"
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right-thum.png`}
+                    src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section4_right-thum.png`}
                     width={width < 900 ? `350px` : `400px`}
                   />
                 </Wrapper>
@@ -796,7 +796,7 @@ const Home = ({}) => {
           <Wrapper
             height={width < 1280 ? `auto` : `100vh`}
             attachment={`fixed`}
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section5.png")`}
+            bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/img_section5.png")`}
           >
             <Wrapper
               height={`100%`}
@@ -997,7 +997,7 @@ const Home = ({}) => {
                         <Wrapper width={`auto`}>
                           <Image
                             alt="blog"
-                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_blog.png`}
+                            src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_blog.png`}
                             width={`74px`}
                           />
                           <Text margin={`10px 0 0`} fontSize={`18px`}>
@@ -1008,7 +1008,7 @@ const Home = ({}) => {
                       <Wrapper width={`auto`}>
                         <Image
                           alt="kakao"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_kakao.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_kakao.png`}
                           width={`74px`}
                         />
                         <Text margin={`10px 0 0`} fontSize={`18px`}>
@@ -1018,7 +1018,7 @@ const Home = ({}) => {
                       <Wrapper width={`auto`}>
                         <Image
                           alt="band"
-                          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_band.png`}
+                          src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/main-page/icon_band.png`}
                           width={`74px`}
                         />
                         <Text margin={`10px 0 0`} fontSize={`18px`}>

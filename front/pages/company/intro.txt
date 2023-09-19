@@ -40,13 +40,13 @@ const Intro = () => {
           <CommonTitle>요양원 소개</CommonTitle>
           <Wrapper
             padding={`50px 0`}
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_bg-1.png")`}
+            bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_bg-1.png")`}
           >
             <RsWrapper>
               <Wrapper dr={`row`} ju={`space-between`}>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro1.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro1.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
@@ -60,7 +60,7 @@ const Intro = () => {
                     >
                       <Image
                         alt="logo"
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/logo_symbol.png`}
+                        src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/logo_symbol.png`}
                         width={`60px`}
                       />
                       <Text
@@ -74,7 +74,7 @@ const Intro = () => {
                       </Text>
                       <Image
                         width={`180px`}
-                        src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                        src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
                       />
                     </Wrapper>
 
@@ -130,7 +130,7 @@ const Intro = () => {
                           <Image
                             width={`180px`}
                             margin={`0 10px`}
-                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                            src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
                           />
                           입니다.
                         </Text>
@@ -155,7 +155,7 @@ const Intro = () => {
                           <Image
                             width={`180px`}
                             margin={`0 10px`}
-                            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                            src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
                           />
                           입니다.
                         </Text>
@@ -165,7 +165,7 @@ const Intro = () => {
                 </Wrapper>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro2.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro2.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
@@ -174,13 +174,13 @@ const Intro = () => {
           </Wrapper>
           <Wrapper
             padding={`50px 0`}
-            bgImg={`url("https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_bg-2.png")`}
+            bgImg={`url("https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_bg-2.png")`}
           >
             <RsWrapper>
               <Wrapper dr={`row`} ju={`space-between`}>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro3.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro3.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
@@ -251,7 +251,7 @@ const Intro = () => {
                 </Wrapper>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro4.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_intro4.png`}
                   width={width < 700 ? `100%` : `48%`}
                   margin={width < 700 && `0 0 10px`}
                 />
@@ -268,7 +268,7 @@ const Intro = () => {
               <Wrapper dr={`row`}>
                 <Image
                   alt="image"
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_ledger.png`}
+                  src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/introduce-page/img_ledger.png`}
                   width={`236px`}
                 />
                 <Wrapper
@@ -304,7 +304,7 @@ const Intro = () => {
 
                     <Image
                       alt="logo"
-                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
+                      src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo.png`}
                       width={width < 900 ? `120px` : `163px`}
                     />
                   </Wrapper>

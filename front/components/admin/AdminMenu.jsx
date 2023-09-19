@@ -68,7 +68,7 @@ const AdminMenu = () => {
         <Wrapper margin={`20px 0 10px`}>
           <Image
             alt="logo"
-            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
+            src={`https://hyoin-s3.s3.ap-northeast-2.amazonaws.com/hyoin/assets+/images/logo/logo_footer_hyoin.png`}
             width={`60px`}
           />
         </Wrapper>
